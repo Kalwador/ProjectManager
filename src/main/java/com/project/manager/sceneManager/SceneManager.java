@@ -1,9 +1,6 @@
 package com.project.manager.sceneManager;
 
-import com.project.manager.sceneManager.scenes.DashboardScene;
-import com.project.manager.sceneManager.scenes.LoginScene;
-import com.project.manager.sceneManager.scenes.ProjectViewScene;
-import com.project.manager.sceneManager.scenes.RegistrationScene;
+import com.project.manager.sceneManager.scenes.*;
 import com.project.manager.sceneManager.scenes.system.CustomScene;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Service;
@@ -23,6 +20,7 @@ public class SceneManager {
     private RegistrationScene registrationScene;
     private DashboardScene dashboardScene;
     private ProjectViewScene projectViewScene;
+    private ResetPasswdScene resetPasswdScene;
     private HashMap<Integer, CustomScene> scenes;
 
     /**
@@ -62,6 +60,7 @@ public class SceneManager {
         this.registrationScene = new RegistrationScene(primaryStage);
         this.dashboardScene = new DashboardScene(primaryStage);
         this.projectViewScene = new ProjectViewScene(primaryStage);
+        this.resetPasswdScene = new ResetPasswdScene(primaryStage);
 
         scenes = new HashMap<Integer, CustomScene>() {
             {
@@ -69,6 +68,7 @@ public class SceneManager {
                 put(SceneType.REGISTRATION.getId(), registrationScene);
                 put(SceneType.DASHBOARD.getId(), dashboardScene);
                 put(SceneType.PROJECT_VIEW.getId(), projectViewScene);
+                put(SceneType.RESETPASSWD.getId(), resetPasswdScene);
             }
         };
     }

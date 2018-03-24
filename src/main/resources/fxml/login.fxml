@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -9,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.LoginController">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.LoginController">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -21,13 +24,13 @@
             <children>
                 <Label layoutX="26.0" layoutY="27.0" prefHeight="17.0" prefWidth="112.0" text="username" />
                 <Label layoutX="26.0" layoutY="101.0" prefHeight="17.0" prefWidth="125.0" text="password" />
-                <Label fx:id="labelForgotPassword" layoutX="26.0" layoutY="228.0" text="forgot password" />
                 <Button fx:id="register" layoutX="159.0" layoutY="224.0" mnemonicParsing="false" text="REGISTER" />
                 <PasswordField fx:id="passwordPassField" layoutX="26.0" layoutY="118.0" prefHeight="25.0" prefWidth="200.0" />
                 <TextField fx:id="usernameTextField" layoutX="26.0" layoutY="44.0" prefHeight="25.0" prefWidth="200.0" />
                 <Button fx:id="loginButton" layoutX="26.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Login" />
                 <Label fx:id="labelErrorUsername" layoutX="26.0" layoutY="74.0" prefHeight="17.0" prefWidth="517.0" text="Label" textFill="RED" />
                 <Label fx:id="labelErrorPassword" layoutX="26.0" layoutY="143.0" prefHeight="17.0" prefWidth="517.0" text="Label" textFill="RED" />
+            <Button fx:id="forgotPasswordButton" layoutX="26.0" layoutY="224.0" mnemonicParsing="false" text="Forgot Password" />
             </children>
         </Pane>
     </children>

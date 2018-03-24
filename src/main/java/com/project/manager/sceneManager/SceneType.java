@@ -26,6 +26,11 @@ public enum SceneType {
         Integer getId() {
             return 3;
         }
+    }, RESETPASSWD {
+        @Override
+        Integer getId() {
+            return 4;
+        }
     };
 
     /**

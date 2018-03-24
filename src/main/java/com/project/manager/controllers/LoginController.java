@@ -26,7 +26,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button loginButton;
     @FXML
-    private Label labelForgotPassword;
+    private Button forgotPasswordButton;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -96,8 +96,8 @@ public class LoginController implements Initializable {
             }
         });
 
-        labelForgotPassword.setOnMouseClicked(e -> {
-            //sceneManager.showScene(SceneType.FORGOTPASSWD);
+        forgotPasswordButton.setOnAction(e -> {
+            sceneManager.showScene(SceneType.RESETPASSWD);
         });
     }
 

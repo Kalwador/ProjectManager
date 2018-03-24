@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.ResetPasswdController">
+   <children>
+      <Pane prefHeight="350.0" prefWidth="300.0">
+         <children>
+            <Label layoutX="96.0" layoutY="50.0" text="Reset your password" />
+            <TextField fx:id="userNameToResetPass" layoutX="66.0" layoutY="163.0" prefHeight="25.0" prefWidth="169.0" promptText="Type your email or username" />
+            <JFXButton fx:id="resetPasswdButton" buttonType="RAISED" layoutX="106.0" layoutY="217.0" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #bfb3b3;" text="Reset" />
+         </children>
+      </Pane>
+      <Pane prefHeight="350.0" prefWidth="300.0" visible="false" />
+   </children>
+</AnchorPane>
