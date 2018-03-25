@@ -9,7 +9,7 @@
    <children>
       <AnchorPane prefHeight="650.0" prefWidth="1000.0">
          <children>
-            <Button fx:id="backToLogin" layoutX="29.0" layoutY="27.0" mnemonicParsing="false" text="BACK_TO_LOGIN" />
+            <Button fx:id="backToLoginButton" layoutY="2.0" mnemonicParsing="false" text="BACK_TO_LOGIN" />
             <VBox fx:id="projectsArea" layoutX="111.0" layoutY="101.0" prefHeight="433.0" prefWidth="150.0" />
          </children></AnchorPane>
    </children>

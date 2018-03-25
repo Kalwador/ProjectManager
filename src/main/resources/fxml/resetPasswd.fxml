@@ -10,8 +10,10 @@
       <Pane prefHeight="350.0" prefWidth="300.0">
          <children>
             <Label layoutX="96.0" layoutY="50.0" text="Reset your password" />
-            <TextField fx:id="userNameToResetPass" layoutX="66.0" layoutY="163.0" prefHeight="25.0" prefWidth="169.0" promptText="Type your email or username" />
-            <JFXButton fx:id="resetPasswdButton" buttonType="RAISED" layoutX="106.0" layoutY="217.0" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #bfb3b3;" text="Reset" />
+            <TextField fx:id="usernameOrEmailField" layoutX="66.0" layoutY="163.0" prefHeight="25.0" prefWidth="169.0" promptText="Type your email or username" />
+            <JFXButton fx:id="resetPasswdButton" buttonType="RAISED" layoutX="106.0" layoutY="224.0" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #bfb3b3;" text="Reset" />
+            <Label fx:id="usernameOrEmailErrorLabel" alignment="CENTER" layoutX="13.0" layoutY="188.0" prefHeight="17.0" prefWidth="275.0" text="Label" textAlignment="CENTER" textFill="RED" />
+            <Button fx:id="backToLoginButton" layoutY="2.0" mnemonicParsing="false" text="BACK_TO_LOGIN" />
          </children>
       </Pane>
       <Pane prefHeight="350.0" prefWidth="300.0" visible="false" />
