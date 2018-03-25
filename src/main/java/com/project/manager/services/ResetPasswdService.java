@@ -29,12 +29,15 @@ public class ResetPasswdService {
         if (!Optional.ofNullable(userModel).isPresent()) {
             throw new UserDoesNotExistException("There is no user with that username or email in our service.");
         }else{
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText(Optional.ofNullable(userModel.getUsername()).toString());
-            alert.setContentText("Are you sure it is OK?");
+//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setTitle("Confirmation Dialog");
+//            alert.setHeaderText(Optional.ofNullable(userModel.getUsername()).toString());
+//            alert.setContentText("Are you sure it is OK?");
+//
+//            alert.showAndWait();
 
-            alert.showAndWait();
+            userModel.setBlocked(true);
+            userRepository.save(userModel);
         }
 
 

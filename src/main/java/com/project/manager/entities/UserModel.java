@@ -44,6 +44,8 @@ public class UserModel {
 
     private boolean isFirstLogin;
 
+    private boolean isBlocked;
+
     @NotNull
     private String code;
 

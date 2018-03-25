@@ -42,6 +42,7 @@ public class InjectData {
                 .email("user@mail.com")
                 .role(UserRole.USER)
                 .isFirstLogin(false)
+                .isBlocked(false)
                 .projects(new HashSet<>())
                 .build();
 

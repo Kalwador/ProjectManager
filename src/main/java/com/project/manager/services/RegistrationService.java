@@ -42,6 +42,7 @@ public class RegistrationService {
             .role(UserRole.USER)
             .password(BCryptEncoder.encode(password))
             .isFirstLogin(true)
+            .isBlocked(false)
             .code(code)
             .build();
         userRepository.save(userModel);

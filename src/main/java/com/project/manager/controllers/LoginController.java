@@ -79,7 +79,8 @@ public class LoginController implements Initializable {
                 String username = usernameTextField.getText().toString();
                 String passedPassword = passwordPassField.getText().toString();
                 loginService.loginUser(username, passedPassword);
-                sceneManager.showScene(SceneType.DASHBOARD);
+
+
             }
             catch (DifferentPasswordException dpe) {
                 labelErrorPassword.setText(dpe.getMessage());
