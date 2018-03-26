@@ -100,59 +100,63 @@ public class AdminDashboardTablesComponent {
         adminDashboardController.getInboxTable().getColumns().clear();
 
         List<Message> received = messageService.getAllReceivedMessages();
-        receivedMessages = FXCollections.observableList(received.stream()
-                        .map(MessageTableView::convert)
-                        .collect(Collectors.toList()));
+        if (!received.isEmpty()) {
+            receivedMessages = FXCollections.observableList(received.stream()
+                    .map(MessageTableView::convert)
+                    .collect(Collectors.toList()));
+
+
+            TreeTableColumn<MessageTableView, String> receiverColumn = new TreeTableColumn<>("From");
+            TreeTableColumn<MessageTableView, String> receivedTitleColumn = new TreeTableColumn<>("Title");
+            TreeTableColumn<MessageTableView, String> receivedDateColumn = new TreeTableColumn<>("Date");
+
+            receiverColumn.setSortable(false);
+            receivedDateColumn.setSortable(false);
+            receivedDateColumn.setSortable(false);
+
+            adminDashboardController.getInboxTable().getColumns().addAll(receiverColumn, receivedTitleColumn, receivedDateColumn);
+
+            receiverColumn.setCellValueFactory(m -> m.getValue().getValue().getSender());
+            receivedTitleColumn.setCellValueFactory(m -> m.getValue().getValue().getTitle());
+            receivedDateColumn.setCellValueFactory(m -> m.getValue().getValue().getSentDate());
+
+            TreeItem<MessageTableView> inboxItem = new RecursiveTreeItem<MessageTableView>(receivedMessages, RecursiveTreeObject::getChildren);
+
+            adminDashboardController.getInboxTable().setRoot(inboxItem);
+            adminDashboardController.getInboxTable().setShowRoot(false);
+        }
 
         List<Message> sent = messageService.getAllSentMessages();
-        sentMessages = FXCollections.observableList(sent.stream()
-                .map(MessageTableView::convert)
-                .collect(Collectors.toList()));
+        if (!sent.isEmpty()) {
+            sentMessages = FXCollections.observableList(sent.stream()
+                    .map(MessageTableView::convert)
+                    .collect(Collectors.toList()));
 
-        TreeTableColumn<MessageTableView, String> senderColumn = new TreeTableColumn<>("From");
-        TreeTableColumn<MessageTableView, String> sendTitleColumn = new TreeTableColumn<>("Title");
-        TreeTableColumn<MessageTableView, String> sendDateColumn = new TreeTableColumn<>("Date");
+            TreeTableColumn<MessageTableView, String> senderColumn = new TreeTableColumn<>("To");
+            TreeTableColumn<MessageTableView, String> sendTitleColumn = new TreeTableColumn<>("Title");
+            TreeTableColumn<MessageTableView, String> sendDateColumn = new TreeTableColumn<>("Date");
 
-        TreeTableColumn<MessageTableView, String> receiverColumn = new TreeTableColumn<>("To");
-        TreeTableColumn<MessageTableView, String> receivedTitleColumn = new TreeTableColumn<>("Title");
-        TreeTableColumn<MessageTableView, String> receivedDateColumn = new TreeTableColumn<>("Date");
+            senderColumn.setSortable(false);
+            sendTitleColumn.setSortable(false);
+            sendDateColumn.setSortable(false);
 
-        senderColumn.setSortable(false);
-        sendTitleColumn.setSortable(false);
-        sendDateColumn.setSortable(false);
+            adminDashboardController.getSentboxTable().getColumns().addAll(senderColumn, sendTitleColumn, sendDateColumn);
 
-        receiverColumn.setSortable(false);
-        receivedDateColumn.setSortable(false);
-        receivedDateColumn.setSortable(false);
+            senderColumn.setCellValueFactory(m -> m.getValue().getValue().getReceiver());
+            sendTitleColumn.setCellValueFactory(m -> m.getValue().getValue().getTitle());
+            sendDateColumn.setCellValueFactory(m -> m.getValue().getValue().getSentDate());
 
-        adminDashboardController.getInboxTable().getColumns().addAll(senderColumn, sendTitleColumn, sendDateColumn);
-        adminDashboardController.getSentboxTable().getColumns().addAll(receiverColumn, receivedTitleColumn, receivedDateColumn);
+            TreeItem<MessageTableView> sentBoxItem = new RecursiveTreeItem<MessageTableView>(sentMessages, RecursiveTreeObject::getChildren);
 
-        senderColumn.setCellValueFactory(m -> m.getValue().getValue().getSender());
-        sendTitleColumn.setCellValueFactory(m -> m.getValue().getValue().getTitle());
-        sendDateColumn.setCellValueFactory(m -> m.getValue().getValue().getSentDate());
-
-        receiverColumn.setCellValueFactory(m -> m.getValue().getValue().getReceiver());
-        receivedTitleColumn.setCellValueFactory(m -> m.getValue().getValue().getTitle());
-        receivedDateColumn.setCellValueFactory(m -> m.getValue().getValue().getSentDate());
-
-
-        TreeItem<MessageTableView> inboxItem = new RecursiveTreeItem<MessageTableView>(receivedMessages, RecursiveTreeObject::getChildren);
-        TreeItem<MessageTableView> sentBoxItem = new RecursiveTreeItem<MessageTableView>(sentMessages, RecursiveTreeObject::getChildren);
-
-
-        adminDashboardController.getInboxTable().setRoot(inboxItem);
-        adminDashboardController.getInboxTable().setShowRoot(false);
-        adminDashboardController.getSentboxTable().setRoot(sentBoxItem);
-        adminDashboardController.getSentboxTable().setShowRoot(false);
-
-
+            adminDashboardController.getSentboxTable().setRoot(sentBoxItem);
+            adminDashboardController.getSentboxTable().setShowRoot(false);
+        }
     }
 
     /**
      * This method generate table view for all users in application and provides some button to do some action depending
      * on select row of user in table or just click on specific row of table
-     *
+     * <p>
      * Inside is also refactor method to color users which are locked or block
      */
     public void generateUserTableView() {
@@ -160,77 +164,79 @@ public class AdminDashboardTablesComponent {
         adminDashboardController.getUserTable().setSelectionModel(null);
 
         List<UserModel> users = userService.getAllUsers();
-        userTableViews = FXCollections.observableList(users.stream()
-                        .map(UserTableView::convert)
-                        .map(u -> u.generateDelButton(u))
-                        .peek(u -> u.getDelete().getValue()
-                                .setOnAction(e -> userService.delete(u.getId().get())))
-                        .map(u -> u.generateLockOrUnlockButton(u))
-                        .peek(u -> u.getLockOrUnlock().getValue()
-                                .setOnAction(e -> {
-                                    userService.changeLockStatus(u.getIsLocked().get(), u.getId().get());
-                                    generateUserTableView();
-                                }))
-                        .map(u -> u.generateResetButton(u))
-                        .peek(u -> u.getResetPass().getValue()
-                                .setOnAction(e -> userService.changePassword(u.getId().get())))
-                        .collect(Collectors.toList()));
+        if (!users.isEmpty()) {
+            userTableViews = FXCollections.observableList(users.stream()
+                    .map(UserTableView::convert)
+                    .map(u -> u.generateDelButton(u))
+                    .peek(u -> u.getDelete().getValue()
+                            .setOnAction(e -> userService.delete(u.getId().get())))
+                    .map(u -> u.generateLockOrUnlockButton(u))
+                    .peek(u -> u.getLockOrUnlock().getValue()
+                            .setOnAction(e -> {
+                                userService.changeLockStatus(u.getIsLocked().get(), u.getId().get());
+                                generateUserTableView();
+                            }))
+                    .map(u -> u.generateResetButton(u))
+                    .peek(u -> u.getResetPass().getValue()
+                            .setOnAction(e -> userService.changePassword(u.getId().get())))
+                    .collect(Collectors.toList()));
 
-        TreeTableColumn<UserTableView, CheckBox> checkColumn = new TreeTableColumn<>("");
-        TreeTableColumn<UserTableView, Long> idColumn = new TreeTableColumn<>("Id");
-        TreeTableColumn<UserTableView, String> usernameColumn = new TreeTableColumn<>("Username");
-        TreeTableColumn<UserTableView, String> emailColumn = new TreeTableColumn<>("Email");
-        TreeTableColumn<UserTableView, String> roleColumn = new TreeTableColumn<>("Role");
-        TreeTableColumn<UserTableView, Integer> countOfProjectsColumn = new TreeTableColumn<>("Count of projects");
-        TreeTableColumn<UserTableView, Boolean> lockColumn = new TreeTableColumn<>("Lock");
-        TreeTableColumn<UserTableView, JFXButton> lockButtonColumn = new TreeTableColumn<>("");
-        TreeTableColumn<UserTableView, JFXButton> resetPassColumn = new TreeTableColumn<>("");
-        TreeTableColumn<UserTableView, JFXButton> deleteColumn = new TreeTableColumn<>("");
+            TreeTableColumn<UserTableView, CheckBox> checkColumn = new TreeTableColumn<>("");
+            TreeTableColumn<UserTableView, Long> idColumn = new TreeTableColumn<>("Id");
+            TreeTableColumn<UserTableView, String> usernameColumn = new TreeTableColumn<>("Username");
+            TreeTableColumn<UserTableView, String> emailColumn = new TreeTableColumn<>("Email");
+            TreeTableColumn<UserTableView, String> roleColumn = new TreeTableColumn<>("Role");
+            TreeTableColumn<UserTableView, Integer> countOfProjectsColumn = new TreeTableColumn<>("Count of projects");
+            TreeTableColumn<UserTableView, Boolean> lockColumn = new TreeTableColumn<>("Lock");
+            TreeTableColumn<UserTableView, JFXButton> lockButtonColumn = new TreeTableColumn<>("");
+            TreeTableColumn<UserTableView, JFXButton> resetPassColumn = new TreeTableColumn<>("");
+            TreeTableColumn<UserTableView, JFXButton> deleteColumn = new TreeTableColumn<>("");
 
-        checkColumn.setSortable(false);
-        idColumn.setSortable(false);
-        usernameColumn.setSortable(false);
-        emailColumn.setSortable(false);
-        roleColumn.setSortable(false);
-        countOfProjectsColumn.setSortable(false);
-        lockColumn.setSortable(false);
-        lockButtonColumn.setSortable(false);
-        resetPassColumn.setSortable(false);
-        deleteColumn.setSortable(false);
-
-
-        adminDashboardController.getUserTable().getColumns().addAll
-                (checkColumn, idColumn, usernameColumn, emailColumn, roleColumn, countOfProjectsColumn, lockColumn, lockButtonColumn, resetPassColumn, deleteColumn);
-
-        checkColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getCheck().get()));
-        idColumn.setCellValueFactory(u -> u.getValue().getValue().getId().asObject());
-        usernameColumn.setCellValueFactory(u -> u.getValue().getValue().getUsername());
-        emailColumn.setCellValueFactory(u -> u.getValue().getValue().getEmail());
-        roleColumn.setCellValueFactory(u -> u.getValue().getValue().getRole());
-        countOfProjectsColumn.setCellValueFactory(u -> u.getValue().getValue().getCountOfProjects().asObject());
-        lockColumn.setCellValueFactory(u -> u.getValue().getValue().getIsLocked());
-        lockButtonColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getLockOrUnlock().get()));
-        resetPassColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getResetPass().get()));
-        deleteColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getDelete().get()));
-
-        TreeItem<UserTableView> item = new RecursiveTreeItem<UserTableView>(userTableViews, RecursiveTreeObject::getChildren);
+            checkColumn.setSortable(false);
+            idColumn.setSortable(false);
+            usernameColumn.setSortable(false);
+            emailColumn.setSortable(false);
+            roleColumn.setSortable(false);
+            countOfProjectsColumn.setSortable(false);
+            lockColumn.setSortable(false);
+            lockButtonColumn.setSortable(false);
+            resetPassColumn.setSortable(false);
+            deleteColumn.setSortable(false);
 
 
-        adminDashboardController.getUserTable().setRoot(item);
-        adminDashboardController.getUserTable().setShowRoot(false);
-        adminDashboardController.getUserTable().setRowFactory(row -> new TreeTableRow<UserTableView>(){
-            @Override
-            protected void updateItem(UserTableView item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null) {
-                    setStyle("");
-                } else {
-                    if (!item.getIsLocked().get()) {
-                        setStyle("-fx-background-color: #ff5a47");
+            adminDashboardController.getUserTable().getColumns().addAll
+                    (checkColumn, idColumn, usernameColumn, emailColumn, roleColumn, countOfProjectsColumn, lockColumn, lockButtonColumn, resetPassColumn, deleteColumn);
+
+            checkColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getCheck().get()));
+            idColumn.setCellValueFactory(u -> u.getValue().getValue().getId().asObject());
+            usernameColumn.setCellValueFactory(u -> u.getValue().getValue().getUsername());
+            emailColumn.setCellValueFactory(u -> u.getValue().getValue().getEmail());
+            roleColumn.setCellValueFactory(u -> u.getValue().getValue().getRole());
+            countOfProjectsColumn.setCellValueFactory(u -> u.getValue().getValue().getCountOfProjects().asObject());
+            lockColumn.setCellValueFactory(u -> u.getValue().getValue().getIsLocked());
+            lockButtonColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getLockOrUnlock().get()));
+            resetPassColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getResetPass().get()));
+            deleteColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getDelete().get()));
+
+            TreeItem<UserTableView> item = new RecursiveTreeItem<UserTableView>(userTableViews, RecursiveTreeObject::getChildren);
+
+
+            adminDashboardController.getUserTable().setRoot(item);
+            adminDashboardController.getUserTable().setShowRoot(false);
+            adminDashboardController.getUserTable().setRowFactory(row -> new TreeTableRow<UserTableView>() {
+                @Override
+                protected void updateItem(UserTableView item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null) {
+                        setStyle("");
+                    } else {
+                        if (!item.getIsLocked().get()) {
+                            setStyle("-fx-background-color: #ff5a47");
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**
@@ -241,48 +247,50 @@ public class AdminDashboardTablesComponent {
         adminDashboardController.getProjectTable().setSelectionModel(null);
 
         List<Project> projects = projectService.getAllProjects();
-        projectTableViews = FXCollections
-                .observableList(projects
-                        .stream()
-                        .map(ProjectTableView::convert)
-                        .map(projectTableView -> projectTableView.generateDelButton(projectTableView))
-                        .peek(projectTableView -> projectTableView.getDelete().getValue()
-                                .setOnAction(e -> projectService.delete(projectTableView.getId().get())))
-                        .collect(Collectors.toList()));
+        if (!projects.isEmpty()) {
+            projectTableViews = FXCollections
+                    .observableList(projects
+                            .stream()
+                            .map(ProjectTableView::convert)
+                            .map(projectTableView -> projectTableView.generateDelButton(projectTableView))
+                            .peek(projectTableView -> projectTableView.getDelete().getValue()
+                                    .setOnAction(e -> projectService.delete(projectTableView.getId().get())))
+                            .collect(Collectors.toList()));
 
 
-        TreeTableColumn<ProjectTableView, CheckBox> checkColumn = new TreeTableColumn<>("");
-        TreeTableColumn<ProjectTableView, Long> idColumn = new TreeTableColumn<>("Id");
-        TreeTableColumn<ProjectTableView, String> projectNameColumn = new TreeTableColumn<>("Project name");
-        TreeTableColumn<ProjectTableView, String> managerColumn = new TreeTableColumn<>("Manager");
-        TreeTableColumn<ProjectTableView, String> clientColumn = new TreeTableColumn<>("Client");
-        TreeTableColumn<ProjectTableView, Integer> countOfMembersColumn = new TreeTableColumn<>("Count of members");
-        TreeTableColumn<ProjectTableView, JFXButton> deleteButtonColumn = new TreeTableColumn<>("");
+            TreeTableColumn<ProjectTableView, CheckBox> checkColumn = new TreeTableColumn<>("");
+            TreeTableColumn<ProjectTableView, Long> idColumn = new TreeTableColumn<>("Id");
+            TreeTableColumn<ProjectTableView, String> projectNameColumn = new TreeTableColumn<>("Project name");
+            TreeTableColumn<ProjectTableView, String> managerColumn = new TreeTableColumn<>("Manager");
+            TreeTableColumn<ProjectTableView, String> clientColumn = new TreeTableColumn<>("Client");
+            TreeTableColumn<ProjectTableView, Integer> countOfMembersColumn = new TreeTableColumn<>("Count of members");
+            TreeTableColumn<ProjectTableView, JFXButton> deleteButtonColumn = new TreeTableColumn<>("");
 
-        checkColumn.setSortable(false);
-        idColumn.setSortable(false);
-        projectNameColumn.setSortable(false);
-        managerColumn.setSortable(false);
-        countOfMembersColumn.setSortable(false);
-        clientColumn.setSortable(false);
-        deleteButtonColumn.setSortable(false);
+            checkColumn.setSortable(false);
+            idColumn.setSortable(false);
+            projectNameColumn.setSortable(false);
+            managerColumn.setSortable(false);
+            countOfMembersColumn.setSortable(false);
+            clientColumn.setSortable(false);
+            deleteButtonColumn.setSortable(false);
 
 
-        adminDashboardController.getProjectTable().getColumns().addAll
-                (checkColumn, idColumn, projectNameColumn, managerColumn, clientColumn, countOfMembersColumn, deleteButtonColumn);
+            adminDashboardController.getProjectTable().getColumns().addAll
+                    (checkColumn, idColumn, projectNameColumn, managerColumn, clientColumn, countOfMembersColumn, deleteButtonColumn);
 
-        checkColumn.setCellValueFactory(p -> new SimpleObjectProperty(p.getValue().getValue().getCheck().get()));
-        idColumn.setCellValueFactory(p -> p.getValue().getValue().getId().asObject());
-        projectNameColumn.setCellValueFactory(p -> p.getValue().getValue().getProjectName());
-        managerColumn.setCellValueFactory(p -> p.getValue().getValue().getManagerFirstAndLastName());
-        clientColumn.setCellValueFactory(p -> p.getValue().getValue().getClientFirstAndLastName());
-        countOfMembersColumn.setCellValueFactory(p -> p.getValue().getValue().getCountOfMembers().asObject());
-        deleteButtonColumn.setCellValueFactory(p -> new SimpleObjectProperty(p.getValue().getValue().getDelete().get()));
+            checkColumn.setCellValueFactory(p -> new SimpleObjectProperty(p.getValue().getValue().getCheck().get()));
+            idColumn.setCellValueFactory(p -> p.getValue().getValue().getId().asObject());
+            projectNameColumn.setCellValueFactory(p -> p.getValue().getValue().getProjectName());
+            managerColumn.setCellValueFactory(p -> p.getValue().getValue().getManagerFirstAndLastName());
+            clientColumn.setCellValueFactory(p -> p.getValue().getValue().getClientFirstAndLastName());
+            countOfMembersColumn.setCellValueFactory(p -> p.getValue().getValue().getCountOfMembers().asObject());
+            deleteButtonColumn.setCellValueFactory(p -> new SimpleObjectProperty(p.getValue().getValue().getDelete().get()));
 
-        TreeItem<ProjectTableView> item = new RecursiveTreeItem<ProjectTableView>(projectTableViews, RecursiveTreeObject::getChildren);
+            TreeItem<ProjectTableView> item = new RecursiveTreeItem<ProjectTableView>(projectTableViews, RecursiveTreeObject::getChildren);
 
-        adminDashboardController.getProjectTable().setRoot(item);
-        adminDashboardController.getProjectTable().setShowRoot(false);
+            adminDashboardController.getProjectTable().setRoot(item);
+            adminDashboardController.getProjectTable().setShowRoot(false);
+        }
     }
 
     /**
