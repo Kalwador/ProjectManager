@@ -18,7 +18,6 @@ public class SceneManager {
     private RegistrationScene registrationScene;
     private DashboardScene dashboardScene;
     private ProjectViewScene projectViewScene;
-    private AddUserScene addUserScene;
     private AdminDashboardScene adminDashboardScene;
     private UpdateProjectScene updateProjectScene;
     private MessageViewWindowScene messageViewWindowScene;
@@ -61,7 +60,6 @@ public class SceneManager {
         this.registrationScene = new RegistrationScene(primaryStage);
         this.dashboardScene = new DashboardScene(primaryStage);
         this.projectViewScene = new ProjectViewScene(primaryStage);
-        this.addUserScene = new AddUserScene(primaryStage);
         this.adminDashboardScene = new AdminDashboardScene(primaryStage);
         this.updateProjectScene = new UpdateProjectScene(primaryStage);
         this.messageViewWindowScene = new MessageViewWindowScene(primaryStage);
@@ -72,7 +70,6 @@ public class SceneManager {
                 put(SceneType.REGISTRATION.getId(), registrationScene);
                 put(SceneType.DASHBOARD.getId(), dashboardScene);
                 put(SceneType.PROJECT_VIEW.getId(), projectViewScene);
-                put(SceneType.ADD_USER.getId(), addUserScene);
                 put(SceneType.ADMIN_DASHBOARD.getId(), adminDashboardScene);
                 put(SceneType.ADMIN_UPDATE_PROJECT.getId(), updateProjectScene);
                 put(SceneType.MESSAGE_VIEW_WINDOW.getId(), messageViewWindowScene);

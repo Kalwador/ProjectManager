@@ -20,10 +20,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import com.project.manager.services.LoginService;
 
-/**
- * This is the class which is responsible for login window.
- * This class perform display input fields, error labels and references to other frames.
- */
 @Component
 public class LoginController implements Initializable {
 
@@ -64,11 +60,22 @@ public class LoginController implements Initializable {
         this.resetUsernameError();
         this.resetPasswordError();
 
+        /** -----------------------------todo
+         * Register action listener
+         * Closes login window and opens menu to register new account
+         * Registration window - in progress by Seba
+         */
 
         register.setOnAction(e -> {
             sceneManager.showScene(SceneType.REGISTRATION);
         });
 
+        /**
+         * Login action listener
+         * Searches passed username in database and checks if it exists
+         * If user exists, compares passed password with password in database
+         * When passwords match, login is achieved
+         */
         loginButton.setOnAction(e -> {
             this.resetUsernameError();
             this.resetPasswordError();
@@ -106,17 +113,11 @@ public class LoginController implements Initializable {
         });
     }
 
-    /**
-     * Method responsible for resetting username's error label.
-     */
     public void resetUsernameError() {
         labelErrorUsername.setText("");
         labelErrorUsername.setVisible(false);
     }
 
-    /**
-     * Method responsible for resetting password's error label.
-     */
     public void resetPasswordError() {
         labelErrorPassword.setText("");
         labelErrorPassword.setVisible(false);

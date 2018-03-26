@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>Project Manager</name>
-    <description>Project to manager many project and the tasks inside these projects</description>
+    <description>Project to manager many project and the tasks inside these projectsAsUser</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -91,12 +91,7 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
-        <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>8.40.14</version>
-        </dependency>
+
     </dependencies>
 
     <build>
@@ -133,4 +128,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

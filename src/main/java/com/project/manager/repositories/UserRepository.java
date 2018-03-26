@@ -7,8 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * This is the class which provides all methods to manage the {@link UserModel} in database
+ */
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Long> {
 
@@ -26,8 +28,6 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
      */
     UserModel findByEmail(String email);
 
-    @Query(value = "SELECT USER_MODEL.USERNAME FROM USER_MODEL", nativeQuery = true)
-    Optional<List<String>> findAllUsernames();
     /**
      * This method is returning all users from database with specify {@link UserRole} in parameter
      * @param userRole this is the role which help to specify what users we are want to return
