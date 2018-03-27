@@ -1,15 +1,19 @@
 package com.project.manager.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import com.project.manager.sceneManager.SceneManager;
 import com.project.manager.sceneManager.SceneType;
 import com.project.manager.services.ResetPasswdService;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,18 +24,53 @@ import java.util.ResourceBundle;
 @Component
 public class ResetPasswdController implements Initializable {
 
-
     @FXML
     private Button backToLoginButton;//button for testing
 
     @FXML
-    private TextField usernameOrEmailField;
+    private Button backToLoginButton1;//button for testing
+
+    @FXML
+    private Button backToLoginButton2;//button for testing
+
+    @FXML
+    private JFXTextField usernameOrEmailField;
 
     @FXML
     private Label usernameOrEmailErrorLabel;
 
     @FXML
     private JFXButton resetPasswdButton;
+
+    @FXML
+    private Pane resetPasswdStepOne;
+
+    @FXML
+    private Pane resetPasswdStepTwo;
+
+    @FXML
+    private Pane resetPasswdStepThree;
+
+    @FXML
+    private JFXTextField generatedCodeField;
+
+    @FXML
+    private Label codeErrorLabel;
+
+    @FXML
+    private JFXButton confirmButton;
+
+    @FXML
+    private JFXPasswordField passwdField;
+
+    @FXML
+    private JFXPasswordField repeatPasswdField;
+
+    @FXML
+    private Label passwdErrorLabel;
+
+    @FXML
+    private JFXButton changePasswdButton;
 
     private SceneManager sceneManager;
     private ResetPasswdService resetPasswdService;
@@ -46,8 +85,18 @@ public class ResetPasswdController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         resetUsernameOrEmailError();
+        resetCodeErrorLabel();
+        resetPasswdLabel();
 
         backToLoginButton.setOnAction(e -> {
+            sceneManager.showScene(SceneType.LOGIN);
+        });
+
+        backToLoginButton1.setOnAction(e -> {
+            sceneManager.showScene(SceneType.LOGIN);
+        });
+
+        backToLoginButton2.setOnAction(e -> {
             sceneManager.showScene(SceneType.LOGIN);
         });
 
@@ -57,25 +106,61 @@ public class ResetPasswdController implements Initializable {
             try {
                 String usernameOrEmail = usernameOrEmailField.getText().toString();
                 resetPasswdService.resetPassword(usernameOrEmail);
-                //sceneManager.showScene(SceneType.DASHBOARD);
+                resetPasswdStepOne.setVisible(false);
+                resetPasswdStepTwo.setVisible(true);
             } catch (RuntimeException ex) {
                 usernameOrEmailErrorLabel.setVisible(true);
                 usernameOrEmailErrorLabel.setText(ex.getMessage());
             }
 
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("Confirmation Dialog");
-//            alert.setHeaderText("Look, a Confirmation Dialog");
-//            alert.setContentText("Are you ok with this?");
-//
-//            alert.showAndWait();
-
         });
 
+        confirmButton.setOnAction(e -> {
+            resetCodeErrorLabel();
+
+            try {
+                String usernameOrEmail = usernameOrEmailField.getText().toString();
+                String generatedCode = generatedCodeField.getText().toString();
+                resetPasswdService.checkGeneratedCode(usernameOrEmail, generatedCode);
+                resetPasswdStepTwo.setVisible(false);
+                resetPasswdStepThree.setVisible(true);
+            } catch (RuntimeException ex) {
+                codeErrorLabel.setVisible(true);
+                codeErrorLabel.setText(ex.getMessage());
+            }
+        });
+
+        changePasswdButton.disableProperty().bind(Bindings.isEmpty(passwdField.textProperty())
+            .or(Bindings.length(passwdField.textProperty()).lessThan(8))
+            .or(Bindings.length(repeatPasswdField.textProperty()).lessThan(8)));
+
+        changePasswdButton.setOnAction(e -> {
+            resetPasswdLabel();
+
+            try {
+                String usernameOrEmail = usernameOrEmailField.getText().toString();
+                String password = passwdField.getText().toString();
+                String repeatPassword = repeatPasswdField.getText().toString();
+                resetPasswdService.changePassword(usernameOrEmail, password, repeatPassword);
+            } catch (RuntimeException ex) {
+                passwdErrorLabel.setVisible(true);
+                passwdErrorLabel.setText(ex.getMessage());
+            }
+        });
     }
 
     public void resetUsernameOrEmailError() {
         usernameOrEmailErrorLabel.setText("");
         usernameOrEmailErrorLabel.setVisible(false);
+    }
+
+    public void resetCodeErrorLabel() {
+        codeErrorLabel.setText("");
+        codeErrorLabel.setVisible(false);
+    }
+
+    public void resetPasswdLabel() {
+        passwdErrorLabel.setText("");
+        passwdErrorLabel.setVisible(false);
     }
 }

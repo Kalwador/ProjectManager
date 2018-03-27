@@ -44,6 +44,7 @@ public class InjectData {
                 .isFirstLogin(false)
                 .isBlocked(false)
                 .projects(new HashSet<>())
+                .unlockPasswdCode(null)
                 .build();
 
         Project projectOne = Project.builder()

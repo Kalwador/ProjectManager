@@ -44,6 +44,7 @@ public class RegistrationService {
             .isFirstLogin(true)
             .isBlocked(false)
             .code(code)
+            .unlockPasswdCode(null)
             .build();
         userRepository.save(userModel);
     }

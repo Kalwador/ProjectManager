@@ -49,6 +49,8 @@ public class UserModel {
     @NotNull
     private String code;
 
+    private String unlockPasswdCode;
+
     @ManyToMany
     @JoinTable(
         name = "USER_PROJECT",

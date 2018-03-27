@@ -9,6 +9,7 @@ import com.project.manager.exceptions.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.sceneManager.SceneManager;
 import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.AlertManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,10 +46,8 @@ public class LoginService {
             throw new DifferentPasswordException("Password you entered was incorrect.");
         }
 
-        if (usermodel.isBlocked()){
-
-            System.out.println("not working");
-
+        if (usermodel.isBlocked()) {
+            AlertManager.showInformationAlert("Account blocked!", "Your account is blocked because somebody send request to change a password. Finish password reset procedure or contact with administrator.");
         } else {
             sessionService.setLoggedUser(usermodel);
             sceneManager.showScene(SceneType.DASHBOARD);
