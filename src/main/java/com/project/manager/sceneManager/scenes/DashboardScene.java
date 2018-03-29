@@ -4,7 +4,7 @@ import com.project.manager.sceneManager.scenes.system.CustomSceneImpl;
 import javafx.stage.Stage;
 
 /**
- * Dashboard Scene, view list of projects logged user
+ * Dashboard Scene, view list of projectsAsUser logged user
  */
 public class DashboardScene extends CustomSceneImpl {
 

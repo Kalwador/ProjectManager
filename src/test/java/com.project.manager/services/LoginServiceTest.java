@@ -1,4 +1,4 @@
-package com.project.manager.login;
+package com.project.manager.services;
 
 import com.project.manager.BCryptEncoder;
 import com.project.manager.entities.UserModel;
@@ -8,7 +8,6 @@ import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.services.LoginService;
-import com.project.manager.services.RegistrationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,7 +31,7 @@ public class LoginServiceTest {
                 .username("username")
                 .email("username@gmail.com")
                 .password(BCryptEncoder.encode("password"))
-                .isFirstLogin(true).build();
+                .isLocked(true).build();
         when(userRepository.findByUsername("username")).thenReturn(userModel);
         loginService.loginUser("username",userModel.getPassword());
     }
@@ -43,7 +42,7 @@ public class LoginServiceTest {
                 .username("username")
                 .email("username@gmail.com")
                 .password("")
-                .isFirstLogin(true).build();
+                .isLocked(true).build();
         when(userRepository.findByUsername("username")).thenReturn(null);
         loginService.loginUser("usernameasd","123");
     }
@@ -54,7 +53,7 @@ public class LoginServiceTest {
                 .username("username")
                 .email("username@gmail.com")
                 .password("")
-                .isFirstLogin(true).build();
+                .isLocked(true).build();
         when(userRepository.findByUsername("username")).thenReturn(null);
         loginService.loginUser("usernameasd","");
     }
@@ -65,7 +64,7 @@ public class LoginServiceTest {
                 .username("username")
                 .email("username@gmail.com")
                 .password(BCryptEncoder.encode("123"))
-                .isFirstLogin(true).build();
+                .isLocked(true).build();
         when(userRepository.findByUsername("username")).thenReturn(userModel);
         loginService.loginUser("","123");
     }
@@ -76,8 +75,10 @@ public class LoginServiceTest {
                 .username("username")
                 .email("username@gmail.com")
                 .password(BCryptEncoder.encode("123"))
-                .isFirstLogin(true).build();
+                .isLocked(true).build();
         when(userRepository.findByUsername("username")).thenReturn(userModel);
         loginService.loginUser("username","123");
     }
+
+
 }

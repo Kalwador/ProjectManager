@@ -1,10 +1,6 @@
 package com.project.manager.controllers;
 
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
@@ -17,8 +13,6 @@ import java.util.ResourceBundle;
 @Component
 public class ProjectViewController implements Initializable {
 
-    @FXML
-    private Button addUserButton;
     /**
      * Initialization of project view components
      * @param location
@@ -26,11 +20,5 @@ public class ProjectViewController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addUserButton.setOnAction(e -> {
-            SceneManager sceneManager = SceneManager.getInstance();
-            sceneManager.showInNewWindow(SceneType.ADD_USER);
-        });
     }
-
 }
-//sceneManager.showScene(SceneType.REGISTRATION);

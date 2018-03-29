@@ -4,8 +4,10 @@ import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.UserDoesNotExistException;
+import com.project.manager.models.UserRole;
 import com.project.manager.sceneManager.SceneManager;
 import com.project.manager.sceneManager.SceneType;
+import com.project.manager.services.SessionService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,10 +20,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import com.project.manager.services.LoginService;
 
-/**
- * This is the class which is responsible for login window.
- * This class perform display input fields, error labels and references to other frames.
- */
 @Component
 public class LoginController implements Initializable {
 
@@ -42,11 +40,13 @@ public class LoginController implements Initializable {
 
     private SceneManager sceneManager;
     private LoginService loginService;
+    private SessionService sessionService;
 
     @Autowired
     public LoginController(LoginService loginService) {
         sceneManager = SceneManager.getInstance();
         this.loginService=loginService;
+        this.sessionService = SessionService.getInstance();
     }
 
     /**
@@ -60,11 +60,22 @@ public class LoginController implements Initializable {
         this.resetUsernameError();
         this.resetPasswordError();
 
+        /** -----------------------------todo
+         * Register action listener
+         * Closes login window and opens menu to register new account
+         * Registration window - in progress by Seba
+         */
 
         register.setOnAction(e -> {
             sceneManager.showScene(SceneType.REGISTRATION);
         });
 
+        /**
+         * Login action listener
+         * Searches passed username in database and checks if it exists
+         * If user exists, compares passed password with password in database
+         * When passwords match, login is achieved
+         */
         loginButton.setOnAction(e -> {
             this.resetUsernameError();
             this.resetPasswordError();
@@ -72,7 +83,15 @@ public class LoginController implements Initializable {
                 String username = usernameTextField.getText().toString();
                 String passedPassword = passwordPassField.getText().toString();
                 loginService.loginUser(username, passedPassword);
-                sceneManager.showScene(SceneType.DASHBOARD);
+                UserRole role = sessionService.getRole();
+                switch (role) {
+                    case USER:
+                        sceneManager.showScene(SceneType.DASHBOARD);
+                        break;
+                    case ADMIN:
+                        sceneManager.showScene(SceneType.ADMIN_DASHBOARD);
+                }
+
             }
             catch (DifferentPasswordException dpe) {
                 labelErrorPassword.setText(dpe.getMessage());
@@ -94,17 +113,11 @@ public class LoginController implements Initializable {
         });
     }
 
-    /**
-     * Method responsible for resetting username's error label.
-     */
     public void resetUsernameError() {
         labelErrorUsername.setText("");
         labelErrorUsername.setVisible(false);
     }
 
-    /**
-     * Method responsible for resetting password's error label.
-     */
     public void resetPasswordError() {
         labelErrorPassword.setText("");
         labelErrorPassword.setVisible(false);

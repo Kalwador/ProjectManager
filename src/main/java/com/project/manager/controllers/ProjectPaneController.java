@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 /**
  * This is the class which is responsible for each pane view with project name.
- * This class perform display project view after clicked view button on one of user projects on dashboard.
+ * This class perform display project view after clicked view button on one of user projectsAsUser on dashboard.
  */
 @Getter
 @Setter
