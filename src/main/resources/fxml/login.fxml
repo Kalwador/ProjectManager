@@ -21,7 +21,7 @@
          <center>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="369.0" prefWidth="317.0" style="-fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: #ffcc00; -fx-border-width: 2px; -fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="69.0" fitWidth="66.0" layoutX="131.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="105.0" fitWidth="108.0" layoutX="112.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/task%20manager.png" />
                      </image>
