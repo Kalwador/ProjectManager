@@ -31,12 +31,12 @@
                         </Label>
                      </children>
                   </Pane>
-                  <ImageView fitHeight="25.0" fitWidth="24.0" focusTraversable="true" layoutX="56.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="25.0" fitWidth="24.0" focusTraversable="true" layoutX="59.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/user-white.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="56.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="59.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/password-white.png" />
                      </image>
@@ -46,8 +46,8 @@
                         <Image url="@../images/task%20manager.png" />
                      </image>
                   </ImageView>
-                      <Label fx:id="labelForgotPassword" layoutX="87.0" layoutY="264.0" text="Forgot password ?" textFill="#d66000" />
-                  <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="68.0" layoutY="298.0" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="Login" textFill="#d66000">
+                      <Label fx:id="labelForgotPassword" layoutX="88.0" layoutY="279.0" text="Forgot password ?" textFill="#d66000" />
+                  <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="64.0" layoutY="313.0" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="Login" textFill="#d66000">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -60,7 +60,7 @@
                         </LinearGradient>
                      </ripplerFill>
                   </JFXButton>
-                  <JFXButton fx:id="register" buttonType="RAISED" layoutX="173.0" layoutY="298.0" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="REGISTER" textFill="#d66000" underline="true">
+                  <JFXButton fx:id="register" buttonType="RAISED" layoutX="176.0" layoutY="313.0" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="REGISTER" textFill="#d66000" underline="true">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -73,13 +73,15 @@
                         </LinearGradient>
                      </ripplerFill>
                   </JFXButton>
-                  <JFXTextField fx:id="usernameTextField" focusColor="#ee9701" labelFloat="true" layoutX="89.0" layoutY="172.0" prefHeight="25.0" prefWidth="120.0" promptText="Username:" style="-fx-text-color: white;" unFocusColor="#ffedd0" />
-                  <JFXPasswordField fx:id="passwordPassField" focusColor="#ee9701" layoutX="89.0" layoutY="222.0" prefHeight="25.0" prefWidth="120.0" promptText="Password:" unFocusColor="#ffedd0" />
+                  <JFXTextField fx:id="usernameTextField" focusColor="#ee9701" labelFloat="true" layoutX="92.0" layoutY="160.0" prefHeight="25.0" prefWidth="120.0" promptText="Username:" style="-fx-text-color: white;" unFocusColor="#ffedd0" />
+                  <JFXPasswordField fx:id="passwordPassField" focusColor="#ee9701" layoutX="92.0" layoutY="222.0" prefHeight="25.0" prefWidth="120.0" promptText="Password:" unFocusColor="#ffedd0" />
                   <ImageView fitHeight="175.0" fitWidth="205.0" layoutX="212.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/dragon.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="labelErrorUsername" layoutX="92.0" layoutY="192.0" prefHeight="17.0" prefWidth="120.0" text="Label" textFill="RED" />
+                  <Label fx:id="labelErrorPassword" layoutX="92.0" layoutY="256.0" prefHeight="17.0" prefWidth="120.0" text="Label" textFill="RED" />
                </children>
             </Pane>
          </center>

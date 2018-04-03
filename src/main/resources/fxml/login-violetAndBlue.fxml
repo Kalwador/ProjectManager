@@ -58,23 +58,25 @@
                         </LinearGradient>
                      </ripplerFill>
                   </JFXButton>
-                  <ImageView fitHeight="20.0" fitWidth="19.0" layoutX="72.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="19.0" layoutX="73.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/user-white.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField fx:id="usernameTextField" focusColor="#970ee0" labelFloat="true" layoutX="100.0" layoutY="183.0" prefHeight="25.0" prefWidth="124.0" promptText="Username:" unFocusColor="#1249ff" />
+                  <JFXTextField fx:id="usernameTextField" focusColor="#970ee0" labelFloat="true" layoutX="101.0" layoutY="172.0" prefHeight="25.0" prefWidth="124.0" promptText="Username:" unFocusColor="#1249ff" />
                   <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="71.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/password-white.png" />
                      </image>
                   </ImageView>
                   <JFXPasswordField fx:id="passwordPassField" focusColor="#970ee0" labelFloat="true" layoutX="100.0" layoutY="239.0" prefHeight="25.0" prefWidth="124.0" promptText="Password:" unFocusColor="#1249ff" />
-                  <ImageView fitHeight="141.0" fitWidth="139.0" layoutX="92.0" layoutY="33.0" nodeOrientation="INHERIT" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="128.0" fitWidth="130.0" layoutX="100.0" layoutY="33.0" nodeOrientation="INHERIT" opacity="0.9" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/TM-Yellow%20and%20blue.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="labelErrorUsername" layoutX="101.0" layoutY="208.0" prefHeight="17.0" prefWidth="125.0" text="Label" textFill="RED" />
+                  <Label fx:id="labelErrorPassword" layoutX="100.0" layoutY="270.0" prefHeight="17.0" prefWidth="125.0" text="Label" textFill="RED" />
                </children>
             </Pane>
          </center>

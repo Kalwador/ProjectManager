@@ -74,6 +74,8 @@
                      </image>
                   </ImageView>
                   <JFXPasswordField fx:id="passwordPassField" focusColor="#ee9701" labelFloat="true" layoutX="97.0" layoutY="182.0" prefHeight="25.0" prefWidth="125.0" promptText="Password:" unFocusColor="#ffedd0" />
+                  <Label fx:id="labelErrorUsername1" layoutX="97.0" layoutY="158.0" prefHeight="17.0" prefWidth="130.0" text="Label" textFill="RED" />
+                  <Label fx:id="labelErrorPassword" layoutX="97.0" layoutY="207.0" prefHeight="17.0" prefWidth="130.0" text="Label" textFill="RED" />
                </children>
             </Pane>
          </center>
