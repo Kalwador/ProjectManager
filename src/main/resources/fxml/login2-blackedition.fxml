@@ -47,31 +47,15 @@
                      </image>
                   </ImageView>
                       <Label fx:id="labelForgotPassword" layoutX="88.0" layoutY="279.0" text="Forgot password ?" textFill="#d66000" />
-                  <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="64.0" layoutY="313.0" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="Login" textFill="#d66000">
+                  <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="64.0" layoutY="313.0" prefHeight="30.0" prefWidth="73.0" ripplerFill="#ed9302" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="Login" textFill="#d66000">
                      <font>
                         <Font size="13.0" />
                      </font>
-                     <ripplerFill>
-                        <LinearGradient endX="1.0" endY="0.6714285714285715" startX="1.0" startY="0.1523809523809524">
-                           <stops>
-                              <Stop color="#ee9701" />
-                              <Stop color="BLACK" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </ripplerFill>
                   </JFXButton>
-                  <JFXButton fx:id="register" buttonType="RAISED" layoutX="176.0" layoutY="313.0" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="REGISTER" textFill="#d66000" underline="true">
+                  <JFXButton fx:id="register" buttonType="RAISED" layoutX="176.0" layoutY="313.0" prefHeight="30.0" prefWidth="73.0" ripplerFill="#ed9302" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="REGISTER" textFill="#d66000" underline="true">
                      <font>
                         <Font size="13.0" />
                      </font>
-                     <ripplerFill>
-                        <LinearGradient endX="1.0" endY="0.6714285714285715" startX="1.0" startY="0.1523809523809524">
-                           <stops>
-                              <Stop color="#ee9701" />
-                              <Stop color="BLACK" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </ripplerFill>
                   </JFXButton>
                   <JFXTextField fx:id="usernameTextField" focusColor="#ee9701" labelFloat="true" layoutX="92.0" layoutY="160.0" prefHeight="25.0" prefWidth="120.0" promptText="Username:" style="-fx-text-color: white;" unFocusColor="#ffedd0" />
                   <JFXPasswordField fx:id="passwordPassField" focusColor="#ee9701" layoutX="92.0" layoutY="222.0" prefHeight="25.0" prefWidth="120.0" promptText="Password:" unFocusColor="#ffedd0" />
