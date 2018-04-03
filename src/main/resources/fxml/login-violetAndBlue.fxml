@@ -69,7 +69,7 @@
                         <Image url="@../images/password-white.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField fx:id="passwordPassField" focusColor="#970ee0" labelFloat="true" layoutX="99.0" layoutY="238.0" prefHeight="25.0" prefWidth="124.0" promptText="Password:" unFocusColor="#1249ff" />
+                  <JFXPasswordField fx:id="passwordPassField" focusColor="#970ee0" labelFloat="true" layoutX="100.0" layoutY="239.0" prefHeight="25.0" prefWidth="124.0" promptText="Password:" unFocusColor="#1249ff" />
                   <ImageView fitHeight="141.0" fitWidth="139.0" layoutX="92.0" layoutY="33.0" nodeOrientation="INHERIT" opacity="0.9" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/TM-Yellow%20and%20blue.png" />

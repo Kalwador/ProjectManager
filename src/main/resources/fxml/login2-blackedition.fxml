@@ -74,7 +74,7 @@
                      </ripplerFill>
                   </JFXButton>
                   <JFXTextField fx:id="usernameTextField" focusColor="#ee9701" labelFloat="true" layoutX="89.0" layoutY="172.0" prefHeight="25.0" prefWidth="120.0" promptText="Username:" style="-fx-text-color: white;" unFocusColor="#ffedd0" />
-                  <JFXTextField fx:id="passwordPassField" focusColor="#ee9701" labelFloat="true" layoutX="87.0" layoutY="221.0" prefHeight="25.0" prefWidth="124.0" promptText="Password:" unFocusColor="#ffedd0" />
+                  <JFXPasswordField fx:id="passwordPassField" focusColor="#ee9701" layoutX="89.0" layoutY="222.0" prefHeight="25.0" prefWidth="120.0" promptText="Password:" unFocusColor="#ffedd0" />
                   <ImageView fitHeight="175.0" fitWidth="205.0" layoutX="212.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/dragon.png" />

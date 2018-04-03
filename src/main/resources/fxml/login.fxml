@@ -67,13 +67,13 @@
                         <Image url="@../images/user.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField fx:id="usernameTextField" focusColor="#ee9701" labelFloat="true" layoutX="94.0" layoutY="133.0" prefHeight="25.0" prefWidth="120.0" promptText="Username:" style="-fx-text-color: white;" unFocusColor="#ffedd0" />
+                  <JFXTextField fx:id="usernameTextField" focusColor="#ee9701" labelFloat="true" layoutX="96.0" layoutY="133.0" prefHeight="25.0" prefWidth="125.0" promptText="Username:" style="-fx-text-color: white;" unFocusColor="#ffedd0" />
                   <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="68.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/password.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField fx:id="passwordPassField" focusColor="#ee9701" labelFloat="true" layoutX="92.0" layoutY="181.0" prefHeight="25.0" prefWidth="124.0" promptText="Password:" unFocusColor="#ffedd0" />
+                  <JFXPasswordField fx:id="passwordPassField" focusColor="#ee9701" labelFloat="true" layoutX="97.0" layoutY="182.0" prefHeight="25.0" prefWidth="125.0" promptText="Password:" unFocusColor="#ffedd0" />
                </children>
             </Pane>
          </center>
