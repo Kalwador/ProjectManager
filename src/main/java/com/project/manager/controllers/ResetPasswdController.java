@@ -84,6 +84,10 @@ public class ResetPasswdController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        resetPasswdStepOne.setVisible(true);
+        resetPasswdStepTwo.setVisible(false);
+        resetPasswdStepThree.setVisible(false);
+
         resetUsernameOrEmailError();
         resetCodeErrorLabel();
         resetPasswdLabel();

@@ -10,7 +10,9 @@ import com.project.manager.ui.AlertManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class ResetPasswdService {
@@ -79,6 +81,17 @@ public class ResetPasswdService {
     }
 
     private String generateCode() {
-        return String.valueOf(System.currentTimeMillis());
+        //return String.valueOf(System.currentTimeMillis());
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 5) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
     }
+
+
 }
