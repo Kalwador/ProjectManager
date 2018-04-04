@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.RegistrationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.RegistrationController">
    <center>
-      <BorderPane prefHeight="140.0" prefWidth="229.0" style="-fx-background-image: url('images/violet.jpg');">
+      <BorderPane prefHeight="140.0" prefWidth="229.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;">
          <center>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.96" prefHeight="403.0" prefWidth="323.0" style="-fx-border-color: #7a05b8; -fx-border-radius: 5px; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-background-color: black;" BorderPane.alignment="CENTER">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="403.0" prefWidth="323.0" style="-fx-border-color: #ee9701; -fx-border-radius: 5px; -fx-border-width: 2px; -fx-background-radius: 5px; -fx-background-color: black;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-7.0" layoutY="-7.0" prefHeight="28.0" prefWidth="338.0" style="-fx-background-color: #7a05b8; -fx-background-radius: 5px;">
+                  <Pane layoutX="-7.0" layoutY="-7.0" prefHeight="28.0" prefWidth="338.0" style="-fx-background-color: #d66000; -fx-background-radius: 5px; -fx-border-width: 2px; -fx-border-radius: 5px;">
                      <children>
                         <Label layoutX="14.0" layoutY="5.0" text="Sign Up" textAlignment="CENTER" textFill="WHITE">
                            <font>
@@ -26,29 +26,29 @@
                         </Label>
                      </children>
                   </Pane>
-                  <JFXTextField fx:id="username" focusColor="#970ee0" labelFloat="true" layoutX="75.0" layoutY="129.0" prefHeight="25.0" prefWidth="200.0" promptText="Username" unFocusColor="#1249ff">
+                  <JFXTextField fx:id="username" focusColor="#ee9701" labelFloat="true" layoutX="84.0" layoutY="130.0" prefHeight="25.0" prefWidth="180.0" promptText="Username:" unFocusColor="#ffedd0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </JFXTextField>
-                  <JFXTextField fx:id="email" focusColor="#970ee0" labelFloat="true" layoutX="75.0" layoutY="169.0" prefHeight="25.0" prefWidth="200.0" promptText="E-mail" unFocusColor="#1249ff">
+                  <JFXTextField fx:id="email" focusColor="#ee9701" labelFloat="true" layoutX="84.0" layoutY="180.0" prefHeight="25.0" prefWidth="180.0" promptText="E-mail:" unFocusColor="#ffedd0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </JFXTextField>
-                  <ImageView fitHeight="93.0" fitWidth="91.0" layoutX="117.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="96.0" fitWidth="100.0" layoutX="117.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/TM-Yellow%20and%20blue.png" />
+                        <Image url="@../images/task%20manager.png" />
                      </image>
                   </ImageView>
-                  <JFXPasswordField fx:id="password" focusColor="#970ee0" labelFloat="true" layoutX="75.0" layoutY="209.0" prefHeight="25.0" prefWidth="200.0" promptText="Password" unFocusColor="#1249ff" />
-                  <JFXPasswordField fx:id="repeatPassword" focusColor="#970ee0" labelFloat="true" layoutX="75.0" layoutY="249.0" prefHeight="25.0" prefWidth="200.0" promptText="Repeat password" unFocusColor="#1249ff" />
-                  <JFXButton fx:id="sign" alignment="CENTER" buttonType="RAISED" layoutX="50.0" layoutY="338.0" prefHeight="38.0" prefWidth="87.0" ripplerFill="#144bff" style="-fx-background-color: black; -fx-border-color: #1249ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Sign Up" textFill="#1249ff">
+                  <JFXPasswordField fx:id="password" focusColor="#ee9701" labelFloat="true" layoutX="84.0" layoutY="230.0" prefHeight="25.0" prefWidth="180.0" promptText="Password: min 8 characters" unFocusColor="#ffedd0" />
+                  <JFXPasswordField fx:id="repeatPassword" focusColor="#ee9701" labelFloat="true" layoutX="84.0" layoutY="275.0" prefHeight="25.0" prefWidth="180.0" promptText="Repeat password:" unFocusColor="#ffedd0" />
+                  <JFXButton fx:id="sign" alignment="CENTER" buttonType="RAISED" layoutX="50.0" layoutY="338.0" prefHeight="30.0" prefWidth="73.0" ripplerFill="#ed9302" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="Sign Up" textFill="#d66000">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </JFXButton>
-                  <Label fx:id="problem" alignment="CENTER" layoutX="76.0" layoutY="288.0" prefHeight="24.0" prefWidth="198.0" textAlignment="RIGHT">
+                  <Label fx:id="problem" alignment="CENTER" layoutX="76.0" layoutY="305.0" prefHeight="24.0" prefWidth="198.0" textAlignment="RIGHT">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -56,29 +56,34 @@
                         <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
                      </padding>
                   </Label>
-                  <JFXButton fx:id="cancel" alignment="CENTER" buttonType="RAISED" layoutX="188.0" layoutY="338.0" prefHeight="38.0" prefWidth="87.0" ripplerFill="#144bff" style="-fx-background-color: black; -fx-border-color: #1249ff; -fx-border-radius: 10px; -fx-background-radius: 10px;" text="Cancel" textFill="#ff0400">
+                  <JFXButton fx:id="cancel" alignment="CENTER" buttonType="RAISED" layoutX="188.0" layoutY="338.0" prefHeight="30.0" prefWidth="73.0" ripplerFill="#ed9302" style="-fx-background-color: #f7ffda; -fx-background-radius: 5px;" text="Cancel" textFill="#ff0400">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </JFXButton>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="59.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/user-white.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="59.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/password-white.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="59.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/repeat%20pass.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="50.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="59.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/email.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="175.0" fitWidth="205.0" layoutX="222.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/dragon.png" />
                      </image>
                   </ImageView>
                </children>
