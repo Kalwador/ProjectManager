@@ -4,12 +4,14 @@ import com.project.manager.models.UserRole;
 import lombok.*;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.core.annotation.AliasFor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -52,7 +54,6 @@ public class UserModel {
 
     private String unlockPasswdCode;
 
-    //@ManyToMany
     @NotNull
     @Size(min = 1)
     private String firstName;
