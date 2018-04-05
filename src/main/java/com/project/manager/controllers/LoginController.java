@@ -4,8 +4,10 @@ import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.UserDoesNotExistException;
+import com.project.manager.models.UserRole;
 import com.project.manager.sceneManager.SceneManager;
 import com.project.manager.sceneManager.SceneType;
+import com.project.manager.services.SessionService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -38,11 +40,13 @@ public class LoginController implements Initializable {
 
     private SceneManager sceneManager;
     private LoginService loginService;
+    private SessionService sessionService;
 
     @Autowired
     public LoginController(LoginService loginService) {
         sceneManager = SceneManager.getInstance();
         this.loginService=loginService;
+        this.sessionService = SessionService.getInstance();
     }
 
     /**
@@ -79,6 +83,15 @@ public class LoginController implements Initializable {
                 String username = usernameTextField.getText().toString();
                 String passedPassword = passwordPassField.getText().toString();
                 loginService.loginUser(username, passedPassword);
+
+                UserRole role = sessionService.getRole();
+                switch (role) {
+                    case USER:
+                        sceneManager.showScene(SceneType.DASHBOARD);
+                        break;
+                    case ADMIN:
+                        sceneManager.showScene(SceneType.ADMIN_DASHBOARD);
+                }
             }
             catch (DifferentPasswordException dpe) {
                 labelErrorPassword.setText(dpe.getMessage());

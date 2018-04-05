@@ -41,10 +41,10 @@ public class RegistrationService {
             .username(username)
             .role(UserRole.USER)
             .password(BCryptEncoder.encode(password))
-            .isFirstLogin(true)
             .isBlocked(false)
-            .code(code)
             .unlockPasswdCode(null)
+            .isLocked(true)
+            .unlockCode(code)
             .build();
         userRepository.save(userModel);
     }

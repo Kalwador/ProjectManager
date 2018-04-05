@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 /**
- * This is the class which is responsible for projects panes in Dashboard view.
- * This class perform generating of projects panes into Dashboard view.
+ * This is the class which is responsible for projectsAsUser panes in Dashboard view.
+ * This class perform generating of projectsAsUser panes into Dashboard view.
  */
 @Component
 public class ProjectPaneGenerator {
@@ -30,7 +30,7 @@ public class ProjectPaneGenerator {
     }
 
     /**
-     * This method perform generating of projects panes witch will be displayed into Dashboard
+     * This method perform generating of projectsAsUser panes witch will be displayed into Dashboard
      * @param projectsArea
      * @exception IOException
      */

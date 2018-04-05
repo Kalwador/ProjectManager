@@ -26,15 +26,31 @@ public enum SceneType {
         Integer getId() {
             return 3;
         }
-    }, RESETPASSWD {
+    },  ADMIN_DASHBOARD {
         @Override
         Integer getId() {
             return 4;
+        }
+    }, ADMIN_UPDATE_PROJECT {
+        @Override
+        Integer getId() {
+            return 5;
+        }
+    }, MESSAGE_VIEW_WINDOW {
+        @Override
+        Integer getId() {
+            return 6;
+        }
+    }, RESETPASSWD {
+        @Override
+        Integer getId() {
+            return 7;
         }
     };
 
     /**
      * Return unique value of scene, used in changing scenes.
+     *
      * @return integer value
      */
     abstract Integer getId();

@@ -15,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import static org.mockito.Mockito.*;
 
@@ -59,7 +58,7 @@ public class RegistrationServiceTest {
                                         .username("username")
                                         .email("username@mail.com")
                                         .password(BCryptEncoder.encode("password"))
-                                        .isFirstLogin(true).build();
+                                        .isLocked(true).build();
 
         ArgumentCaptor<UserModel> arg = ArgumentCaptor.forClass(UserModel.class);
 

@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 /**
  * This is the class which is responsible for dashboard window.
- * This class perform display dynamically generated view projects of logged user.
+ * This class perform display dynamically generated view projectsAsUser of logged user.
  */
 @Component
 public class DashboardController implements Initializable {

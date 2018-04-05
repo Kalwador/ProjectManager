@@ -31,10 +31,7 @@ public class ResetPasswdServiceTest {
 
     @Test(expected = UserDoesNotExistException.class)
     public void testExpectedUserDoesNotExist() {
-        UserModel userModel = UserModel.builder()
-                .username("username")
-                .email("username@gmail.com").build();
-        when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
+        when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(null);
         resetPasswdService.resetPassword("usernameasd");
     }
 
@@ -49,6 +46,20 @@ public class ResetPasswdServiceTest {
         when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
         resetPasswdService.checkGeneratedCode("username","");
     }
+
+    //problem z nullem na userModel
+//    @Test(expected = DifferentGeneratedCodeException.class)
+//    public void testExpectedDifferentGeneratedCode() {
+//        String generatePasswdCode = resetPasswdService.generateCode();
+//
+//        UserModel userModel = UserModel.builder()
+//                .username("username")
+//                .email("username@gmail.com")
+//                .unlockPasswdCode(generatePasswdCode).build();
+//        when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
+//        resetPasswdService.checkGeneratedCode("username","gfghfh");
+//    }
+
 
     @Test(expected = DifferentPasswordException.class)
     public void testResetPasswdExpectDifferentPassword() {

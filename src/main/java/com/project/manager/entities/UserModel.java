@@ -2,14 +2,14 @@ package com.project.manager.entities;
 
 import com.project.manager.models.UserRole;
 import lombok.*;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Email;
-import org.springframework.core.annotation.AliasFor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -19,6 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Proxy(lazy = false)
 public class UserModel {
 
     @Id
@@ -42,21 +43,39 @@ public class UserModel {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    private boolean isFirstLogin;
+    private boolean isLocked;
 
     private boolean isBlocked;
 
     @NotNull
-    private String code;
+    private String unlockCode;
 
     private String unlockPasswdCode;
 
-    @ManyToMany
+    //@ManyToMany
+    @NotNull
+    @Size(min = 1)
+    private String firstName;
+
+    @NotNull
+    @Size(min = 1)
+    private String lastName;
+
+    @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER)
+    private Set<Project> projectsAsManager;
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<Project> projectsAsClient;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "USER_PROJECT",
         joinColumns = { @JoinColumn(name = "user_id") },
         inverseJoinColumns = { @JoinColumn(name = "project_id") }
     )
-    private Set<Project> projects = new HashSet<>();
+    private Set<Project> projectsAsUser;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Message> messages;
 }
 
