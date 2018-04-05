@@ -26,7 +26,7 @@ public enum SceneType {
         Integer getId() {
             return 3;
         }
-    }, ADMIN_DASHBOARD {
+    },  ADMIN_DASHBOARD {
         @Override
         Integer getId() {
             return 4;
@@ -40,6 +40,11 @@ public enum SceneType {
         @Override
         Integer getId() {
             return 6;
+        }
+    }, RESETPASSWD {
+        @Override
+        Integer getId() {
+            return 7;
         }
     };
 

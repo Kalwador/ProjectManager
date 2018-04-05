@@ -47,8 +47,12 @@ public class UserModel {
 
     private boolean isLocked;
 
+    private boolean isBlocked;
+
     @NotNull
     private String unlockCode;
+
+    private String unlockPasswdCode;
 
     @NotNull
     @Size(min = 1)

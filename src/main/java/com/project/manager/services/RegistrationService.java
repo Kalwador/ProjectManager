@@ -41,6 +41,8 @@ public class RegistrationService {
             .username(username)
             .role(UserRole.USER)
             .password(BCryptEncoder.encode(password))
+            .isBlocked(false)
+            .unlockPasswdCode(null)
             .isLocked(true)
             .unlockCode(code)
             .build();

@@ -9,8 +9,12 @@
    <children>
       <AnchorPane prefHeight="650.0" prefWidth="1000.0">
          <children>
-            <Button fx:id="backToLogin" layoutX="29.0" layoutY="27.0" mnemonicParsing="false" text="BACK_TO_LOGIN" />
-            <VBox fx:id="projectsArea" layoutX="111.0" layoutY="101.0" prefHeight="433.0" prefWidth="150.0" />
+            <Button fx:id="backToLoginButton" layoutY="2.0" mnemonicParsing="false" text="BACK_TO_LOGIN" />
+            <ScrollPane layoutX="53.0" layoutY="59.0" prefHeight="530.0" prefWidth="225.0">
+               <content>
+                  <VBox fx:id="projectsArea" prefHeight="152.0" prefWidth="220.0" />
+               </content>
+            </ScrollPane>
          </children></AnchorPane>
    </children>
 </AnchorPane>

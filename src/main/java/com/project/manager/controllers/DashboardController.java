@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     @FXML
-    private Button backToLogin;
+    private Button backToLoginButton;//button for testing
 
     @FXML
     private VBox projectsArea;
@@ -46,9 +46,7 @@ public class DashboardController implements Initializable {
 
         projectPaneGenerator.createPanes(projectsArea);
 
-        backToLogin.setOnAction(e -> {
-            sceneManager.showScene(SceneType.LOGIN);
-        });
+        backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
     }
 }

@@ -4,21 +4,21 @@ import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.UserDoesNotExistException;
-import com.project.manager.models.UserRole;
 import com.project.manager.sceneManager.SceneManager;
 import com.project.manager.sceneManager.SceneType;
+import com.project.manager.services.LoginService;
 import com.project.manager.services.SessionService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import com.project.manager.services.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 @Component
 public class LoginController implements Initializable {
@@ -28,7 +28,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button loginButton;
     @FXML
-    private Label labelForgotPassword;
+    private Button forgotPasswordButton;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -80,18 +80,9 @@ public class LoginController implements Initializable {
             this.resetUsernameError();
             this.resetPasswordError();
             try {
-                String username = usernameTextField.getText().toString();
-                String passedPassword = passwordPassField.getText().toString();
+                String username = usernameTextField.getText();
+                String passedPassword = passwordPassField.getText();
                 loginService.loginUser(username, passedPassword);
-                UserRole role = sessionService.getRole();
-                switch (role) {
-                    case USER:
-                        sceneManager.showScene(SceneType.DASHBOARD);
-                        break;
-                    case ADMIN:
-                        sceneManager.showScene(SceneType.ADMIN_DASHBOARD);
-                }
-
             }
             catch (DifferentPasswordException dpe) {
                 labelErrorPassword.setText(dpe.getMessage());
@@ -108,9 +99,7 @@ public class LoginController implements Initializable {
             }
         });
 
-        labelForgotPassword.setOnMouseClicked(e -> {
-            //sceneManager.showScene(SceneType.FORGOTPASSWD);
-        });
+        forgotPasswordButton.setOnAction(e -> sceneManager.showScene(SceneType.RESETPASSWD));
     }
 
     public void resetUsernameError() {

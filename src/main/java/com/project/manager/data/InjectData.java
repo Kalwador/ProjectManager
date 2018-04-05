@@ -41,7 +41,7 @@ public class InjectData {
     /**
      * This method perform injection of test data into database and relations between tables
      */
-//    @PostConstruct
+    @PostConstruct
     public void injectData() {
 
         UserModel client = UserModel.builder()
@@ -62,6 +62,7 @@ public class InjectData {
                 .password(BCryptEncoder.encode("password"))
                 .email("manager@mail.com")
                 .role(UserRole.USER)
+                .unlockPasswdCode(null)
                 .isLocked(false)
                 .projectsAsClient(new HashSet<>())
                 .firstName("Edward")

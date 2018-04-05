@@ -1,5 +1,6 @@
 package com.project.manager.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.project.manager.sceneManager.SceneManager;
 import com.project.manager.sceneManager.SceneType;
 import javafx.fxml.FXML;
@@ -23,15 +24,12 @@ public class ProjectPaneController implements Initializable {
     private Long projectId;
 
     @FXML
-    private Label projectName;
-
-    @FXML
-    private Button viewProject;
+    private JFXButton viewProject;
 
     /**
      * Initialization of project view after clicked view button
-     * @param location
-     * @param resources
+     * @param location - URL location
+     * @param resources - Bundle resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -6,7 +6,11 @@ import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.UserDoesNotExistException;
+import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
+import com.project.manager.sceneManager.SceneManager;
+import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.AlertManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +20,11 @@ import java.util.Optional;
 public class LoginService {
     private UserRepository userRepository;
     private SessionService sessionService;
+    private SceneManager sceneManager;
+
     @Autowired
     public LoginService(UserRepository userRepository) {
+        sceneManager = SceneManager.getInstance();
         this.userRepository = userRepository;
         this.sessionService = SessionService.getInstance();
     }
@@ -39,6 +46,21 @@ public class LoginService {
         if (!result) {
             throw new DifferentPasswordException("Password you entered was incorrect.");
         }
-        sessionService.setLoggedUser(usermodel);
+
+        if (usermodel.isBlocked()) {
+            AlertManager.showInformationAlert("Account blocked!", "Your account is blocked.");
+        } else {
+            sessionService.setLoggedUser(usermodel);
+
+            UserRole role = sessionService.getRole();
+
+            switch (role) {
+                case USER:
+                    sceneManager.showScene(SceneType.DASHBOARD);
+                    break;
+                case ADMIN:
+                    sceneManager.showScene(SceneType.ADMIN_DASHBOARD);
+            }
+        }
     }
 }

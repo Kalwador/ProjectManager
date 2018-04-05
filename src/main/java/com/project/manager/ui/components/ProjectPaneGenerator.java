@@ -50,7 +50,7 @@ public class ProjectPaneGenerator {
 
                 controller.setProjectId(project.getId());
 
-                controller.getProjectName().setText(project.getProjectName());
+                controller.getViewProject().setText(project.getProjectName());
 
                 projectsArea.getChildren().add(newAnchorPane);
 
