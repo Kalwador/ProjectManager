@@ -6,6 +6,7 @@ import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.UserDoesNotExistException;
+import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.sceneManager.SceneManager;
 import com.project.manager.sceneManager.SceneType;
@@ -47,10 +48,19 @@ public class LoginService {
         }
 
         if (usermodel.isBlocked()) {
-            AlertManager.showInformationAlert("Account blocked!", "Your account is blocked. because somebody send request to change a password. Finish password reset procedure or contact with administrator.");
+            AlertManager.showInformationAlert("Account blocked!", "Your account is blocked.");
         } else {
             sessionService.setLoggedUser(usermodel);
-            sceneManager.showScene(SceneType.DASHBOARD);
+
+            UserRole role = sessionService.getRole();
+
+            switch (role) {
+                case USER:
+                    sceneManager.showScene(SceneType.DASHBOARD);
+                    break;
+                case ADMIN:
+                    sceneManager.showScene(SceneType.ADMIN_DASHBOARD);
+            }
         }
     }
 }

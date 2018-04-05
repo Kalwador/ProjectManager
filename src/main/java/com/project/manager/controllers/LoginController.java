@@ -83,15 +83,6 @@ public class LoginController implements Initializable {
                 String username = usernameTextField.getText().toString();
                 String passedPassword = passwordPassField.getText().toString();
                 loginService.loginUser(username, passedPassword);
-
-                UserRole role = sessionService.getRole();
-                switch (role) {
-                    case USER:
-                        sceneManager.showScene(SceneType.DASHBOARD);
-                        break;
-                    case ADMIN:
-                        sceneManager.showScene(SceneType.ADMIN_DASHBOARD);
-                }
             }
             catch (DifferentPasswordException dpe) {
                 labelErrorPassword.setText(dpe.getMessage());
