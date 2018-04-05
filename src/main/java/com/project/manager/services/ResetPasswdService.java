@@ -10,15 +10,20 @@ import com.project.manager.ui.AlertManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
 import java.util.Optional;
 import java.util.Random;
 
+
+/**
+ * This is the class which is responsible for operations step by step to perform password resetting.
+ * This class perform methods pessetPassword, checkGeneratedCode, chcangePassword and generatedCode
+ */
 @Service
 public class ResetPasswdService {
 
     private SceneManager sceneManager;
     private UserRepository userRepository;
+
 
     @Autowired
     public ResetPasswdService(UserRepository userRepository) {
@@ -26,6 +31,10 @@ public class ResetPasswdService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * This method perform starting process of resetting password and perform blocking account and generating code to unlock account.
+     * @param usernameOrEmail - name or email of user that want to reset password.
+     */
     public void resetPassword(String usernameOrEmail){
 
         if (usernameOrEmail.isEmpty()) {
@@ -43,13 +52,21 @@ public class ResetPasswdService {
             userModel.setUnlockPasswdCode(generatePasswdCode);
             userRepository.save(userModel);
 
+            /** -----------------------------todo
+             * Sending generated code to continue reset password on email
+             */
+
             AlertManager.showInformationAlert("Resetting password", "You started procedure to reset your" +
                     " password. We sent on your email message with special code to continue reset your password.");
 
             System.out.println(userModel.getUnlockPasswdCode());
         }
     }
-
+    /**
+     * This method checking that inserted code is not empty and if is equal to generated code.
+     * @param usernameOrEmail - name or email of user that want to reset password.
+     * @param generatedCode - code to unlock blocked account.
+     */
     public void checkGeneratedCode(String usernameOrEmail, String generatedCode){
 
         UserModel userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
@@ -65,6 +82,12 @@ public class ResetPasswdService {
         }
     }
 
+    /**
+     * This method perform checking that passwords are the same and password changing.
+     * @param usernameOrEmail - name or email of user that want to reset password.
+     * @param password - new password.
+     * @param repeatPassword - confirmed new password.
+     */
     public void changePassword(String usernameOrEmail, String password, String repeatPassword) {
 
         UserModel userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
@@ -80,7 +103,10 @@ public class ResetPasswdService {
         sceneManager.showScene(SceneType.LOGIN);
     }
 
-    private String generateCode() {
+    /**
+     * This method perform generating unique code that required to unlock account
+     */
+    public String generateCode() {
         //return String.valueOf(System.currentTimeMillis());
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         StringBuilder salt = new StringBuilder();

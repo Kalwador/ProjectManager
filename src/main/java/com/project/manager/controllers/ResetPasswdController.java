@@ -81,6 +81,12 @@ public class ResetPasswdController implements Initializable {
         this.resetPasswdService = resetPasswdService;
     }
 
+    /**
+     * This method is responsible for listening the controller in window, and making action after button clicked
+     * implemented in lambdas expression
+     * @param location - URL location
+     * @param resources - Bundle resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -104,6 +110,10 @@ public class ResetPasswdController implements Initializable {
             sceneManager.showScene(SceneType.LOGIN);
         });
 
+        /**
+         * Reset password action listener
+         * perform first step of reset password procedure that typing user name or email
+         */
         resetPasswdButton.setOnAction(e -> {
             resetUsernameOrEmailError();
 
@@ -119,6 +129,10 @@ public class ResetPasswdController implements Initializable {
 
         });
 
+        /**
+         * Confirm generated code action listener
+         * perform second step of reset password procedure that checking if typed generated code are the same like in database
+         */
         confirmButton.setOnAction(e -> {
             resetCodeErrorLabel();
 
@@ -138,6 +152,10 @@ public class ResetPasswdController implements Initializable {
             .or(Bindings.length(passwdField.textProperty()).lessThan(8))
             .or(Bindings.length(repeatPasswdField.textProperty()).lessThan(8)));
 
+        /**
+         * Change password action listener
+         * perform third step of reset password procedure that typed and confirmed password is going to change.
+         */
         changePasswdButton.setOnAction(e -> {
             resetPasswdLabel();
 
@@ -153,16 +171,25 @@ public class ResetPasswdController implements Initializable {
         });
     }
 
+    /**
+     * This method perform set empty string on label and set this label hidden
+     */
     public void resetUsernameOrEmailError() {
         usernameOrEmailErrorLabel.setText("");
         usernameOrEmailErrorLabel.setVisible(false);
     }
 
+    /**
+     * This method perform set empty string on label and set this label hidden
+     */
     public void resetCodeErrorLabel() {
         codeErrorLabel.setText("");
         codeErrorLabel.setVisible(false);
     }
 
+    /**
+     * This method perform set empty string on label and set this label hidden
+     */
     public void resetPasswdLabel() {
         passwdErrorLabel.setText("");
         passwdErrorLabel.setVisible(false);

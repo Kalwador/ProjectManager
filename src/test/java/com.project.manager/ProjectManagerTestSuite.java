@@ -1,6 +1,6 @@
 package com.project.manager;
 
-import com.project.manager.registration.RegistrationServiceTest;
+import com.project.manager.services.RegistrationServiceTest;
 import com.project.manager.sceneManager.TestLoginScene;
 import com.project.manager.sceneManager.TestRegistrationScene;
 import com.project.manager.sceneManager.TestSceneManager;

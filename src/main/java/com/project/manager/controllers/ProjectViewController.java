@@ -15,8 +15,8 @@ public class ProjectViewController implements Initializable {
 
     /**
      * Initialization of project view components
-     * @param location
-     * @param resources
+     * @param location - URL location
+     * @param resources - Bundle resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

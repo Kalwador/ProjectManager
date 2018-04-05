@@ -47,7 +47,7 @@ public class LoginService {
         }
 
         if (usermodel.isBlocked()) {
-            AlertManager.showInformationAlert("Account blocked!", "Your account is blocked.");
+            AlertManager.showInformationAlert("Account blocked!", "Your account is blocked. because somebody send request to change a password. Finish password reset procedure or contact with administrator.");
         } else {
             sessionService.setLoggedUser(usermodel);
             sceneManager.showScene(SceneType.DASHBOARD);
