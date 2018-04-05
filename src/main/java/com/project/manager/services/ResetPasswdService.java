@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.Random;
 
-
 /**
  * This is the class which is responsible for operations step by step to perform password resetting.
  * This class perform methods pessetPassword, checkGeneratedCode, chcangePassword and generatedCode
@@ -53,7 +52,7 @@ public class ResetPasswdService {
             userRepository.save(userModel);
 
             /** -----------------------------todo
-             * Sending generated code to continue reset password on email
+             * Sending generated code on email to continue reset password
              */
 
             AlertManager.showInformationAlert("Resetting password", "You started procedure to reset your" +
@@ -107,7 +106,6 @@ public class ResetPasswdService {
      * This method perform generating unique code that required to unlock account
      */
     public String generateCode() {
-        //return String.valueOf(System.currentTimeMillis());
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
@@ -115,8 +113,7 @@ public class ResetPasswdService {
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
         }
-        String saltStr = salt.toString();
-        return saltStr;
+        return salt.toString();
     }
 
 

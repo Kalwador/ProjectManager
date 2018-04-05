@@ -46,9 +46,7 @@ public class DashboardController implements Initializable {
 
         projectPaneGenerator.createPanes(projectsArea);
 
-        backToLoginButton.setOnAction(e -> {
-            sceneManager.showScene(SceneType.LOGIN);
-        });
+        backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
     }
 }

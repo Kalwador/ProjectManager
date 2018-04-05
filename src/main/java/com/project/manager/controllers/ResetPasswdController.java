@@ -9,14 +9,11 @@ import com.project.manager.services.ResetPasswdService;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -74,17 +71,19 @@ public class ResetPasswdController implements Initializable {
 
     private SceneManager sceneManager;
     private ResetPasswdService resetPasswdService;
+    private String usernameOrEmail;
 
     @Autowired
     public ResetPasswdController(ResetPasswdService resetPasswdService) {
-        sceneManager = SceneManager.getInstance();
+        this.sceneManager = SceneManager.getInstance();
         this.resetPasswdService = resetPasswdService;
     }
 
     /**
      * This method is responsible for listening the controller in window, and making action after button clicked
      * implemented in lambdas expression
-     * @param location - URL location
+     *
+     * @param location  - URL location
      * @param resources - Bundle resources
      */
     @Override
@@ -98,17 +97,11 @@ public class ResetPasswdController implements Initializable {
         resetCodeErrorLabel();
         resetPasswdLabel();
 
-        backToLoginButton.setOnAction(e -> {
-            sceneManager.showScene(SceneType.LOGIN);
-        });
+        backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
-        backToLoginButton1.setOnAction(e -> {
-            sceneManager.showScene(SceneType.LOGIN);
-        });
+        backToLoginButton1.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
-        backToLoginButton2.setOnAction(e -> {
-            sceneManager.showScene(SceneType.LOGIN);
-        });
+        backToLoginButton2.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
         /**
          * Reset password action listener
@@ -118,7 +111,7 @@ public class ResetPasswdController implements Initializable {
             resetUsernameOrEmailError();
 
             try {
-                String usernameOrEmail = usernameOrEmailField.getText().toString();
+                usernameOrEmail = usernameOrEmailField.getText();
                 resetPasswdService.resetPassword(usernameOrEmail);
                 resetPasswdStepOne.setVisible(false);
                 resetPasswdStepTwo.setVisible(true);
@@ -126,7 +119,6 @@ public class ResetPasswdController implements Initializable {
                 usernameOrEmailErrorLabel.setVisible(true);
                 usernameOrEmailErrorLabel.setText(ex.getMessage());
             }
-
         });
 
         /**
@@ -137,8 +129,8 @@ public class ResetPasswdController implements Initializable {
             resetCodeErrorLabel();
 
             try {
-                String usernameOrEmail = usernameOrEmailField.getText().toString();
-                String generatedCode = generatedCodeField.getText().toString();
+                usernameOrEmail = usernameOrEmailField.getText();
+                String generatedCode = generatedCodeField.getText();
                 resetPasswdService.checkGeneratedCode(usernameOrEmail, generatedCode);
                 resetPasswdStepTwo.setVisible(false);
                 resetPasswdStepThree.setVisible(true);
@@ -149,8 +141,8 @@ public class ResetPasswdController implements Initializable {
         });
 
         changePasswdButton.disableProperty().bind(Bindings.isEmpty(passwdField.textProperty())
-            .or(Bindings.length(passwdField.textProperty()).lessThan(8))
-            .or(Bindings.length(repeatPasswdField.textProperty()).lessThan(8)));
+                .or(Bindings.length(passwdField.textProperty()).lessThan(8))
+                .or(Bindings.length(repeatPasswdField.textProperty()).lessThan(8)));
 
         /**
          * Change password action listener
@@ -160,9 +152,9 @@ public class ResetPasswdController implements Initializable {
             resetPasswdLabel();
 
             try {
-                String usernameOrEmail = usernameOrEmailField.getText().toString();
-                String password = passwdField.getText().toString();
-                String repeatPassword = repeatPasswdField.getText().toString();
+                usernameOrEmail = usernameOrEmailField.getText();
+                String password = passwdField.getText();
+                String repeatPassword = repeatPasswdField.getText();
                 resetPasswdService.changePassword(usernameOrEmail, password, repeatPassword);
             } catch (RuntimeException ex) {
                 passwdErrorLabel.setVisible(true);
