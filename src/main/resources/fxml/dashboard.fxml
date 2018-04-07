@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.DashboardController">
+   <children>
+      <AnchorPane prefHeight="650.0" prefWidth="1000.0">
+         <children>
+            <Button fx:id="backToLogin" layoutX="29.0" layoutY="27.0" mnemonicParsing="false" text="BACK_TO_LOGIN" />
+            <VBox fx:id="projectsArea" layoutX="111.0" layoutY="101.0" prefHeight="433.0" prefWidth="150.0" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
