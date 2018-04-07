@@ -42,7 +42,7 @@ public class ResetPasswdServiceTest {
         UserModel userModel = UserModel.builder()
                 .username("username")
                 .email("username@gmail.com")
-                .unlockPasswdCode(generatePasswdCode).build();
+                .activationCode(generatePasswdCode).build();
         when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
         resetPasswdService.checkGeneratedCode("username","");
     }

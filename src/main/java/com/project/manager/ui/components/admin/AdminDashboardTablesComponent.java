@@ -3,7 +3,7 @@ package com.project.manager.ui.components.admin;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.project.manager.controllers.AdminDashboardController;
+import com.project.manager.controllers.admin.AdminDashboardController;
 import com.project.manager.entities.Message;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.UserModel;
@@ -14,8 +14,6 @@ import com.project.manager.services.MessageService;
 import com.project.manager.services.ProjectService;
 import com.project.manager.services.UserService;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -24,7 +22,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -54,9 +51,10 @@ public class AdminDashboardTablesComponent {
 
     /**
      * This is the constructor with injected services and one controller
-     * @param projectService injected project service which provides all project login methods
-     * @param userService injected user service which provides all project login methods
-     * @param messageService injected message service which provides all project login methods
+     *
+     * @param projectService           injected project service which provides all project login methods
+     * @param userService              injected user service which provides all project login methods
+     * @param messageService           injected message service which provides all project login methods
      * @param adminDashboardController injected admin dashboard controller to get reference to JavaFX components
      *                                 in admin view like tables and buttons
      */
@@ -85,7 +83,7 @@ public class AdminDashboardTablesComponent {
         }
         if (adminDashboardController.getMessageTab().isSelected() &&
                 (adminDashboardController.getInboxTable().getCurrentItemsCount() < 1 ||
-                adminDashboardController.getSentboxTable().getCurrentItemsCount() < 1)) {
+                        adminDashboardController.getSentboxTable().getCurrentItemsCount() < 1)) {
             generateInboxAndSentTableView();
         }
     }
@@ -244,7 +242,6 @@ public class AdminDashboardTablesComponent {
      */
     public void generateProjectTableView() {
         adminDashboardController.getProjectTable().getColumns().clear();
-        adminDashboardController.getProjectTable().setSelectionModel(null);
 
         List<Project> projects = projectService.getAllProjects();
         if (!projects.isEmpty()) {
@@ -257,6 +254,10 @@ public class AdminDashboardTablesComponent {
                                     .setOnAction(e -> projectService.delete(projectTableView.getId().get())))
                             .collect(Collectors.toList()));
 
+            adminDashboardController.getProjectTable().setOnMouseClicked(e -> {
+                projectTableViews.get(adminDashboardController.getProjectTable().getSelectionModel().getFocusedIndex()).getCheck().get().fire();
+                adminDashboardController.getProjectTable().getSelectionModel().clearSelection();
+            });
 
             TreeTableColumn<ProjectTableView, CheckBox> checkColumn = new TreeTableColumn<>("");
             TreeTableColumn<ProjectTableView, Long> idColumn = new TreeTableColumn<>("Id");
@@ -295,6 +296,7 @@ public class AdminDashboardTablesComponent {
 
     /**
      * This method are responsible for showing message window with more details about message
+     *
      * @param id this is the id parameter to select in {@link MessageService} that we will ask about message
      *           with passed id after show
      */

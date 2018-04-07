@@ -1,6 +1,6 @@
 package com.project.manager.services;
 
-import com.project.manager.BCryptEncoder;
+import com.project.manager.utils.BCryptEncoder;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
@@ -8,8 +8,8 @@ import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.UserDoesNotExistException;
 import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.ui.AlertManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

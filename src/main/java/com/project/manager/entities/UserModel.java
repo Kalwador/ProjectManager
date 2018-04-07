@@ -4,14 +4,12 @@ import com.project.manager.models.UserRole;
 import lombok.*;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Email;
-import org.springframework.core.annotation.AliasFor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,6 +24,7 @@ public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @NotNull
@@ -49,12 +48,8 @@ public class UserModel {
 
     private boolean isBlocked;
 
-    @NotNull
-    private String unlockCode;
+    private String activationCode;
 
-    private String unlockPasswdCode;
-
-    @NotNull
     @Size(min = 1)
     private String firstName;
 
@@ -65,9 +60,6 @@ public class UserModel {
     @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER)
     private Set<Project> projectsAsManager;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<Project> projectsAsClient;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "USER_PROJECT",
@@ -76,7 +68,7 @@ public class UserModel {
     )
     private Set<Project> projectsAsUser;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Message> messages;
 }
 

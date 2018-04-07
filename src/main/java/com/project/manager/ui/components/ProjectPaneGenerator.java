@@ -1,7 +1,7 @@
 package com.project.manager.ui.components;
 
-import com.project.manager.controllers.ProjectPaneController;
-import com.project.manager.services.ProjectService;
+import com.project.manager.controllers.dashboard.ProjectPaneController;
+import com.project.manager.entities.Project;
 import com.project.manager.services.SessionService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -18,45 +18,45 @@ import java.io.IOException;
 @Component
 public class ProjectPaneGenerator {
 
-    private ProjectService projectService;
-
     private SessionService sessionService;
 
-
     @Autowired
-    public ProjectPaneGenerator(ProjectService projectService) {
-        this.projectService = projectService;
+    public ProjectPaneGenerator() {
         this.sessionService = SessionService.getInstance();
     }
 
     /**
      * This method perform generating of projectsAsUser panes witch will be displayed into Dashboard
-     * @param projectsArea
-     * @exception IOException
+     *
+     * @param projectsArea //TODO
      */
     public void createPanes(VBox projectsArea) {
-        projectService.projectsOfUser().forEach(project -> {
-            try {
-
-                AnchorPane newAnchorPane;
-
-                ProjectPaneController controller = new ProjectPaneController();
-
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/projectPane.fxml"));
-
-                fxmlLoader.setController(controller);
-
-                newAnchorPane = fxmlLoader.load();
-
-                controller.setProjectId(project.getId());
-
-                controller.getViewProject().setText(project.getProjectName());
-
-                projectsArea.getChildren().add(newAnchorPane);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        sessionService.getUserModel().getProjectsAsManager().forEach(project -> {
+            createProjectBrick(projectsArea, project);
         });
+        sessionService.getUserModel().getProjectsAsUser().forEach(project -> {
+            createProjectBrick(projectsArea, project);
+        });
+    }
+
+    /**
+     * //TODO MACIEK
+     *
+     * @param projectsArea //TODO MACIEK
+     * @param project      //TODO MACIEK
+     */
+    private void createProjectBrick(VBox projectsArea, Project project) {
+        try {
+            AnchorPane newAnchorPane;
+            ProjectPaneController controller = new ProjectPaneController();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/dashboard/projectPaneComponent.fxml"));
+            fxmlLoader.setController(controller);
+            newAnchorPane = fxmlLoader.load();
+            controller.setProject(project);
+            controller.getProjectName().setText(project.getProjectName());
+            projectsArea.getChildren().add(newAnchorPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

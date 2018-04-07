@@ -3,7 +3,7 @@ package com.project.manager.admin.projects;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.project.manager.JavaFXThreadingRule;
-import com.project.manager.controllers.AdminDashboardController;
+import com.project.manager.controllers.admin.AdminDashboardController;
 import com.project.manager.entities.Message;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.UserModel;
@@ -76,9 +76,6 @@ public class AdminDashboardTablesComponentTest {
         assertEquals(AdminDashboardTablesComponent.projectTableViews.get(0).getManagerFirstAndLastName().getValue(),
                 getExampleProjects().get(0).getManager().getFirstName() + " "
                         + getExampleProjects().get(0).getManager().getLastName());
-        assertEquals(AdminDashboardTablesComponent.projectTableViews.get(0).getClientFirstAndLastName().getValue(),
-                getExampleProjects().get(0).getClient().getFirstName() + " "
-                        + getExampleProjects().get(0).getClient().getLastName());
         assertEquals(AdminDashboardTablesComponent.projectTableViews.get(0).getCountOfMembers().get(),
                 getExampleProjects().get(0).getMembers().size());
 
@@ -108,10 +105,6 @@ public class AdminDashboardTablesComponentTest {
                 users.get(0).getId());
         assertEquals(AdminDashboardTablesComponent.userTableViews.get(0).getIsLocked().asObject().get(),
                 users.get(0).isLocked());
-        assertEquals(AdminDashboardTablesComponent.userTableViews.get(0).getCountOfProjects().get(),
-                 users.get(0).getProjectsAsClient().size() +
-                        users.get(0).getProjectsAsManager().size() +
-                        users.get(0).getProjectsAsUser().size());
         assertEquals(AdminDashboardTablesComponent.userTableViews.get(0).getEmail().get(),
                 users.get(0).getEmail());
         assertEquals(AdminDashboardTablesComponent.userTableViews.get(0).getRole().get(),
@@ -131,10 +124,6 @@ public class AdminDashboardTablesComponentTest {
                 users.get(0).getEmail());
         assertEquals(table.getColumns().get(4).getCellObservableValue(0).getValue(),
                 users.get(0).getRole().toString());
-        assertEquals(table.getColumns().get(5).getCellObservableValue(0).getValue(),
-                 users.get(0).getProjectsAsClient().size() +
-                        users.get(0).getProjectsAsManager().size() +
-                        users.get(0).getProjectsAsUser().size());
         assertEquals(table.getColumns().get(7).getCellObservableValue(0).getValue().getClass(),
                 JFXButton.class);
         assertEquals(table.getColumns().get(8).getCellObservableValue(0).getValue().getClass(),
@@ -221,7 +210,6 @@ public class AdminDashboardTablesComponentTest {
                 .projectName("projectOne")
                 .projectInformation("project one inf")
                 .manager(getExampleUsers().get(0))
-                .client(client)
                 .members(memberList)
                 .build();
 
@@ -230,7 +218,6 @@ public class AdminDashboardTablesComponentTest {
                 .projectName("projectTwo")
                 .projectInformation("project two inf")
                 .manager(manager)
-                .client(client)
                 .members(memberList)
                 .build();
 
@@ -246,7 +233,6 @@ public class AdminDashboardTablesComponentTest {
                         .username("adam")
                         .email("adam@mail.com")
                         .projectsAsManager(new HashSet<>())
-                        .projectsAsClient(new HashSet<>())
                         .projectsAsUser(new HashSet<>())
                         .role(UserRole.USER)
                         .build(),
@@ -257,7 +243,6 @@ public class AdminDashboardTablesComponentTest {
                         .username("adam")
                         .email("adam@mail.com")
                         .projectsAsManager(new HashSet<>())
-                        .projectsAsClient(new HashSet<>())
                         .projectsAsUser(new HashSet<>())
                         .role(UserRole.USER)
                         .build(),
@@ -268,7 +253,6 @@ public class AdminDashboardTablesComponentTest {
                         .username("adam")
                         .email("adam@mail.com")
                         .projectsAsManager(new HashSet<>())
-                        .projectsAsClient(new HashSet<>())
                         .projectsAsUser(new HashSet<>())
                         .role(UserRole.USER)
                         .build()

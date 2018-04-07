@@ -3,8 +3,8 @@ package com.project.manager.services;
 import com.project.manager.entities.Message;
 import com.project.manager.entities.UserModel;
 import com.project.manager.repositories.MessageRepository;
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,9 +20,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
@@ -102,7 +100,7 @@ public class MessageServiceTest {
         Optional<List<Message>> messages = Optional.of(new ArrayList<Message>());
         messages.get().add(Message
                 .builder()
-                .id(1l)
+                .id(1L)
                 .sender("sender@mail.com")
                 .receiver("receiver@mail.com")
                 .title("title")
@@ -112,7 +110,7 @@ public class MessageServiceTest {
 
         messages.get().add(Message
                 .builder()
-                .id(2l)
+                .id(2L)
                 .sender("sender2@mail.com")
                 .receiver("receiver2@mail.com")
                 .title("title2")

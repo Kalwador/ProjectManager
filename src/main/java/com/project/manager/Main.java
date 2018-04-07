@@ -1,7 +1,7 @@
 package com.project.manager;
 
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

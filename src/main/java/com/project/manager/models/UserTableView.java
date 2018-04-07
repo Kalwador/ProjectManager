@@ -41,8 +41,7 @@ public class UserTableView extends RecursiveTreeObject<UserTableView> {
                 .username(new SimpleStringProperty(userModel.getUsername()))
                 .email(new SimpleStringProperty(userModel.getEmail()))
                 .role(new SimpleStringProperty(userModel.getRole().toString()))
-                .countOfProjects(new SimpleIntegerProperty(userModel.getProjectsAsClient().size() +
-                        userModel.getProjectsAsManager().size() +
+                .countOfProjects(new SimpleIntegerProperty(userModel.getProjectsAsManager().size() +
                         userModel.getProjectsAsUser().size()))
                 .isLocked(new SimpleBooleanProperty(userModel.isLocked()))
                 .check(new SimpleObjectProperty<>(new JFXCheckBox()))
@@ -75,5 +74,4 @@ public class UserTableView extends RecursiveTreeObject<UserTableView> {
         userTableView.setLockOrUnlock(new SimpleObjectProperty<>(lock));
         return userTableView;
     }
-
 }

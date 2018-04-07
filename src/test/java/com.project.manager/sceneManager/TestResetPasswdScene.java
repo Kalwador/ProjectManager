@@ -1,6 +1,9 @@
 package com.project.manager.sceneManager;
 
 import com.project.manager.JavaFXThreadingRule;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
+import com.project.manager.ui.sceneManager.TestSceneManager;
 import javafx.stage.Stage;
 import org.junit.Rule;
 import org.junit.Test;

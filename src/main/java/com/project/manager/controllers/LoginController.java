@@ -4,10 +4,9 @@ import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.UserDoesNotExistException;
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.services.LoginService;
-import com.project.manager.services.SessionService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -40,19 +39,17 @@ public class LoginController implements Initializable {
 
     private SceneManager sceneManager;
     private LoginService loginService;
-    private SessionService sessionService;
 
     @Autowired
     public LoginController(LoginService loginService) {
         sceneManager = SceneManager.getInstance();
         this.loginService=loginService;
-        this.sessionService = SessionService.getInstance();
     }
 
     /**
      * Initialization of login frame
-     * @param location
-     * @param resources
+     * @param location //TODO
+     * @param resources //TODO
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,27 +84,23 @@ public class LoginController implements Initializable {
             catch (DifferentPasswordException dpe) {
                 labelErrorPassword.setText(dpe.getMessage());
             }
-            catch (UserDoesNotExistException udnee) {
+            catch (UserDoesNotExistException | EmptyUsernameException udnee) {
                 labelErrorUsername.setVisible(true);
                 labelErrorUsername.setText(udnee.getMessage());
-            } catch (EmptyUsernameException eue) {
-                labelErrorUsername.setVisible(true);
-                labelErrorUsername.setText(eue.getMessage());
             } catch (EmptyPasswordException epe){
                 labelErrorUsername.setVisible(true);
                 labelErrorPassword.setText(epe.getMessage());
             }
         });
-
         forgotPasswordButton.setOnAction(e -> sceneManager.showScene(SceneType.RESETPASSWD));
     }
 
-    public void resetUsernameError() {
+    private void resetUsernameError() {
         labelErrorUsername.setText("");
         labelErrorUsername.setVisible(false);
     }
 
-    public void resetPasswordError() {
+    private void resetPasswordError() {
         labelErrorPassword.setText("");
         labelErrorPassword.setVisible(false);
     }

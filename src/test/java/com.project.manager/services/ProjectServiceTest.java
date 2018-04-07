@@ -47,7 +47,6 @@ public class ProjectServiceTest {
         assertEquals(projects.get(0).getId().intValue(), 1);
         assertEquals(projects.get(0).getProjectName(), "projectOne");
         assertEquals(projects.get(0).getManager(), exampleProject.get(0).getManager());
-        assertEquals(projects.get(0).getClient(), exampleProject.get(0).getClient());
         assertEquals(projects.get(0).getMembers().size(), 1);
     }
 }

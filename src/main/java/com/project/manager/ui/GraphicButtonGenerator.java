@@ -11,6 +11,7 @@ public class GraphicButtonGenerator {
 
     /**
      * This method provides functionality to generate button with graphic representation
+     *
      * @param path this is the path to the image which we want to pass for our button
      * @return button which changed graphic representation on the passed image
      */

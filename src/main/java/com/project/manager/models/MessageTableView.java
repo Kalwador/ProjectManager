@@ -10,7 +10,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Setter
@@ -41,5 +40,4 @@ public class MessageTableView extends RecursiveTreeObject<MessageTableView> {
                 .sentDate(new SimpleStringProperty(message.getSentDate().format(DateTimeFormatter.ISO_DATE)))
                 .build();
     }
-
 }

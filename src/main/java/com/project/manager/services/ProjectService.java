@@ -26,6 +26,7 @@ public class ProjectService {
 
     /**
      * This method perform returning list of projectsAsUser by logged user id
+     *
      * @return list of projectsAsUser of logged user by id
      */
     public List<Project> projectsOfUser() {
@@ -34,6 +35,7 @@ public class ProjectService {
 
     /**
      * This method are returning all project form DB
+     *
      * @return list of {@link Project}
      */
     public List<Project> getAllProjects() {
@@ -42,6 +44,7 @@ public class ProjectService {
 
     /**
      * TO IMPLEMENT
+     *
      * @param id
      */
     public void delete(long id) {

@@ -6,8 +6,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.project.manager.entities.Project;
 import com.project.manager.ui.GraphicButtonGenerator;
 import javafx.beans.property.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,6 +35,7 @@ public class ProjectTableView extends RecursiveTreeObject<ProjectTableView> {
     /**
      * This is the method which convert original Project entity from database to our class for making pretty view class
      * to displaying information about project for admin
+     *
      * @param project This parameter is original project for converting to Project view class
      * @return method return already converted original project to project view class
      */
@@ -45,13 +44,14 @@ public class ProjectTableView extends RecursiveTreeObject<ProjectTableView> {
                 .id(new SimpleLongProperty(project.getId()))
                 .projectName(new SimpleStringProperty(project.getProjectName()))
                 .managerFirstAndLastName(new SimpleStringProperty(project.getManager().getFirstName() + " " + project.getManager().getLastName()))
-                .clientFirstAndLastName(new SimpleStringProperty(project.getClient().getFirstName() + " " + project.getClient().getLastName()))
                 .countOfMembers(new SimpleIntegerProperty(project.getMembers().size()))
                 .check(new SimpleObjectProperty<>(new JFXCheckBox()))
                 .build();
     }
 
-    /** This is the method to generate delete button in table
+    /**
+     * This is the method to generate delete button in table
+     *
      * @param projectTableView this is the projectView object for modify it to contain this button inside
      * @return method will return ProjectView object with delete button inside
      */

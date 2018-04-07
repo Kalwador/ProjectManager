@@ -1,6 +1,6 @@
 package com.project.manager.services;
 
-import com.project.manager.BCryptEncoder;
+import com.project.manager.utils.BCryptEncoder;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;

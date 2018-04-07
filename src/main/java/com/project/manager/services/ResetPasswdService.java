@@ -1,12 +1,12 @@
 package com.project.manager.services;
 
-import com.project.manager.BCryptEncoder;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.*;
 import com.project.manager.repositories.UserRepository;
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.ui.AlertManager;
+import com.project.manager.utils.BCryptEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +48,7 @@ public class ResetPasswdService {
             String generatePasswdCode = generateCode();
 
             userModel.setBlocked(true);
-            userModel.setUnlockPasswdCode(generatePasswdCode);
+            userModel.setActivationCode(generatePasswdCode);
             userRepository.save(userModel);
 
             /** -----------------------------todo
@@ -58,7 +58,7 @@ public class ResetPasswdService {
             AlertManager.showInformationAlert("Resetting password", "You started procedure to reset your" +
                     " password. We sent on your email message with special code to continue reset your password.");
 
-            System.out.println(userModel.getUnlockPasswdCode());
+            System.out.println(userModel.getActivationCode());
         }
     }
     /**
@@ -73,10 +73,10 @@ public class ResetPasswdService {
         if (generatedCode.isEmpty()){
             throw new EmptyGeneratedCodeException("Insert your code please.");
         }
-        if (!userModel.getUnlockPasswdCode().equals(generatedCode)) {
+        if (!userModel.getActivationCode().equals(generatedCode)) {
             throw new DifferentGeneratedCodeException("Inserted code is incorrect.");
         } else {
-            userModel.setUnlockPasswdCode(null);
+            userModel.setActivationCode(null);
             userRepository.save(userModel);
         }
     }

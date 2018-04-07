@@ -4,8 +4,8 @@ import com.project.manager.controllers.MessageViewWindowController;
 import com.project.manager.entities.Message;
 import com.project.manager.models.MessageTableView;
 import com.project.manager.repositories.MessageRepository;
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +27,7 @@ public class MessageService {
     /**
      * Constructor of this class contain reference to {@link SessionService} {@link SceneManager} and injected
      * message repository
+     *
      * @param messageRepository this repository provides all logical method of database to manager {@link Message} in database
      */
     @Autowired
@@ -38,6 +39,7 @@ public class MessageService {
 
     /**
      * That method return all method which was received to actual logged user
+     *
      * @return the list of {@link Message}
      */
     public List<Message> getAllReceivedMessages() {
@@ -46,6 +48,7 @@ public class MessageService {
 
     /**
      * Method which return all messages which was sent by actual logged user
+     *
      * @return list of {@link Message}
      */
     public List<Message> getAllSentMessages() {
@@ -54,6 +57,7 @@ public class MessageService {
 
     /**
      * Method which showing the message view window to display more information about message which passed id
+     *
      * @param id parameter contain id of {@link Message} which user want to see
      */
     public void showMessageWindow(long id) {
