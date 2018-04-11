@@ -3,7 +3,7 @@ package com.project.manager.services;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.NotEnoughPermissionsException;
-import com.project.manager.exceptions.UserDoesNotExistException;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

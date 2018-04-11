@@ -11,6 +11,6 @@ public class LoginScene extends CustomSceneImpl {
     public LoginScene(Stage stage) {
         super(stage);
         super.setWindowTitle("Sign in");
-        super.setPathToFXML("/fxml/login.fxml");
+        super.setPathToFXML("/fxml/login/login.fxml");
     }
 }

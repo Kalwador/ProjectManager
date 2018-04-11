@@ -2,6 +2,7 @@ package com.project.manager.services;
 
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.*;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;

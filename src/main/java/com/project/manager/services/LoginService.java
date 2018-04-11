@@ -5,7 +5,7 @@ import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
-import com.project.manager.exceptions.UserDoesNotExistException;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.sceneManager.SceneManager;

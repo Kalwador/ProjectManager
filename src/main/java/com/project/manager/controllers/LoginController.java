@@ -3,7 +3,7 @@ package com.project.manager.controllers;
 import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
-import com.project.manager.exceptions.UserDoesNotExistException;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.services.LoginService;

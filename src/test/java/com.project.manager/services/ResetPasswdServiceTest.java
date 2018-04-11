@@ -2,6 +2,7 @@ package com.project.manager.services;
 
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.*;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -4,7 +4,7 @@ import com.project.manager.utils.BCryptEncoder;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmailValidationException;
-import com.project.manager.exceptions.UserAlreadyExistException;
+import com.project.manager.exceptions.user.UserAlreadyExistException;
 import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,13 @@
 package com.project.manager.services;
 
 import com.project.manager.entities.Project;
+import com.project.manager.exceptions.project.ProjectNotExistException;
 import com.project.manager.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This is the class which is responsible for returning list of projectsAsUser logged user.
@@ -48,5 +50,11 @@ public class ProjectService {
      * @param id
      */
     public void delete(long id) {
+    }
+
+    public Project getProjectById(Long projectId) {
+        Optional<Project> optionalProject = this.projectRepository.findById(projectId);
+        if (optionalProject.isPresent()) return optionalProject.get();
+        throw new ProjectNotExistException("Project Not Exist - Couldnt Find it in ProjectService, ID: "+ projectId);
     }
 }

@@ -49,11 +49,11 @@ public class ProjectPaneGenerator {
         try {
             AnchorPane newAnchorPane;
             ProjectPaneController controller = new ProjectPaneController();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/dashboard/projectPaneComponent.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/dashboard/projectPane.fxml"));
             fxmlLoader.setController(controller);
             newAnchorPane = fxmlLoader.load();
-            controller.setProject(project);
-            controller.getProjectName().setText(project.getProjectName());
+            controller.setProjectId(project.getId());
+            controller.getViewProject().setText(project.getProjectName());
             projectsArea.getChildren().add(newAnchorPane);
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,13 +1,15 @@
 package com.project.manager.controllers.dashboard;
 
+import com.jfoenix.controls.JFXButton;
+import com.project.manager.config.ApplicationContextProvider;
+import com.project.manager.config.FXMLLoaderProvider;
 import com.project.manager.entities.Project;
+import com.project.manager.services.ProjectService;
 import com.project.manager.services.SessionService;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,13 +24,11 @@ import java.util.ResourceBundle;
 @Setter
 public class ProjectPaneController implements Initializable {
     @FXML
-    private Label projectName;
+    private JFXButton viewProject;
 
-    @FXML
-    private Button viewProject;
-
-    private Project project;
+    private Long projectId;
     private SessionService session;
+    private ProjectService projectService;
 
     /**
      * Initialization of project view after clicked view button
@@ -41,6 +41,8 @@ public class ProjectPaneController implements Initializable {
         session = SessionService.getInstance();
         viewProject.setOnAction(e -> {
             SceneManager sceneManager = SceneManager.getInstance();
+            projectService = ApplicationContextProvider.getInstance().getContext().getBean(ProjectService.class);
+            Project project = projectService.getProjectById(projectId);
             session.setProject(project);
 
             if (project.getManager().getId().equals(session.getUserModel().getId())) {

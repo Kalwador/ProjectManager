@@ -43,7 +43,6 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         projectPaneGenerator.createPanes(projectsArea);
-
         backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
     }
 }

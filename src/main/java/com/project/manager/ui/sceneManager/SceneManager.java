@@ -75,16 +75,16 @@ public class SceneManager {
 
         scenes = new HashMap<Integer, CustomScene>() {
             {
-                put(SceneType.LOGIN.getId(), loginScene);
-                put(SceneType.REGISTRATION.getId(), registrationScene);
-                put(SceneType.DASHBOARD.getId(), dashboardScene);
-                put(SceneType.EMPLOYEE_PROJECT_VIEW.getId(), employeeProjectView);
-                put(SceneType.MANAGER_PROJECT_VIEW.getId(), managerProjectView);
-                put(SceneType.ADMIN_DASHBOARD.getId(), adminDashboardScene);
-                put(SceneType.ADMIN_UPDATE_PROJECT.getId(), updateProjectScene);
-                put(SceneType.MESSAGE_VIEW_WINDOW.getId(), messageViewWindowScene);
-                put(SceneType.RESETPASSWD.getId(), resetPasswdScene);
-                put(SceneType.ADD_USER.getId(), addUserScene);
+                put(SceneType.LOGIN.ordinal(), loginScene);
+                put(SceneType.REGISTRATION.ordinal(), registrationScene);
+                put(SceneType.DASHBOARD.ordinal(), dashboardScene);
+                put(SceneType.EMPLOYEE_PROJECT_VIEW.ordinal(), employeeProjectView);
+                put(SceneType.MANAGER_PROJECT_VIEW.ordinal(), managerProjectView);
+                put(SceneType.ADMIN_DASHBOARD.ordinal(), adminDashboardScene);
+                put(SceneType.ADMIN_UPDATE_PROJECT.ordinal(), updateProjectScene);
+                put(SceneType.MESSAGE_VIEW_WINDOW.ordinal(), messageViewWindowScene);
+                put(SceneType.RESETPASSWD.ordinal(), resetPasswdScene);
+                put(SceneType.ADD_USER.ordinal(), addUserScene);
             }
         };
     }
@@ -95,7 +95,7 @@ public class SceneManager {
      * @param type SceneType to show
      */
     public void showScene(SceneType type) {
-        scenes.get(type.getId()).show();
+        scenes.get(type.ordinal()).show();
     }
 
     /**
@@ -113,7 +113,7 @@ public class SceneManager {
      * @param type SceneType to show
      */
     public void hideScene(SceneType type) {
-        scenes.get(type.getId()).hide();
+        scenes.get(type.ordinal()).hide();
     }
 
     /**
@@ -131,7 +131,7 @@ public class SceneManager {
      * @param type SceneType to show
      */
     public void closeScene(SceneType type) {
-        scenes.get(type.getId()).close();
+        scenes.get(type.ordinal()).close();
     }
 
     /**
@@ -150,7 +150,7 @@ public class SceneManager {
      * @param type SceneType to show
      */
     public void showInNewWindow(SceneType type) {
-        scenes.get(type.getId()).showInNewScene();
+        scenes.get(type.ordinal()).showInNewScene();
     }
 
     /**
@@ -170,7 +170,7 @@ public class SceneManager {
      * @param type SceneType to show
      */
     public void hideNewWindow(SceneType type) {
-        scenes.get(type.getId()).hideNewScene();
+        scenes.get(type.ordinal()).hideNewScene();
     }
 
     /**
@@ -190,7 +190,7 @@ public class SceneManager {
      * @param type SceneType to show
      */
     public void closeNewWindow(SceneType type) {
-        scenes.get(type.getId()).closeNewScene();
+        scenes.get(type.ordinal()).closeNewScene();
     }
 
     /**

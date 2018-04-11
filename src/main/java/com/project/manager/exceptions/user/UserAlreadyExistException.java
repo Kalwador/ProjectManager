@@ -1,4 +1,4 @@
-package com.project.manager.exceptions;
+package com.project.manager.exceptions.user;
 
 
 public class UserAlreadyExistException extends RuntimeException {

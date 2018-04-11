@@ -12,7 +12,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.LoginController">
    <center>
-      <BorderPane opacity="0.95" prefHeight="494.0" prefWidth="653.0" style="-fx-background-image: url('images/violet.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
+      <BorderPane opacity="0.95" prefHeight="494.0" prefWidth="653.0" style="-fx-background-image: url('../../images/violet.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
          <center>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.96" prefHeight="403.0" prefWidth="323.0" style="-fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: #7a05b8; -fx-border-width: 2px; -fx-background-color: black;" BorderPane.alignment="CENTER">
                <children>
@@ -38,13 +38,13 @@
                   </JFXButton>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="75.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/user-white.png" />
+                        <Image url="@../../images/user-white.png" />
                      </image>
                   </ImageView>
                   <JFXTextField fx:id="usernameTextField" focusColor="#970ee0" labelFloat="true" layoutX="100.0" layoutY="175.0" prefHeight="25.0" prefWidth="124.0" promptText="Username:" unFocusColor="#1249ff" />
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="75.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/password-white.png" />
+                        <Image url="@../../images/password-white.png" />
                      </image>
                   </ImageView>
                   <JFXPasswordField fx:id="passwordPassField" focusColor="#970ee0" labelFloat="true" layoutX="100.0" layoutY="240.0" prefHeight="25.0" prefWidth="124.0" promptText="Password:" unFocusColor="#1249ff" />
