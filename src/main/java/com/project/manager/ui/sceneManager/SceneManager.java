@@ -24,6 +24,7 @@ public class SceneManager {
     private MessageViewWindowScene messageViewWindowScene;
     private ManagerProjectView managerProjectView;
     private EmployeeProjectView employeeProjectView;
+    private AddUserScene addUserScene;
     private HashMap<Integer, CustomScene> scenes;
 
     /**
@@ -70,6 +71,7 @@ public class SceneManager {
         this.messageViewWindowScene = new MessageViewWindowScene(primaryStage);
         this.managerProjectView = new ManagerProjectView(primaryStage);
         this.employeeProjectView = new EmployeeProjectView(primaryStage);
+        this.addUserScene = new AddUserScene(primaryStage);
 
         scenes = new HashMap<Integer, CustomScene>() {
             {
@@ -82,6 +84,7 @@ public class SceneManager {
                 put(SceneType.ADMIN_UPDATE_PROJECT.getId(), updateProjectScene);
                 put(SceneType.MESSAGE_VIEW_WINDOW.getId(), messageViewWindowScene);
                 put(SceneType.RESETPASSWD.getId(), resetPasswdScene);
+                put(SceneType.ADD_USER.getId(), addUserScene);
             }
         };
     }

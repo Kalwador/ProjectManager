@@ -51,6 +51,11 @@ public enum SceneType {
         public Integer getId() {
             return 8;
         }
+    }, ADD_USER {
+        @Override
+        public Integer getId() {
+            return 9;
+        }
     };
 
     /**

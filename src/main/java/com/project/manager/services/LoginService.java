@@ -29,6 +29,13 @@ public class LoginService {
         this.sessionService = SessionService.getInstance();
     }
 
+    /**
+     * Method validating propriety of user's password and username
+     * Additionaly, it invokes SessionService to hold logged user data.
+     *
+     * @param username user's username given in textfield.
+     * @param password user's password given in textfield.
+     */
     public void loginUser(String username, String password) {
         if (username.isEmpty()) {
             throw new EmptyUsernameException("Username field can't be empty.");
@@ -36,9 +43,7 @@ public class LoginService {
         if (password.isEmpty()) {
             throw new EmptyPasswordException("Password field can't be empty.");
         }
-
         UserModel usermodel = userRepository.findByUsername(username);
-
         if (!Optional.ofNullable(userRepository.findByUsername(username)).isPresent()) {
             throw new UserDoesNotExistException("There is no user with that username in our service.");
         }
@@ -46,7 +51,6 @@ public class LoginService {
         if (!result) {
             throw new DifferentPasswordException("Password you entered was incorrect.");
         }
-
         if (usermodel.isBlocked()) {
             AlertManager.showInformationAlert("Account blocked!", "Your account is blocked.");
         } else {
