@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.project.manager.controllers.manager.ManagerProjectViewController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: #a7d4e5;">
+         <children>
+            <Label fx:id="projectNameLabel" layoutX="136.0" layoutY="15.0" prefHeight="21.0" prefWidth="143.0" text="NAZWA PROJEKTU" />
+            <JFXButton fx:id="backButton" layoutX="43.0" layoutY="10.0" text="&lt;-" />
+         </children>
+      </Pane>
+      <Pane layoutY="50.0" prefHeight="548.0" prefWidth="800.0">
+         <children>
+            <ScrollPane layoutX="10.0" layoutY="20.0" prefHeight="511.0" prefWidth="780.0">
+               <content>
+                  <Pane prefHeight="503.0" prefWidth="1342.0">
+                     <children>
+                        <Label layoutX="59.0" layoutY="18.0" prefHeight="21.0" prefWidth="114.0" text="Product Backlog" />
+                        <ScrollPane layoutX="15.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
+                           <content>
+                              <VBox fx:id="productBacklogVBox" prefHeight="415.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="290.0" layoutY="18.0" prefHeight="21.0" prefWidth="97.0" text="Sprint Backlog" />
+                        <ScrollPane layoutX="237.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
+                           <content>
+                              <VBox fx:id="sprintBacklogVBox" prefHeight="415.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="521.0" layoutY="18.0" prefHeight="21.0" prefWidth="78.0" text="In progress" />
+                        <ScrollPane layoutX="459.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
+                           <content>
+                              <VBox fx:id="inProgressVBox" prefHeight="415.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="754.0" layoutY="18.0" prefHeight="21.0" prefWidth="56.0" text="Testing" />
+                        <ScrollPane layoutX="681.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
+                           <content>
+                              <VBox fx:id="testingVBox" prefHeight="415.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                        <ScrollPane layoutX="903.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
+                           <content>
+                              <VBox fx:id="codeReviewVBox" prefHeight="415.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                        <ScrollPane layoutX="1125.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
+                           <content>
+                              <VBox fx:id="doneVBox" prefHeight="415.0" prefWidth="200.0" />
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="962.0" layoutY="18.0" prefHeight="21.0" prefWidth="85.0" text="Code review" />
+                        <Label layoutX="1226.0" layoutY="18.0" prefHeight="21.0" prefWidth="36.0" text="Done" />
+                     </children>
+                  </Pane>
+               </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -19,6 +19,7 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "project_id")
     private Long id;
 
     @NotNull
@@ -29,6 +30,14 @@ public class Project {
     @NotEmpty
     private String projectInformation;
 
-    @ManyToMany(mappedBy = "projects")//, fetch = FetchType.EAGER)
-    private Set<UserModel> members = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "MANAGER_ID")
+    @NotNull
+    private UserModel manager;
+
+    @ManyToMany(mappedBy = "projectsAsUser", fetch = FetchType.EAGER)//, fetch = FetchType.EAGER)
+    private Set<UserModel> members;
+
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private Set<Task> tasks;
 }

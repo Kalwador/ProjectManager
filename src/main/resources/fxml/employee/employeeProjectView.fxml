@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.employee.EmployeeProjectViewController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="800.0">
+         <children>
+            <Label fx:id="projectNameLabel" layoutX="136.0" layoutY="15.0" prefHeight="21.0" prefWidth="143.0" text="NAZWA PROJEKTU" />
+            <JFXButton fx:id="backButton" layoutX="43.0" layoutY="10.0" text="&lt;-" />
+            <Button fx:id="addUser" layoutX="563.0" layoutY="13.0" mnemonicParsing="false" text="Add User" />
+         </children>
+      </Pane>
+      <Pane layoutY="50.0" prefHeight="550.0" prefWidth="800.0">
+         <children>
+            <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="530.0" prefWidth="780.0">
+               <content>
+                  <Pane prefHeight="503.0" prefWidth="1152.0">
+                     <children>
+                        <Label layoutX="48.0" layoutY="14.0" prefHeight="21.0" prefWidth="143.0" text="Product Backlog" />
+                        <ScrollPane layoutX="15.0" layoutY="50.0" prefHeight="437.0" prefWidth="200.0">
+                           <content>
+                              <VBox fx:id="productBacklogVBox" prefHeight="415.0" prefWidth="198.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </Pane>
+               </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>Project Manager</name>
-    <description>Project to manager many project and the tasks inside these projects</description>
+    <description>Project to manager many project and the tasks inside these projectsAsUser</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-            <jdk.version>1.8</jdk.version>
+        <jdk.version>1.8</jdk.version>
     </properties>
 
 
@@ -91,7 +91,11 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>8.40.14</version>
+        </dependency>
     </dependencies>
 
     <build>

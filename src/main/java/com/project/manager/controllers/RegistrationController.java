@@ -3,8 +3,8 @@ package com.project.manager.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.services.RegistrationService;
 import com.project.manager.ui.AlertManager;
 import javafx.beans.binding.Bindings;
@@ -75,7 +75,7 @@ public class RegistrationController implements Initializable{
         sign.setOnAction((e) -> {
             try {
                 registrationService.registerUser(username.getText(), email.getText(), password.getText(), repeatPassword.getText());
-                AlertManager.showInformationAlert("Registration", "Successful registration, check your email to get login code!");
+                AlertManager.showInformationAlert("Registration", "Successful registration, check your email to get login activation code!");
                 sceneManager.showScene(SceneType.LOGIN);
             }
             catch (RuntimeException ex) {
@@ -88,7 +88,5 @@ public class RegistrationController implements Initializable{
         cancel.setOnAction(e -> {
             sceneManager.showScene(SceneType.LOGIN);
         });
-
-
     }
 }

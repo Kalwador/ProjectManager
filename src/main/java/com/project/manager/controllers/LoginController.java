@@ -3,20 +3,21 @@ package com.project.manager.controllers;
 import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmptyPasswordException;
 import com.project.manager.exceptions.EmptyUsernameException;
-import com.project.manager.exceptions.UserDoesNotExistException;
-import com.project.manager.sceneManager.SceneManager;
-import com.project.manager.sceneManager.SceneType;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
+import com.project.manager.services.LoginService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import com.project.manager.services.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 @Component
 public class LoginController implements Initializable {
@@ -26,7 +27,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button loginButton;
     @FXML
-    private Label labelForgotPassword;
+    private Button forgotPasswordButton;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -47,8 +48,8 @@ public class LoginController implements Initializable {
 
     /**
      * Initialization of login frame
-     * @param location
-     * @param resources
+     * @param location //TODO
+     * @param resources //TODO
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,37 +77,30 @@ public class LoginController implements Initializable {
             this.resetUsernameError();
             this.resetPasswordError();
             try {
-                String username = usernameTextField.getText().toString();
-                String passedPassword = passwordPassField.getText().toString();
+                String username = usernameTextField.getText();
+                String passedPassword = passwordPassField.getText();
                 loginService.loginUser(username, passedPassword);
-                sceneManager.showScene(SceneType.DASHBOARD);
             }
             catch (DifferentPasswordException dpe) {
                 labelErrorPassword.setText(dpe.getMessage());
             }
-            catch (UserDoesNotExistException udnee) {
+            catch (UserDoesNotExistException | EmptyUsernameException udnee) {
                 labelErrorUsername.setVisible(true);
                 labelErrorUsername.setText(udnee.getMessage());
-            } catch (EmptyUsernameException eue) {
-                labelErrorUsername.setVisible(true);
-                labelErrorUsername.setText(eue.getMessage());
             } catch (EmptyPasswordException epe){
                 labelErrorUsername.setVisible(true);
                 labelErrorPassword.setText(epe.getMessage());
             }
         });
-
-        labelForgotPassword.setOnMouseClicked(e -> {
-            //sceneManager.showScene(SceneType.FORGOTPASSWD);
-        });
+        forgotPasswordButton.setOnAction(e -> sceneManager.showScene(SceneType.RESETPASSWD));
     }
 
-    public void resetUsernameError() {
+    private void resetUsernameError() {
         labelErrorUsername.setText("");
         labelErrorUsername.setVisible(false);
     }
 
-    public void resetPasswordError() {
+    private void resetPasswordError() {
         labelErrorPassword.setText("");
         labelErrorPassword.setVisible(false);
     }

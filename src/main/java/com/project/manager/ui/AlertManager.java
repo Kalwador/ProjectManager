@@ -12,7 +12,8 @@ public class AlertManager {
 
     /**
      * This class show information alert
-     * @param header this parameter store information about header text
+     *
+     * @param header  this parameter store information about header text
      * @param message this parameter store information about message in alert
      */
     public static void showInformationAlert(String header, String message) {
@@ -25,7 +26,8 @@ public class AlertManager {
 
     /**
      * This class show error alert
-     * @param header this parameter store information about header text
+     *
+     * @param header  this parameter store information about header text
      * @param message this parameter store information about message in alert
      */
     public static void showErrorAlert(String header, String message) {
@@ -38,7 +40,8 @@ public class AlertManager {
 
     /**
      * This class show confirmation alert
-     * @param header this parameter store information about header text
+     *
+     * @param header  this parameter store information about header text
      * @param message this parameter store information about message in alert
      * @return method return button type as a result of confirmation
      */
