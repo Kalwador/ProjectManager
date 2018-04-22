@@ -4,14 +4,13 @@ import com.project.manager.ui.sceneManager.scenes.system.CustomSceneImpl;
 import javafx.stage.Stage;
 
 /**
- * Reset Password Scene, view steps to change a password
+ * Reset Password Scene, view steps to change a PASSWORD
  */
-public class ResetPasswdScene extends CustomSceneImpl {
+public class ResetPasswordScene extends CustomSceneImpl {
 
-    public ResetPasswdScene(Stage stage) {
+    public ResetPasswordScene(Stage stage) {
         super(stage);
         super.setWindowTitle("Reset Password");
-        super.setPathToFXML("/fxml/resetPasswd.fxml");
+        super.setPathToFXML("/fxml/resetPassword.fxml");
     }
-
 }

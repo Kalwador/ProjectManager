@@ -62,13 +62,16 @@ public class UserModel {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "USER_PROJECT",
-        joinColumns = { @JoinColumn(name = "user_id") },
-        inverseJoinColumns = { @JoinColumn(name = "project_id") }
+            name = "USER_PROJECT",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")}
     )
     private Set<Project> projectsAsUser;
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Message> messages;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Task> tasks;
 }
 

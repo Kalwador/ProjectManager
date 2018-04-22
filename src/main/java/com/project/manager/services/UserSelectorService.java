@@ -5,6 +5,7 @@ import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.NotEnoughPermissionsException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,14 @@ public class UserSelectorService {
 
     private UserRepository userRepository;
     private SessionService sessionService;
-    static String role = "USER";
+    public static String role = "USER";
+    private final Logger logger;
 
     @Autowired
     public UserSelectorService(UserRepository userRepository) {
         this.userRepository = userRepository;
         this.sessionService = SessionService.getInstance();
+        this.logger = Logger.getLogger(UserSelectorService.class);
     }
 
     /**

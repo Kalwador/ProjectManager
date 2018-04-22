@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
@@ -17,22 +18,23 @@ import java.util.ResourceBundle;
 @Setter
 public class MessageViewWindowController implements Initializable {
 
-    public static MessageTableView messageToView;
-
     @FXML
     private Label sender;
-
     @FXML
     private Label contents;
-
     @FXML
     private Label receiver;
-
     @FXML
     private Label date;
-
     @FXML
     private Label title;
+
+    public static MessageTableView messageToView;
+    private final Logger logger;
+
+    public MessageViewWindowController() {
+        this.logger = Logger.getLogger(MessageViewWindowController.class);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

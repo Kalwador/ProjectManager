@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.apache.log4j.Logger;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,6 @@ import java.util.ResourceBundle;
 @Component
 public class UserSelectorController implements Initializable {
 
-    private SceneManager sceneManager;
-
-    private ProjectPaneGenerator projectPaneGenerator;
-    private UserSelectorService userSelectorService;
-
-    List<String> possibleUsers;
-    private AutoCompletionBinding<String> autoCompletionBinding;
-
     @FXML
     private Label errorLabel;
     @FXML
@@ -39,10 +32,19 @@ public class UserSelectorController implements Initializable {
     @FXML
     private TextField usernameTextField;
 
+    private SceneManager sceneManager;
+    private ProjectPaneGenerator projectPaneGenerator;
+    private UserSelectorService userSelectorService;
+    private final Logger logger;
+
+    private List<String> possibleUsers;
+    private AutoCompletionBinding<String> autoCompletionBinding;
+
     @Autowired
     public UserSelectorController(UserSelectorService userSelectorService) {
-        sceneManager = SceneManager.getInstance();
+        this.sceneManager = SceneManager.getInstance();
         this.userSelectorService = userSelectorService;
+        this.logger = Logger.getLogger(UserSelectorController.class);
     }
 
     /**
@@ -60,11 +62,12 @@ public class UserSelectorController implements Initializable {
         addUserButton.setOnMouseClicked(e -> {
             this.reserLabelError();
             try {
-                String username = usernameTextField.getText().toString();
+                String username = usernameTextField.getText();
                 userSelectorService.findUser(username);
             } catch (RuntimeException ex) {
                 errorLabel.setVisible(true);
                 errorLabel.setText(ex.getMessage());
+                logger.error("User couldnt be selected in UserSelectorWindow with username: "+usernameTextField.getText());
             }
         });
     }

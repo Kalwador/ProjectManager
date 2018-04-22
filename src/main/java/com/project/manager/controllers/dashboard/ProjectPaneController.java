@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +30,11 @@ public class ProjectPaneController implements Initializable {
     private Long projectId;
     private SessionService session;
     private ProjectService projectService;
+    private final Logger logger;
+
+    public ProjectPaneController() {
+        this.logger = Logger.getLogger(ProjectPaneController.class);
+    }
 
     /**
      * Initialization of project view after clicked view button

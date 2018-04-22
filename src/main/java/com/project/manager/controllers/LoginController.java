@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,11 +40,13 @@ public class LoginController implements Initializable {
 
     private SceneManager sceneManager;
     private LoginService loginService;
+    private final Logger logger;
 
     @Autowired
     public LoginController(LoginService loginService) {
-        sceneManager = SceneManager.getInstance();
+        this.sceneManager = SceneManager.getInstance();
         this.loginService=loginService;
+        this.logger = Logger.getLogger(LoginController.class);
     }
 
     /**
@@ -70,7 +73,7 @@ public class LoginController implements Initializable {
         /**
          * Login action listener
          * Searches passed username in database and checks if it exists
-         * If user exists, compares passed password with password in database
+         * If user exists, compares passed PASSWORD with PASSWORD in database
          * When passwords match, login is achieved
          */
         loginButton.setOnAction(e -> {

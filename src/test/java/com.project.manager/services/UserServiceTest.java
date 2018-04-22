@@ -71,7 +71,7 @@ public class UserServiceTest {
                         .username("adam")
                         .email("adam@mail.com")
                         .role(UserRole.USER)
-                        .password(BCryptEncoder.encode("password"))
+                        .password(BCryptEncoder.encode("PASSWORD"))
                         .isLocked(false)
                         .build(),
 

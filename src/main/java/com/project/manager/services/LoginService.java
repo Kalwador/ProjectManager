@@ -11,6 +11,7 @@ import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.ui.AlertManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +22,22 @@ public class LoginService {
     private UserRepository userRepository;
     private SessionService sessionService;
     private SceneManager sceneManager;
+    private final Logger logger;
 
     @Autowired
     public LoginService(UserRepository userRepository) {
-        sceneManager = SceneManager.getInstance();
+        this.sceneManager = SceneManager.getInstance();
         this.userRepository = userRepository;
         this.sessionService = SessionService.getInstance();
+        this.logger = Logger.getLogger(LoginService.class);
     }
 
     /**
-     * Method validating propriety of user's password and username
+     * Method validating propriety of user's PASSWORD and username
      * Additionaly, it invokes SessionService to hold logged user data.
      *
      * @param username user's username given in textfield.
-     * @param password user's password given in textfield.
+     * @param password user's PASSWORD given in textfield.
      */
     public void loginUser(String username, String password) {
         if (username.isEmpty()) {

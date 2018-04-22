@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,37 +26,32 @@ public class ManagerProjectViewController implements Initializable {
 
     @FXML
     private JFXButton backButton;
-
     @FXML
     private Label projectNameLabel;
-
     @FXML
     private VBox productBacklogVBox;
-
     @FXML
     private VBox sprintBacklogVBox;
-
     @FXML
     private VBox inProgressVBox;
-
     @FXML
     private VBox testingVBox;
-
     @FXML
     private VBox codeReviewVBox;
-
     @FXML
     private VBox doneVBox;
 
     private SessionService sessionService;
     private SceneManager sceneManager;
     private TaskGenerator taskGenerator;
+    private final Logger logger;
 
     @Autowired
     public ManagerProjectViewController(TaskGenerator taskGenerator) {
         this.sessionService = SessionService.getInstance();
         this.taskGenerator = taskGenerator;
         this.sceneManager = SceneManager.getInstance();
+        this.logger = Logger.getLogger(ManagerProjectViewController.class);
     }
 
     /**
@@ -69,10 +65,6 @@ public class ManagerProjectViewController implements Initializable {
         projectNameLabel.setText(sessionService.getProject().getProjectName());
         backButton.setOnAction(e -> {
             sceneManager.showScene(SceneType.DASHBOARD);
-        });
-        testingVBox.setOnDragDetected(e -> {
-            System.out.println("dragging");
-            System.out.println(e.getPickResult().toString());
         });
         injectTasksToVBoxes();
     }

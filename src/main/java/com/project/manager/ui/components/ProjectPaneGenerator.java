@@ -6,6 +6,7 @@ import com.project.manager.services.SessionService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +20,12 @@ import java.io.IOException;
 public class ProjectPaneGenerator {
 
     private SessionService sessionService;
+    private Logger logger;
 
     @Autowired
     public ProjectPaneGenerator() {
         this.sessionService = SessionService.getInstance();
+        this.logger = Logger.getLogger(ProjectPaneGenerator.class);
     }
 
     /**
@@ -57,6 +60,7 @@ public class ProjectPaneGenerator {
             projectsArea.getChildren().add(newAnchorPane);
         } catch (IOException e) {
             e.printStackTrace();
+            logger.error("Project pane fml not found or problem with loading it");
         }
     }
 }

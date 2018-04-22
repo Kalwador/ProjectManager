@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
     /**
      * This method is searching the {@link UserModel} with passed id in database
      * @param aLong this parameter is id to identify the user in database
-     * @return the user with the same email ass passed in parameter
+     * @return the user with the same EMAIL ass passed in parameter
      */
     @Override
     Optional<UserModel> findById(Long aLong);
@@ -30,14 +30,14 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
     UserModel findByUsername(String username);
 
     /**
-     * This method is searching the {@link UserModel} with passed email in database
+     * This method is searching the {@link UserModel} with passed EMAIL in database
      * @param email this parameter is emial to identify the user in database
-     * @return the user with the same email ass passed in parameter
+     * @return the user with the same EMAIL ass passed in parameter
      */
     UserModel findByEmail(String email);
 
     /**
-     * This method is searching the {@link UserModel} with passed username or email in database
+     * This method is searching the {@link UserModel} with passed username or EMAIL in database
      * @param username this parameter is username to identify the user in database
      * @param email this parameter is username to identify the user in database
      * @return the user with the same username ass passed in parameter

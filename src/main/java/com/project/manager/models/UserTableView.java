@@ -56,7 +56,7 @@ public class UserTableView extends RecursiveTreeObject<UserTableView> {
 
 
     public UserTableView generateResetButton(UserTableView userTableView) {
-        JFXButton reset = new JFXButton("Reset password");
+        JFXButton reset = new JFXButton("Reset PASSWORD");
         reset.setButtonType(JFXButton.ButtonType.RAISED);
         reset.setStyle("-fx-background-color: #be2e22");
         userTableView.setResetPass(new SimpleObjectProperty(reset));

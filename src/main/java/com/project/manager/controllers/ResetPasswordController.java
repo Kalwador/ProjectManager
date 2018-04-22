@@ -5,13 +5,14 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import com.project.manager.services.ResetPasswdService;
+import com.project.manager.services.ResetPasswordService;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,34 +20,32 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Component
-public class ResetPasswdController implements Initializable {
+public class ResetPasswordController implements Initializable {
 
+
+    //TODO czy te testowe przyciski sa nadal potrzebne??
     @FXML
     private Button backToLoginButton;//button for testing
-
     @FXML
     private Button backToLoginButton1;//button for testing
-
     @FXML
     private Button backToLoginButton2;//button for testing
-
     @FXML
     private JFXTextField usernameOrEmailField;
-
     @FXML
     private Label usernameOrEmailErrorLabel;
 
     @FXML
-    private JFXButton resetPasswdButton;
+    private JFXButton resetPasswordButton;
 
     @FXML
-    private Pane resetPasswdStepOne;
+    private Pane resetPasswordStepOne;
 
     @FXML
-    private Pane resetPasswdStepTwo;
+    private Pane resetPasswordStepTwo;
 
     @FXML
-    private Pane resetPasswdStepThree;
+    private Pane resetPasswordStepThree;
 
     @FXML
     private JFXTextField generatedCodeField;
@@ -58,25 +57,27 @@ public class ResetPasswdController implements Initializable {
     private JFXButton confirmButton;
 
     @FXML
-    private JFXPasswordField passwdField;
+    private JFXPasswordField passwordField;
 
     @FXML
-    private JFXPasswordField repeatPasswdField;
+    private JFXPasswordField repeatPasswordField;
 
     @FXML
-    private Label passwdErrorLabel;
+    private Label passwordErrorLabel;
 
     @FXML
-    private JFXButton changePasswdButton;
+    private JFXButton changePasswordButton;
 
     private SceneManager sceneManager;
-    private ResetPasswdService resetPasswdService;
+    private ResetPasswordService resetPasswordService;
     private String usernameOrEmail;
+    private final Logger logger;
 
     @Autowired
-    public ResetPasswdController(ResetPasswdService resetPasswdService) {
+    public ResetPasswordController(ResetPasswordService resetPasswordService) {
         this.sceneManager = SceneManager.getInstance();
-        this.resetPasswdService = resetPasswdService;
+        this.resetPasswordService = resetPasswordService;
+        this.logger = Logger.getLogger(ResetPasswordController.class);
     }
 
     /**
@@ -89,13 +90,13 @@ public class ResetPasswdController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        resetPasswdStepOne.setVisible(true);
-        resetPasswdStepTwo.setVisible(false);
-        resetPasswdStepThree.setVisible(false);
+        resetPasswordStepOne.setVisible(true);
+        resetPasswordStepTwo.setVisible(false);
+        resetPasswordStepThree.setVisible(false);
 
         resetUsernameOrEmailError();
         resetCodeErrorLabel();
-        resetPasswdLabel();
+        resetPasswordLabel();
 
         backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
@@ -104,17 +105,17 @@ public class ResetPasswdController implements Initializable {
         backToLoginButton2.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
         /**
-         * Reset password action listener
-         * perform first step of reset password procedure that typing user name or email
+         * Reset PASSWORD action listener
+         * perform first step of reset PASSWORD procedure that typing user name or EMAIL
          */
-        resetPasswdButton.setOnAction(e -> {
+        resetPasswordButton.setOnAction(e -> {
             resetUsernameOrEmailError();
 
             try {
                 usernameOrEmail = usernameOrEmailField.getText();
-                resetPasswdService.resetPassword(usernameOrEmail);
-                resetPasswdStepOne.setVisible(false);
-                resetPasswdStepTwo.setVisible(true);
+                resetPasswordService.resetPassword(usernameOrEmail);
+                resetPasswordStepOne.setVisible(false);
+                resetPasswordStepTwo.setVisible(true);
             } catch (RuntimeException ex) {
                 usernameOrEmailErrorLabel.setVisible(true);
                 usernameOrEmailErrorLabel.setText(ex.getMessage());
@@ -123,7 +124,7 @@ public class ResetPasswdController implements Initializable {
 
         /**
          * Confirm generated code action listener
-         * perform second step of reset password procedure that checking if typed generated code are the same like in database
+         * perform second step of reset PASSWORD procedure that checking if typed generated code are the same like in database
          */
         confirmButton.setOnAction(e -> {
             resetCodeErrorLabel();
@@ -131,34 +132,34 @@ public class ResetPasswdController implements Initializable {
             try {
                 usernameOrEmail = usernameOrEmailField.getText();
                 String generatedCode = generatedCodeField.getText();
-                resetPasswdService.checkGeneratedCode(usernameOrEmail, generatedCode);
-                resetPasswdStepTwo.setVisible(false);
-                resetPasswdStepThree.setVisible(true);
+                resetPasswordService.checkGeneratedCode(usernameOrEmail, generatedCode);
+                resetPasswordStepTwo.setVisible(false);
+                resetPasswordStepThree.setVisible(true);
             } catch (RuntimeException ex) {
                 codeErrorLabel.setVisible(true);
                 codeErrorLabel.setText(ex.getMessage());
             }
         });
 
-        changePasswdButton.disableProperty().bind(Bindings.isEmpty(passwdField.textProperty())
-                .or(Bindings.length(passwdField.textProperty()).lessThan(8))
-                .or(Bindings.length(repeatPasswdField.textProperty()).lessThan(8)));
+        changePasswordButton.disableProperty().bind(Bindings.isEmpty(passwordField.textProperty())
+                .or(Bindings.length(passwordField.textProperty()).lessThan(8))
+                .or(Bindings.length(repeatPasswordField.textProperty()).lessThan(8)));
 
         /**
-         * Change password action listener
-         * perform third step of reset password procedure that typed and confirmed password is going to change.
+         * Change PASSWORD action listener
+         * perform third step of reset PASSWORD procedure that typed and confirmed PASSWORD is going to change.
          */
-        changePasswdButton.setOnAction(e -> {
-            resetPasswdLabel();
+        changePasswordButton.setOnAction(e -> {
+            resetPasswordLabel();
 
             try {
                 usernameOrEmail = usernameOrEmailField.getText();
-                String password = passwdField.getText();
-                String repeatPassword = repeatPasswdField.getText();
-                resetPasswdService.changePassword(usernameOrEmail, password, repeatPassword);
+                String password = passwordField.getText();
+                String repeatPassword = repeatPasswordField.getText();
+                resetPasswordService.changePassword(usernameOrEmail, password, repeatPassword);
             } catch (RuntimeException ex) {
-                passwdErrorLabel.setVisible(true);
-                passwdErrorLabel.setText(ex.getMessage());
+                passwordErrorLabel.setVisible(true);
+                passwordErrorLabel.setText(ex.getMessage());
             }
         });
     }
@@ -182,8 +183,8 @@ public class ResetPasswdController implements Initializable {
     /**
      * This method perform set empty string on label and set this label hidden
      */
-    public void resetPasswdLabel() {
-        passwdErrorLabel.setText("");
-        passwdErrorLabel.setVisible(false);
+    public void resetPasswordLabel() {
+        passwordErrorLabel.setText("");
+        passwordErrorLabel.setVisible(false);
     }
 }

@@ -5,6 +5,7 @@ import com.project.manager.config.FXMLLoaderProvider;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
@@ -18,17 +19,19 @@ public class CustomSceneImpl implements CustomScene {
     private String pathToFXML;
     private Integer width;
     private Integer height;
+    private Logger logger;
 
     protected CustomSceneImpl(Stage primaryStage) {
-        context = ApplicationContextProvider.getInstance().getContext();
+        this.context = ApplicationContextProvider.getInstance().getContext();
         this.primaryStage = primaryStage;
         this.newStage = new Stage();
+        this.logger = Logger.getLogger(CustomSceneImpl.class);
     }
 
     private Scene createNewScene() {
         try {
-
             FXMLLoader loader = context.getBean(FXMLLoaderProvider.class).getLoader(pathToFXML);
+            logger.info("SceneCreated succesfully with path: " + pathToFXML);
             if (Optional.ofNullable(width).isPresent() && Optional.ofNullable(height).isPresent()) {
                 return new Scene(loader.load(), this.width, this.height);
             } else {
@@ -37,6 +40,7 @@ public class CustomSceneImpl implements CustomScene {
         } catch (IOException e) {
             System.err.println("ERROR - FAILURE OF CREATING NEW SCENE");
             e.printStackTrace();
+            logger.fatal("ERROR - FAILURE OF CREATING NEW SCENE with path: " + pathToFXML);
         }
         return null;
     }

@@ -22,6 +22,9 @@ public class ApplicationContextProvider {
         return instance;
     }
 
+    /**
+     * Method initialize context field with ApplicationContext
+     */
     private ApplicationContextProvider() {
         this.context = new AnnotationConfigApplicationContext(DataSourceConfiguration.class);
     }

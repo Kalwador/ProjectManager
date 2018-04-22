@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
 
-public class TestResetPasswdScene {
+public class TestResetPasswordScene {
     @Rule
     public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 

@@ -6,6 +6,7 @@ import com.project.manager.models.MessageTableView;
 import com.project.manager.repositories.MessageRepository;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,9 @@ import java.util.Optional;
 public class MessageService {
 
     private MessageRepository messageRepository;
-
     private SessionService sessionService;
-
     private SceneManager sceneManager;
+    private final Logger logger;
 
     /**
      * Constructor of this class contain reference to {@link SessionService} {@link SceneManager} and injected
@@ -35,6 +35,7 @@ public class MessageService {
         this.messageRepository = messageRepository;
         this.sessionService = SessionService.getInstance();
         this.sceneManager = SceneManager.getInstance();
+        this.logger = Logger.getLogger(MessageService.class);
     }
 
     /**

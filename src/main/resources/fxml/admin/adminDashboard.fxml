@@ -74,7 +74,8 @@
                               </Tab>
                            </tabs>
                         </JFXTabPane>
-                     </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
                </content>
             </Tab>
         </tabs>

@@ -44,10 +44,10 @@ public class UserSelectorServiceTest {
                 .username("user")
                 .email("username@gmail.com")
                 .role(UserRole.USER)
-                .password(BCryptEncoder.encode("password"))
+                .password(BCryptEncoder.encode("PASSWORD"))
                 .isLocked(false).build();
         when(userRepository.findByUsername("user")).thenReturn(userModel);
-        loginService.loginUser("user","password");
+        loginService.loginUser("user","PASSWORD");
         userSelectorService.findUser("user");
     }
 
@@ -57,10 +57,10 @@ public class UserSelectorServiceTest {
                 .username("user")
                 .email("username@gmail.com")
                 .role(UserRole.ADMIN)
-                .password(BCryptEncoder.encode("password"))
+                .password(BCryptEncoder.encode("PASSWORD"))
                 .isLocked(false).build();
         when(userRepository.findByUsername("user")).thenReturn(userModel);
-        loginService.loginUser("user","password");
+        loginService.loginUser("user","PASSWORD");
         userSelectorService.findUser("user");
     }
     @Test
@@ -69,10 +69,10 @@ public class UserSelectorServiceTest {
                 .username("user")
                 .email("username@gmail.com")
                 .role(UserRole.USER)
-                .password(BCryptEncoder.encode("password"))
+                .password(BCryptEncoder.encode("PASSWORD"))
                 .isLocked(false).build();
         when(userRepository.findByUsername("user")).thenReturn(userModel);
-        loginService.loginUser("user","password");
+        loginService.loginUser("user","PASSWORD");
         userSelectorService.findUser("user");
     }
 }

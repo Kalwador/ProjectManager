@@ -1,4 +1,4 @@
-package com.project.manager.controllers.manager;
+package com.project.manager.controllers.employee;
 
 import com.project.manager.entities.Task;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 @Component
 @Getter
 @Setter
-public class ManagerTaskBrickComponentController implements Initializable {
+public class EmployeeTaskBrickComponentController implements Initializable {
     @FXML
     private AnchorPane brickPane;
     @FXML
@@ -33,8 +33,9 @@ public class ManagerTaskBrickComponentController implements Initializable {
     private Task task;
     private final Logger logger;
 
-    public ManagerTaskBrickComponentController() {
-        this.logger = Logger.getLogger(ManagerTaskBrickComponentController.class);
+
+    public EmployeeTaskBrickComponentController() {
+        this.logger = Logger.getLogger(EmployeeTaskBrickComponentController.class);
     }
 
     /**

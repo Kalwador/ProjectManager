@@ -3,6 +3,7 @@ package com.project.manager.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.project.manager.models.MessageTableView;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.services.RegistrationService;
@@ -11,6 +12,7 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +27,24 @@ import java.util.ResourceBundle;
 @Component
 public class RegistrationController implements Initializable{
 
+    @FXML
+    private JFXPasswordField password;
+    @FXML
+    private JFXTextField email;
+    @FXML
+    private JFXPasswordField repeatPassword;
+    @FXML
+    private JFXTextField username;
+    @FXML
+    private JFXButton sign;
+    @FXML
+    private JFXButton cancel;
+    @FXML
+    private Label problem;
+
     private RegistrationService registrationService;
     private SceneManager sceneManager;
+    private final Logger logger;
 
     /**
      * This is the constructor of controller with contain reference to the sceneManager for switching scenes
@@ -37,28 +55,8 @@ public class RegistrationController implements Initializable{
     public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
         sceneManager = SceneManager.getInstance();
+        this.logger = Logger.getLogger(RegistrationController.class);
     }
-
-    @FXML
-    private JFXPasswordField password;
-
-    @FXML
-    private JFXTextField email;
-
-    @FXML
-    private JFXPasswordField repeatPassword;
-
-    @FXML
-    private JFXTextField username;
-
-    @FXML
-    private JFXButton sign;
-
-    @FXML
-    private JFXButton cancel;
-
-    @FXML
-    private Label problem;
 
     /**
      * This method is responsible for listening the controller in window, and making action
@@ -75,7 +73,7 @@ public class RegistrationController implements Initializable{
         sign.setOnAction((e) -> {
             try {
                 registrationService.registerUser(username.getText(), email.getText(), password.getText(), repeatPassword.getText());
-                AlertManager.showInformationAlert("Registration", "Successful registration, check your email to get login activation code!");
+                AlertManager.showInformationAlert("Registration", "Successful registration, check your EMAIL to get login activation code!");
                 sceneManager.showScene(SceneType.LOGIN);
             }
             catch (RuntimeException ex) {

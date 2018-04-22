@@ -14,6 +14,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,7 @@ public class AdminDashboardController implements Initializable {
 
     private AdminDashboardTablesComponent adminDashboardTablesComponent;
     private SceneManager sceneManager;
+    private final Logger logger;
 
     /**
      * The constructor of this Spring Bean contains reference to {@link AdminDashboardTablesComponent},
@@ -45,6 +47,7 @@ public class AdminDashboardController implements Initializable {
     public AdminDashboardController(AdminDashboardTablesComponent adminDashboardTablesComponent) {
         this.adminDashboardTablesComponent = adminDashboardTablesComponent;
         this.sceneManager = SceneManager.getInstance();
+        this.logger = Logger.getLogger(AdminDashboardController.class);
     }
 
     @FXML

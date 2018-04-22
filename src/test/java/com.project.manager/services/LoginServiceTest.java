@@ -29,7 +29,7 @@ public class LoginServiceTest {
         UserModel userModel = UserModel.builder()
                 .username("username")
                 .email("username@gmail.com")
-                .password(BCryptEncoder.encode("password"))
+                .password(BCryptEncoder.encode("PASSWORD"))
                 .isLocked(true).build();
         when(userRepository.findByUsername("username")).thenReturn(userModel);
         loginService.loginUser("username",userModel.getPassword());

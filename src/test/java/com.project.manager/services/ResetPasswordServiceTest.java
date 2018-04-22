@@ -4,6 +4,7 @@ import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.*;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
+import com.project.manager.utils.ActivationCodeGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,13 +14,13 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ResetPasswdServiceTest {
+public class ResetPasswordServiceTest {
 
     @Mock
     private UserRepository userRepository;
 
     @InjectMocks
-    private ResetPasswdService resetPasswdService;
+    private ResetPasswordService resetPasswordService;
 
     @Test(expected = EmptyUsernameException.class)
     public void testExpectedEmptyUsername() {
@@ -27,44 +28,44 @@ public class ResetPasswdServiceTest {
                 .username("username")
                 .email("username@gmail.com").build();
         when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
-        resetPasswdService.resetPassword("");
+        resetPasswordService.resetPassword("");
     }
 
     @Test(expected = UserDoesNotExistException.class)
     public void testExpectedUserDoesNotExist() {
         when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(null);
-        resetPasswdService.resetPassword("usernameasd");
+        resetPasswordService.resetPassword("usernameasd");
     }
 
     @Test(expected = EmptyGeneratedCodeException.class)
     public void testExpectedEmptyGeneratedCode() {
-        String generatePasswdCode = resetPasswdService.generateCode();
+        String generatePasswordCode = ActivationCodeGenerator.generateCode();
 
         UserModel userModel = UserModel.builder()
                 .username("username")
                 .email("username@gmail.com")
-                .activationCode(generatePasswdCode).build();
+                .activationCode(generatePasswordCode).build();
         when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
-        resetPasswdService.checkGeneratedCode("username","");
+        resetPasswordService.checkGeneratedCode("username","");
     }
 
     //problem z nullem na userModel
 //    @Test(expected = DifferentGeneratedCodeException.class)
 //    public void testExpectedDifferentGeneratedCode() {
-//        String generatePasswdCode = resetPasswdService.generateCode();
+//        String generatePasswordCode = resetPasswordService.generateCode();
 //
 //        UserModel userModel = UserModel.builder()
 //                .username("username")
-//                .email("username@gmail.com")
-//                .unlockPasswdCode(generatePasswdCode).build();
+//                .EMAIL("username@gmail.com")
+//                .unlockPasswordCode(generatePasswordCode).build();
 //        when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
-//        resetPasswdService.checkGeneratedCode("username","gfghfh");
+//        resetPasswordService.checkGeneratedCode("username","gfghfh");
 //    }
 
 
     @Test(expected = DifferentPasswordException.class)
-    public void testResetPasswdExpectDifferentPassword() {
-        resetPasswdService.changePassword("username@mail.com", "password", "otherpass");
+    public void testResetPasswordExpectDifferentPassword() {
+        resetPasswordService.changePassword("username@mail.com", "PASSWORD", "otherpass");
     }
 
 }

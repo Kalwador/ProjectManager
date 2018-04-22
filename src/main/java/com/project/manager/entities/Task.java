@@ -1,6 +1,5 @@
 package com.project.manager.entities;
 
-import com.project.manager.models.TaskStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,4 +35,8 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usermodel_id")
+    private UserModel user;
 }

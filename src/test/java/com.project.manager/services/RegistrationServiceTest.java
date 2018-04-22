@@ -48,7 +48,7 @@ public class RegistrationServiceTest {
 
     @Test(expected = DifferentPasswordException.class)
     public void testRegistrationExpectDifferentPassword() {
-        registrationService.registerUser("","username@mail.com", "password", "otherpass");
+        registrationService.registerUser("","username@mail.com", "PASSWORD", "otherpass");
     }
 
     @Test
@@ -56,7 +56,7 @@ public class RegistrationServiceTest {
         UserModel userModel = UserModel.builder()
                                         .username("username")
                                         .email("username@mail.com")
-                                        .password(BCryptEncoder.encode("password"))
+                                        .password(BCryptEncoder.encode("PASSWORD"))
                                         .isLocked(true).build();
 
         ArgumentCaptor<UserModel> arg = ArgumentCaptor.forClass(UserModel.class);
@@ -65,7 +65,7 @@ public class RegistrationServiceTest {
         when(userRepository.findByEmail("")).thenReturn(null);
         when(userRepository.save(userModel)).thenReturn(arg.capture());
 
-        registrationService.registerUser(userModel.getUsername(), userModel.getEmail(), "password", "password");
+        registrationService.registerUser(userModel.getUsername(), userModel.getEmail(), "PASSWORD", "PASSWORD");
 
         verify(userRepository, times(1)).findByUsername(userModel.getUsername());
         verify(userRepository, times(1)).findByEmail(userModel.getEmail());
@@ -75,11 +75,11 @@ public class RegistrationServiceTest {
 
     @Test
     public void testIsValidEmailAddress() {
-        boolean result = registrationService.isValidEmailAddress("email");
-        boolean result2 = registrationService.isValidEmailAddress("email@");
+        boolean result = registrationService.isValidEmailAddress("EMAIL");
+        boolean result2 = registrationService.isValidEmailAddress("EMAIL@");
         boolean result3 = registrationService.isValidEmailAddress("emailmail.pl");
-        boolean result4 = registrationService.isValidEmailAddress("email@.pl");
-        boolean result5 = registrationService.isValidEmailAddress("email@mail");
+        boolean result4 = registrationService.isValidEmailAddress("EMAIL@.pl");
+        boolean result5 = registrationService.isValidEmailAddress("EMAIL@mail");
 
         Assert.assertFalse(result);
         Assert.assertFalse(result2);
@@ -87,7 +87,7 @@ public class RegistrationServiceTest {
         Assert.assertFalse(result4);
         Assert.assertFalse(result5);
 
-        boolean result6 = registrationService.isValidEmailAddress("email@mail.pl");
+        boolean result6 = registrationService.isValidEmailAddress("EMAIL@mail.pl");
 
         Assert.assertTrue(result6);
     }

@@ -4,6 +4,7 @@ import com.project.manager.ui.sceneManager.scenes.*;
 import com.project.manager.ui.sceneManager.scenes.MessageViewWindowScene;
 import com.project.manager.ui.sceneManager.scenes.system.CustomScene;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ public class SceneManager {
     private LoginScene loginScene;
     private RegistrationScene registrationScene;
     private DashboardScene dashboardScene;
-    private ResetPasswdScene resetPasswdScene;
+    private ResetPasswordScene resetPasswordScene;
     private AdminDashboardScene adminDashboardScene;
     private UpdateProjectScene updateProjectScene;
     private MessageViewWindowScene messageViewWindowScene;
@@ -26,11 +27,14 @@ public class SceneManager {
     private EmployeeProjectView employeeProjectView;
     private AddUserScene addUserScene;
     private HashMap<Integer, CustomScene> scenes;
+    private Logger logger;
 
     /**
      * private constructor, access only through method getInstance
      */
     private SceneManager() {
+        this.logger = Logger.getLogger(SceneManager.class);
+        this.logger.info("new instance of SceneManager created");
     }
 
     /**
@@ -54,6 +58,7 @@ public class SceneManager {
      */
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        logger.info("PrimaryStage set complete");
         initializeScenes();
     }
 
@@ -65,7 +70,7 @@ public class SceneManager {
         this.loginScene = new LoginScene(primaryStage);
         this.registrationScene = new RegistrationScene(primaryStage);
         this.dashboardScene = new DashboardScene(primaryStage);
-        this.resetPasswdScene = new ResetPasswdScene(primaryStage);
+        this.resetPasswordScene = new ResetPasswordScene(primaryStage);
         this.adminDashboardScene = new AdminDashboardScene(primaryStage);
         this.updateProjectScene = new UpdateProjectScene(primaryStage);
         this.messageViewWindowScene = new MessageViewWindowScene(primaryStage);
@@ -83,10 +88,11 @@ public class SceneManager {
                 put(SceneType.ADMIN_DASHBOARD.ordinal(), adminDashboardScene);
                 put(SceneType.ADMIN_UPDATE_PROJECT.ordinal(), updateProjectScene);
                 put(SceneType.MESSAGE_VIEW_WINDOW.ordinal(), messageViewWindowScene);
-                put(SceneType.RESETPASSWD.ordinal(), resetPasswdScene);
+                put(SceneType.RESETPASSWD.ordinal(), resetPasswordScene);
                 put(SceneType.ADD_USER.ordinal(), addUserScene);
             }
         };
+        logger.info("Scenes initializec succesfully in initializeScenes method");
     }
 
     /**
@@ -96,6 +102,7 @@ public class SceneManager {
      */
     public void showScene(SceneType type) {
         scenes.get(type.ordinal()).show();
+        logger.trace("Show scene: " + type.toString());
     }
 
     /**
@@ -105,6 +112,7 @@ public class SceneManager {
      */
     public void showScene(int sceneID) {
         scenes.get(sceneID).show();
+        logger.trace("Show scene: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -114,6 +122,7 @@ public class SceneManager {
      */
     public void hideScene(SceneType type) {
         scenes.get(type.ordinal()).hide();
+        logger.trace("Hide scene: " + type.toString());
     }
 
     /**
@@ -123,6 +132,7 @@ public class SceneManager {
      */
     public void hideScene(int sceneID) {
         scenes.get(sceneID).hide();
+        logger.trace("Hide scene: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -132,6 +142,7 @@ public class SceneManager {
      */
     public void closeScene(SceneType type) {
         scenes.get(type.ordinal()).close();
+        logger.trace("Close scene: " + type.toString());
     }
 
     /**
@@ -141,6 +152,7 @@ public class SceneManager {
      */
     public void closeScene(int sceneID) {
         scenes.get(sceneID).close();
+        logger.trace("Close scene: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -151,6 +163,7 @@ public class SceneManager {
      */
     public void showInNewWindow(SceneType type) {
         scenes.get(type.ordinal()).showInNewScene();
+        logger.trace("Show scene in new window: " + type.toString());
     }
 
     /**
@@ -161,6 +174,7 @@ public class SceneManager {
      */
     public void showInNewWindow(int sceneID) {
         scenes.get(sceneID).showInNewScene();
+        logger.trace("Show scene in new window: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -171,6 +185,7 @@ public class SceneManager {
      */
     public void hideNewWindow(SceneType type) {
         scenes.get(type.ordinal()).hideNewScene();
+        logger.trace("Hide scene in new window: " + type.toString());
     }
 
     /**
@@ -181,6 +196,7 @@ public class SceneManager {
      */
     public void hideNewWindow(int sceneID) {
         scenes.get(sceneID).hideNewScene();
+        logger.trace("Hide scene in new window: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -191,6 +207,7 @@ public class SceneManager {
      */
     public void closeNewWindow(SceneType type) {
         scenes.get(type.ordinal()).closeNewScene();
+        logger.trace("Close scene in new window: " + type.toString());
     }
 
     /**
@@ -202,6 +219,7 @@ public class SceneManager {
      */
     public void closeNewWindow(int sceneID) {
         scenes.get(sceneID).closeNewScene();
+        logger.trace("Close scene in new window: "+ scenes.get(sceneID).toString());
     }
 }
 
