@@ -3,16 +3,16 @@ package com.project.manager.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.project.manager.models.MessageTableView;
+import com.project.manager.exceptions.EmailValidationException;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.services.RegistrationService;
 import com.project.manager.ui.AlertManager;
+import com.project.manager.utils.Validator;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +44,7 @@ public class RegistrationController implements Initializable{
 
     private RegistrationService registrationService;
     private SceneManager sceneManager;
-    private final Logger logger;
+
 
     /**
      * This is the constructor of controller with contain reference to the sceneManager for switching scenes
@@ -54,8 +54,7 @@ public class RegistrationController implements Initializable{
     @Autowired
     public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
-        sceneManager = SceneManager.getInstance();
-        this.logger = Logger.getLogger(RegistrationController.class);
+        this.sceneManager = SceneManager.getInstance();
     }
 
     /**
@@ -68,7 +67,7 @@ public class RegistrationController implements Initializable{
         sign.disableProperty().bind(Bindings.isEmpty(username.textProperty())
                 .or(Bindings.length(password.textProperty()).lessThan(8))
                 .or(Bindings.length(repeatPassword.textProperty()).lessThan(8))
-                .or(Bindings.createBooleanBinding(() -> !registrationService.isValidEmailAddress(email.getText()),email.textProperty())));
+                .or(Bindings.createBooleanBinding(() -> !Validator.isEmailValid(email.getText()),email.textProperty())));
 
         sign.setOnAction((e) -> {
             try {
@@ -76,7 +75,7 @@ public class RegistrationController implements Initializable{
                 AlertManager.showInformationAlert("Registration", "Successful registration, check your EMAIL to get login activation code!");
                 sceneManager.showScene(SceneType.LOGIN);
             }
-            catch (RuntimeException ex) {
+            catch (EmailValidationException ex) {
                 problem.setStyle("-fx-background-color: #b73634");
                 problem.setVisible(true);
                 problem.setText(ex.getMessage());

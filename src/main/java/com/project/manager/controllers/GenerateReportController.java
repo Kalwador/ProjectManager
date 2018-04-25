@@ -1,6 +1,7 @@
 package com.project.manager.controllers;
 
 import com.project.manager.entities.Project;
+import com.project.manager.exceptions.EmailValidationException;
 import com.project.manager.services.ReportService;
 import com.project.manager.services.SessionService;
 import com.project.manager.ui.sceneManager.SceneManager;
@@ -51,6 +52,8 @@ public class GenerateReportController implements Initializable{
     @FXML
     private Label location;
     @FXML
+    private Label emailError;
+    @FXML
     private RadioButton sentToMe;
     @FXML
     private RadioButton sentTo;
@@ -67,11 +70,19 @@ public class GenerateReportController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         setFields();
         disableEmailField();
+        emailError.setVisible(false);
         save.setOnAction(e -> setLocalization());
 
         cancel.setOnAction(e -> sceneManager.closeNewWindow(SceneType.GENERATE_REPORT));
-        generate.setOnAction(e -> reportService.generateReport
-                (sentToMe.isSelected(), email.getText(), this.location.getText()));
+        generate.setOnAction(e -> {
+            try {
+                reportService.generateReport
+                        (sentToMe.isSelected(), email.getText(), this.location.getText());
+            } catch (EmailValidationException e1) {
+                emailError.setVisible(true);
+                emailError.setText(e1.getMessage());
+            }
+        });
     }
 
     /**
@@ -100,7 +111,7 @@ public class GenerateReportController implements Initializable{
     }
 
     /**
-     * This method disable email field if sent to user radio button is unselected
+     * This method disable isEmailValid field if sent to user radio button is unselected
      */
     private void disableEmailField() {
         sentTo.setOnAction(e -> {

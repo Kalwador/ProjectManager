@@ -9,7 +9,6 @@ import com.project.manager.services.login.LoginService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,13 +37,12 @@ public class LoginController implements Initializable {
 
     private SceneManager sceneManager;
     private LoginService loginService;
-    private final Logger logger;
+
 
     @Autowired
     public LoginController(LoginService loginService) {
         this.sceneManager = SceneManager.getInstance();
         this.loginService = loginService;
-        this.logger = Logger.getLogger(LoginController.class);
     }
 
     /**

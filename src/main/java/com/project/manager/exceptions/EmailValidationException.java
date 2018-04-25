@@ -1,7 +1,7 @@
 package com.project.manager.exceptions;
 
-public class EmailValidationException extends RuntimeException {
-    public EmailValidationException(String s) {
-        super(s);
+public class EmailValidationException extends Exception {
+    public EmailValidationException() {
+        super("Email adress is not valid");
     }
 }

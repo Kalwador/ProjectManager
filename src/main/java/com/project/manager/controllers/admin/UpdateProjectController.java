@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.project.manager.ui.components.admin.AdminDashboardTablesComponent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
@@ -23,11 +22,6 @@ public class UpdateProjectController implements Initializable {
     @FXML
     private JFXButton cancel;
 
-    private final Logger logger;
-
-    public UpdateProjectController() {
-        this.logger = Logger.getLogger(UpdateProjectController.class);
-    }
 
     /**
      * This method is responsible for listening the controller in window, and making action

@@ -4,7 +4,6 @@ import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.*;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.mail.MailSubject;
-import com.project.manager.models.mail.ProjectReportMail;
 import com.project.manager.models.mail.ResetPasswordMail;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.services.mail.MailFactory;
@@ -13,14 +12,9 @@ import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.ui.AlertManager;
 import com.project.manager.utils.ActivationCodeGenerator;
 import com.project.manager.utils.BCryptEncoder;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.File;
-import java.time.LocalDate;
 import java.util.Optional;
-import java.util.Random;
 
 /**
  * This is the class which is responsible for operations step by step to perform PASSWORD resetting.
@@ -32,14 +26,13 @@ public class ResetPasswordService {
     private SceneManager sceneManager;
     private UserRepository userRepository;
     private MailFactory mailFactory;
-    private final Logger logger;
+
 
     @Autowired
     public ResetPasswordService(UserRepository userRepository, MailFactory mailFactory) {
         this.sceneManager = SceneManager.getInstance();
         this.userRepository = userRepository;
         this.mailFactory = mailFactory;
-        this.logger = Logger.getLogger(ResetPasswordService.class);
     }
 
     /**
@@ -47,7 +40,7 @@ public class ResetPasswordService {
      *
      * @param usernameOrEmail - name or EMAIL of user that want to reset PASSWORD.
      */
-    public void resetPassword(String usernameOrEmail) {
+    public void resetPassword(String usernameOrEmail) throws EmailValidationException{
 
         if (usernameOrEmail.isEmpty()) {
             throw new EmptyUsernameException("Username or Email field can't be empty.");
@@ -56,7 +49,7 @@ public class ResetPasswordService {
         Optional<UserModel> userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
         if (!userModel.isPresent()) {
-            throw new UserDoesNotExistException("There is no user with that username or email in our service.");
+            throw new UserDoesNotExistException("There is no user with that username or isEmailValid in our service.");
         } else {
             String generatePasswordCode = ActivationCodeGenerator.generateCode();
 
@@ -71,7 +64,7 @@ public class ResetPasswordService {
         }
     }
 
-    private void sendActivationCodeInMessage(UserModel userModel) {
+    private void sendActivationCodeInMessage(UserModel userModel) throws EmailValidationException{
         ResetPasswordMail mail = ResetPasswordMail.builder()
                 .activationCode(userModel.getActivationCode())
                 .username(userModel.getUsername())

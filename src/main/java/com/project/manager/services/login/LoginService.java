@@ -10,7 +10,6 @@ import com.project.manager.services.SessionService;
 import com.project.manager.services.user.UserService;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import org.apache.log4j.Logger;
 import com.project.manager.utils.BCryptEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class LoginService {
     private RememberUserService rememberUserService;
     private SceneManager sceneManager;
     private UserService userService;
-    private final Logger logger;
+
 
     @Autowired
     public LoginService(UserRepository userRepository, RememberUserService rememberUserService, UserService userService) {
@@ -36,7 +35,6 @@ public class LoginService {
         this.rememberUserService = rememberUserService;
         this.sessionService = SessionService.getInstance();
         this.userService = userService;
-        this.logger = Logger.getLogger(LoginService.class);
     }
 
     /**

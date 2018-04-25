@@ -93,7 +93,7 @@ public class SentMessageController implements Initializable {
             refreshTables();
 
         } catch (UserDoesNotExistException e) {
-            showInformationAlert("User does not found", "The is no user of that email in service");
+            showInformationAlert("User does not found", "The is no user of that isEmailValid in service");
         }
     }
 

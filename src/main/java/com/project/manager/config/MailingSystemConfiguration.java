@@ -1,6 +1,6 @@
 package com.project.manager.config;
 
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 /**
  * Class provides Mailing System configuration form application properties
  */
+@Log4j
 @Configuration
 @PropertySource("classpath:application.properties")
 public class MailingSystemConfiguration {
@@ -25,11 +26,7 @@ public class MailingSystemConfiguration {
     public static String SSL_TRUST;
     public static String PORT;
     public static String AUTH;
-    private final Logger logger;
 
-    public MailingSystemConfiguration() {
-        this.logger = Logger.getLogger(MailingSystemConfiguration.class);
-    }
 
     /**
      * Initialize configuration variables as address, PASSWORD, HOST
@@ -43,6 +40,6 @@ public class MailingSystemConfiguration {
         SSL_TRUST = env.getRequiredProperty("mail.smtp.ssl.trust");
         PORT = env.getRequiredProperty("mail.smtp.port");
         AUTH = env.getRequiredProperty("mail.smtp.auth");
-        logger.info("Mailing system variables inicialized");
+        log.info("Mailing system variables inicialized");
     }
 }

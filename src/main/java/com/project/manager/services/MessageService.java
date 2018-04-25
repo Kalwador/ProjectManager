@@ -9,7 +9,6 @@ import com.project.manager.repositories.MessageRepository;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,7 @@ public class MessageService {
     private MessageRepository messageRepository;
     private SessionService sessionService;
     private SceneManager sceneManager;
-    private final Logger logger;
+
 
     private UserRepository userRepository;
 
@@ -41,7 +40,6 @@ public class MessageService {
         this.userRepository = userRepository;
         this.sessionService = SessionService.getInstance();
         this.sceneManager = SceneManager.getInstance();
-        this.logger = Logger.getLogger(MessageService.class);
     }
 
     /**
@@ -79,7 +77,7 @@ public class MessageService {
         UserModel sender = sessionService.getUserModel();
         Optional<UserModel> receiver = userRepository.findByUsername(message.getReceiver());
         if (!receiver.isPresent()) {
-            throw new UserDoesNotExistException("The user with that email does not exist");
+            throw new UserDoesNotExistException("The user with that isEmailValid does not exist");
         }
                 
         message.setSender(sender.getUsername());

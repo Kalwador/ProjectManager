@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,14 +43,13 @@ public class EmployeeProjectViewController implements Initializable {
     private SessionService sessionService;
     private SceneManager sceneManager;
     private TaskGenerator taskGenerator;
-    private final Logger logger;
+
 
     @Autowired
     public EmployeeProjectViewController(TaskGenerator taskGenerator) {
         this.sessionService = SessionService.getInstance();
         this.taskGenerator = taskGenerator;
         this.sceneManager = SceneManager.getInstance();
-        this.logger = Logger.getLogger(EmployeeProjectViewController.class);
     }
 
     /**

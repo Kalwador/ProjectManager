@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
  * This is the class which is responsible for adding users window.
  * This class perform display autobinding text field and button.
  */
+@Log4j
 @Component
 public class UserSelectorController implements Initializable {
 
@@ -35,7 +36,7 @@ public class UserSelectorController implements Initializable {
     private SceneManager sceneManager;
     private ProjectPaneGenerator projectPaneGenerator;
     private UserSelectorService userSelectorService;
-    private final Logger logger;
+
 
     private List<String> possibleUsers;
     private AutoCompletionBinding<String> autoCompletionBinding;
@@ -44,7 +45,6 @@ public class UserSelectorController implements Initializable {
     public UserSelectorController(UserSelectorService userSelectorService) {
         this.sceneManager = SceneManager.getInstance();
         this.userSelectorService = userSelectorService;
-        this.logger = Logger.getLogger(UserSelectorController.class);
     }
 
     /**
@@ -67,7 +67,7 @@ public class UserSelectorController implements Initializable {
             } catch (RuntimeException ex) {
                 errorLabel.setVisible(true);
                 errorLabel.setText(ex.getMessage());
-                logger.error("User couldnt be selected in UserSelectorWindow with username: "+usernameTextField.getText());
+                log.error("User couldnt be selected in UserSelectorWindow with username: "+usernameTextField.getText());
             }
         });
     }

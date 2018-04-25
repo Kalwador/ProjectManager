@@ -32,7 +32,7 @@ public class RememberUserService {
     /**
      * This method is creating a file to remember last logged user
      *
-     * @param usernameOrEmail username of email of user
+     * @param usernameOrEmail username of isEmailValid of user
      * @return
      */
     public boolean rememberUser(String usernameOrEmail) {

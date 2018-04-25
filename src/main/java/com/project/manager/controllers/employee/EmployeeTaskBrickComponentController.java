@@ -8,7 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
@@ -31,12 +30,7 @@ public class EmployeeTaskBrickComponentController implements Initializable {
     private Label nameLabel;
 
     private Task task;
-    private final Logger logger;
 
-
-    public EmployeeTaskBrickComponentController() {
-        this.logger = Logger.getLogger(EmployeeTaskBrickComponentController.class);
-    }
 
     /**
      * Standard method initialized on controller setup.

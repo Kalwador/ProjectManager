@@ -1,7 +1,7 @@
 package com.project.manager.services.mail;
 
 import com.project.manager.config.MailingSystemConfiguration;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -18,14 +18,9 @@ import java.util.Properties;
  * Class contains methods building object of type Message from javax library
  * Works under MailFactory interface
  */
+@Log4j
 @Service
 class MailServiceImpl implements MailService {
-
-    private Logger logger;
-
-    public MailServiceImpl() {
-        this.logger = Logger.getLogger(MailServiceImpl.class);
-    }
 
     /**
      * Message without attachment
@@ -49,7 +44,7 @@ class MailServiceImpl implements MailService {
             send(message, session);
         } catch (MessagingException e) {
             e.printStackTrace();
-            logger.error("messagign exception message = " + recipient + content + subject);
+            log.error("messagign exception message = " + recipient + content + subject);
         }
     }
 
@@ -86,7 +81,7 @@ class MailServiceImpl implements MailService {
             send(message, session);
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
-            logger.error("messagign exception message = " + recipient + content + subject + file.toString());
+            log.error("messagign exception message = " + recipient + content + subject + file.toString());
         }
     }
 
@@ -104,10 +99,10 @@ class MailServiceImpl implements MailService {
                     MailingSystemConfiguration.PASSWORD);
             transport.sendMessage(msng, msng.getAllRecipients());
             transport.close();
-            logger.info("Message sent succesfully");
+            log.info("Message sent succesfully");
         } catch (MessagingException e) {
             e.printStackTrace();
-            logger.error("Message could not be sent " + e.getMessage());
+            log.error("Message could not be sent " + e.getMessage());
         }
     }
 
@@ -123,7 +118,7 @@ class MailServiceImpl implements MailService {
         properties.put("mail.smtp.PASSWORD", MailingSystemConfiguration.PASSWORD);
         properties.put("mail.smtp.port", MailingSystemConfiguration.PORT);
         properties.put("mail.smtp.auth", MailingSystemConfiguration.AUTH);
-        logger.info("Message properties set successful");
+        log.info("Message properties set successful");
         return properties;
     }
 }

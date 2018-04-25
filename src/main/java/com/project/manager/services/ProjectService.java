@@ -3,7 +3,6 @@ package com.project.manager.services;
 import com.project.manager.entities.Project;
 import com.project.manager.exceptions.project.ProjectNotExistException;
 import com.project.manager.repositories.ProjectRepository;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +18,12 @@ public class ProjectService {
 
     private ProjectRepository projectRepository;
     private SessionService sessionService;
-    private final Logger logger;
+
 
     @Autowired
     public ProjectService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
         this.sessionService = SessionService.getInstance();
-        this.logger = Logger.getLogger(ProjectService.class);
     }
 
     /**

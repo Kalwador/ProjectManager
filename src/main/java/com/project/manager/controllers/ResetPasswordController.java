@@ -3,6 +3,7 @@ package com.project.manager.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.project.manager.exceptions.EmailValidationException;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.services.ResetPasswordService;
@@ -12,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -71,13 +71,12 @@ public class ResetPasswordController implements Initializable {
     private SceneManager sceneManager;
     private ResetPasswordService resetPasswordService;
     private String usernameOrEmail;
-    private final Logger logger;
+
 
     @Autowired
     public ResetPasswordController(ResetPasswordService resetPasswordService) {
         this.sceneManager = SceneManager.getInstance();
         this.resetPasswordService = resetPasswordService;
-        this.logger = Logger.getLogger(ResetPasswordController.class);
     }
 
     /**
@@ -116,7 +115,7 @@ public class ResetPasswordController implements Initializable {
                 resetPasswordService.resetPassword(usernameOrEmail);
                 resetPasswordStepOne.setVisible(false);
                 resetPasswordStepTwo.setVisible(true);
-            } catch (RuntimeException ex) {
+            } catch (EmailValidationException ex) {
                 usernameOrEmailErrorLabel.setVisible(true);
                 usernameOrEmailErrorLabel.setText(ex.getMessage());
             }

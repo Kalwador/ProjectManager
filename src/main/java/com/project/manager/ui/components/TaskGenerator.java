@@ -9,7 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,16 +18,15 @@ import java.io.IOException;
 /**
  * Class generates TaskBricks (Panes) in VBoxes to show tasks in specified container.
  */
+@Log4j
 @Component
 @Getter
 public class TaskGenerator {
     private SessionService sessionService;
-    private Logger logger;
 
     @Autowired
     public TaskGenerator() {
         this.sessionService = SessionService.getInstance();
-        this.logger = Logger.getLogger(TaskGenerator.class);
     }
 
     /**
@@ -61,11 +60,11 @@ public class TaskGenerator {
             managerTaskBrickComponentController.setTask(task);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/managerTaskBrickComponent.fxml"));
             fxmlLoader.setController(managerTaskBrickComponentController);
-            logger.info("Pane from task created succesfully " + task.toString());
+            log.info("Pane from task created succesfully " + task.toString());
             return fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
-            logger.error("IOException in getPaneFromTask method during creating Pane from Task");
+            log.error("IOException in getPaneFromTask method during creating Pane from Task");
             throw new RuntimeException("IOException in getPaneFromTask method during creating Pane from Task");
         }
     }

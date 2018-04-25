@@ -25,7 +25,7 @@ public class ResetPasswordServiceTest {
     private ResetPasswordService resetPasswordService;
 
     @Test(expected = EmptyUsernameException.class)
-    public void testExpectedEmptyUsername() {
+    public void testExpectedEmptyUsername() throws EmailValidationException{
         Optional<UserModel> userModel = Optional.of(UserModel.builder()
                 .username("username")
                 .email("username@gmail.com").build());
@@ -34,7 +34,7 @@ public class ResetPasswordServiceTest {
     }
 
     @Test(expected = UserDoesNotExistException.class)
-    public void testExpectedUserDoesNotExist() {
+    public void testExpectedUserDoesNotExist() throws EmailValidationException{
         when(userRepository.findByUsernameOrEmail("usernameasd", "usernameasd")).thenReturn(Optional.empty());
         resetPasswordService.resetPassword("usernameasd");
     }

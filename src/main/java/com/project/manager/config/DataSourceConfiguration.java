@@ -5,7 +5,7 @@ import java.util.Properties;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +22,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 
+@Log4j
 @Configuration
 @ComponentScan(basePackages = "com.project.manager")
 @EnableJpaRepositories(basePackages = "com.project.manager.repositories")
@@ -37,11 +38,6 @@ public class DataSourceConfiguration {
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String PROPERTY_NAME_HIBERNATE_AUTO = "hibernate.hbm2ddl.auto";
     private static final String PROPERTY_NAME_PACKAGES_TO_SCAN = "packages.to.scan";
-    private final Logger logger;
-
-    public DataSourceConfiguration() {
-        this.logger = Logger.getLogger(DataSourceConfiguration.class);
-    }
 
     @Resource
     private Environment env;
@@ -54,7 +50,7 @@ public class DataSourceConfiguration {
         factoryBean.setPackagesToScan(env.getRequiredProperty(PROPERTY_NAME_PACKAGES_TO_SCAN));
         factoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         factoryBean.setJpaProperties(getJpaProperties());
-        logger.info("Bean entityManagerFactory created");
+        log.info("Bean entityManagerFactory created");
         return factoryBean;
     }
 
@@ -64,7 +60,7 @@ public class DataSourceConfiguration {
         properties.setProperty(PROPERTY_NAME_HIBERNATE_AUTO, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_AUTO));
         properties.setProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
         properties.setProperty(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
-        logger.info("Bean getJpaProperties created");
+        log.info("Bean getJpaProperties created");
         return properties;
     }
 
@@ -75,19 +71,19 @@ public class DataSourceConfiguration {
         driver.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
         driver.setUsername(env.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
         driver.setPassword(env.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
-        logger.info("Bean dataSource created");
+        log.info("Bean dataSource created");
         return driver;
     }
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        logger.info("Bean transactionManager created");
+        log.info("Bean transactionManager created");
         return new JpaTransactionManager(entityManagerFactory);
     }
 
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslator() {
-        logger.info("Bean exceptionTranslator created");
+        log.info("Bean exceptionTranslator created");
         return new PersistenceExceptionTranslationPostProcessor();
     }
 }

@@ -6,7 +6,7 @@ import com.project.manager.services.SessionService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,16 +16,15 @@ import java.io.IOException;
  * This is the class which is responsible for projectsAsUser panes in Dashboard view.
  * This class perform generating of projectsAsUser panes into Dashboard view.
  */
+@Log4j
 @Component
 public class ProjectPaneGenerator {
 
     private SessionService sessionService;
-    private Logger logger;
 
     @Autowired
     public ProjectPaneGenerator() {
         this.sessionService = SessionService.getInstance();
-        this.logger = Logger.getLogger(ProjectPaneGenerator.class);
     }
 
     /**
@@ -60,7 +59,7 @@ public class ProjectPaneGenerator {
             projectsArea.getChildren().add(newAnchorPane);
         } catch (IOException e) {
             e.printStackTrace();
-            logger.error("Project pane fml not found or problem with loading it");
+            log.error("Project pane fml not found or problem with loading it");
         }
     }
 }

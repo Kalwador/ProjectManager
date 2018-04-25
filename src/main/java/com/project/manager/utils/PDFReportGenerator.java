@@ -5,7 +5,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.project.manager.models.Report;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Optional;
@@ -13,12 +13,8 @@ import java.util.Optional;
 /**
  * Class responsible for generating reports in pdf file
  */
+@Log4j
 public class PDFReportGenerator {
-    private Logger logger;
-
-    public PDFReportGenerator() {
-        this.logger = Logger.getLogger(PDFReportGenerator.class);
-    }
 
     /**
      * @param report this is object which will provide all date necessary to generate report, that data was fetch from
@@ -42,7 +38,7 @@ public class PDFReportGenerator {
 
         document.close();
         writer.close();
-        logger.info("The report was created!");
+        log.info("The report was created!");
 
         return baos.toByteArray();
     }

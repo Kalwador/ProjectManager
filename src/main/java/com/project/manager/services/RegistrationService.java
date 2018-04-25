@@ -11,31 +11,27 @@ import com.project.manager.exceptions.EmailValidationException;
 import com.project.manager.exceptions.user.UserAlreadyExistException;
 import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
-import org.apache.log4j.Logger;
+import com.project.manager.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class RegistrationService {
 
     private UserRepository userRepository;
     private MailFactory mailFactory;
-    private final Logger logger;
+
 
     @Autowired
     public RegistrationService(UserRepository userRepository, MailFactory mailFactory) {
         this.userRepository = userRepository;
         this.mailFactory = mailFactory;
-        this.logger = Logger.getLogger(RegistrationService.class);
     }
 
-    public void registerUser(String username, String email, String password, String repeatPassword) {
-        if (!isValidEmailAddress(email)) throw new EmailValidationException("Your EMAIL is invalid!");
+    public void registerUser(String username, String email, String password, String repeatPassword) throws EmailValidationException {
+        if (!Validator.isEmailValid(email)) throw new EmailValidationException();
 
         if (userRepository.findByUsername(username).isPresent() || userRepository.findByEmail(email).isPresent())
             throw new UserAlreadyExistException("The user with that EMAIL or username already exist in our service");
@@ -63,7 +59,7 @@ public class RegistrationService {
         sendActivationCodeInMail(userModel);
     }
 
-    private void sendActivationCodeInMail(UserModel userModel) {
+    private void sendActivationCodeInMail(UserModel userModel) throws EmailValidationException{
         AccountActivationMail mail = AccountActivationMail.builder()
                 .activationCode(userModel.getActivationCode())
                 .username(userModel.getUsername())
@@ -72,12 +68,5 @@ public class RegistrationService {
         mail.setSubject(MailSubject.ACCOUNT_ACTIVATION);
 
         mailFactory.sendMail(mail);
-    }
-
-    public boolean isValidEmailAddress(String email) {
-        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-        Pattern p = Pattern.compile(ePattern);
-        Matcher m = p.matcher(email);
-        return m.matches();
     }
 }

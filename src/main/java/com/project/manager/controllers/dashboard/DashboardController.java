@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,13 +29,12 @@ public class DashboardController implements Initializable {
 
     private SceneManager sceneManager;
     private ProjectPaneGenerator projectPaneGenerator;
-    private final Logger logger;
+
 
     @Autowired
     public DashboardController(ProjectPaneGenerator projectPaneGenerator) {
         this.projectPaneGenerator = projectPaneGenerator;
         this.sceneManager = SceneManager.getInstance();
-        this.logger = Logger.getLogger(DashboardController.class);
     }
 
     /**
