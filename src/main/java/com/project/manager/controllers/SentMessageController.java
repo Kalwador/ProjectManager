@@ -2,7 +2,9 @@ package com.project.manager.controllers;
 
 import com.project.manager.entities.Message;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
+import com.project.manager.models.UserRole;
 import com.project.manager.services.MessageService;
+import com.project.manager.services.SessionService;
 import com.project.manager.services.user.UserSelectorService;
 import com.project.manager.ui.components.admin.AdminDashboardTablesComponent;
 import com.project.manager.ui.sceneManager.SceneManager;
@@ -30,6 +32,7 @@ public class SentMessageController implements Initializable {
     private UserSelectorService userSelectorService;
     private SceneManager sceneManager;
     private AdminDashboardTablesComponent adminDashboardTablesComponent;
+    private SessionService sessionService;
 
     @Autowired
     public SentMessageController(MessageService messageService, UserSelectorService userSelectorService,
@@ -38,6 +41,7 @@ public class SentMessageController implements Initializable {
         this.adminDashboardTablesComponent = adminDashboardTablesComponent;
         this.userSelectorService = userSelectorService;
         this.sceneManager = SceneManager.getInstance();
+        this.sessionService = SessionService.getInstance();
     }
 
     @FXML
@@ -85,11 +89,23 @@ public class SentMessageController implements Initializable {
     private void sentMessage() {
         try {
             messageService.sentMessage(prepareMessage());
-            adminDashboardTablesComponent.generateInboxAndSentTableView();
             sceneManager.closeNewWindow(SceneType.MESSAGE_SENT_WINDOW);
+            refreshTables();
 
         } catch (UserDoesNotExistException e) {
             showInformationAlert("User does not found", "The is no user of that email in service");
+        }
+    }
+
+    private void refreshTables() {
+        UserRole role = sessionService.getRole();
+        switch (role) {
+            case USER:
+                System.out.println("Odswiezanie tabeli dla usera");
+                break;
+            case ADMIN:
+                adminDashboardTablesComponent.generateInboxAndSentTableView();
+                break;
         }
     }
 }
