@@ -2,14 +2,12 @@ package com.project.manager.entities;
 
 import com.project.manager.models.UserRole;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
@@ -44,11 +42,19 @@ public class UserModel {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    /**
+     * This properties can be change only by admin
+     */
     private boolean isLocked;
 
     private boolean isBlocked;
 
     private String activationCode;
+
+    @Min(0)
+    @Max(3)
+    @ColumnDefault("0")
+    private int incorrectLoginCount;
 
     @Size(min = 1)
     private String firstName;

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +35,9 @@ public class Project {
     @JoinColumn(name = "MANAGER_ID")
     @NotNull
     private UserModel manager;
+
+    @Column(name = "LAST_RAPPORT_DATE")
+    private LocalDate lastRapportDate;
 
     @ManyToMany(mappedBy = "projectsAsUser", fetch = FetchType.EAGER)//, fetch = FetchType.EAGER)
     private Set<UserModel> members;

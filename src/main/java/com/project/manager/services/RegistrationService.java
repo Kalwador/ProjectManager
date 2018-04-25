@@ -37,8 +37,7 @@ public class RegistrationService {
     public void registerUser(String username, String email, String password, String repeatPassword) {
         if (!isValidEmailAddress(email)) throw new EmailValidationException("Your EMAIL is invalid!");
 
-        if (Optional.ofNullable(userRepository.findByUsername(username)).isPresent()
-                || Optional.ofNullable(userRepository.findByEmail(email)).isPresent())
+        if (userRepository.findByUsername(username).isPresent() || userRepository.findByEmail(email).isPresent())
             throw new UserAlreadyExistException("The user with that EMAIL or username already exist in our service");
 
         if (!password.equals(repeatPassword)) throw new DifferentPasswordException("The passwords aren't the same!");
@@ -51,8 +50,8 @@ public class RegistrationService {
                 .username(username)
                 .password(BCryptEncoder.encode(password))
                 .role(UserRole.USER)
-                .isBlocked(false)
-                .isLocked(true)
+                .isBlocked(true)
+                .isLocked(false)
                 .projectsAsUser(new HashSet<>())
                 .projectsAsManager(new HashSet<>())
                 .tasks(new HashSet<>())

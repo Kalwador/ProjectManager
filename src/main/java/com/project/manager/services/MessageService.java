@@ -2,8 +2,11 @@ package com.project.manager.services;
 
 import com.project.manager.controllers.MessageViewWindowController;
 import com.project.manager.entities.Message;
+import com.project.manager.entities.UserModel;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.MessageTableView;
 import com.project.manager.repositories.MessageRepository;
+import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import org.apache.log4j.Logger;
@@ -24,6 +27,8 @@ public class MessageService {
     private SceneManager sceneManager;
     private final Logger logger;
 
+    private UserRepository userRepository;
+
     /**
      * Constructor of this class contain reference to {@link SessionService} {@link SceneManager} and injected
      * message repository
@@ -31,8 +36,9 @@ public class MessageService {
      * @param messageRepository this repository provides all logical method of database to manager {@link Message} in database
      */
     @Autowired
-    public MessageService(MessageRepository messageRepository) {
+    public MessageService(MessageRepository messageRepository, UserRepository userRepository) {
         this.messageRepository = messageRepository;
+        this.userRepository = userRepository;
         this.sessionService = SessionService.getInstance();
         this.sceneManager = SceneManager.getInstance();
         this.logger = Logger.getLogger(MessageService.class);
@@ -44,7 +50,7 @@ public class MessageService {
      * @return the list of {@link Message}
      */
     public List<Message> getAllReceivedMessages() {
-        return messageRepository.findByReceiver(sessionService.getEmail()).get();
+        return messageRepository.findByReceiver(sessionService.getUsername());
     }
 
     /**
@@ -53,7 +59,7 @@ public class MessageService {
      * @return list of {@link Message}
      */
     public List<Message> getAllSentMessages() {
-        return messageRepository.findBySender(sessionService.getEmail()).get();
+        return messageRepository.findBySender(sessionService.getUsername());
     }
 
     /**
@@ -67,5 +73,23 @@ public class MessageService {
             MessageViewWindowController.messageToView = MessageTableView.convert(m);
             sceneManager.showInNewWindow(SceneType.MESSAGE_VIEW_WINDOW);
         });
+    }
+
+    public void sentMessage(Message message) {
+        UserModel sender = sessionService.getUserModel();
+        Optional<UserModel> receiver = userRepository.findByUsername(message.getReceiver());
+        if (!receiver.isPresent()) {
+            throw new UserDoesNotExistException("The user with that email does not exist");
+        }
+                
+        message.setSender(sender.getUsername());
+        message = messageRepository.save(message);
+        message.getUsers().add(sender);
+        message.getUsers().add(receiver.get());
+        sender.getMessages().add(message);
+        receiver.get().getMessages().add(message);
+        messageRepository.save(message);
+        userRepository.save(sender);
+        userRepository.save(receiver.get());
     }
 }

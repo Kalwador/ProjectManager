@@ -1,7 +1,7 @@
 package com.project.manager.controllers.employee;
 
 import com.jfoenix.controls.JFXButton;
-import com.project.manager.models.TaskStatus;
+import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
 import com.project.manager.ui.components.TaskGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;

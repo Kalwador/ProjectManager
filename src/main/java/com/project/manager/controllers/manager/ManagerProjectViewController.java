@@ -1,19 +1,23 @@
 package com.project.manager.controllers.manager;
 
 import com.jfoenix.controls.JFXButton;
-import com.project.manager.models.TaskStatus;
+import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
 import com.project.manager.ui.components.TaskGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,6 +30,8 @@ public class ManagerProjectViewController implements Initializable {
 
     @FXML
     private JFXButton backButton;
+    @FXML
+    private Button report;
     @FXML
     private Label projectNameLabel;
     @FXML
@@ -63,10 +69,9 @@ public class ManagerProjectViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         projectNameLabel.setText(sessionService.getProject().getProjectName());
-        backButton.setOnAction(e -> {
-            sceneManager.showScene(SceneType.DASHBOARD);
-        });
+        backButton.setOnAction(e -> sceneManager.showScene(SceneType.DASHBOARD));
         injectTasksToVBoxes();
+        report.setOnAction(e -> sceneManager.showInNewWindow(SceneType.GENERATE_REPORT));
     }
 
     /**

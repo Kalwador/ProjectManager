@@ -1,6 +1,6 @@
 package com.project.manager.controllers;
 
-import com.project.manager.services.UserSelectorService;
+import com.project.manager.services.user.UserSelectorService;
 import com.project.manager.ui.components.ProjectPaneGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
 import javafx.fxml.FXML;

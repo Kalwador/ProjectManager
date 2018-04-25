@@ -27,14 +27,14 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
      * @param username this parameter is username to identify the user in database
      * @return the user with the same username ass passed in parameter
      */
-    UserModel findByUsername(String username);
+    Optional<UserModel> findByUsername(String username);
 
     /**
      * This method is searching the {@link UserModel} with passed EMAIL in database
      * @param email this parameter is emial to identify the user in database
      * @return the user with the same EMAIL ass passed in parameter
      */
-    UserModel findByEmail(String email);
+    Optional<UserModel> findByEmail(String email);
 
     /**
      * This method is searching the {@link UserModel} with passed username or EMAIL in database
@@ -42,7 +42,7 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
      * @param email this parameter is username to identify the user in database
      * @return the user with the same username ass passed in parameter
      */
-    UserModel findByUsernameOrEmail(String username, String email);
+    Optional<UserModel> findByUsernameOrEmail(String username, String email);
 
     /**
      * This method is returning all users from database with specify {@link UserRole} in parameter

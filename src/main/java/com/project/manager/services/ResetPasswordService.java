@@ -53,21 +53,21 @@ public class ResetPasswordService {
             throw new EmptyUsernameException("Username or Email field can't be empty.");
         }
 
-        UserModel userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
+        Optional<UserModel> userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
-        if (!Optional.ofNullable(userModel).isPresent()) {
-            throw new UserDoesNotExistException("There is no user with that username or EMAIL in our service.");
+        if (!userModel.isPresent()) {
+            throw new UserDoesNotExistException("There is no user with that username or email in our service.");
         } else {
             String generatePasswordCode = ActivationCodeGenerator.generateCode();
 
-            userModel.setBlocked(true);
-            userModel.setActivationCode(generatePasswordCode);
-            userRepository.save(userModel);
+            userModel.get().setBlocked(true);
+            userModel.get().setActivationCode(generatePasswordCode);
+            userRepository.save(userModel.get());
 
             AlertManager.showInformationAlert("Resetting PASSWORD", "You started procedure to reset your" +
                     " PASSWORD. We sent on your EMAIL message with special code to continue reset your PASSWORD.");
 
-            sendActivationCodeInMessage(userModel);
+            sendActivationCodeInMessage(userModel.get());
         }
     }
 
@@ -90,16 +90,16 @@ public class ResetPasswordService {
      */
     public void checkGeneratedCode(String usernameOrEmail, String generatedCode) {
 
-        UserModel userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
+        Optional<UserModel> userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
         if (generatedCode.isEmpty()) {
             throw new EmptyGeneratedCodeException("Insert your code please.");
         }
-        if (!userModel.getActivationCode().equals(generatedCode)) {
+        if (!userModel.get().getActivationCode().equals(generatedCode)) {
             throw new DifferentGeneratedCodeException("Inserted code is incorrect.");
         } else {
-            userModel.setActivationCode(null);
-            userRepository.save(userModel);
+            userModel.get().setActivationCode(null);
+            userRepository.save(userModel.get());
         }
     }
 
@@ -112,13 +112,13 @@ public class ResetPasswordService {
      */
     public void changePassword(String usernameOrEmail, String password, String repeatPassword) {
 
-        UserModel userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
+        Optional<UserModel> userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
         if (!password.equals(repeatPassword)) throw new DifferentPasswordException("The passwords aren't the same!");
 
-        userModel.setPassword(BCryptEncoder.encode(password));
-        userModel.setBlocked(false);
-        userRepository.save(userModel);
+        userModel.get().setPassword(BCryptEncoder.encode(password));
+        userModel.get().setBlocked(false);
+        userRepository.save(userModel.get());
 
         AlertManager.showInformationAlert("Password changed", "Your PASSWORD is changed!");
 

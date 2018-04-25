@@ -26,6 +26,8 @@ public class SceneManager {
     private ManagerProjectView managerProjectView;
     private EmployeeProjectView employeeProjectView;
     private AddUserScene addUserScene;
+    private MessageSentScene messageSentScene;
+    private GenerateReportScene generateReportScene;
     private HashMap<Integer, CustomScene> scenes;
     private Logger logger;
 
@@ -77,6 +79,8 @@ public class SceneManager {
         this.managerProjectView = new ManagerProjectView(primaryStage);
         this.employeeProjectView = new EmployeeProjectView(primaryStage);
         this.addUserScene = new AddUserScene(primaryStage);
+        this.messageSentScene = new MessageSentScene(primaryStage);
+        this.generateReportScene = new GenerateReportScene(primaryStage);
 
         scenes = new HashMap<Integer, CustomScene>() {
             {
@@ -90,6 +94,8 @@ public class SceneManager {
                 put(SceneType.MESSAGE_VIEW_WINDOW.ordinal(), messageViewWindowScene);
                 put(SceneType.RESETPASSWD.ordinal(), resetPasswordScene);
                 put(SceneType.ADD_USER.ordinal(), addUserScene);
+                put(SceneType.MESSAGE_SENT_WINDOW.ordinal(), messageSentScene);
+                put(SceneType.GENERATE_REPORT.ordinal(), generateReportScene);
             }
         };
         logger.info("Scenes initializec succesfully in initializeScenes method");

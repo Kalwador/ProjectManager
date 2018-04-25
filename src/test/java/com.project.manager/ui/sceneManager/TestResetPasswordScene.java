@@ -1,4 +1,4 @@
-package com.project.manager.sceneManager;
+package com.project.manager.ui.sceneManager;
 
 import com.project.manager.JavaFXThreadingRule;
 import com.project.manager.ui.sceneManager.SceneManager;
@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
 
-public class TestDashboardScene {
+public class TestResetPasswordScene {
     @Rule
     public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
@@ -19,7 +19,7 @@ public class TestDashboardScene {
         Stage testStage = new Stage();
         testStage.show();
         SceneManager testSceneManager = TestSceneManager.getReadySceneManager(testStage);
-        testSceneManager.showScene(SceneType.DASHBOARD);
+        testSceneManager.showScene(SceneType.RESETPASSWD);
         assertTrue(testStage.isShowing());
     }
 
@@ -28,7 +28,7 @@ public class TestDashboardScene {
         Stage testStage = new Stage();
         testStage.show();
         SceneManager testSceneManager = TestSceneManager.getReadySceneManager(testStage);
-        testSceneManager.hideScene(SceneType.DASHBOARD);
+        testSceneManager.hideScene(SceneType.RESETPASSWD);
         assertTrue(!testStage.isShowing());
     }
 
@@ -37,7 +37,7 @@ public class TestDashboardScene {
         Stage testStage = new Stage();
         testStage.show();
         SceneManager testSceneManager = TestSceneManager.getReadySceneManager(testStage);
-        testSceneManager.closeScene(SceneType.DASHBOARD);
+        testSceneManager.closeScene(SceneType.RESETPASSWD);
         assertTrue(!testStage.isShowing());
     }
 }

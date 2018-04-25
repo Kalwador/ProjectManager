@@ -3,6 +3,7 @@ package com.project.manager.services;
 import com.project.manager.entities.UserModel;
 import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
+import com.project.manager.services.user.UserService;
 import com.project.manager.utils.BCryptEncoder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -61,6 +61,31 @@ public class UserServiceTest {
         assertEquals(userModel.getEmail(), getExampleUsersList().get(0).getEmail());
         assertEquals(userModel.getFirstName(), getExampleUsersList().get(0).getFirstName());
     }
+
+    @Test
+    public void testIncreaseIncorrectLoginCounter() {
+        UserModel userModel = getExampleUsersList().get(0);
+
+        for (int i = 1; i <= 4; i++) {
+            userService.increaseIncorrectLoginCounter(userModel);
+            when(userRepository.save(userModel)).thenReturn(userModel);
+
+            if (i <= 3) {
+                assertFalse(userModel.isBlocked());
+            } else {
+                assertTrue(userModel.isBlocked());
+            }
+        }
+    }
+
+    @Test
+    public void testChangeBlockedStatus() {
+        UserModel userModel = getExampleUsersList().get(0);
+        userService.changeBlockedStatus(true, userModel);
+
+        assertTrue(userModel.isBlocked());
+    }
+
     public List<UserModel> getExampleUsersList() {
         return Arrays.asList(
                 UserModel
@@ -73,6 +98,7 @@ public class UserServiceTest {
                         .role(UserRole.USER)
                         .password(BCryptEncoder.encode("PASSWORD"))
                         .isLocked(false)
+                        .isBlocked(false)
                         .build(),
 
                 UserModel
@@ -85,6 +111,7 @@ public class UserServiceTest {
                         .role(UserRole.USER)
                         .password(BCryptEncoder.encode("password2"))
                         .isLocked(false)
+                        .isBlocked(false)
                         .build());
     }
 }

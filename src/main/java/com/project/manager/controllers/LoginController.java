@@ -1,18 +1,14 @@
 package com.project.manager.controllers;
 
-import com.project.manager.exceptions.DifferentPasswordException;
-import com.project.manager.exceptions.EmptyPasswordException;
-import com.project.manager.exceptions.EmptyUsernameException;
+import com.project.manager.exceptions.*;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
+import com.project.manager.ui.AlertManager;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import com.project.manager.services.LoginService;
+import com.project.manager.services.login.LoginService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,6 +33,8 @@ public class LoginController implements Initializable {
     private Label labelErrorUsername;
     @FXML
     private Label labelErrorPassword;
+    @FXML
+    private CheckBox rememberUser;
 
     private SceneManager sceneManager;
     private LoginService loginService;
@@ -45,7 +43,7 @@ public class LoginController implements Initializable {
     @Autowired
     public LoginController(LoginService loginService) {
         this.sceneManager = SceneManager.getInstance();
-        this.loginService=loginService;
+        this.loginService = loginService;
         this.logger = Logger.getLogger(LoginController.class);
     }
 
@@ -56,7 +54,6 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         this.resetUsernameError();
         this.resetPasswordError();
 
@@ -82,9 +79,10 @@ public class LoginController implements Initializable {
             try {
                 String username = usernameTextField.getText();
                 String passedPassword = passwordPassField.getText();
-                loginService.loginUser(username, passedPassword);
+                loginService.loginUser(username, passedPassword, rememberUser.isSelected());
             }
             catch (DifferentPasswordException dpe) {
+                labelErrorPassword.setVisible(true);
                 labelErrorPassword.setText(dpe.getMessage());
             }
             catch (UserDoesNotExistException | EmptyUsernameException udnee) {
@@ -93,6 +91,9 @@ public class LoginController implements Initializable {
             } catch (EmptyPasswordException epe){
                 labelErrorUsername.setVisible(true);
                 labelErrorPassword.setText(epe.getMessage());
+            }
+            catch (AccountLockedException | AccountBlockedException ex) {
+                AlertManager.showInformationAlert("Account blocked!", ex.getMessage());
             }
         });
         forgotPasswordButton.setOnAction(e -> sceneManager.showScene(SceneType.RESETPASSWD));

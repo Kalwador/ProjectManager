@@ -1,4 +1,4 @@
-package com.project.manager.sceneManager;
+package com.project.manager.ui.sceneManager;
 
 import com.project.manager.JavaFXThreadingRule;
 import com.project.manager.ui.sceneManager.SceneManager;
@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
 
-public class TestAdminDashboardScene {
+public class TestMessageViewWindowScene {
 
     @Rule
     public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
@@ -29,19 +29,19 @@ public class TestAdminDashboardScene {
 
     @Test
     public void testShowScene(){
-        sceneManager.showScene(SceneType.ADMIN_DASHBOARD);
+        sceneManager.showScene(SceneType.MESSAGE_VIEW_WINDOW);
         assertTrue(stage.isShowing());
     }
 
     @Test
     public void testHidedScene(){
-        sceneManager.hideScene(SceneType.ADMIN_DASHBOARD);
+        sceneManager.hideScene(SceneType.MESSAGE_VIEW_WINDOW);
         assertTrue(!stage.isShowing());
     }
 
     @Test
     public void testClosedScene(){
-        sceneManager.closeScene(SceneType.ADMIN_DASHBOARD);
+        sceneManager.closeScene(SceneType.MESSAGE_VIEW_WINDOW);
         assertTrue(!stage.isShowing());
     }
 }

@@ -12,7 +12,7 @@ import com.project.manager.models.ProjectTableView;
 import com.project.manager.models.UserTableView;
 import com.project.manager.services.MessageService;
 import com.project.manager.services.ProjectService;
-import com.project.manager.services.UserService;
+import com.project.manager.services.user.UserService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

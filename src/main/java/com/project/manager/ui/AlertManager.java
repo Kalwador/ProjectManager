@@ -45,12 +45,12 @@ public class AlertManager {
      * @param message this parameter store information about message in alert
      * @return method return button type as a result of confirmation
      */
-    public static Optional<ButtonType> showConfirmationAlert(String header, String message) {
+    public static Alert showConfirmationAlert(String header, String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText(header);
-        alert.setHeaderText(message);
-        Optional<ButtonType> result = alert.showAndWait();
-        return result;
+	alert.setContentText(message);
+        alert.showAndWait();
+        return alert;
     }
 }

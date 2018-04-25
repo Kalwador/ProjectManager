@@ -2,7 +2,7 @@ package com.project.manager.ui.components;
 
 import com.project.manager.TestData;
 import com.project.manager.controllers.manager.ManagerTaskBrickComponentController;
-import com.project.manager.models.TaskStatus;
+import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;

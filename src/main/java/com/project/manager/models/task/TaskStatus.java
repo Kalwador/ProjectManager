@@ -1,4 +1,4 @@
-package com.project.manager.models;
+package com.project.manager.models.task;
 
 public enum TaskStatus {
     PRODUCT_BACKLOG {

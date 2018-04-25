@@ -10,6 +10,7 @@ import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TreeItem;
 import lombok.Getter;
@@ -52,36 +53,30 @@ public class AdminDashboardController implements Initializable {
 
     @FXML
     private Tab projectsTab;
-
     @FXML
     private Tab usersTab;
-
     @FXML
     private Tab messageTab;
 
     @FXML
     private JFXTreeTableView<ProjectTableView> projectTable;
-
     @FXML
     private JFXTreeTableView<UserTableView> userTable;
-
     @FXML
     private JFXTreeTableView<MessageTableView> inboxTable;
-
     @FXML
     private JFXTreeTableView<MessageTableView> sentboxTable;
 
     @FXML
     private JFXButton logout;
-
     @FXML
     private JFXButton updateProject;
-
     @FXML
     private JFXButton deleteProject;
-
     @FXML
     private JFXButton showProject;
+    @FXML
+    private Button sentMessage;
 
     /**
      * This method is responsible for listening the controller in window, and making action
@@ -89,6 +84,8 @@ public class AdminDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        sentMessage.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGE_SENT_WINDOW));
+
         adminDashboardTablesComponent.generateProjectTableView();
 
         projectsTab.setOnSelectionChanged(e -> adminDashboardTablesComponent.generateTables());

@@ -2,8 +2,8 @@ package com.project.manager.data;
 
 import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
-import com.project.manager.models.TaskPriority;
-import com.project.manager.models.TaskStatus;
+import com.project.manager.models.task.TaskPriority;
+import com.project.manager.models.task.TaskStatus;
 import com.project.manager.repositories.TaskRepository;
 import com.project.manager.utils.BCryptEncoder;
 import com.project.manager.entities.Message;
@@ -78,8 +78,8 @@ public class InjectData {
     private void addUsers() {
         this.user = UserModel.builder()
                 .username("user")
-                .password(BCryptEncoder.encode("PASSWORD"))
-                .email("user@mail.com")
+                .password(BCryptEncoder.encode("password"))
+                .email("user@grr.la")
                 .firstName("Benek")
                 .lastName("Bebenek")
                 .role(UserRole.USER)
@@ -93,8 +93,8 @@ public class InjectData {
 
         this.manager = UserModel.builder()
                 .username("manager")
-                .password(BCryptEncoder.encode("PASSWORD"))
-                .email("manager@mail.com")
+                .password(BCryptEncoder.encode("password"))
+                .email("manager@grr.la")
                 .firstName("Edward")
                 .lastName("Oncki")
                 .role(UserRole.USER)
@@ -109,8 +109,8 @@ public class InjectData {
         this.admin = UserModel
                 .builder()
                 .username("admin")
-                .password(BCryptEncoder.encode("PASSWORD"))
-                .email("admin@mail.com")
+                .password(BCryptEncoder.encode("password"))
+                .email("admin@grr.la")
                 .firstName("Adam")
                 .lastName("Admiński")
                 .role(UserRole.ADMIN)
@@ -126,8 +126,8 @@ public class InjectData {
         for (int i = 0; i < 10; i++) {
             UserModel tempUser = UserModel.builder()
                     .username("user" + i)
-                    .password(BCryptEncoder.encode("PASSWORD"))
-                    .email("user" + i + "@mail.com")
+                    .password(BCryptEncoder.encode("password"))
+                    .email("user" + i + "@grr.la")
                     .firstName("Adam" + i)
                     .lastName("Spadam" + i)
                     .role(UserRole.USER)
@@ -333,8 +333,8 @@ public class InjectData {
     private void addMessages() {
         this.sentMessage = Message
                 .builder()
-                .sender(admin.getEmail())
-                .receiver(user.getEmail())
+                .sender(admin.getUsername())
+                .receiver(user.getUsername())
                 .title("Msg sent by admin to user")
                 .contents("Message which will sent by admin to user")
                 .sentDate(LocalDateTime.now())
@@ -343,8 +343,8 @@ public class InjectData {
 
         this.receivedMessage = Message
                 .builder()
-                .sender(user.getEmail())
-                .receiver(admin.getEmail())
+                .sender(user.getUsername())
+                .receiver(admin.getUsername())
                 .title("Msg sent by user to admin")
                 .contents("Message which will sent by user to admin")
                 .sentDate(LocalDateTime.now())

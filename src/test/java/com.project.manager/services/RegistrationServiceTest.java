@@ -1,5 +1,6 @@
 package com.project.manager.services;
 
+import com.project.manager.services.mail.MailFactory;
 import com.project.manager.utils.BCryptEncoder;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.DifferentPasswordException;
@@ -15,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,6 +25,9 @@ public class RegistrationServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private MailFactory mailFactory;
 
     @InjectMocks
     private RegistrationService registrationService;
@@ -39,7 +45,7 @@ public class RegistrationServiceTest {
     @Test(expected = UserAlreadyExistException.class)
     public void testRegistrationExpectUserAlreadyExist()
     {
-        UserModel userModel = new UserModel();
+        Optional<UserModel> userModel = Optional.of(new UserModel());
         when(userRepository.findByEmail("")).thenReturn(userModel);
         when(userRepository.findByUsername("")).thenReturn(userModel);
 
@@ -48,7 +54,9 @@ public class RegistrationServiceTest {
 
     @Test(expected = DifferentPasswordException.class)
     public void testRegistrationExpectDifferentPassword() {
-        registrationService.registerUser("","username@mail.com", "PASSWORD", "otherpass");
+        when(userRepository.findByUsername("username")).thenReturn(Optional.empty());
+        when(userRepository.findByEmail("username@mail.com")).thenReturn(Optional.empty());
+        registrationService.registerUser("username","username@mail.com", "PASSWORD", "otherpass");
     }
 
     @Test
@@ -61,8 +69,8 @@ public class RegistrationServiceTest {
 
         ArgumentCaptor<UserModel> arg = ArgumentCaptor.forClass(UserModel.class);
 
-        when(userRepository.findByUsername("")).thenReturn(null);
-        when(userRepository.findByEmail("")).thenReturn(null);
+        when(userRepository.findByUsername(userModel.getUsername())).thenReturn(Optional.empty());
+        when(userRepository.findByEmail(userModel.getEmail())).thenReturn(Optional.empty());
         when(userRepository.save(userModel)).thenReturn(arg.capture());
 
         registrationService.registerUser(userModel.getUsername(), userModel.getEmail(), "PASSWORD", "PASSWORD");

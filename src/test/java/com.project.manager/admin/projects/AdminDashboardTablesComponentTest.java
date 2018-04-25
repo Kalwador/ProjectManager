@@ -13,7 +13,7 @@ import com.project.manager.models.UserRole;
 import com.project.manager.models.UserTableView;
 import com.project.manager.services.MessageService;
 import com.project.manager.services.ProjectService;
-import com.project.manager.services.UserService;
+import com.project.manager.services.user.UserService;
 import com.project.manager.ui.components.admin.AdminDashboardTablesComponent;
 import org.junit.Rule;
 import org.junit.Test;
@@ -85,7 +85,6 @@ public class AdminDashboardTablesComponentTest {
         assertEquals(table.getColumns().get(1).getCellObservableValue(0).getValue(), 1L);
         assertEquals(table.getColumns().get(2).getCellObservableValue(0).getValue(), "projectOne");
         assertEquals(table.getColumns().get(3).getCellObservableValue(0).getValue(), "Adam Manager");
-        assertEquals(table.getColumns().get(4).getCellObservableValue(0).getValue(), "Adam Client");
         assertEquals(table.getColumns().get(5).getCellObservableValue(0).getValue(), 1);
     }
 

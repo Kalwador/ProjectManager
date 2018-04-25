@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,16 +26,16 @@ public class ResetPasswordServiceTest {
 
     @Test(expected = EmptyUsernameException.class)
     public void testExpectedEmptyUsername() {
-        UserModel userModel = UserModel.builder()
+        Optional<UserModel> userModel = Optional.of(UserModel.builder()
                 .username("username")
-                .email("username@gmail.com").build();
+                .email("username@gmail.com").build());
         when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
         resetPasswordService.resetPassword("");
     }
 
     @Test(expected = UserDoesNotExistException.class)
     public void testExpectedUserDoesNotExist() {
-        when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(null);
+        when(userRepository.findByUsernameOrEmail("usernameasd", "usernameasd")).thenReturn(Optional.empty());
         resetPasswordService.resetPassword("usernameasd");
     }
 
@@ -41,10 +43,10 @@ public class ResetPasswordServiceTest {
     public void testExpectedEmptyGeneratedCode() {
         String generatePasswordCode = ActivationCodeGenerator.generateCode();
 
-        UserModel userModel = UserModel.builder()
+        Optional<UserModel> userModel = Optional.of(UserModel.builder()
                 .username("username")
                 .email("username@gmail.com")
-                .activationCode(generatePasswordCode).build();
+                .activationCode(generatePasswordCode).build());
         when(userRepository.findByUsernameOrEmail("username", "username@gmail.com")).thenReturn(userModel);
         resetPasswordService.checkGeneratedCode("username","");
     }

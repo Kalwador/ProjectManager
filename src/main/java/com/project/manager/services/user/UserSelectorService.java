@@ -1,10 +1,11 @@
-package com.project.manager.services;
+package com.project.manager.services.user;
 
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.NotEnoughPermissionsException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
+import com.project.manager.services.SessionService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,9 +60,9 @@ public class UserSelectorService {
         if (username.isEmpty()) {
             throw new EmptyUsernameException("Username field can't be empty.");
         }
-        UserModel usermodel = userRepository.findByUsername(username);
+        Optional<UserModel> usermodel = userRepository.findByUsername(username);
 
-        if (!Optional.ofNullable(userRepository.findByUsername(username)).isPresent()) {
+        if (!usermodel.isPresent()) {
             throw new UserDoesNotExistException("There is no user with that username in our service.");
         }
         role = sessionService.getRole().toString();
@@ -69,6 +70,6 @@ public class UserSelectorService {
             throw new NotEnoughPermissionsException("You do not have enough permissions to do that.");
         }
 
-        return usermodel;
+        return usermodel.get();
     }
 }

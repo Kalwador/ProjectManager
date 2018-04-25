@@ -3,8 +3,8 @@ package com.project.manager;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
 import com.project.manager.entities.UserModel;
-import com.project.manager.models.TaskPriority;
-import com.project.manager.models.TaskStatus;
+import com.project.manager.models.task.TaskPriority;
+import com.project.manager.models.task.TaskStatus;
 import com.project.manager.models.UserRole;
 import com.project.manager.utils.BCryptEncoder;
 

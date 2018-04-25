@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    Optional<List<Message>> findBySender(String email);
+    List<Message> findBySender(String email);
 
-    Optional<List<Message>> findByReceiver(String email);
+    List<Message> findByReceiver(String email);
 }

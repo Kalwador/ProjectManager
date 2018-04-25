@@ -1,7 +1,7 @@
 package com.project.manager;
 
-import com.project.manager.ui.sceneManager.SceneManager;
-import com.project.manager.ui.sceneManager.SceneType;
+import com.project.manager.config.ApplicationContextProvider;
+import com.project.manager.services.login.LoginScreenManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,9 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        SceneManager sceneManager = SceneManager.getInstance();
-        sceneManager.setPrimaryStage(primaryStage);
-        sceneManager.showScene(SceneType.LOGIN);
-        primaryStage.show();
+        ApplicationContextProvider.getInstance().getContext()
+                .getBean(LoginScreenManager.class).setLoginScreen(primaryStage);
     }
 }
