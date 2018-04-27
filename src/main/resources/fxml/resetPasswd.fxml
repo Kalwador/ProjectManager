@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.ResetPasswdController">
+   <center>
+      <BorderPane prefHeight="484.0" prefWidth="640.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
+         <center>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="317.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="resetPasswdStepTwo" layoutX="9.0" layoutY="10.0" opacity="0.8" prefHeight="350.0" prefWidth="300.0" styleClass="backgroundMainScene" stylesheets="@resetPasswd.css" visible="false">
+                     <children>
+                        <Label fx:id="codeErrorLabel" alignment="CENTER" layoutX="12.0" layoutY="217.0" prefWidth="275.0" text="Label" textAlignment="CENTER" textFill="RED" wrapText="true" />
+                        <Label layoutX="82.0" layoutY="96.0" text="Enter code from e-mail:" textFill="#d66000">
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="generatedCodeField" focusColor="#ee9701" labelFloat="true" layoutX="80.0" layoutY="185.0" promptText="Enter code:" style="-fx-text-fill: white;" unFocusColor="#ffedd0" />
+                        <JFXButton fx:id="confirmButton" buttonType="RAISED" layoutX="105.0" layoutY="300.0" prefHeight="25.0" prefWidth="89.0" ripplerFill="#ed9302" styleClass="ButtonForward" text="Confirm" textFill="#d66000" />
+                        <JFXButton fx:id="backToLoginButton1" buttonType="RAISED" layoutY="35.0" prefWidth="109.0" ripplerFill="#ff9d00" text="Back to Login" textFill="#bfc200">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/arrows.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <Pane layoutX="-7.0" layoutY="-2.0" prefHeight="33.0" prefWidth="315.0" style="-fx-background-radius: 5px; -fx-background-color: #d66000; -fx-border-width: 2px; -fx-border-radius: 5px;">
+                           <children>
+                              <Label layoutX="10.0" prefHeight="33.0" prefWidth="99.0" text="Reset Password" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/dragon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="resetPasswdStepOne" layoutX="9.0" layoutY="10.0" opacity="0.8" prefHeight="350.0" prefWidth="300.0" styleClass="backgroundMainScene" stylesheets="@resetPasswd.css">
+                     <children>
+                        <Label layoutX="83.0" layoutY="95.0" text="Reset your password" textFill="#d66000">
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="resetPasswdButton" buttonType="RAISED" layoutX="105.0" layoutY="300.0" prefHeight="25.0" prefWidth="89.0" ripplerFill="#ed9302" styleClass="ButtonForward" text="Reset" textFill="#d66000" />
+                        <Label fx:id="usernameOrEmailErrorLabel" alignment="CENTER" layoutX="13.0" layoutY="214.0" prefWidth="275.0" text="Label" textAlignment="CENTER" textFill="RED" wrapText="true" />
+                        <JFXButton fx:id="backToLoginButton" buttonType="RAISED" layoutY="35.0" ripplerFill="#ff9d00" text="Back to Login" textFill="#bfc200">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/arrows.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXTextField fx:id="usernameOrEmailField" focusColor="#ee9701" labelFloat="true" layoutX="66.0" layoutY="175.0" prefHeight="25.0" prefWidth="169.0" promptText="Type your email or username:" style="-fx-text-fill: white;" unFocusColor="#ffedd0" />
+                        <Pane layoutX="-8.0" layoutY="-4.0" prefHeight="33.0" prefWidth="315.0" style="-fx-background-radius: 5px; -fx-background-color: #d66000; -fx-border-width: 2px; -fx-border-radius: 5px;">
+                           <children>
+                              <Label layoutX="10.0" prefHeight="33.0" prefWidth="99.0" text="Reset Password" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/dragon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="resetPasswdStepThree" layoutX="9.0" layoutY="10.0" opacity="0.8" prefHeight="350.0" prefWidth="300.0" styleClass="backgroundMainScene" stylesheets="@resetPasswd.css" visible="false">
+                     <children>
+                        <Pane layoutX="-7.0" layoutY="-2.0" prefHeight="33.0" prefWidth="315.0" style="-fx-background-radius: 5px; -fx-background-color: #d66000; -fx-border-width: 2px; -fx-border-radius: 5px;">
+                           <children>
+                              <Label layoutX="10.0" prefHeight="33.0" prefWidth="99.0" text="Reset Password" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Label layoutX="83.0" layoutY="95.0" text="Change your password" textFill="#d66000">
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="changePasswdButton" buttonType="RAISED" layoutX="96.0" layoutY="300.0" prefHeight="25.0" prefWidth="110.0" ripplerFill="#ed9302" styleClass="ButtonForward" text="Change Password" textFill="#d66000" />
+                        <JFXPasswordField fx:id="passwdField" focusColor="#ee9701" labelFloat="true" layoutX="83.0" layoutY="131.0" promptText="Type password:" style="-fx-text-fill: white;" unFocusColor="#ffedd0" />
+                        <JFXPasswordField fx:id="repeatPasswdField" focusColor="#ee9701" labelFloat="true" layoutX="80.0" layoutY="185.0" promptText="Confirm password" style="-fx-text-fill: white;" unFocusColor="#ffedd0" />
+                        <Label fx:id="passwdErrorLabel" alignment="CENTER" layoutX="11.0" layoutY="236.0" prefWidth="275.0" text="Label" textAlignment="CENTER" textFill="RED" wrapText="true" />
+                        <JFXButton fx:id="backToLoginButton2" buttonType="RAISED" layoutY="35.0" ripplerFill="#ff9d00" text="Back to Login" textFill="#bfc200">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/arrows.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/dragon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>

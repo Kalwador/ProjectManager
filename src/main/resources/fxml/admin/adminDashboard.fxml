@@ -3,88 +3,156 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="461.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.admin.AdminDashboardController">
-   <children>
-      <TabPane prefHeight="461.0" prefWidth="708.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="30.0" tabMinWidth="50.0">
-        <tabs>
-          <Tab fx:id="projectsTab" text="Projects">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.admin.AdminDashboardController">
+   <center>
+      <BorderPane minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="400.0" prefWidth="400.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
+         <center>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="480.0" prefWidth="640.0" style="-fx-border-radius: 5px;" stylesheets="@adminDashboard.css" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <children>
+                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="480.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="800.0" tabMaxWidth="600.0" tabMinHeight="30.0" tabMinWidth="50.0">
+                    <tabs>
+                      <Tab fx:id="projectsTab" styleClass="tabMain" text="Projects">
+                        <content>
+                          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="613.0">
+                                 <children>
+                                    <JFXButton fx:id="showProject" buttonType="RAISED" layoutX="551.0" layoutY="32.0" minWidth="75.0" opacity="0.98" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 );" text="Show" textFill="#006b0e">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="updateProject" buttonType="RAISED" layoutX="551.0" layoutY="78.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(136,141,0,0.7) , 6, 0.0 , 0 , 2 );" text="Update" textFill="#888d00">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="deleteProject" buttonType="RAISED" layoutX="551.0" layoutY="123.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXTreeTableView id="InsideProject" fx:id="projectTable" fixedCellSize="0.0" layoutX="2.0" prefHeight="410.0" prefWidth="535.0" />
+                                    <JFXButton fx:id="logout" buttonType="RAISED" layoutX="551.0" layoutY="367.0" minWidth="75.0" ripplerFill="BLACK" style="-fx-background-color: red;" text="Logout" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab fx:id="usersTab" styleClass="tabMain" text="Users">
+                        <content>
+                              <Pane style="-fx-background-radius: 50px;">
+                                 <children>
+                                    <JFXTreeTableView id="InsideProject" fx:id="userTable" layoutX="2.0" prefHeight="410.0" prefWidth="535.0" />
+                                    <JFXButton fx:id="deleteUsers" buttonType="RAISED" layoutX="551.0" layoutY="32.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </Pane>
+                        </content>
+                      </Tab>
+                        <Tab id="popsutemessage" fx:id="messageTab" styleClass="tabMain" text="Messages">
+                           <content>
+                              <AnchorPane accessibleRole="SPINNER" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="377.0">
+                                 <children>
+                                    <JFXTabPane cache="true" prefHeight="420.0" prefWidth="600.0" styleClass="messageWindow" tabMinHeight="20.0" tabMinWidth="100.0">
+                                       <tabs>
+                                          <Tab closable="false" text="Inbox">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <JFXTreeTableView fx:id="inboxTable" prefHeight="390.0" prefWidth="600.0" />
+                                                   </children>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </AnchorPane>
+                                            </content>
+                                          </Tab>
+                                          <Tab closable="false" text="Sent">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <JFXTreeTableView fx:id="sentboxTable" prefHeight="373.0" prefWidth="600.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </Tab>
+                                       </tabs>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <padding>
+                                          <Insets top="-5.0" />
+                                       </padding>
+                                    </JFXTabPane>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="25.0" />
+                     </padding>
+                  </TabPane>
+                  <Pane layoutX="-7.0" prefHeight="29.0" prefWidth="655.0" styleClass="backgroundMainScene">
                      <children>
-                        <JFXButton fx:id="showProject" buttonType="RAISED" layoutX="615.0" layoutY="14.0" minWidth="75.0" ripplerFill="#70d739" style="-fx-background-color: #53bb1b;" text="Show">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="updateProject" buttonType="RAISED" layoutX="615.0" layoutY="59.0" minWidth="75.0" ripplerFill="#f0d44f" style="-fx-background-color: #f0ad4e;" text="Update">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="deleteProject" buttonType="RAISED" layoutX="615.0" layoutY="105.0" minWidth="75.0" ripplerFill="#e8706e" style="-fx-background-color: #d9534f;" text="Delete">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXTreeTableView fx:id="projectTable" layoutX="9.0" layoutY="14.0" prefHeight="400.0" prefWidth="580.0" />
-                        <JFXButton fx:id="logout" buttonType="RAISED" layoutX="620.0" layoutY="380.0" ripplerFill="#56a4f2" style="-fx-background-color: #2b75c5;" text="Logout">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXButton>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="usersTab" text="Users">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTreeTableView fx:id="userTable" layoutX="14.0" layoutY="12.0" prefHeight="400.0" prefWidth="553.0" />
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab fx:id="messageTab" text="Messages">
-               <content>
-                  <AnchorPane accessibleRole="SPINNER" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXTabPane layoutX="30.0" layoutY="10.0" prefHeight="400.0" prefWidth="550.0" style="-fx-border-color: #fff;" tabMinHeight="20.0" tabMinWidth="100.0">
-                           <tabs>
-                              <Tab closable="false" text="Inbox">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <JFXTreeTableView fx:id="inboxTable" prefHeight="363.0" prefWidth="548.0" />
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </Tab>
-                              <Tab closable="false" text="Sent">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <JFXTreeTableView fx:id="sentboxTable" prefHeight="363.0" prefWidth="548.0" />
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </Tab>
-                           </tabs>
-                        </JFXTabPane>
-                        <Button fx:id="sentMessage" layoutX="588.0" layoutY="10.0" mnemonicParsing="false" text="Sent message">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
+                        <Label layoutX="14.0" layoutY="2.0" prefHeight="26.0" prefWidth="100.0" text="AdminDashboard" textFill="WHITE" />
                      </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+                  </Pane>
+                  <JFXButton buttonType="RAISED" ellipsisString="" layoutX="600.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/door-exit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" ellipsisString="" layoutX="560.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/Messages.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" ellipsisString="" layoutX="520.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/WstazkaUser.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
