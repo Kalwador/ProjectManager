@@ -72,7 +72,7 @@
                            <content>
                               <AnchorPane accessibleRole="SPINNER" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="377.0">
                                  <children>
-                                    <JFXTabPane cache="true" prefHeight="420.0" prefWidth="600.0" styleClass="messageWindow" tabMinHeight="20.0" tabMinWidth="100.0">
+                                    <JFXTabPane cache="true" prefHeight="420.0" prefWidth="528.0" styleClass="messageWindow" tabMinHeight="20.0" tabMinWidth="100.0">
                                        <tabs>
                                           <Tab closable="false" text="Inbox">
                                             <content>
@@ -103,6 +103,7 @@
                                           <Insets top="-5.0" />
                                        </padding>
                                     </JFXTabPane>
+                                    <JFXButton fx:id="sentMessage" buttonType="RAISED" layoutX="535.0" layoutY="20.0" prefHeight="25.0" prefWidth="95.0" ripplerFill="#ed9302" style="-fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 ); -fx-background-color: black;" text="SendMessage" textFill="#006b0e" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
