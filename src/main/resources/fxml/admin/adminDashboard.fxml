@@ -103,7 +103,7 @@
                                           <Insets top="-5.0" />
                                        </padding>
                                     </JFXTabPane>
-                                    <JFXButton fx:id="sentMessage" buttonType="RAISED" layoutX="535.0" layoutY="20.0" prefHeight="25.0" prefWidth="95.0" ripplerFill="#ed9302" style="-fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 ); -fx-background-color: black;" text="SendMessage" textFill="#006b0e" />
+                                    <JFXButton fx:id="sentMessage" buttonType="RAISED" layoutX="535.0" layoutY="20.0" prefHeight="25.0" prefWidth="95.0" ripplerFill="#ed9302" style="-fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 ); -fx-background-color: black;" text="Sent message" textFill="#006b0e" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
