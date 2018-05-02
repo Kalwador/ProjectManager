@@ -38,7 +38,7 @@
                   </JFXTextField>
                   <ImageView fitHeight="96.0" fitWidth="100.0" layoutX="117.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/task%20manager.png" />
+                        <Image url="@../../images/task_manager.png" />
                      </image>
                   </ImageView>
                   <JFXPasswordField fx:id="password" focusColor="#ee9701" labelFloat="true" layoutX="84.0" layoutY="230.0" prefHeight="25.0" prefWidth="180.0" promptText="Password: min 8 characters" unFocusColor="#ffedd0" />
@@ -63,27 +63,27 @@
                   </JFXButton>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="59.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/user-white.png" />
+                        <Image url="@../../images/user-white.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="59.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/password-white.png" />
+                        <Image url="@../../images/password-white.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="59.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/repeat%20pass.png" />
+                        <Image url="@../../images/repeat%20pass.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="59.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/email.png" />
+                        <Image url="@../../images/email.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="175.0" fitWidth="205.0" layoutX="222.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/dragon.png" />
+                        <Image url="@../../images/dragon.png" />
                      </image>
                   </ImageView>
                </children>

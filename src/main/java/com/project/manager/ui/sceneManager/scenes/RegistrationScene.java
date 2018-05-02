@@ -8,6 +8,6 @@ public class RegistrationScene extends CustomSceneImpl {
     public RegistrationScene(Stage stage) {
         super(stage);
         super.setWindowTitle("Sign up");
-        super.setPathToFXML("/fxml/registration.fxml");
+        super.setPathToFXML("/fxml/registration/registration.fxml");
     }
 }
