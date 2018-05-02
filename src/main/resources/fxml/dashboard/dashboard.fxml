@@ -31,15 +31,6 @@
                         </Label>
                      </children>
                   </Pane>
-                  <JFXButton fx:id="backToLoginButton" focusTraversable="false" layoutX="14.0" layoutY="32.0" ripplerFill="#ff9d00" text="Back to login" textFill="#bfc200">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/arrows.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
                   <Label layoutX="55.0" layoutY="458.0" text="Its so simple to rule them all..." />
                   <ImageView fitHeight="194.0" fitWidth="192.0" layoutX="14.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -55,7 +46,7 @@
                         </AnchorPane>
                     </content>
                   </ScrollPane>
-                  <JFXButton buttonType="RAISED" ellipsisString="" layoutX="600.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                  <JFXButton fx:id="backToLoginButton" buttonType="RAISED" ellipsisString="" layoutX="600.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
