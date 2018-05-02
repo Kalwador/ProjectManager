@@ -23,7 +23,7 @@
                   <Insets />
                </BorderPane.margin>
                <children>
-                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="630.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="800.0" tabMaxWidth="600.0" tabMinHeight="30.0" tabMinWidth="50.0">
+                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="500.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="800.0" tabMaxWidth="600.0" tabMinHeight="30.0" tabMinWidth="50.0">
                     <tabs>
                       <Tab fx:id="projectsTab" styleClass="tabMain" text="Projects">
                         <content>
@@ -44,7 +44,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXTreeTableView id="InsideProject" fx:id="projectTable" fixedCellSize="0.0" layoutX="2.0" prefHeight="560.0" prefWidth="725.0" />
+                                    <JFXTreeTableView id="InsideProject" fx:id="projectTable" fixedCellSize="0.0" layoutX="2.0" prefHeight="429.0" prefWidth="725.0" />
                                     <JFXButton fx:id="logout" buttonType="RAISED" layoutX="747.0" layoutY="498.0" minWidth="75.0" ripplerFill="BLACK" style="-fx-background-color: red;" text="Logout" textFill="WHITE">
                                        <font>
                                           <Font size="14.0" />
@@ -58,7 +58,7 @@
                         <content>
                               <Pane style="-fx-background-radius: 50px;">
                                  <children>
-                                    <JFXTreeTableView id="InsideProject" fx:id="userTable" layoutX="2.0" prefHeight="560.0" prefWidth="725.0" />
+                                    <JFXTreeTableView id="InsideProject" fx:id="userTable" layoutX="2.0" prefHeight="429.0" prefWidth="725.0" />
                                     <JFXButton fx:id="deleteUsers" buttonType="RAISED" layoutX="750.0" layoutY="35.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
                                        <font>
                                           <Font size="14.0" />
@@ -78,7 +78,7 @@
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="715.0">
                                                    <children>
-                                                      <JFXTreeTableView fx:id="inboxTable" prefHeight="525.0" prefWidth="730.0" />
+                                                      <JFXTreeTableView fx:id="inboxTable" layoutX="1.0" prefHeight="394.0" prefWidth="730.0" />
                                                    </children>
                                                    <opaqueInsets>
                                                       <Insets />
@@ -88,9 +88,9 @@
                                           </Tab>
                                           <Tab closable="false" text="Sent">
                                             <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="110.0" prefWidth="728.0">
                                                    <children>
-                                                      <JFXTreeTableView fx:id="sentboxTable" prefHeight="525.0" prefWidth="730.0" />
+                                                      <JFXTreeTableView fx:id="sentboxTable" layoutX="1.0" prefHeight="394.0" prefWidth="730.0" />
                                                    </children>
                                                 </AnchorPane>
                                             </content>

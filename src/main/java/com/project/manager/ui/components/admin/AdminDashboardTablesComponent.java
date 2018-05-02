@@ -226,10 +226,10 @@ public class AdminDashboardTablesComponent {
                 protected void updateItem(UserTableView item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item == null) {
-                        setStyle("");
+                        setStyle("-fx-background-color: #ff1a1a;-fx-text-fill:#ffffff");
                     } else {
                         if (!item.getIsLocked().get()) {
-                            setStyle("-fx-background-color: #ff5a47");
+                            setStyle("-fx-background-color: #99ff99;-fx-text-fill:#000000");
                         }
                     }
                 }
