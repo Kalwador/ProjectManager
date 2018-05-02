@@ -1,0 +1,17 @@
+#MainPane{
+	-fx-border-radius:5px;
+	-fx-background-radius:5px;
+	-fx-border-color:#ee9701;
+	-fx-border-width:2px;
+	-fx-background-color:black;
+}
+#BorderPaneBackground{
+	-fx-background-image:  url('images/horse.jpg');
+	-fx-background-position: center;
+}
+#TopBar{
+	-fx-background-color:#d66000;
+	-fx-background-radius:5px;
+	-fx-border-width:2px;
+	-fx-border-radius:5px;
+}

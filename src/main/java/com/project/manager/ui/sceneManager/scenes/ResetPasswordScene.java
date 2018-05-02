@@ -11,6 +11,6 @@ public class ResetPasswordScene extends CustomSceneImpl {
     public ResetPasswordScene(Stage stage) {
         super(stage);
         super.setWindowTitle("Reset Password");
-        super.setPathToFXML("/fxml/resetPassword.fxml");
+        super.setPathToFXML("/fxml/resetPassword/resetPassword.fxml");
     }
 }
