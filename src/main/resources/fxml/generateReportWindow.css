@@ -1,0 +1,14 @@
+.buttonsDown{
+-fx-background-color:black;
+-fx-background-radius:5px;
+-fx-border-color:#d66000;
+-fx-border-radius:5px;
+-fx-effect: innershadow( three-pass-box , rgba(214,96,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+.paneSetting{
+	-fx-background-color:black;
+	-fx-border-radius:5px;
+	-fx-border-color:#ee9701;
+	-fx-background-radius:5px;
+	-fx-border-width:2px;
+}
