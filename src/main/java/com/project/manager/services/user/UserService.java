@@ -2,11 +2,17 @@ package com.project.manager.services.user;
 
 import com.project.manager.entities.UserModel;
 import com.project.manager.models.UserRole;
+import com.project.manager.repositories.MessageRepository;
+import com.project.manager.repositories.ProjectRepository;
 import com.project.manager.repositories.UserRepository;
+import com.project.manager.ui.AlertManager;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This class is a service which contains all logic operation on users in database
@@ -15,14 +21,20 @@ import java.util.List;
 public class UserService {
 
     private UserRepository userRepository;
+    private MessageRepository messageRepository;
+    private ProjectRepository projectRepository;
 
     /**
      * Constructor of this class contains injected repository of users
      * @param userRepository this class provides necessary methods to manage users in database
      */
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository,
+                       MessageRepository messageRepository,
+                       ProjectRepository projectRepository) {
         this.userRepository = userRepository;
+        this.messageRepository = messageRepository;
+        this.projectRepository = projectRepository;
     }
 
     /**
@@ -34,11 +46,42 @@ public class UserService {
     }
 
     /**
-     * TO IMPLEMENT!!
-     * @param id
+     * This method provides get users from database by inserted Id in parameter
+     *
+     * @param id Id of user that we need to get
+     * @return user with inserted Id in parameter.
      */
-    public void delete(long id) {
-        System.out.println(id);
+    public Optional<UserModel> getUserById(Long id) {return userRepository.findById(id);}
+
+    /**
+     * This method perform delete user operation on userRepository by inserted user Id in parameter.
+     *
+     * @param userId Id of user that we need to delete
+     */
+    public void delete(Long userId) {
+        UserModel user = userRepository.getOne(userId);
+
+        Alert alert = AlertManager.showConfirmationAlert("Delete", "Do you really want to delete " +
+                "that user?");
+        if (alert.getResult().equals(ButtonType.OK)) {
+            userRepository.delete(user);
+        }
+    }
+
+    /**
+     * This method perform delete list of users operation on userRepository by inserted list of user indexes
+     * in parameter.
+     *
+     * @param indexes indexes of users that we need to delete
+     */
+    public void delete(List<Long> indexes) {
+        Alert alert = AlertManager.showConfirmationAlert("Delete", "Do you really want to delete " +
+                "this "+ indexes.size() +" user(s)?");
+        if (alert.getResult().equals(ButtonType.OK)) {
+            for (Long id : indexes) {
+                userRepository.delete(userRepository.findById(id).get());
+            }
+        }
     }
 
     /**
@@ -54,12 +97,16 @@ public class UserService {
     }
 
     /**
-     * TODO ???
-     * TO IMPLEMENT!!
-     * @param id
+     * This is the method which change the block status for change password operation
+     * of user which id is passed in parameter
+     *
+     * @param userId Id of user that need to change a password
      */
-    public void changePassword(long id) {
-        System.out.println(id);
+    public void changePassword(Long userId) {
+        UserModel user = userRepository.getOne(userId);
+        user.setBlocked(true);
+        userRepository.save(user);
+        AlertManager.showInformationAlert("Account blocked!", "This account is set as blocked.");
     }
 
     /**

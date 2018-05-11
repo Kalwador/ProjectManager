@@ -4,7 +4,7 @@ import com.project.manager.ui.sceneManager.scenes.system.CustomSceneImpl;
 import javafx.stage.Stage;
 
 /**
- * Reset Password Scene, view steps to change a PASSWORD
+ * Reset Password Scene, view steps to change a password
  */
 public class ResetPasswordScene extends CustomSceneImpl {
 

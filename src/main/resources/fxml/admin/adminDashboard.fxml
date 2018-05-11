@@ -29,23 +29,23 @@
                         <content>
                           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="613.0">
                                  <children>
-                                    <JFXButton fx:id="showProject" buttonType="RAISED" layoutX="750.0" layoutY="35.0" minWidth="75.0" opacity="0.98" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 );" text="Show" textFill="#006b0e">
+                                    <JFXButton fx:id="showProject" buttonType="RAISED" layoutX="750.0" layoutY="35.0" minWidth="75.0" opacity="0.98" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 );" text="Show" textFill="#006b0e" disable="true">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="updateProject" buttonType="RAISED" layoutX="750.0" layoutY="80.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(136,141,0,0.7) , 6, 0.0 , 0 , 2 );" text="Update" textFill="#888d00">
+                                    <JFXButton fx:id="updateProject" buttonType="RAISED" layoutX="750.0" layoutY="80.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(136,141,0,0.7) , 6, 0.0 , 0 , 2 );" text="Update" textFill="#888d00" disable="true">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="deleteProject" buttonType="RAISED" layoutX="750.0" layoutY="125.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
+                                    <JFXButton fx:id="deleteProject" buttonType="RAISED" layoutX="750.0" layoutY="125.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300" disable="true">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </JFXButton>
                                     <JFXTreeTableView id="InsideProject" fx:id="projectTable" fixedCellSize="0.0" layoutX="2.0" prefHeight="429.0" prefWidth="725.0" />
-                                    <JFXButton fx:id="logout" buttonType="RAISED" layoutX="747.0" layoutY="498.0" minWidth="75.0" ripplerFill="BLACK" style="-fx-background-color: red;" text="Logout" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" layoutX="747.0" layoutY="498.0" minWidth="75.0" ripplerFill="BLACK" style="-fx-background-color: red;" text="Logout" textFill="WHITE">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -59,7 +59,7 @@
                               <Pane style="-fx-background-radius: 50px;">
                                  <children>
                                     <JFXTreeTableView id="InsideProject" fx:id="userTable" layoutX="2.0" prefHeight="429.0" prefWidth="725.0" />
-                                    <JFXButton fx:id="deleteUsers" buttonType="RAISED" layoutX="750.0" layoutY="35.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
+                                    <JFXButton fx:id="deleteUsers" buttonType="RAISED" layoutX="750.0" layoutY="35.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300" disable="true">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -74,7 +74,7 @@
                                  <children>
                                     <JFXTabPane cache="true" prefHeight="560.0" prefWidth="730.0" styleClass="messageWindow" tabMinHeight="20.0" tabMinWidth="100.0">
                                        <tabs>
-                                          <Tab closable="false" text="Inbox">
+                                          <Tab fx:id="selectedInbox" closable="false" text="Inbox">
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="715.0">
                                                    <children>
@@ -86,7 +86,7 @@
                                                 </AnchorPane>
                                             </content>
                                           </Tab>
-                                          <Tab closable="false" text="Sent">
+                                          <Tab fx:id="selectedSendbox" closable="false" text="Sent">
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="110.0" prefWidth="728.0">
                                                    <children>
@@ -104,6 +104,7 @@
                                        </padding>
                                     </JFXTabPane>
                                     <JFXButton fx:id="sentMessage" buttonType="RAISED" layoutX="741.0" layoutY="35.0" prefHeight="34.0" prefWidth="95.0" ripplerFill="#ed9302" style="-fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 ); -fx-background-color: black;" text="Sent message" textFill="#006b0e" />
+                                     <JFXButton fx:id="deleteMessages" buttonType="RAISED" layoutX="741.0" layoutY="75.0" prefHeight="34.0" prefWidth="95.0" ripplerFill="#ed9302" style="-fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 ); -fx-background-color: black;" text="Delete message" textFill="#006b0e" disable="true" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -124,7 +125,7 @@
                         <Label layoutX="14.0" layoutY="2.0" prefHeight="26.0" prefWidth="100.0" text="AdminDashboard" textFill="WHITE" />
                      </children>
                   </Pane>
-                  <JFXButton buttonType="RAISED" ellipsisString="" layoutX="810.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                  <JFXButton fx:id="logout" buttonType="RAISED" ellipsisString="" layoutX="810.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>

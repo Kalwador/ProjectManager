@@ -22,6 +22,7 @@ public class SceneManager {
     private DashboardScene dashboardScene;
     private ResetPasswordScene resetPasswordScene;
     private AdminDashboardScene adminDashboardScene;
+    private AdminProjectView adminProjectView;
     private UpdateProjectScene updateProjectScene;
     private MessageViewWindowScene messageViewWindowScene;
     private ManagerProjectView managerProjectView;
@@ -73,6 +74,7 @@ public class SceneManager {
         this.dashboardScene = new DashboardScene(primaryStage);
         this.resetPasswordScene = new ResetPasswordScene(primaryStage);
         this.adminDashboardScene = new AdminDashboardScene(primaryStage);
+        this.adminProjectView = new AdminProjectView(primaryStage);
         this.updateProjectScene = new UpdateProjectScene(primaryStage);
         this.messageViewWindowScene = new MessageViewWindowScene(primaryStage);
         this.managerProjectView = new ManagerProjectView(primaryStage);
@@ -89,9 +91,10 @@ public class SceneManager {
                 put(SceneType.EMPLOYEE_PROJECT_VIEW.ordinal(), employeeProjectView);
                 put(SceneType.MANAGER_PROJECT_VIEW.ordinal(), managerProjectView);
                 put(SceneType.ADMIN_DASHBOARD.ordinal(), adminDashboardScene);
+                put(SceneType.ADMIN_PROJECT_VIEW.ordinal(), adminProjectView);
                 put(SceneType.ADMIN_UPDATE_PROJECT.ordinal(), updateProjectScene);
                 put(SceneType.MESSAGE_VIEW_WINDOW.ordinal(), messageViewWindowScene);
-                put(SceneType.RESETPASSWD.ordinal(), resetPasswordScene);
+                put(SceneType.RESET_PASSWORD.ordinal(), resetPasswordScene);
                 put(SceneType.ADD_USER.ordinal(), addUserScene);
                 put(SceneType.MESSAGE_SENT_WINDOW.ordinal(), messageSentScene);
                 put(SceneType.GENERATE_REPORT.ordinal(), generateReportScene);

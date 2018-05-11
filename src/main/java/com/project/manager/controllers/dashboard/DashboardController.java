@@ -40,8 +40,8 @@ public class DashboardController implements Initializable {
     /**
      * Initialization of Dashboard view with project panes
      *
-     * @param location
-     * @param resources
+     * @param location URL location
+     * @param resources Bundle resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

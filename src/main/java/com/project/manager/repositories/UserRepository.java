@@ -16,11 +16,11 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     /**
      * This method is searching the {@link UserModel} with passed id in database
-     * @param aLong this parameter is id to identify the user in database
-     * @return the user with the same EMAIL ass passed in parameter
+     * @param id this parameter is id to identify the user in database
+     * @return the user with the same email ass passed in parameter
      */
     @Override
-    Optional<UserModel> findById(Long aLong);
+    Optional<UserModel> findById(Long id);
 
     /**
      * This method is searching the {@link UserModel} with passed username in database
@@ -52,5 +52,8 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
     List<UserModel> getAllByRole(UserRole userRole);
 
     @Query(value = "SELECT USER_MODEL.USERNAME FROM USER_MODEL", nativeQuery = true)
-    Optional<List<String>> findAllUsernames();
+    Optional<List<String>> findAllUserNames();
+
+    @Query(value = "SELECT USER_MODEL.USERNAME FROM USER_MODEL WHERE USER_MODEL.ROLE = 'USER' AND USER_MODEL.ISLOCKED = FALSE", nativeQuery = true)
+    Optional<List<String>> findAllUserNamesByRole();
 }

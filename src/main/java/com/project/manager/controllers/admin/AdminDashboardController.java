@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.project.manager.models.MessageTableView;
 import com.project.manager.models.ProjectTableView;
 import com.project.manager.models.UserTableView;
+import com.project.manager.services.ProjectService;
+import com.project.manager.services.login.LoginService;
 import com.project.manager.ui.components.admin.AdminDashboardTablesComponent;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
@@ -32,8 +34,9 @@ import java.util.ResourceBundle;
 public class AdminDashboardController implements Initializable {
 
     private AdminDashboardTablesComponent adminDashboardTablesComponent;
+    private ProjectService projectService;
+    private LoginService loginService;
     private SceneManager sceneManager;
-
 
     /**
      * The constructor of this Spring Bean contains reference to {@link AdminDashboardTablesComponent},
@@ -44,37 +47,61 @@ public class AdminDashboardController implements Initializable {
      * @param adminDashboardTablesComponent
      */
     @Autowired
-    public AdminDashboardController(AdminDashboardTablesComponent adminDashboardTablesComponent) {
+    public AdminDashboardController(AdminDashboardTablesComponent adminDashboardTablesComponent,
+                                    ProjectService projectService,
+                                    LoginService loginService) {
         this.adminDashboardTablesComponent = adminDashboardTablesComponent;
+        this.projectService = projectService;
+        this.loginService = loginService;
         this.sceneManager = SceneManager.getInstance();
     }
 
     @FXML
     private Tab projectsTab;
+
     @FXML
     private Tab usersTab;
+
     @FXML
     private Tab messageTab;
 
     @FXML
     private JFXTreeTableView<ProjectTableView> projectTable;
+
     @FXML
     private JFXTreeTableView<UserTableView> userTable;
+
     @FXML
     private JFXTreeTableView<MessageTableView> inboxTable;
+
     @FXML
     private JFXTreeTableView<MessageTableView> sentboxTable;
 
     @FXML
     private JFXButton logout;
+
     @FXML
     private JFXButton updateProject;
+
     @FXML
     private JFXButton deleteProject;
+
     @FXML
     private JFXButton showProject;
     @FXML
     private Button sentMessage;
+
+    @FXML
+    private JFXButton deleteUsers;
+
+    @FXML
+    private JFXButton deleteMessages;
+
+    @FXML
+    private Tab selectedInbox;
+
+    @FXML
+    private Tab selectedSendbox;
 
     /**
      * This method is responsible for listening the controller in window, and making action
@@ -85,6 +112,9 @@ public class AdminDashboardController implements Initializable {
         sentMessage.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGE_SENT_WINDOW));
 
         adminDashboardTablesComponent.generateProjectTableView();
+        adminDashboardTablesComponent.deleteSelectedUsers();
+        adminDashboardTablesComponent.deleteSelectedProjects();
+        adminDashboardTablesComponent.deleteSelectedMessages();
 
         projectsTab.setOnSelectionChanged(e -> adminDashboardTablesComponent.generateTables());
         usersTab.setOnSelectionChanged(e -> adminDashboardTablesComponent.generateTables());
@@ -104,6 +134,13 @@ public class AdminDashboardController implements Initializable {
             }
         });
 
-        updateProject.setOnAction(e -> sceneManager.showInNewWindow(SceneType.ADMIN_UPDATE_PROJECT));
+        showProject.setOnAction(e -> sceneManager.showInNewWindow(SceneType.ADMIN_PROJECT_VIEW));
+
+        updateProject.setOnAction(e -> {
+            projectService.getProjectToUpdate();
+            sceneManager.showInNewWindow(SceneType.ADMIN_UPDATE_PROJECT);
+        });
+
+        logout.setOnAction(e -> loginService.logoutUser());
     }
 }

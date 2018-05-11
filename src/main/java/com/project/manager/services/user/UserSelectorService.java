@@ -40,7 +40,15 @@ public class UserSelectorService {
      * @return list of usernames
      */
     public List<String> getUserList() {
-        Optional<List<String>> optionalList = userRepository.findAllUsernames();
+        Optional<List<String>> optionalList = userRepository.findAllUserNames();
+        if (optionalList.isPresent()) {
+            return optionalList.get();
+        }
+        throw new UserDoesNotExistException("No users in database, critical error");
+    }
+
+    public List<String> getOnlyUserList() {
+        Optional<List<String>> optionalList = userRepository.findAllUserNamesByRole();
         if (optionalList.isPresent()) {
             return optionalList.get();
         }

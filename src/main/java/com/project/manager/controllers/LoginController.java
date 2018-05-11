@@ -94,7 +94,7 @@ public class LoginController implements Initializable {
                 AlertManager.showInformationAlert("Account blocked!", ex.getMessage());
             }
         });
-        forgotPasswordButton.setOnAction(e -> sceneManager.showScene(SceneType.RESETPASSWD));
+        forgotPasswordButton.setOnAction(e -> sceneManager.showScene(SceneType.RESET_PASSWORD));
     }
 
     private void resetUsernameError() {

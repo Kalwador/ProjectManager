@@ -1,6 +1,7 @@
 package com.project.manager.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -16,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Proxy(lazy = false)
 public class Project {
 
     @Id
@@ -33,15 +35,21 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "MANAGER_ID")
-    @NotNull
     private UserModel manager;
 
     @Column(name = "LAST_RAPPORT_DATE")
     private LocalDate lastRapportDate;
 
-    @ManyToMany(mappedBy = "projectsAsUser", fetch = FetchType.EAGER)//, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "projectsAsUser", fetch = FetchType.EAGER)
     private Set<UserModel> members;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Task> tasks;
+
+    @PreRemove
+    private void preRemove() {
+        members.forEach( userModel -> userModel.getProjectsAsUser().remove(this));
+        tasks.forEach(task -> task.setProject(null));
+        manager.getProjectsAsManager().remove(this);
+    }
 }

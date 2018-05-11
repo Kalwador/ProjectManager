@@ -25,11 +25,11 @@ public class ResetPasswordController implements Initializable {
 
     //TODO czy te testowe przyciski sa nadal potrzebne??
     @FXML
-    private Button backToLoginButton;//button for testing
+    private Button backToLoginButton;
     @FXML
-    private Button backToLoginButton1;//button for testing
+    private Button backToLoginButton1;
     @FXML
-    private Button backToLoginButton2;//button for testing
+    private Button backToLoginButton2;
     @FXML
     private JFXTextField usernameOrEmailField;
     @FXML
@@ -104,8 +104,8 @@ public class ResetPasswordController implements Initializable {
         backToLoginButton2.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
         /**
-         * Reset PASSWORD action listener
-         * perform first step of reset PASSWORD procedure that typing user name or EMAIL
+         * Reset password action listener
+         * perform first step of reset password procedure that typing user name or email
          */
         resetPasswordButton.setOnAction(e -> {
             resetUsernameOrEmailError();
@@ -123,7 +123,7 @@ public class ResetPasswordController implements Initializable {
 
         /**
          * Confirm generated code action listener
-         * perform second step of reset PASSWORD procedure that checking if typed generated code are the same like in database
+         * perform second step of reset password procedure that checking if typed generated code are the same like in database
          */
         confirmButton.setOnAction(e -> {
             resetCodeErrorLabel();
@@ -145,8 +145,8 @@ public class ResetPasswordController implements Initializable {
                 .or(Bindings.length(repeatPasswordField.textProperty()).lessThan(8)));
 
         /**
-         * Change PASSWORD action listener
-         * perform third step of reset PASSWORD procedure that typed and confirmed PASSWORD is going to change.
+         * Change password action listener
+         * perform third step of reset password procedure that typed and confirmed password is going to change.
          */
         changePasswordButton.setOnAction(e -> {
             resetPasswordLabel();
