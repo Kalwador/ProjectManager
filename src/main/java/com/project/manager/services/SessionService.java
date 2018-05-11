@@ -6,6 +6,8 @@ import com.project.manager.models.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Optional;
+
 @Getter
 @Setter
 public class SessionService {

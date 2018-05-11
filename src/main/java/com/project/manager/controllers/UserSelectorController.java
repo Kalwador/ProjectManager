@@ -50,17 +50,17 @@ public class UserSelectorController implements Initializable {
     /**
      * Initialization of AddUser view with list of users
      *
-     * @param location
-     * @param resources
+     * @param location URL location
+     * @param resources Bundle resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.reserLabelError();
+        this.resetLabelError();
         possibleUsers = userSelectorService.getUserList();
         TextFields.bindAutoCompletion(usernameTextField, possibleUsers);
 
         addUserButton.setOnMouseClicked(e -> {
-            this.reserLabelError();
+            this.resetLabelError();
             try {
                 String username = usernameTextField.getText();
                 userSelectorService.findUser(username);
@@ -75,7 +75,7 @@ public class UserSelectorController implements Initializable {
     /**
      * Method responsible for resetting error label.
      */
-    public void reserLabelError() {
+    public void resetLabelError() {
         errorLabel.setText("");
         errorLabel.setVisible(false);
     }

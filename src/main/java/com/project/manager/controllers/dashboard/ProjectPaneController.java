@@ -33,8 +33,8 @@ public class ProjectPaneController implements Initializable {
     /**
      * Initialization of project view after clicked view button
      *
-     * @param location  //TODO MACIEK - do uzupelnienia
-     * @param resources //TODO MACIEK - do uzupelnienia
+     * @param location  URL location
+     * @param resources Bundle resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

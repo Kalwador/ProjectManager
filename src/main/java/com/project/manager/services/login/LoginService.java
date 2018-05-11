@@ -101,4 +101,9 @@ public class LoginService {
         Optional<UserModel> userModel = rememberUserService.getRememberedUser();
         userModel.ifPresent(this::loginValidUser);
     }
+
+    public void logoutUser() {
+        sessionService.setLoggedUser(null);
+        sceneManager.showScene(SceneType.LOGIN);
+    }
 }

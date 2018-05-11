@@ -3,12 +3,16 @@ package com.project.manager.services;
 import com.project.manager.controllers.MessageViewWindowController;
 import com.project.manager.entities.Message;
 import com.project.manager.entities.UserModel;
+import com.project.manager.exceptions.message.MessageNotExistException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.MessageTableView;
 import com.project.manager.repositories.MessageRepository;
 import com.project.manager.repositories.UserRepository;
+import com.project.manager.ui.AlertManager;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,7 +83,7 @@ public class MessageService {
         if (!receiver.isPresent()) {
             throw new UserDoesNotExistException("The user with that isEmailValid does not exist");
         }
-                
+
         message.setSender(sender.getUsername());
         message = messageRepository.save(message);
         message.getUsers().add(sender);
@@ -89,5 +93,38 @@ public class MessageService {
         messageRepository.save(message);
         userRepository.save(sender);
         userRepository.save(receiver.get());
+    }
+
+
+    /**
+     * This method perform delete message operation on messageRepository by inserted message Id in parameter
+     *
+     * @param messageId Id of message that we need to delete
+     */
+    public void delete(Long messageId) throws MessageNotExistException {
+        Optional<Message> optionalMessage = messageRepository.findById(messageId);
+        if (optionalMessage.isPresent()) {
+            Alert alert = AlertManager.showConfirmationAlert("Delete", "Do you really want to delete that project?");
+            if (alert.getResult().equals(ButtonType.OK)) {
+                messageRepository.delete(optionalMessage.get());
+            }
+        } else {
+            throw new MessageNotExistException();
+        }
+    }
+
+    /**
+     * This method perform delete list of messages operation on messageRepository by inserted list of
+     * message indexes in parameter.
+     *
+     * @param indexes indexes of messages that we need to delete
+     */
+    public void delete(List<Long> indexes) {
+        Alert alert = AlertManager.showConfirmationAlert("Delete", "Do you really want to delete this "+ indexes.size() +" message(s)?");
+        if (alert.getResult().equals(ButtonType.OK)) {
+            for (Long id : indexes) {
+                messageRepository.delete(messageRepository.findById(id).get());
+            }
+        }
     }
 }

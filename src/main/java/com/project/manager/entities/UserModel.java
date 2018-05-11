@@ -4,6 +4,7 @@ import com.project.manager.models.UserRole;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Proxy;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -63,7 +64,12 @@ public class UserModel {
     @Size(min = 1)
     private String lastName;
 
-    @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER)
+    @Lob
+    @Column(name="avatar")
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] avatar;
+
+    @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     private Set<Project> projectsAsManager;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -74,10 +80,21 @@ public class UserModel {
     )
     private Set<Project> projectsAsUser;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Message.class)
+    @JoinTable(
+            name = "MESSAGE_USER",
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "message_id", nullable = false)}
+    )
     private Set<Message> messages;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Task> tasks;
+
+    @PreRemove
+    private void preRemove() {
+        projectsAsManager.forEach(project -> project.setManager(null));
+        this.getTasks().forEach(task -> task.setUser(null));
+    }
 }
 

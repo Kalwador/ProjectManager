@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * This is the class which is responsible for operations step by step to perform PASSWORD resetting.
+ * This is the class which is responsible for operations step by step to perform password resetting.
  * This class perform methods pessetPassword, checkGeneratedCode, chcangePassword and generatedCode
  */
 @Service
@@ -36,9 +36,9 @@ public class ResetPasswordService {
     }
 
     /**
-     * This method perform starting process of resetting PASSWORD and perform blocking account and generating code to unlock account.
+     * This method perform starting process of resetting password and perform blocking account and generating code to unlock account.
      *
-     * @param usernameOrEmail - name or EMAIL of user that want to reset PASSWORD.
+     * @param usernameOrEmail - name or email of user that want to reset password.
      */
     public void resetPassword(String usernameOrEmail) throws EmailValidationException{
 
@@ -58,7 +58,7 @@ public class ResetPasswordService {
             userRepository.save(userModel.get());
 
             AlertManager.showInformationAlert("Resetting PASSWORD", "You started procedure to reset your" +
-                    " PASSWORD. We sent on your EMAIL message with special code to continue reset your PASSWORD.");
+                    " password. We sent on your EMAIL message with special code to continue reset your password.");
 
             sendActivationCodeInMessage(userModel.get());
         }
@@ -78,7 +78,7 @@ public class ResetPasswordService {
     /**
      * This method checking that inserted code is not empty and if is equal to generated code.
      *
-     * @param usernameOrEmail - name or EMAIL of user that want to reset PASSWORD.
+     * @param usernameOrEmail - name or EMAIL of user that want to reset password.
      * @param generatedCode   - code to unlock blocked account.
      */
     public void checkGeneratedCode(String usernameOrEmail, String generatedCode) {
@@ -97,11 +97,11 @@ public class ResetPasswordService {
     }
 
     /**
-     * This method perform checking that passwords are the same and PASSWORD changing.
+     * This method perform checking that passwords are the same and password changing.
      *
-     * @param usernameOrEmail - name or EMAIL of user that want to reset PASSWORD.
-     * @param password        - new PASSWORD.
-     * @param repeatPassword  - confirmed new PASSWORD.
+     * @param usernameOrEmail - name or email of user that want to reset password.
+     * @param password        - new password.
+     * @param repeatPassword  - confirmed new password.
      */
     public void changePassword(String usernameOrEmail, String password, String repeatPassword) {
 
@@ -113,7 +113,7 @@ public class ResetPasswordService {
         userModel.get().setBlocked(false);
         userRepository.save(userModel.get());
 
-        AlertManager.showInformationAlert("Password changed", "Your PASSWORD is changed!");
+        AlertManager.showInformationAlert("Password changed", "Your password is changed!");
 
         sceneManager.showScene(SceneType.LOGIN);
     }

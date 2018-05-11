@@ -2,6 +2,7 @@ package com.project.manager.ui.components;
 
 import com.project.manager.controllers.dashboard.ProjectPaneController;
 import com.project.manager.entities.Project;
+import com.project.manager.entities.UserModel;
 import com.project.manager.services.SessionService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * This is the class which is responsible for projectsAsUser panes in Dashboard view.
@@ -30,9 +32,10 @@ public class ProjectPaneGenerator {
     /**
      * This method perform generating of projectsAsUser panes witch will be displayed into Dashboard
      *
-     * @param projectsArea //TODO
+     * @param projectsArea - VBox that contains buttons of projects
      */
     public void createPanes(VBox projectsArea) {
+
         sessionService.getUserModel().getProjectsAsManager().forEach(project -> {
             createProjectBrick(projectsArea, project);
         });
@@ -42,10 +45,10 @@ public class ProjectPaneGenerator {
     }
 
     /**
-     * //TODO MACIEK
+     * This method perform logic of generating of projectsAsUser panes witch will be displayed into Dashboard
      *
-     * @param projectsArea //TODO MACIEK
-     * @param project      //TODO MACIEK
+     * @param projectsArea - VBox that contains buttons of projects
+     * @param project      - model of project
      */
     private void createProjectBrick(VBox projectsArea, Project project) {
         try {

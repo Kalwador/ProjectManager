@@ -15,7 +15,7 @@ public class UpdateProjectScene extends CustomSceneImpl {
      */
     public UpdateProjectScene(Stage primaryStage) {
         super(primaryStage);
-        super.setWindowTitle("Update Window");
+        super.setWindowTitle("Update Project");
         super.setPathToFXML("/fxml/admin/adminUpdateProject.fxml");
     }
 }

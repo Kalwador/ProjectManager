@@ -1,12 +1,12 @@
 package com.project.manager.data;
 
+import com.project.manager.entities.Message;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
 import com.project.manager.models.task.TaskPriority;
 import com.project.manager.models.task.TaskStatus;
 import com.project.manager.repositories.TaskRepository;
 import com.project.manager.utils.BCryptEncoder;
-import com.project.manager.entities.Message;
 import com.project.manager.entities.UserModel;
 import com.project.manager.models.UserRole;
 import com.project.manager.repositories.MessageRepository;
@@ -52,16 +52,21 @@ public class InjectData {
 
     private Message sentMessage;
     private Message receivedMessage;
+    private Message sentMessage2;
+    private Message receivedMessage2;
+    private InjectAvatar injectAvatar;
 
     @Autowired
     public InjectData(ProjectRepository projectRepository,
                       TaskRepository taskRepository,
                       UserRepository userRepository,
-                      MessageRepository messageRepository) {
+                      MessageRepository messageRepository,
+                      InjectAvatar injectAvatar) {
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.messageRepository = messageRepository;
+        this.injectAvatar = injectAvatar;
     }
 
     /**
@@ -76,6 +81,7 @@ public class InjectData {
     }
 
     private void addUsers() {
+
         this.user = UserModel.builder()
                 .username("user")
                 .password(BCryptEncoder.encode("password"))
@@ -88,6 +94,7 @@ public class InjectData {
                 .projectsAsManager(new HashSet<>())
                 .projectsAsUser(new HashSet<>())
                 .messages(new HashSet<>())
+                .avatar(injectAvatar.getAvatar())
                 .tasks(new HashSet<>())
                 .build();
 
@@ -103,6 +110,7 @@ public class InjectData {
                 .projectsAsManager(new HashSet<>())
                 .projectsAsUser(new HashSet<>())
                 .messages(new HashSet<>())
+                .avatar(injectAvatar.getAvatar())
                 .tasks(new HashSet<>())
                 .build();
 
@@ -117,6 +125,7 @@ public class InjectData {
                 .isLocked(false)
                 .isBlocked(false)
                 .messages(new HashSet<>())
+                .avatar(injectAvatar.getAvatar())
                 .build();
 
         this.user = userRepository.save(this.user);
@@ -136,6 +145,7 @@ public class InjectData {
                     .projectsAsUser(new HashSet<>())
                     .projectsAsManager(new HashSet<>())
                     .messages(new HashSet<>())
+                    .avatar(injectAvatar.getAvatar())
                     .build();
             tempUser = userRepository.save(tempUser);
         }
@@ -341,7 +351,27 @@ public class InjectData {
                 .users(new HashSet<>())
                 .build();
 
+        this.sentMessage2 = Message
+                .builder()
+                .sender(admin.getUsername())
+                .receiver(user.getUsername())
+                .title("Msg sent by admin to user")
+                .contents("Message which will sent by admin to user")
+                .sentDate(LocalDateTime.now())
+                .users(new HashSet<>())
+                .build();
+
         this.receivedMessage = Message
+                .builder()
+                .sender(user.getUsername())
+                .receiver(admin.getUsername())
+                .title("Msg sent by user to admin")
+                .contents("Message which will sent by user to admin")
+                .sentDate(LocalDateTime.now())
+                .users(new HashSet<>())
+                .build();
+
+        this.receivedMessage2 = Message
                 .builder()
                 .sender(user.getUsername())
                 .receiver(admin.getUsername())
@@ -353,8 +383,15 @@ public class InjectData {
 
         this.admin.getMessages().add(sentMessage);
         this.sentMessage.getUsers().add(admin);
+
         this.admin.getMessages().add(receivedMessage);
         this.receivedMessage.getUsers().add(admin);
+
+        this.admin.getMessages().add(sentMessage2);
+        this.sentMessage2.getUsers().add(admin);
+
+        this.admin.getMessages().add(receivedMessage2);
+        this.receivedMessage2.getUsers().add(admin);
 
         this.user.getMessages().add(sentMessage);
         this.sentMessage.getUsers().add(user);
@@ -363,6 +400,9 @@ public class InjectData {
 
         this.sentMessage = messageRepository.save(sentMessage);
         this.receivedMessage = messageRepository.save(receivedMessage);
+
+        this.sentMessage2 = messageRepository.save(sentMessage2);
+        this.receivedMessage2 = messageRepository.save(receivedMessage2);
 
         this.user = userRepository.save(user);
         this.admin = userRepository.save(admin);
