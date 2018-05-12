@@ -18,7 +18,7 @@
                <children>
                   <Pane prefHeight="600.0" prefWidth="900.0">
                      <children>
-                        <ScrollPane layoutY="50.0" prefHeight="550.0" prefWidth="900.0" style="-fx-background-color: black;">
+                        <ScrollPane fitToHeight="true" layoutY="50.0" prefHeight="550.0" prefWidth="900.0" style="-fx-background-color: black;">
                            <content>
                               <Pane prefHeight="550.0" prefWidth="1310.0" style="-fx-background-color: black;">
                                  <children>
@@ -27,9 +27,9 @@
                                           <Font name="Calibri" size="14.0" />
                                        </font>
                                     </Label>
-                                    <ScrollPane layoutX="10.0" layoutY="50.0" prefHeight="420.0" prefWidth="204.0" style="-fx-border-color: #d66000; -fx-background-radius: 3px; -fx-border-radius: 3px;">
+                                    <ScrollPane layoutX="10.0" layoutY="50.0" prefHeight="420.0" prefWidth="204.0" styleClass="scrollPaneInside">
                                        <content>
-                                          <VBox fx:id="productBacklogVBox" prefHeight="415.0" prefWidth="200.0" style="-fx-background-raidus: 3px;" />
+                                          <VBox fx:id="productBacklogVBox" prefHeight="415.0" prefWidth="200.0" />
                                        </content>
                                     </ScrollPane>
                                     <Label layoutX="287.0" layoutY="18.0" prefHeight="21.0" prefWidth="83.0" text="Sprint Backlog" textFill="WHITE" underline="true">
@@ -72,12 +72,12 @@
                                           <VBox fx:id="doneVBox" prefHeight="415.0" prefWidth="200.0" />
                                        </content>
                                     </ScrollPane>
-                                    <Label layoutX="969.0" layoutY="18.0" prefHeight="21.0" prefWidth="85.0" text="Code review" textFill="WHITE" underline="true">
+                                    <Label layoutX="949.0" layoutY="18.0" prefHeight="21.0" prefWidth="85.0" text="Code review" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="1197.0" layoutY="18.0" prefHeight="21.0" prefWidth="36.0" text="Done" textFill="WHITE" underline="true">
+                                    <Label layoutX="1187.0" layoutY="18.0" prefHeight="21.0" prefWidth="36.0" text="Done" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
@@ -102,17 +102,17 @@
                                           <Image url="@../../images/InProgress.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="711.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="711.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../images/Testing.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="939.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="919.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../images/CodeReview.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1167.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1157.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../images/Done.png" />
                                        </image>
@@ -123,13 +123,13 @@
                         </ScrollPane>
                      </children>
                   </Pane>
-                  <Pane layoutX="-7.0" prefHeight="50.0" prefWidth="916.0" style="-fx-background-color: #d66000; -fx-background-radius: 7px;">
+                  <Pane layoutX="-7.0" prefHeight="50.0" prefWidth="916.0" styleClass="topPaneWindow">
                      <children>
                         <Label fx:id="projectNameLabel" layoutX="55.0" layoutY="15.0" prefHeight="21.0" prefWidth="143.0" text="NAZWA PROJEKTU" textFill="WHITE">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font></Label>
-                        <JFXButton fx:id="backButton" focusTraversable="false" layoutX="14.0" layoutY="13.0" text=" " textFill="WHITE">
+                        <JFXButton fx:id="backButton" buttonType="RAISED" focusTraversable="false" layoutX="14.0" layoutY="13.0" text=" " textFill="WHITE">
                            <graphic>
                               <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

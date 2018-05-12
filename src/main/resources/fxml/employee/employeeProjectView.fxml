@@ -1,67 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="800.0"
-            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.project.manager.controllers.employee.EmployeeProjectViewController">
-   <children>
-      <Pane prefHeight="50.0" prefWidth="800.0" style="-fx-background-color: #a7d4e5;">
-         <children>
-            <Label fx:id="projectNameLabel" layoutX="136.0" layoutY="15.0" prefHeight="21.0" prefWidth="143.0" text="NAZWA PROJEKTU" />
-            <JFXButton fx:id="backButton" layoutX="43.0" layoutY="10.0" text="&lt;-" />
-         </children>
-      </Pane>
-      <Pane layoutY="50.0" prefHeight="548.0" prefWidth="800.0">
-         <children>
-            <ScrollPane layoutX="10.0" layoutY="20.0" prefHeight="511.0" prefWidth="780.0">
-               <content>
-                  <Pane prefHeight="503.0" prefWidth="1342.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../manager/mangerProjectView.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.employee.EmployeeProjectViewController">
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
+         <center>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane layoutX="-7.0" prefHeight="50.0" prefWidth="916.0" styleClass="topPaneWindow">
                      <children>
-                        <Label layoutX="59.0" layoutY="18.0" prefHeight="21.0" prefWidth="114.0" text="Product Backlog" />
-                        <ScrollPane layoutX="15.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
-                           <content>
-                              <VBox fx:id="productBacklogVBox" prefHeight="415.0" prefWidth="200.0" />
-                           </content>
-                        </ScrollPane>
-                        <Label layoutX="290.0" layoutY="18.0" prefHeight="21.0" prefWidth="97.0" text="Sprint Backlog" />
-                        <ScrollPane layoutX="237.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
-                           <content>
-                              <VBox fx:id="sprintBacklogVBox" prefHeight="415.0" prefWidth="200.0" />
-                           </content>
-                        </ScrollPane>
-                        <Label layoutX="521.0" layoutY="18.0" prefHeight="21.0" prefWidth="78.0" text="In progress" />
-                        <ScrollPane layoutX="459.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
-                           <content>
-                              <VBox fx:id="inProgressVBox" prefHeight="415.0" prefWidth="200.0" />
-                           </content>
-                        </ScrollPane>
-                        <Label layoutX="754.0" layoutY="18.0" prefHeight="21.0" prefWidth="56.0" text="Testing" />
-                        <ScrollPane layoutX="681.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
-                           <content>
-                              <VBox fx:id="testingVBox" prefHeight="415.0" prefWidth="200.0" />
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane layoutX="903.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
-                           <content>
-                              <VBox fx:id="codeReviewVBox" prefHeight="415.0" prefWidth="200.0" />
-                           </content>
-                        </ScrollPane>
-                        <ScrollPane layoutX="1125.0" layoutY="50.0" prefHeight="420.0" prefWidth="202.0">
-                           <content>
-                              <VBox fx:id="doneVBox" prefHeight="415.0" prefWidth="200.0" />
-                           </content>
-                        </ScrollPane>
-                        <Label layoutX="962.0" layoutY="18.0" prefHeight="21.0" prefWidth="85.0" text="Code review" />
-                        <Label layoutX="1226.0" layoutY="18.0" prefHeight="21.0" prefWidth="36.0" text="Done" />
+                        <Label fx:id="projectNameLabel" layoutX="55.0" layoutY="15.0" prefHeight="21.0" prefWidth="143.0" text="NAZWA PROJEKTU" textFill="WHITE">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="backButton" buttonType="RAISED" focusTraversable="false" layoutX="14.0" layoutY="13.0" text=" " textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/arrows.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="backToLoginButton" buttonType="RAISED" ellipsisString="" layoutX="850.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/door-exit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="810.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/Messages.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="770.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/WstazkaUser.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </Pane>
-               </content>
-            </ScrollPane>
-         </children>
-      </Pane>
-   </children>
-</AnchorPane>
+                  <Pane prefHeight="600.0" prefWidth="900.0">
+                     <children>
+                        <ScrollPane fitToHeight="true" layoutY="50.0" prefHeight="550.0" prefWidth="900.0" style="-fx-background-color: black;">
+                           <content>
+                              <Pane prefHeight="550.0" prefWidth="1310.0" style="-fx-background-color: black;">
+                                 <children>
+                                    <Label layoutX="62.0" layoutY="49.0" prefHeight="21.0" prefWidth="102.0" text="Product Backlog" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane layoutX="11.0" layoutY="81.0" prefHeight="420.0" prefWidth="204.0" styleClass="scrollPaneInside">
+                                       <content>
+                                          <VBox fx:id="productBacklogVBox" prefHeight="415.0" prefWidth="200.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <Label layoutX="287.0" layoutY="49.0" prefHeight="21.0" prefWidth="87.0" text="Sprint Backlog" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="Calibri" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane layoutX="228.0" layoutY="81.0" prefHeight="420.0" prefWidth="204.0">
+                                       <content>
+                                          <VBox fx:id="sprintBacklogVBox" prefHeight="415.0" prefWidth="200.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <Label layoutX="514.0" layoutY="49.0" prefHeight="21.0" prefWidth="67.0" text="In progress" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="Calibri" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane layoutX="445.0" layoutY="81.0" prefHeight="420.0" prefWidth="204.0">
+                                       <content>
+                                          <VBox fx:id="inProgressVBox" prefHeight="415.0" prefWidth="200.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <Label layoutX="743.0" layoutY="49.0" prefHeight="21.0" prefWidth="43.0" text="Testing" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="Calibri" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ScrollPane layoutX="662.0" layoutY="81.0" prefHeight="420.0" prefWidth="204.0">
+                                       <content>
+                                          <VBox fx:id="testingVBox" prefHeight="415.0" prefWidth="200.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <ScrollPane layoutX="879.0" layoutY="81.0" prefHeight="420.0" prefWidth="204.0">
+                                       <content>
+                                          <VBox fx:id="codeReviewVBox" prefHeight="415.0" prefWidth="200.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <ScrollPane layoutX="1096.0" layoutY="81.0" prefHeight="420.0" prefWidth="204.0">
+                                       <content>
+                                          <VBox fx:id="doneVBox" prefHeight="415.0" prefWidth="200.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <Label layoutX="950.0" layoutY="49.0" prefHeight="21.0" prefWidth="85.0" text="Code review" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font name="Calibri" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="1188.0" layoutY="49.0" prefHeight="21.0" prefWidth="36.0" text="Done" textFill="WHITE" underline="true">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="36.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/Backlog.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="258.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/SprintBacklog.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="484.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/InProgress.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="712.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/Testing.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1158.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/Done.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="920.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/CodeReview.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
