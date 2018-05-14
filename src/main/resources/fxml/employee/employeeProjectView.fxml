@@ -12,18 +12,18 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../manager/mangerProjectView.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.employee.EmployeeProjectViewController">
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
+      <BorderPane opacity="0.9" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
          <center>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="-7.0" prefHeight="50.0" prefWidth="916.0" styleClass="topPaneWindow">
+                  <Pane layoutX="-7.0" prefHeight="40.0" prefWidth="916.0" styleClass="topPaneWindow">
                      <children>
-                        <Label fx:id="projectNameLabel" layoutX="55.0" layoutY="15.0" prefHeight="21.0" prefWidth="143.0" text="NAZWA PROJEKTU" textFill="WHITE">
+                        <Label fx:id="projectNameLabel" layoutX="55.0" layoutY="10.0" prefHeight="21.0" prefWidth="143.0" text="NAZWA PROJEKTU" textFill="WHITE">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="backButton" buttonType="RAISED" focusTraversable="false" layoutX="14.0" layoutY="13.0" text=" " textFill="WHITE">
+                        <JFXButton fx:id="backButton" buttonType="RAISED" focusTraversable="false" layoutX="14.0" layoutY="8.0" text=" " textFill="WHITE">
                            <graphic>
                               <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -32,7 +32,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="backToLoginButton" buttonType="RAISED" ellipsisString="" layoutX="850.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                        <JFXButton fx:id="backToLoginButton" buttonType="RAISED" ellipsisString="" layoutX="850.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -41,7 +41,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="810.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="810.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -50,7 +50,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="770.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="770.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -63,7 +63,7 @@
                   </Pane>
                   <Pane prefHeight="600.0" prefWidth="900.0">
                      <children>
-                        <ScrollPane fitToHeight="true" layoutY="50.0" prefHeight="550.0" prefWidth="900.0" style="-fx-background-color: black;">
+                        <ScrollPane fitToHeight="true" layoutY="40.0" prefHeight="562.0" prefWidth="900.0" style="-fx-background-color: black;">
                            <content>
                               <Pane prefHeight="550.0" prefWidth="1310.0" style="-fx-background-color: black;">
                                  <children>
