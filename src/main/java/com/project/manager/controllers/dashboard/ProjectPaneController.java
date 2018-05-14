@@ -2,7 +2,6 @@ package com.project.manager.controllers.dashboard;
 
 import com.jfoenix.controls.JFXButton;
 import com.project.manager.config.ApplicationContextProvider;
-import com.project.manager.config.FXMLLoaderProvider;
 import com.project.manager.entities.Project;
 import com.project.manager.services.ProjectService;
 import com.project.manager.services.SessionService;

@@ -4,11 +4,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.project.manager.exceptions.EmailValidationException;
-import com.project.manager.ui.sceneManager.SceneManager;
-import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.services.RegistrationService;
 import com.project.manager.ui.AlertManager;
-import com.project.manager.utils.Validator;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
+import com.project.manager.utils.EmailValidator;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -67,7 +67,7 @@ public class RegistrationController implements Initializable{
         sign.disableProperty().bind(Bindings.isEmpty(username.textProperty())
                 .or(Bindings.length(password.textProperty()).lessThan(8))
                 .or(Bindings.length(repeatPassword.textProperty()).lessThan(8))
-                .or(Bindings.createBooleanBinding(() -> !Validator.isEmailValid(email.getText()),email.textProperty())));
+                .or(Bindings.createBooleanBinding(() -> !EmailValidator.isEmailValid(email.getText()),email.textProperty())));
 
         sign.setOnAction((e) -> {
             try {

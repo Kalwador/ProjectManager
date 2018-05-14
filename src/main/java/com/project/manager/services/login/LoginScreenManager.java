@@ -29,13 +29,14 @@ public class LoginScreenManager {
 
     /**
      * This method are setting up the window on start of application
+     *
      * @param primaryStage main stage of application
      */
     public void setLoginScreen(Stage primaryStage) {
         sceneManager.setPrimaryStage(primaryStage);
 
         Optional<UserModel> userModel = rememberUserService.getRememberedUser();
-        boolean isUserRemembered  = rememberUserService.isAnyRememberedUser();
+        boolean isUserRemembered = rememberUserService.isAnyRememberedUser();
         if (isUserRemembered && userModel.isPresent()) {
             loginService.loginRememberedUser();
         } else {

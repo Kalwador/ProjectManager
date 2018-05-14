@@ -1,6 +1,5 @@
 package com.project.manager.entities;
 
-
 import lombok.*;
 import org.hibernate.annotations.Proxy;
 
@@ -48,6 +47,6 @@ public class Message {
 
     @PreRemove
     private void preRemove() {
-        users.forEach( userModel -> userModel.getMessages().remove(this));
+        users.forEach(userModel -> userModel.getMessages().remove(this));
     }
 }

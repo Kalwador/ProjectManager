@@ -5,6 +5,7 @@ import com.project.manager.models.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     /**
      * This method is searching the {@link UserModel} with passed id in database
+     *
      * @param id this parameter is id to identify the user in database
      * @return the user with the same email ass passed in parameter
      */
@@ -24,6 +26,7 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     /**
      * This method is searching the {@link UserModel} with passed username in database
+     *
      * @param username this parameter is username to identify the user in database
      * @return the user with the same username ass passed in parameter
      */
@@ -31,6 +34,7 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     /**
      * This method is searching the {@link UserModel} with passed EMAIL in database
+     *
      * @param email this parameter is emial to identify the user in database
      * @return the user with the same EMAIL ass passed in parameter
      */
@@ -38,14 +42,16 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     /**
      * This method is searching the {@link UserModel} with passed username or EMAIL in database
+     *
      * @param username this parameter is username to identify the user in database
-     * @param email this parameter is username to identify the user in database
+     * @param email    this parameter is username to identify the user in database
      * @return the user with the same username ass passed in parameter
      */
     Optional<UserModel> findByUsernameOrEmail(String username, String email);
 
     /**
      * This method is returning all users from database with specify {@link UserRole} in parameter
+     *
      * @param userRole this is the role which help to specify what users we are want to return
      * @return the List of {@link UserModel } with the same role ass passed in parameter
      */

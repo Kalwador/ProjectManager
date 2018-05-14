@@ -13,10 +13,11 @@ public class ApplicationContextProvider {
 
     /**
      * Singleton getInstance method
+     *
      * @return instance of class
      */
-    public static ApplicationContextProvider getInstance(){
-        if(instance == null){
+    public static ApplicationContextProvider getInstance() {
+        if (instance == null) {
             instance = new ApplicationContextProvider();
         }
         return instance;

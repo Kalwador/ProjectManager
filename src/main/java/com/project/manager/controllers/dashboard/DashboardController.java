@@ -1,7 +1,8 @@
 package com.project.manager.controllers.dashboard;
 
-import com.project.manager.ui.sceneManager.SceneManager;
+import com.jfoenix.controls.JFXButton;
 import com.project.manager.ui.components.ProjectPaneGenerator;
+import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +25,8 @@ public class DashboardController implements Initializable {
     private Button backToLoginButton;
     @FXML
     private Button sentMessage;
+    @FXML
+    private JFXButton userData;
     @FXML
     private VBox projectsArea;
 
@@ -48,5 +51,9 @@ public class DashboardController implements Initializable {
 
         projectPaneGenerator.createPanes(projectsArea);
         backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
+
+        userData.setOnAction(e -> {
+            sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
+        });
     }
 }

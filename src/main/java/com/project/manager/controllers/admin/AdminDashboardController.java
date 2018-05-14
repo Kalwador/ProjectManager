@@ -6,6 +6,7 @@ import com.project.manager.models.MessageTableView;
 import com.project.manager.models.ProjectTableView;
 import com.project.manager.models.UserTableView;
 import com.project.manager.services.ProjectService;
+import com.project.manager.services.SessionService;
 import com.project.manager.services.login.LoginService;
 import com.project.manager.ui.components.admin.AdminDashboardTablesComponent;
 import com.project.manager.ui.sceneManager.SceneManager;
@@ -141,6 +142,6 @@ public class AdminDashboardController implements Initializable {
             sceneManager.showInNewWindow(SceneType.ADMIN_UPDATE_PROJECT);
         });
 
-        logout.setOnAction(e -> loginService.logoutUser());
+        logout.setOnAction(e -> SessionService.getInstance().logoutUser());
     }
 }

@@ -1,7 +1,6 @@
 package com.project.manager.ui.sceneManager;
 
 import com.project.manager.ui.sceneManager.scenes.*;
-import com.project.manager.ui.sceneManager.scenes.MessageViewWindowScene;
 import com.project.manager.ui.sceneManager.scenes.system.CustomScene;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j;
@@ -30,6 +29,8 @@ public class SceneManager {
     private AddUserScene addUserScene;
     private MessageSentScene messageSentScene;
     private GenerateReportScene generateReportScene;
+    private PersonalDataScene personalDataScene;
+
     private HashMap<Integer, CustomScene> scenes;
 
     /**
@@ -82,6 +83,7 @@ public class SceneManager {
         this.addUserScene = new AddUserScene(primaryStage);
         this.messageSentScene = new MessageSentScene(primaryStage);
         this.generateReportScene = new GenerateReportScene(primaryStage);
+        this.personalDataScene = new PersonalDataScene(primaryStage);
 
         scenes = new HashMap<Integer, CustomScene>() {
             {
@@ -98,6 +100,7 @@ public class SceneManager {
                 put(SceneType.ADD_USER.ordinal(), addUserScene);
                 put(SceneType.MESSAGE_SENT_WINDOW.ordinal(), messageSentScene);
                 put(SceneType.GENERATE_REPORT.ordinal(), generateReportScene);
+                put(SceneType.PERSONAL_DATA.ordinal(), personalDataScene);
             }
         };
         log.info("Scenes initializec succesfully in initializeScenes method");
@@ -221,7 +224,6 @@ public class SceneManager {
     /**
      * Close scene passed in parameter by ID in NewStage.
      * There can be only one NewStage.
-     * "when u go so far, that u can't take step back"
      *
      * @param sceneID SceneTypeID to show
      */

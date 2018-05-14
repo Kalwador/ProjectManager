@@ -5,14 +5,12 @@ import com.project.manager.config.ApplicationContextProvider;
 import com.project.manager.entities.UserModel;
 import com.project.manager.services.SessionService;
 import com.project.manager.services.user.UserService;
-import com.project.manager.ui.components.MemberPaneGenerator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URL;
 import java.util.Optional;

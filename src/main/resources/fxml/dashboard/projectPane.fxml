@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane prefHeight="60.0" prefWidth="405.0" style="-fx-background-color: #c6ff72;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <JFXButton fx:id="viewProject" prefHeight="60.0" prefWidth="405.0" text="projectName" textFill="#001eff">

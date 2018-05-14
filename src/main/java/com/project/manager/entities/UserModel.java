@@ -65,8 +65,8 @@ public class UserModel {
     private String lastName;
 
     @Lob
-    @Column(name="avatar")
-    @Type(type="org.hibernate.type.BinaryType")
+    @Column(name = "avatar")
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] avatar;
 
     @OneToMany(mappedBy = "manager", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})

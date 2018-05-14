@@ -1,9 +1,6 @@
 package com.project.manager.ui;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-
-import java.util.Optional;
 
 /**
  * Class which have method to show different dialog alerts

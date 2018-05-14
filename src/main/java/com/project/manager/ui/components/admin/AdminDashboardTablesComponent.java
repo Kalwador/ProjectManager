@@ -41,7 +41,7 @@ public class AdminDashboardTablesComponent {
      * List of Projects in database
      */
     public static ObservableList<ProjectTableView> projectTableViews;
-    /**0
+    /**
      * List of all users in database
      */
     public static ObservableList<UserTableView> userTableViews;
@@ -77,7 +77,7 @@ public class AdminDashboardTablesComponent {
         this.projectService = projectService;
         this.userService = userService;
         this.messageService = messageService;
-               this.adminDashboardController = adminDashboardController;
+        this.adminDashboardController = adminDashboardController;
     }
 
     /**

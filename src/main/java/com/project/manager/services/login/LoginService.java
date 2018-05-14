@@ -69,6 +69,7 @@ public class LoginService {
 
     /**
      * Method to valid that user is blocked or not
+     *
      * @param usermodel model of user
      */
     public void loginValidUser(UserModel usermodel) {
@@ -78,13 +79,13 @@ public class LoginService {
         if (usermodel.isLocked()) {
             throw new AccountLockedException("Your account is locked, you should contact with administrator of service!");
         } else {
-            sessionService.setLoggedUser(usermodel);
+            sessionService.setUserModel(usermodel);
             loadScene(usermodel);
         }
     }
 
     public void loadScene(UserModel usermodel) {
-        UserRole role = sessionService.getRole();
+        UserRole role = sessionService.getUserModel().getRole();
         switch (role) {
             case USER:
                 sceneManager.showScene(SceneType.DASHBOARD);
@@ -100,10 +101,5 @@ public class LoginService {
     public void loginRememberedUser() {
         Optional<UserModel> userModel = rememberUserService.getRememberedUser();
         userModel.ifPresent(this::loginValidUser);
-    }
-
-    public void logoutUser() {
-        sessionService.setLoggedUser(null);
-        sceneManager.showScene(SceneType.LOGIN);
     }
 }

@@ -71,7 +71,7 @@ public class RememberUserService {
                 FileReader fileReader = new FileReader(fileName);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 while ((line = bufferedReader.readLine()) != null && !line.isEmpty()) {
-                        username = decrypt(line);
+                    username = decrypt(line);
                 }
                 bufferedReader.close();
             }

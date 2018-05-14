@@ -3,15 +3,15 @@ package com.project.manager.data;
 import com.project.manager.entities.Message;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
-import com.project.manager.models.task.TaskPriority;
-import com.project.manager.models.task.TaskStatus;
-import com.project.manager.repositories.TaskRepository;
-import com.project.manager.utils.BCryptEncoder;
 import com.project.manager.entities.UserModel;
 import com.project.manager.models.UserRole;
+import com.project.manager.models.task.TaskPriority;
+import com.project.manager.models.task.TaskStatus;
 import com.project.manager.repositories.MessageRepository;
 import com.project.manager.repositories.ProjectRepository;
+import com.project.manager.repositories.TaskRepository;
 import com.project.manager.repositories.UserRepository;
+import com.project.manager.utils.BCryptEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -81,7 +81,6 @@ public class InjectData {
     }
 
     private void addUsers() {
-
         this.user = UserModel.builder()
                 .username("user")
                 .password(BCryptEncoder.encode("password"))
@@ -145,6 +144,7 @@ public class InjectData {
                     .projectsAsUser(new HashSet<>())
                     .projectsAsManager(new HashSet<>())
                     .messages(new HashSet<>())
+                    .tasks(new HashSet<>())
                     .avatar(injectAvatar.getAvatar())
                     .build();
             tempUser = userRepository.save(tempUser);

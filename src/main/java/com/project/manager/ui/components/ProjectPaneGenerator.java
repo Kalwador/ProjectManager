@@ -2,7 +2,6 @@ package com.project.manager.ui.components;
 
 import com.project.manager.controllers.dashboard.ProjectPaneController;
 import com.project.manager.entities.Project;
-import com.project.manager.entities.UserModel;
 import com.project.manager.services.SessionService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * This is the class which is responsible for projectsAsUser panes in Dashboard view.
