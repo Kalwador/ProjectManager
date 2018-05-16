@@ -5,7 +5,7 @@
 }
 .tab-pane
 {
-	-fx-opacity: 0.90;
+	-fx-opacity: 0.80;
 	-fx-background-color: black;
     -fx-tab-min-width:90px;
 	-fx-background-radius:5px;
@@ -62,9 +62,9 @@
     -fx-padding: 0.5em 0.2em 0.5em 0.0em; /* overridden as 5 2 0 0 */
 }
 .backgroundMainScene {
-	-fx-border-color:#ee9701;
+	-fx-border-color:#d66000;
 	-fx-border-radius:5px;
 	-fx-border-width:2px;
 	-fx-background-radius:5px;
-	-fx-background-color:#ee9701;
+	-fx-background-color:#d66000;
 }

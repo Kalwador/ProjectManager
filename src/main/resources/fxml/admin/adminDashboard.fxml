@@ -8,30 +8,30 @@
 <?import javafx.scene.text.*?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.admin.AdminDashboardController">
    <center>
-      <BorderPane minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="400.0" prefWidth="400.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
+      <BorderPane opacity="0.95" prefHeight="400.0" prefWidth="400.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
          <center>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="630.0" prefWidth="850.0" style="-fx-border-radius: 5px;" stylesheets="@adminDashboard.css" BorderPane.alignment="CENTER">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="500.0" prefWidth="850.0" style="-fx-border-radius: 5px;" stylesheets="@adminDashboard.css" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
                <children>
-                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="500.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="800.0" tabMaxWidth="600.0" tabMinHeight="30.0" tabMinWidth="50.0">
+                  <TabPane layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.95" prefHeight="473.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="800.0" tabMaxWidth="600.0" tabMinHeight="30.0" tabMinWidth="50.0">
                     <tabs>
                       <Tab fx:id="projectsTab" styleClass="tabMain" text="Projects">
                         <content>
                           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="613.0">
                                  <children>
-                                    <JFXButton fx:id="showProject" buttonType="RAISED" layoutX="750.0" layoutY="35.0" minWidth="75.0" opacity="0.98" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 );" text="Show" textFill="#006b0e" disable="true">
+                                    <JFXButton fx:id="showProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="35.0" minWidth="75.0" opacity="0.98" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 );" text="Show" textFill="#006b0e">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="updateProject" buttonType="RAISED" layoutX="750.0" layoutY="80.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(136,141,0,0.7) , 6, 0.0 , 0 , 2 );" text="Update" textFill="#888d00" disable="true">
+                                    <JFXButton fx:id="updateProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="80.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(136,141,0,0.7) , 6, 0.0 , 0 , 2 );" text="Update" textFill="#888d00">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="deleteProject" buttonType="RAISED" layoutX="750.0" layoutY="125.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300" disable="true">
+                                    <JFXButton fx:id="deleteProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="125.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -51,7 +51,7 @@
                               <Pane style="-fx-background-radius: 50px;">
                                  <children>
                                     <JFXTreeTableView id="InsideProject" fx:id="userTable" layoutX="2.0" prefHeight="429.0" prefWidth="725.0" />
-                                    <JFXButton fx:id="deleteUsers" buttonType="RAISED" layoutX="750.0" layoutY="35.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300" disable="true">
+                                    <JFXButton fx:id="deleteUsers" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="35.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -96,7 +96,7 @@
                                        </padding>
                                     </JFXTabPane>
                                     <JFXButton fx:id="sentMessage" buttonType="RAISED" layoutX="741.0" layoutY="35.0" prefHeight="34.0" prefWidth="95.0" ripplerFill="#ed9302" style="-fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 ); -fx-background-color: black;" text="Sent message" textFill="#006b0e" />
-                                     <JFXButton fx:id="deleteMessages" buttonType="RAISED" layoutX="741.0" layoutY="75.0" prefHeight="34.0" prefWidth="95.0" ripplerFill="#ed9302" style="-fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 ); -fx-background-color: black;" text="Delete message" textFill="#006b0e" disable="true" />
+                                     <JFXButton fx:id="deleteMessages" buttonType="RAISED" disable="true" layoutX="741.0" layoutY="75.0" prefHeight="34.0" prefWidth="95.0" ripplerFill="#ed9302" style="-fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 ); -fx-background-color: black;" text="Delete message" textFill="#006b0e" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -112,38 +112,38 @@
                         <Insets top="25.0" />
                      </padding>
                   </TabPane>
-                  <Pane layoutX="-7.0" prefHeight="29.0" prefWidth="868.0" styleClass="backgroundMainScene">
+                  <Pane layoutX="-7.0" prefHeight="40.0" prefWidth="868.0" styleClass="backgroundMainScene">
                      <children>
-                        <Label layoutX="14.0" layoutY="2.0" prefHeight="26.0" prefWidth="100.0" text="AdminDashboard" textFill="WHITE" />
+                        <Label layoutX="14.0" layoutY="7.0" prefHeight="26.0" prefWidth="100.0" text="AdminDashboard" textFill="WHITE" />
+                        <JFXButton fx:id="logout" buttonType="RAISED" ellipsisString="" layoutX="814.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/door-exit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="774.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/Messages.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" ellipsisString="" layoutX="734.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/WstazkaUser.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </Pane>
-                  <JFXButton fx:id="logout" buttonType="RAISED" ellipsisString="" layoutX="810.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/door-exit.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" ellipsisString="" layoutX="770.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/Messages.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" ellipsisString="" layoutX="730.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text=" ">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/WstazkaUser.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
                </children>
             </Pane>
          </center>
