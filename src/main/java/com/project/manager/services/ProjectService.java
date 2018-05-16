@@ -49,7 +49,7 @@ public class ProjectService {
      * @return list of projectsAsUser of logged user by id
      */
     public List<Project> projectsOfUser() {
-        return projectRepository.findByMembers_Id(sessionService.getID()).get();
+        return projectRepository.findByMembers_Id(sessionService.getUserModel().getId()).get();
     }
 
     /**
@@ -99,7 +99,7 @@ public class ProjectService {
      */
     public void delete(List<Long> indexes) {
         Alert alert = AlertManager.showConfirmationAlert("Delete", "Do you really want to delete" +
-                " this "+ indexes.size() +" project(s)?");
+                " this " + indexes.size() + " project(s)?");
         if (alert.getResult().equals(ButtonType.OK)) {
             for (Long id : indexes) {
                 projectRepository.delete(projectRepository.findById(id).get());
@@ -123,7 +123,7 @@ public class ProjectService {
      * This method perform update name of project operation on projectRepository by inserted model of project
      * and new project name
      *
-     * @param project model of project that we need to update
+     * @param project     model of project that we need to update
      * @param projectName new name of project
      */
     public void updateName(Project project, String projectName) {
@@ -135,7 +135,7 @@ public class ProjectService {
      * This method perform update description of project operation on projectRepository by inserted model of project
      * and new project description
      *
-     * @param project model of project that we need to update
+     * @param project            model of project that we need to update
      * @param projectDescription new description of project
      */
     public void updateDescription(Project project, String projectDescription) {
@@ -151,7 +151,7 @@ public class ProjectService {
      * @param manager model of new manager of project
      */
     public void updateManager(Project project, UserModel manager) {
-        if(Optional.ofNullable(manager).isPresent()) {
+        if (Optional.ofNullable(manager).isPresent()) {
             project.setManager(manager);
             projectRepository.save(project);
         }

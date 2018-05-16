@@ -2,10 +2,10 @@ package com.project.manager.controllers;
 
 import com.project.manager.exceptions.*;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
+import com.project.manager.services.login.LoginService;
 import com.project.manager.ui.AlertManager;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import com.project.manager.services.login.LoginService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -47,8 +47,8 @@ public class LoginController implements Initializable {
 
     /**
      * Initialization of login frame
-     * @param location //TODO
-     * @param resources //TODO
+     * @param location default framework parameter
+     * @param resources default framework parameter
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

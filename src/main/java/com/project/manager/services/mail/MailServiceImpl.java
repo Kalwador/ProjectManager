@@ -22,6 +22,12 @@ import java.util.Properties;
 @Service
 class MailServiceImpl implements MailService {
 
+    private MailingSystemConfiguration mailingSystemConfiguration;
+
+    public MailServiceImpl(MailingSystemConfiguration mailingSystemConfiguration) {
+        this.mailingSystemConfiguration = mailingSystemConfiguration;
+    }
+
     /**
      * Message without attachment
      *
@@ -36,7 +42,7 @@ class MailServiceImpl implements MailService {
         Session session = Session.getDefaultInstance(prop);
         MimeMessage message = new MimeMessage(session);
         try {
-            message.setFrom(new InternetAddress(MailingSystemConfiguration.EMAIL));
+            message.setFrom(new InternetAddress(mailingSystemConfiguration.getEmail()));
             InternetAddress toAddress = new InternetAddress(recipient);
             message.setRecipient(Message.RecipientType.TO, toAddress);
             message.setSubject(subject);
@@ -62,7 +68,7 @@ class MailServiceImpl implements MailService {
         Session session = Session.getDefaultInstance(properties);
         try {
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(MailingSystemConfiguration.EMAIL));
+            message.setFrom(new InternetAddress(mailingSystemConfiguration.getEmail()));
             InternetAddress toAddress = new InternetAddress(recipient);
             message.setRecipient(Message.RecipientType.TO, toAddress);
             message.setSubject(subject);
@@ -94,9 +100,9 @@ class MailServiceImpl implements MailService {
     private void send(MimeMessage msng, Session session) {
         try {
             Transport transport = session.getTransport("smtp");
-            transport.connect(MailingSystemConfiguration.HOST,
-                    MailingSystemConfiguration.EMAIL,
-                    MailingSystemConfiguration.PASSWORD);
+            transport.connect(mailingSystemConfiguration.getHost(),
+                    mailingSystemConfiguration.getEmail(),
+                    mailingSystemConfiguration.getPassword());
             transport.sendMessage(msng, msng.getAllRecipients());
             transport.close();
             log.info("Message sent succesfully");
@@ -111,13 +117,13 @@ class MailServiceImpl implements MailService {
      */
     private Properties getPropertiesOfMailingSystem() {
         Properties properties = System.getProperties();
-        properties.put("mail.smtp.starttls.enable", MailingSystemConfiguration.START_TLS);
-        properties.put("mail.smtp.HOST", MailingSystemConfiguration.HOST);
-        properties.put("mail.smtp.ssl.trust", MailingSystemConfiguration.SSL_TRUST);
-        properties.put("mail.smtp.user", MailingSystemConfiguration.EMAIL);
-        properties.put("mail.smtp.PASSWORD", MailingSystemConfiguration.PASSWORD);
-        properties.put("mail.smtp.port", MailingSystemConfiguration.PORT);
-        properties.put("mail.smtp.auth", MailingSystemConfiguration.AUTH);
+        properties.put("mail.smtp.starttls.enable", mailingSystemConfiguration.getStart_tsl());
+        properties.put("mail.smtp.HOST", mailingSystemConfiguration.getHost());
+        properties.put("mail.smtp.ssl.trust", mailingSystemConfiguration.getSsl_trust());
+        properties.put("mail.smtp.user", mailingSystemConfiguration.getEmail());
+        properties.put("mail.smtp.PASSWORD", mailingSystemConfiguration.getPassword());
+        properties.put("mail.smtp.port", mailingSystemConfiguration.getPort());
+        properties.put("mail.smtp.auth", mailingSystemConfiguration.getAuth());
         log.info("Message properties set successful");
         return properties;
     }

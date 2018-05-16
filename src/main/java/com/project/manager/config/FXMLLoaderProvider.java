@@ -14,6 +14,7 @@ public class FXMLLoaderProvider {
 
     /**
      * Method allows to load fxml files containing views
+     *
      * @param path path do fxml file
      * @return FXMLLoader containing view and bundle of resources
      */
@@ -25,7 +26,6 @@ public class FXMLLoaderProvider {
     }
 
     /**
-     *
      * @param context Context of application
      */
     @Autowired

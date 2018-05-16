@@ -98,7 +98,7 @@ public class SentMessageController implements Initializable {
     }
 
     private void refreshTables() {
-        UserRole role = sessionService.getRole();
+        UserRole role = sessionService.getUserModel().getRole();
         switch (role) {
             case USER:
                 System.out.println("Odswiezanie tabeli dla usera");

@@ -48,11 +48,12 @@ public class ReportService {
      * provided report object.
      * Then if some parameters have right value method sent report to provided isEmailValid, or to actual logged user or
      * create report file in set localization
+     *
      * @param sendToMe this is value which is responsible to execute sending report to actual logged user
-     * @param email this value is isEmailValid of user which will get isEmailValid message with report is value isn't empty
-     * @param path this is path where application will save report pdf
+     * @param email    this value is isEmailValid of user which will get isEmailValid message with report is value isn't empty
+     * @param path     this is path where application will save report pdf
      */
-    public void generateReport(boolean sendToMe, String email, String path) throws EmailValidationException{
+    public void generateReport(boolean sendToMe, String email, String path) throws EmailValidationException {
         String fileToDelete = "";
         try {
             FileOutputStream fos = null;
@@ -68,7 +69,7 @@ public class ReportService {
                     fos.write(pdf);
                     mail = prepareMail(report, mail);
                     if (sendToMe) {
-                        sentMailWithReport(sessionService.getEmail(), mail);
+                        sentMailWithReport(sessionService.getUserModel().getEmail(), mail);
                     }
                     if (!email.isEmpty()) {
                         sentMailWithReport(email, mail);
@@ -93,6 +94,7 @@ public class ReportService {
 
     /**
      * This method is refreshing project last generated report date
+     *
      * @param actualDate actual date to set in project last report date
      */
     private void refreshProjectObject(LocalDate actualDate) {
@@ -103,8 +105,9 @@ public class ReportService {
 
     /**
      * Function which save report in set localization
+     *
      * @param path where will be saved report
-     * @param pdf file to save
+     * @param pdf  file to save
      * @return {@link FileOutputStream } object to manager stream of data which contains pdf file
      * @throws IOException in case of file problems
      */
@@ -119,8 +122,9 @@ public class ReportService {
 
     /**
      * Method to send mails object to set isEmailValid in parameter
+     *
      * @param email address where application will send mail with report
-     * @param mail object with report attachment
+     * @param mail  object with report attachment
      */
     private void sentMailWithReport(String email, ProjectReportMail mail) throws EmailValidationException {
         mail.setRecipientName(email);
@@ -130,8 +134,9 @@ public class ReportService {
 
     /**
      * Method which prepare mail object with necessary date
+     *
      * @param report object where is stored some data needed to prepare mail message
-     * @param mail original mail object which will be send to user
+     * @param mail   original mail object which will be send to user
      * @return mail because this object will be send by {@link MailFactory } instance
      */
     private ProjectReportMail prepareMail(Report report, ProjectReportMail mail) {
@@ -150,6 +155,7 @@ public class ReportService {
 
     /**
      * Method to prepare report object from original project
+     *
      * @return prepared report object
      */
     private Report prepareReport() {
@@ -168,6 +174,7 @@ public class ReportService {
 
     /**
      * That method is responsible for organizing tasks from project in suitable order
+     *
      * @param tasks this is set of tasks from original project
      * @return list which contains three lists of tasks in order { BACKLOG, ACTUAL, DONE}
      */
@@ -194,6 +201,7 @@ public class ReportService {
 
     /**
      * That method fetch manager and members from team and organizing them into suitable order
+     *
      * @param project original object from database which will be used to generate report
      * @return list of members and manager, manager is always on first place in list
      */
@@ -206,9 +214,10 @@ public class ReportService {
 
     /**
      * This method provides boolean value to decide that application should generate report
+     *
      * @param sendToMe boolean value to decide that actual logged user want get report on his mail
-     * @param email value to send report file to provided user isEmailValid, it will happen when isEmailValid is not empty
-     * @param path to save report file in our computer
+     * @param email    value to send report file to provided user isEmailValid, it will happen when isEmailValid is not empty
+     * @param path     to save report file in our computer
      * @return logic value to decide that application should generate report
      */
     private boolean shouldGenerateReport(boolean sendToMe, String email, String path) {

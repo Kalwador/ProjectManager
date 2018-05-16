@@ -1,9 +1,11 @@
 package com.project.manager.utils;
-import java.security.Key;
-import javax.crypto.Cipher;
-import sun.misc.BASE64Encoder;
+
 import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
 
 /**
  * This is the class which provides basic method to cipher some data

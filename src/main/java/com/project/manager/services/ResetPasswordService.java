@@ -7,13 +7,14 @@ import com.project.manager.models.mail.MailSubject;
 import com.project.manager.models.mail.ResetPasswordMail;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.services.mail.MailFactory;
+import com.project.manager.ui.AlertManager;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import com.project.manager.ui.AlertManager;
 import com.project.manager.utils.ActivationCodeGenerator;
 import com.project.manager.utils.BCryptEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 /**
@@ -40,7 +41,7 @@ public class ResetPasswordService {
      *
      * @param usernameOrEmail - name or email of user that want to reset password.
      */
-    public void resetPassword(String usernameOrEmail) throws EmailValidationException{
+    public void resetPassword(String usernameOrEmail) throws EmailValidationException {
 
         if (usernameOrEmail.isEmpty()) {
             throw new EmptyUsernameException("Username or Email field can't be empty.");
@@ -64,7 +65,7 @@ public class ResetPasswordService {
         }
     }
 
-    private void sendActivationCodeInMessage(UserModel userModel) throws EmailValidationException{
+    private void sendActivationCodeInMessage(UserModel userModel) throws EmailValidationException {
         ResetPasswordMail mail = ResetPasswordMail.builder()
                 .activationCode(userModel.getActivationCode())
                 .username(userModel.getUsername())

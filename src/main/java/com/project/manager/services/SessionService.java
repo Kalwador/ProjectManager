@@ -1,39 +1,36 @@
 package com.project.manager.services;
 
+import com.project.manager.config.ApplicationContextProvider;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.UserModel;
-import com.project.manager.models.UserRole;
+import com.project.manager.ui.sceneManager.SceneManager;
+import com.project.manager.ui.sceneManager.SceneType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Optional;
-
+/**
+ * Singleton class type, contains data of current logged in user.
+ */
 @Getter
 @Setter
 public class SessionService {
 
-    /**
-     * TODO
-     */
     private static SessionService instance = null;
-
-    /**
-     * User that is actual logged in.
-     */
     private UserModel userModel;
+    private Project project;
+    private SceneManager sceneManager;
 
     /**
-     * Project that user actual working on.
+     * Method provides instance of Singleton class
      */
-    private Project project;
-
     private SessionService() {
+        this.sceneManager = SceneManager.getInstance();
     }
 
     /**
-     * TODO
+     * Method provides Singleton instance of class
      *
-     * @return TODO
+     * @return singleton class instance
      */
     public static SessionService getInstance() {
         if (instance == null) {
@@ -42,23 +39,16 @@ public class SessionService {
         return instance;
     }
 
-    public void setLoggedUser(UserModel userModel) {
-        this.userModel = userModel;
-    }
-
-    public String getEmail() {
-        return userModel.getEmail();
-    }
-
-    public String getUsername() {
-        return userModel.getUsername();
-    }
-
-    public UserRole getRole() {
-        return userModel.getRole();
-    }
-
-    public long getID() {
-        return userModel.getId();
+    /**
+     * Method allows to log out of an application
+     * Clears sessionService of user data and clear rememberedUser from file
+     */
+    public void logoutUser() {
+        this.setUserModel(null);
+        this.setProject(null);
+        ApplicationContextProvider.getInstance().getContext()
+                .getBean(RememberUserService.class)
+                .deleteRememberedUser();
+        sceneManager.showScene(SceneType.LOGIN);
     }
 }

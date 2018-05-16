@@ -3,7 +3,6 @@ package com.project.manager.services;
 import com.project.manager.admin.projects.AdminDashboardTablesComponentTest;
 import com.project.manager.entities.Project;
 import com.project.manager.repositories.ProjectRepository;
-import com.project.manager.services.ProjectService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

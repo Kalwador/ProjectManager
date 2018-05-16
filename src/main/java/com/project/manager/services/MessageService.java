@@ -52,7 +52,7 @@ public class MessageService {
      * @return the list of {@link Message}
      */
     public List<Message> getAllReceivedMessages() {
-        return messageRepository.findByReceiver(sessionService.getUsername());
+        return messageRepository.findByReceiver(sessionService.getUserModel().getUsername());
     }
 
     /**
@@ -61,7 +61,7 @@ public class MessageService {
      * @return list of {@link Message}
      */
     public List<Message> getAllSentMessages() {
-        return messageRepository.findBySender(sessionService.getUsername());
+        return messageRepository.findBySender(sessionService.getUserModel().getUsername());
     }
 
     /**
@@ -120,7 +120,7 @@ public class MessageService {
      * @param indexes indexes of messages that we need to delete
      */
     public void delete(List<Long> indexes) {
-        Alert alert = AlertManager.showConfirmationAlert("Delete", "Do you really want to delete this "+ indexes.size() +" message(s)?");
+        Alert alert = AlertManager.showConfirmationAlert("Delete", "Do you really want to delete this " + indexes.size() + " message(s)?");
         if (alert.getResult().equals(ButtonType.OK)) {
             for (Long id : indexes) {
                 messageRepository.delete(messageRepository.findById(id).get());

@@ -56,7 +56,7 @@ public class MessageServiceTest {
     @Test
     public void getAllReceivedMessagesTest() {
         String username = getExampleMessages().get(0).getReceiver();
-        sessionService.setLoggedUser(UserModel.builder().username(username).build());
+        sessionService.setUserModel(UserModel.builder().username(username).build());
 
         when(messageRepository.findByReceiver(username)).thenReturn(getExampleMessages());
 
@@ -78,7 +78,7 @@ public class MessageServiceTest {
     @Test
     public void getAllSentMessagesTest() {
         String username = getExampleMessages().get(0).getReceiver();
-        sessionService.setLoggedUser(UserModel.builder().username(username).build());
+        sessionService.setUserModel(UserModel.builder().username(username).build());
 
         when(messageRepository.findBySender(username)).thenReturn(getExampleMessages());
 
@@ -114,7 +114,7 @@ public class MessageServiceTest {
         Message message = getExampleMessages().get(0);
         UserModel receiver = UserModel.builder().messages(new HashSet<>()).build();
         UserModel sender = UserModel.builder().username("actualSender").messages(new HashSet<>()).build();
-        sessionService.setLoggedUser(sender);
+        sessionService.setUserModel(sender);
 
         when(userRepository.findByUsername(message.getReceiver())).thenReturn(Optional.of(receiver));
         when(messageRepository.save(message)).thenReturn(message);

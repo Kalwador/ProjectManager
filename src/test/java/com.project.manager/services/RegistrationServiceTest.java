@@ -1,13 +1,12 @@
 package com.project.manager.services;
 
-import com.project.manager.services.mail.MailFactory;
-import com.project.manager.utils.BCryptEncoder;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.DifferentPasswordException;
 import com.project.manager.exceptions.EmailValidationException;
 import com.project.manager.exceptions.user.UserAlreadyExistException;
 import com.project.manager.repositories.UserRepository;
-import com.project.manager.utils.Validator;
+import com.project.manager.services.mail.MailFactory;
+import com.project.manager.utils.BCryptEncoder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;

@@ -5,7 +5,7 @@ import com.project.manager.models.mail.AccountActivationMail;
 import com.project.manager.models.mail.Mail;
 import com.project.manager.models.mail.ProjectReportMail;
 import com.project.manager.models.mail.ResetPasswordMail;
-import com.project.manager.utils.Validator;
+import com.project.manager.utils.EmailValidator;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +32,11 @@ public class MailFactory {
      *
      * @param mail full prepared object, need to contain recipent and subject
      */
-    public void sendMail(Mail mail) throws EmailValidationException{
-        String content = "";
-        String subject = "";
+    public void sendMail(Mail mail) throws EmailValidationException {
+        String content;
+        String subject;
 
-        if(!Validator.isEmailValid(mail.getRecipient())){
+        if (!EmailValidator.isEmailValid(mail.getRecipient())) {
             throw new EmailValidationException();
         }
 

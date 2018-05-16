@@ -4,9 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.project.manager.exceptions.EmailValidationException;
+import com.project.manager.services.ResetPasswordService;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import com.project.manager.services.ResetPasswordService;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,9 +21,6 @@ import java.util.ResourceBundle;
 
 @Component
 public class ResetPasswordController implements Initializable {
-
-
-    //TODO czy te testowe przyciski sa nadal potrzebne??
     @FXML
     private Button backToLoginButton;
     @FXML

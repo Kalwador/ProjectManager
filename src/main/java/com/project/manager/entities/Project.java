@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -48,7 +47,7 @@ public class Project {
 
     @PreRemove
     private void preRemove() {
-        members.forEach( userModel -> userModel.getProjectsAsUser().remove(this));
+        members.forEach(userModel -> userModel.getProjectsAsUser().remove(this));
         tasks.forEach(task -> task.setProject(null));
         manager.getProjectsAsManager().remove(this);
     }

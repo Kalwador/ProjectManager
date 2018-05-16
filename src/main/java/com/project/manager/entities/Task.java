@@ -6,6 +6,7 @@ import org.hibernate.annotations.Proxy;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "TASK")
@@ -41,4 +42,9 @@ public class Task {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usermodel_id")
     private UserModel user;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, taskStatus, tag, priority, project, user);
+    }
 }

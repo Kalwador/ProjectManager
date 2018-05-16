@@ -71,7 +71,7 @@ public class UserSelectorService {
         if (!usermodel.isPresent()) {
             throw new UserDoesNotExistException("There is no user with that username in our service.");
         }
-        role = sessionService.getRole().toString();
+        role = sessionService.getUserModel().getRole().toString();
         if (role.equals("USER")) {
             throw new NotEnoughPermissionsException("You do not have enough permissions to do that.");
         }
