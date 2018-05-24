@@ -1,5 +1,8 @@
 package com.project.manager.controllers;
 
+import com.project.manager.exceptions.EmptyUsernameException;
+import com.project.manager.exceptions.NotEnoughPermissionsException;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.services.user.UserSelectorService;
 import com.project.manager.ui.components.ProjectPaneGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
@@ -55,28 +58,47 @@ public class UserSelectorController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.resetLabelError();
-        possibleUsers = userSelectorService.getUserList();
+        this.resetErrorLabel();
+        loadUsers();
         TextFields.bindAutoCompletion(usernameTextField, possibleUsers);
 
         addUserButton.setOnMouseClicked(e -> {
-            this.resetLabelError();
+            this.resetErrorLabel();
             try {
                 String username = usernameTextField.getText();
                 userSelectorService.findUser(username);
-            } catch (RuntimeException ex) {
-                errorLabel.setVisible(true);
-                errorLabel.setText(ex.getMessage());
-                log.error("User couldnt be selected in UserSelectorWindow with username: "+usernameTextField.getText());
+            } catch (EmptyUsernameException ex) {
+                setErrorLabelMessage("User not recognized, username is empty!");
+                log.error("User try to insert use with empty username : " + usernameTextField.getText());
+            } catch (UserDoesNotExistException ex) {
+                setErrorLabelMessage("User with username : '" + usernameTextField.getText() + "' does not exist!");
+                log.warn("User with username : '" + usernameTextField.getText() + "' was not found!");
+            } catch (NotEnoughPermissionsException ex) {
+                setErrorLabelMessage("You don't have enough permissions to execute that action!");
+                log.warn("User try to execute prohibited for him actions!");
             }
         });
+    }
+
+    private void setErrorLabelMessage(String message) {
+        errorLabel.setVisible(true);
+        errorLabel.setText(message);
     }
 
     /**
      * Method responsible for resetting error label.
      */
-    public void resetLabelError() {
+    public void resetErrorLabel() {
         errorLabel.setText("");
         errorLabel.setVisible(false);
+    }
+
+    private void loadUsers() {
+        try {
+            possibleUsers = userSelectorService.getUserList();
+        } catch (UserDoesNotExistException e) {
+            log.warn("Load users error, already logged account try to load user which does not exist in database!");
+            setErrorLabelMessage("User(s) does not exist in database!");
+        }
     }
 }

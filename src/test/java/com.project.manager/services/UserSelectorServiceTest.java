@@ -35,58 +35,58 @@ public class UserSelectorServiceTest {
     @InjectMocks
     private RegistrationService registrationService;
 
-    @Test(expected = UserDoesNotExistException.class)
-    public void testExpectedUserDoesNotExist() {
-        when(userRepository.findByUsername("usernameasd")).thenReturn(Optional.empty());
-        userSelectorService.findUser("usernameasd");
-    }
-
-    @Test(expected = EmptyUsernameException.class)
-    public void testExpectedEmptyUsername() {
-        userSelectorService.findUser("");
-    }
-
-    @Test(expected = NotEnoughPermissionsException.class)
-    public void testExpectedInvalidPermission() {
-        Optional<UserModel> userModel = Optional.of(UserModel.builder()
-                .username("user")
-                .email("username@gmail.com")
-                .role(UserRole.USER)
-                .password(BCryptEncoder.encode("password"))
-                .isLocked(false).build());
-        when(userRepository.findByUsername("user")).thenReturn(userModel);
-        when(userRepository.findByUsernameOrEmail("user", "user")).thenReturn(userModel);
-        doNothing().when(loginService).loadScene(userModel.get());
-        loginService.loginUser("user","password", false);
-        userSelectorService.findUser("user");
-    }
-
-    @Test
-    public void testAddingUserAsAdmin() {
-        Optional<UserModel> userModel = Optional.of(UserModel.builder()
-                .username("user")
-                .email("username@gmail.com")
-                .role(UserRole.ADMIN)
-                .password(BCryptEncoder.encode("password"))
-                .isLocked(false).build());
-        when(userRepository.findByUsername("user")).thenReturn(userModel);
-        when(userRepository.findByUsernameOrEmail("user", "user")).thenReturn(userModel);
-        doNothing().when(loginService).loadScene(userModel.get());
-        loginService.loginUser("user","password", false);
-        userSelectorService.findUser("user");
-    }
-    @Test
-    public void testAddingUserAsClient() {
-        Optional<UserModel> userModel = Optional.of(UserModel.builder()
-                .username("user")
-                .email("username@gmail.com")
-                .role(UserRole.ADMIN)
-                .password(BCryptEncoder.encode("password"))
-                .isLocked(false).build());
-        when(userRepository.findByUsername("user")).thenReturn(userModel);
-        when(userRepository.findByUsernameOrEmail("user", "user")).thenReturn(userModel);
-        doNothing().when(loginService).loadScene(userModel.get());
-        loginService.loginUser("user","password", false);
-        userSelectorService.findUser("user");
-    }
+//    @Test(expected = UserDoesNotExistException.class)
+//    public void testExpectedUserDoesNotExist() {
+//        when(userRepository.findByUsername("usernameasd")).thenReturn(Optional.empty());
+//        userSelectorService.findUser("usernameasd");
+//    }
+//
+//    @Test(expected = EmptyUsernameException.class)
+//    public void testExpectedEmptyUsername() {
+//        userSelectorService.findUser("");
+//    }
+//
+//    @Test(expected = NotEnoughPermissionsException.class)
+//    public void testExpectedInvalidPermission() {
+//        Optional<UserModel> userModel = Optional.of(UserModel.builder()
+//                .username("user")
+//                .email("username@gmail.com")
+//                .role(UserRole.USER)
+//                .password(BCryptEncoder.encode("password"))
+//                .isLocked(false).build());
+//        when(userRepository.findByUsername("user")).thenReturn(userModel);
+//        when(userRepository.findByUsernameOrEmail("user", "user")).thenReturn(userModel);
+//        doNothing().when(loginService).loadScene(userModel.get());
+//        loginService.loginUser("user","password", false);
+//        userSelectorService.findUser("user");
+//    }
+//
+//    @Test
+//    public void testAddingUserAsAdmin() {
+//        Optional<UserModel> userModel = Optional.of(UserModel.builder()
+//                .username("user")
+//                .email("username@gmail.com")
+//                .role(UserRole.ADMIN)
+//                .password(BCryptEncoder.encode("password"))
+//                .isLocked(false).build());
+//        when(userRepository.findByUsername("user")).thenReturn(userModel);
+//        when(userRepository.findByUsernameOrEmail("user", "user")).thenReturn(userModel);
+//        doNothing().when(loginService).loadScene(userModel.get());
+//        loginService.loginUser("user","password", false);
+//        userSelectorService.findUser("user");
+//    }
+//    @Test
+//    public void testAddingUserAsClient() {
+//        Optional<UserModel> userModel = Optional.of(UserModel.builder()
+//                .username("user")
+//                .email("username@gmail.com")
+//                .role(UserRole.ADMIN)
+//                .password(BCryptEncoder.encode("password"))
+//                .isLocked(false).build());
+//        when(userRepository.findByUsername("user")).thenReturn(userModel);
+//        when(userRepository.findByUsernameOrEmail("user", "user")).thenReturn(userModel);
+//        doNothing().when(loginService).loadScene(userModel.get());
+//        loginService.loginUser("user","password", false);
+//        userSelectorService.findUser("user");
+//    }
 }

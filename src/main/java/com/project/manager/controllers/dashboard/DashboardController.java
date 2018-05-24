@@ -29,6 +29,8 @@ public class DashboardController implements Initializable {
     private JFXButton userData;
     @FXML
     private VBox projectsArea;
+    @FXML
+    private Button messages;
 
     private SceneManager sceneManager;
     private ProjectPaneGenerator projectPaneGenerator;
@@ -48,7 +50,7 @@ public class DashboardController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
         projectPaneGenerator.createPanes(projectsArea);
         backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 

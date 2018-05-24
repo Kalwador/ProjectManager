@@ -1,6 +1,8 @@
 package com.project.manager.services.login;
 
 import com.project.manager.entities.UserModel;
+import com.project.manager.exceptions.AccountBlockedException;
+import com.project.manager.exceptions.AccountLockedException;
 import com.project.manager.services.RememberUserService;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
@@ -33,13 +35,16 @@ public class LoginScreenManager {
      * @param primaryStage main stage of application
      */
     public void setLoginScreen(Stage primaryStage) {
-        sceneManager.setPrimaryStage(primaryStage);
-
-        Optional<UserModel> userModel = rememberUserService.getRememberedUser();
-        boolean isUserRemembered = rememberUserService.isAnyRememberedUser();
-        if (isUserRemembered && userModel.isPresent()) {
-            loginService.loginRememberedUser();
-        } else {
+        try {
+            sceneManager.setPrimaryStage(primaryStage);
+            Optional<UserModel> userModel = rememberUserService.getRememberedUser();
+            boolean isUserRemembered = rememberUserService.isAnyRememberedUser();
+            if (isUserRemembered && userModel.isPresent()) {
+                loginService.loginRememberedUser();
+            } else {
+                sceneManager.showScene(SceneType.LOGIN);
+            }
+        } catch (AccountBlockedException | AccountLockedException ex) {
             sceneManager.showScene(SceneType.LOGIN);
         }
         primaryStage.show();

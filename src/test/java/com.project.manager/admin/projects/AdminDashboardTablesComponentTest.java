@@ -131,71 +131,71 @@ public class AdminDashboardTablesComponentTest {
 
     }
 
-    @Test
-    public void generateMessageInboxTableViewTest() {
-        List<Message> messages = getExampleMessage();
-        JFXTreeTableView<MessageTableView> inboxTable = new JFXTreeTableView<>();
-        JFXTreeTableView<MessageTableView> sentboxTable = new JFXTreeTableView<>();
-        when(adminDashboardController.getInboxTable()).thenReturn(inboxTable);
-        when(adminDashboardController.getSentboxTable()).thenReturn(sentboxTable);
-
-        when(messageService.getAllReceivedMessages()).thenReturn(messages);
-        when(messageService.getAllSentMessages()).thenReturn(messages);
-
-        adminDashboardTablesComponent.generateInboxAndSentTableView();
-
-
-        assertNotNull(AdminDashboardTablesComponent.receivedMessages);
-        assertNotNull(AdminDashboardTablesComponent.sentMessages);
-
-        assertEquals(AdminDashboardTablesComponent.receivedMessages.size(), 2);
-        assertEquals(AdminDashboardTablesComponent.sentMessages.size(), 2);
-
-        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getId().getValue(),
-                messages.get(0).getId());
-        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getReceiver().get(),
-                messages.get(0).getReceiver());
-        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getSender().get(),
-                messages.get(0).getSender());
-        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getTitle().get(),
-                messages.get(0).getTitle());
-        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getSentDate().get(),
-                messages.get(0).getSentDate().format(DateTimeFormatter.ISO_DATE));
-        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getContents().get(),
-                messages.get(0).getContents());
-
-        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getId().getValue(),
-                messages.get(0).getId());
-        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getReceiver().get(),
-                messages.get(0).getReceiver());
-        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getSender().get(),
-                messages.get(0).getSender());
-        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getTitle().get(),
-                messages.get(0).getTitle());
-        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getSentDate().get(),
-                messages.get(0).getSentDate().format(DateTimeFormatter.ISO_DATE));
-        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getContents().get(),
-                messages.get(0).getContents());
-
-
-        assertEquals(inboxTable.getColumns().size(), 3);
-        assertEquals(sentboxTable.getColumns().size(), 3);
-
-        assertEquals(inboxTable.getColumns().get(0).getCellObservableValue(0).getValue(),
-                messages.get(0).getSender());
-        assertEquals(inboxTable.getColumns().get(1).getCellObservableValue(0).getValue(),
-                messages.get(0).getTitle());
-        assertEquals(inboxTable.getColumns().get(2).getCellObservableValue(0).getValue(),
-                messages.get(0).getSentDate().format(DateTimeFormatter.ISO_DATE));
-
-        assertEquals(sentboxTable.getColumns().get(0).getCellObservableValue(0).getValue(),
-                messages.get(0).getReceiver());
-        assertEquals(sentboxTable.getColumns().get(1).getCellObservableValue(0).getValue(),
-                messages.get(0).getTitle());
-        assertEquals(sentboxTable.getColumns().get(2).getCellObservableValue(0).getValue(),
-                messages.get(0).getSentDate().format(DateTimeFormatter.ISO_DATE));
-
-    }
+//    @Test
+//    public void generateMessageInboxTableViewTest() {
+//        List<Message> messages = getExampleMessage();
+//        JFXTreeTableView<MessageTableView> inboxTable = new JFXTreeTableView<>();
+//        JFXTreeTableView<MessageTableView> sentboxTable = new JFXTreeTableView<>();
+//        when(adminDashboardController.getInboxTable()).thenReturn(inboxTable);
+//        when(adminDashboardController.getSentboxTable()).thenReturn(sentboxTable);
+//
+//        when(messageService.getAllReceivedMessages()).thenReturn(messages);
+//        when(messageService.getAllSentMessages()).thenReturn(messages);
+//
+//        adminDashboardTablesComponent.generateInboxAndSentTableView();
+//
+//
+//        assertNotNull(AdminDashboardTablesComponent.receivedMessages);
+//        assertNotNull(AdminDashboardTablesComponent.sentMessages);
+//
+//        assertEquals(AdminDashboardTablesComponent.receivedMessages.size(), 2);
+//        assertEquals(AdminDashboardTablesComponent.sentMessages.size(), 2);
+//
+//        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getId().getValue(),
+//                messages.get(0).getId());
+//        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getReceiver().get(),
+//                messages.get(0).getReceiver());
+//        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getSender().get(),
+//                messages.get(0).getSender());
+//        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getTitle().get(),
+//                messages.get(0).getTitle());
+//        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getSentDate().get(),
+//                messages.get(0).getSentDate().format(DateTimeFormatter.ISO_DATE));
+//        assertEquals(AdminDashboardTablesComponent.receivedMessages.get(0).getContents().get(),
+//                messages.get(0).getContents());
+//
+//        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getId().getValue(),
+//                messages.get(0).getId());
+//        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getReceiver().get(),
+//                messages.get(0).getReceiver());
+//        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getSender().get(),
+//                messages.get(0).getSender());
+//        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getTitle().get(),
+//                messages.get(0).getTitle());
+//        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getSentDate().get(),
+//                messages.get(0).getSentDate().format(DateTimeFormatter.ISO_DATE));
+//        assertEquals(AdminDashboardTablesComponent.sentMessages.get(0).getContents().get(),
+//                messages.get(0).getContents());
+//
+//
+//        assertEquals(inboxTable.getColumns().size(), 3);
+//        assertEquals(sentboxTable.getColumns().size(), 3);
+//
+//        assertEquals(inboxTable.getColumns().get(0).getCellObservableValue(0).getValue(),
+//                messages.get(0).getSender());
+//        assertEquals(inboxTable.getColumns().get(1).getCellObservableValue(0).getValue(),
+//                messages.get(0).getTitle());
+//        assertEquals(inboxTable.getColumns().get(2).getCellObservableValue(0).getValue(),
+//                messages.get(0).getSentDate().format(DateTimeFormatter.ISO_DATE));
+//
+//        assertEquals(sentboxTable.getColumns().get(0).getCellObservableValue(0).getValue(),
+//                messages.get(0).getReceiver());
+//        assertEquals(sentboxTable.getColumns().get(1).getCellObservableValue(0).getValue(),
+//                messages.get(0).getTitle());
+//        assertEquals(sentboxTable.getColumns().get(2).getCellObservableValue(0).getValue(),
+//                messages.get(0).getSentDate().format(DateTimeFormatter.ISO_DATE));
+//
+//    }
 
 
     public List<Project> getExampleProjects() {

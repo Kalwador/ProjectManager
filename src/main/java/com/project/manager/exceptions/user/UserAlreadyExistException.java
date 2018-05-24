@@ -1,8 +1,14 @@
 package com.project.manager.exceptions.user;
 
+/**
+ * This exception is throwing when specified user already exist in database
+ */
+public class UserAlreadyExistException extends Exception {
 
-public class UserAlreadyExistException extends RuntimeException {
-    public UserAlreadyExistException(String s) {
-        super(s);
+    /**
+     * This is default constructor with already defined message
+     */
+    public UserAlreadyExistException() {
+        super("The user with that email or username or id already exist in our service");
     }
 }

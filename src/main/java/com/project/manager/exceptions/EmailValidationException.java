@@ -1,7 +1,14 @@
 package com.project.manager.exceptions;
 
+/**
+ * This exception is thrown when provided email is invalid
+ */
 public class EmailValidationException extends Exception {
+
+    /**
+     * This method is constructor of exception with already defined message
+     */
     public EmailValidationException() {
-        super("Email adress is not valid");
+        super("Email address is not valid");
     }
 }

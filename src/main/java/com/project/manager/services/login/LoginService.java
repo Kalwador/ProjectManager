@@ -11,6 +11,7 @@ import com.project.manager.services.user.UserService;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.utils.BCryptEncoder;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import java.util.Optional;
 /**
  * This is the service responsible for login user into our service
  */
+@Log4j
 @Service
 public class LoginService {
     private UserRepository userRepository;
@@ -45,21 +47,23 @@ public class LoginService {
      * @param password user's PASSWORD given in textfield.
      * @param remember stay logged in parameter
      */
-    public void loginUser(String username, String password, boolean remember) {
+    public void loginUser(String username, String password, boolean remember)
+            throws UserDoesNotExistException, AccountBlockedException, AccountLockedException,
+            EmptyPasswordException, DifferentPasswordException, EmptyUsernameException {
         if (username.isEmpty()) {
-            throw new EmptyUsernameException("Username field can't be empty.");
+            throw new EmptyUsernameException();
         }
         if (password.isEmpty()) {
-            throw new EmptyPasswordException("Password field can't be empty.");
+            throw new EmptyPasswordException();
         }
         Optional<UserModel> usermodel = userRepository.findByUsernameOrEmail(username, username);
         if (!usermodel.isPresent()) {
-            throw new UserDoesNotExistException("There is no user with that username in our service.");
+            throw new UserDoesNotExistException();
         }
         boolean result = BCryptEncoder.check(password, usermodel.get().getPassword());
         if (!result) {
             userService.increaseIncorrectLoginCounter(usermodel.get());
-            throw new DifferentPasswordException("Password you entered was incorrect.");
+            throw new DifferentPasswordException();
         }
         if (remember) {
             rememberUserService.rememberUser(username);
@@ -72,19 +76,20 @@ public class LoginService {
      *
      * @param usermodel model of user
      */
-    public void loginValidUser(UserModel usermodel) {
+    private void loginValidUser(UserModel usermodel) throws AccountBlockedException, AccountLockedException {
         if (usermodel.isBlocked()) {
-            throw new AccountBlockedException("Your account is blocked, you should generate code by click forget password to unblock account!");
+            throw new AccountBlockedException();
         }
         if (usermodel.isLocked()) {
-            throw new AccountLockedException("Your account is locked, you should contact with administrator of service!");
+            throw new AccountLockedException();
         } else {
             sessionService.setUserModel(usermodel);
-            loadScene(usermodel);
+            log.info(usermodel.getUsername() + " has just logged in!");
+            loadScene();
         }
     }
 
-    public void loadScene(UserModel usermodel) {
+    private void loadScene() {
         UserRole role = sessionService.getUserModel().getRole();
         switch (role) {
             case USER:
@@ -98,8 +103,10 @@ public class LoginService {
     /**
      * This method is executing if any user declare to stay logged in
      */
-    public void loginRememberedUser() {
+    public void loginRememberedUser() throws AccountBlockedException, AccountLockedException {
         Optional<UserModel> userModel = rememberUserService.getRememberedUser();
-        userModel.ifPresent(this::loginValidUser);
+        if (userModel.isPresent()) {
+            loginValidUser(userModel.get());
+        }
     }
 }

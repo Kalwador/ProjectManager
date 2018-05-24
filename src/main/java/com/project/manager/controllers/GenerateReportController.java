@@ -80,7 +80,7 @@ public class GenerateReportController implements Initializable{
                         (sentToMe.isSelected(), email.getText(), this.location.getText());
             } catch (EmailValidationException e1) {
                 emailError.setVisible(true);
-                emailError.setText(e1.getMessage());
+                emailError.setText("Email is invalid!");
             }
         });
     }

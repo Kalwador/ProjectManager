@@ -12,6 +12,7 @@ import com.project.manager.ui.components.admin.AdminDashboardTablesComponent;
 import javafx.beans.binding.LongExpression;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ import java.util.Set;
  * This is the class which is responsible for returning list of projectsAsUser logged user.
  * This class perform method projectsOfUser which returning list of projectsAsUser by logged user id
  */
+@Log4j
 @Service
 public class ProjectService {
 
@@ -78,7 +80,7 @@ public class ProjectService {
      *
      * @param projectId Id of project that we need to delete
      */
-    public void delete(Long projectId) {
+    public void delete(Long projectId) throws ProjectNotExistException {
         Optional<Project> optionalProject = projectRepository.findById(projectId);
         if (optionalProject.isPresent()) {
             Alert alert = AlertManager.showConfirmationAlert("Delete", "Do you really want to delete " +
@@ -87,7 +89,8 @@ public class ProjectService {
                 projectRepository.delete(optionalProject.get());
             }
         } else {
-            throw new ProjectNotExistException("Project Not Exist - Couldnt Find it in ProjectService, ID: " + projectId);
+            log.warn("User ask about project which does not exist - project id : " + projectId);
+            throw new ProjectNotExistException();
         }
     }
 
@@ -113,10 +116,10 @@ public class ProjectService {
      * @param projectId Id of project that we need to get
      * @return {@link Project}
      */
-    public Project getProjectById(Long projectId) {
+    public Project getProjectById(Long projectId) throws ProjectNotExistException {
         Optional<Project> optionalProject = this.projectRepository.findById(projectId);
         if (optionalProject.isPresent()) return optionalProject.get();
-        throw new ProjectNotExistException("Project Not Exist - Couldnt Find it in ProjectService, ID: " + projectId);
+        throw new ProjectNotExistException();
     }
 
     /**

@@ -64,22 +64,16 @@ public class AdminDashboardController implements Initializable {
     private Tab usersTab;
 
     @FXML
-    private Tab messageTab;
-
-    @FXML
     private JFXTreeTableView<ProjectTableView> projectTable;
 
     @FXML
     private JFXTreeTableView<UserTableView> userTable;
 
     @FXML
-    private JFXTreeTableView<MessageTableView> inboxTable;
-
-    @FXML
-    private JFXTreeTableView<MessageTableView> sentboxTable;
-
-    @FXML
     private JFXButton logout;
+
+    @FXML
+    private JFXButton messages;
 
     @FXML
     private JFXButton updateProject;
@@ -90,19 +84,7 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private JFXButton showProject;
     @FXML
-    private Button sentMessage;
-
-    @FXML
     private JFXButton deleteUsers;
-
-    @FXML
-    private JFXButton deleteMessages;
-
-    @FXML
-    private Tab selectedInbox;
-
-    @FXML
-    private Tab selectedSendbox;
 
     /**
      * This method is responsible for listening the controller in window, and making action
@@ -110,30 +92,13 @@ public class AdminDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        sentMessage.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGE_SENT_WINDOW));
 
         adminDashboardTablesComponent.generateProjectTableView();
         adminDashboardTablesComponent.deleteSelectedUsers();
         adminDashboardTablesComponent.deleteSelectedProjects();
-        adminDashboardTablesComponent.deleteSelectedMessages();
 
         projectsTab.setOnSelectionChanged(e -> adminDashboardTablesComponent.generateTables());
         usersTab.setOnSelectionChanged(e -> adminDashboardTablesComponent.generateTables());
-        messageTab.setOnSelectionChanged(e -> adminDashboardTablesComponent.generateTables());
-
-        inboxTable.setOnMousePressed(e -> {
-            TreeItem<MessageTableView> item = inboxTable.getSelectionModel().getSelectedItem();
-            if (e.isPrimaryButtonDown() && e.getClickCount() == 2 && Optional.ofNullable(item).isPresent()) {
-                adminDashboardTablesComponent.showMessageWindow(item.getValue().getId().get());
-            }
-        });
-
-        sentboxTable.setOnMousePressed(e -> {
-            TreeItem<MessageTableView> item = sentboxTable.getSelectionModel().getSelectedItem();
-            if (e.isPrimaryButtonDown() && e.getClickCount() == 2 && Optional.ofNullable(item).isPresent()) {
-                adminDashboardTablesComponent.showMessageWindow(item.getValue().getId().get());
-            }
-        });
 
         showProject.setOnAction(e -> sceneManager.showInNewWindow(SceneType.ADMIN_PROJECT_VIEW));
 
@@ -143,5 +108,6 @@ public class AdminDashboardController implements Initializable {
         });
 
         logout.setOnAction(e -> SessionService.getInstance().logoutUser());
+        messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
     }
 }

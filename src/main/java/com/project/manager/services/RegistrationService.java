@@ -8,6 +8,7 @@ import com.project.manager.models.UserRole;
 import com.project.manager.models.mail.AccountActivationMail;
 import com.project.manager.models.mail.MailSubject;
 import com.project.manager.repositories.UserRepository;
+import lombok.extern.log4j.Log4j;
 import com.project.manager.services.mail.MailFactory;
 import com.project.manager.utils.ActivationCodeGenerator;
 import com.project.manager.utils.BCryptEncoder;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 
 @Service
+@Log4j
 public class RegistrationService {
 
     private UserRepository userRepository;
@@ -29,13 +31,17 @@ public class RegistrationService {
         this.mailFactory = mailFactory;
     }
 
-    public void registerUser(String username, String email, String password, String repeatPassword) throws EmailValidationException {
+    public void registerUser(String username, String email, String password, String repeatPassword)
+            throws EmailValidationException, UserAlreadyExistException, DifferentPasswordException {
+
         if (!EmailValidator.isEmailValid(email)) throw new EmailValidationException();
-
+        if (username.length() < 4 || username.length() > 25)
+            throw new IllegalArgumentException("The username must be longer than 4 and shorter than 25 letters");
+        if (password.length() < 8 || password.length() > 25)
+            throw new IllegalArgumentException("The password must be longer than 8 and shorter than 25 letters");
         if (userRepository.findByUsername(username).isPresent() || userRepository.findByEmail(email).isPresent())
-            throw new UserAlreadyExistException("The user with that EMAIL or username already exist in our service");
-
-        if (!password.equals(repeatPassword)) throw new DifferentPasswordException("The passwords aren't the same!");
+            throw new UserAlreadyExistException();
+        if (!password.equals(repeatPassword)) throw new DifferentPasswordException();
 
         String code = ActivationCodeGenerator.generateCode();
 
@@ -54,8 +60,8 @@ public class RegistrationService {
                 .activationCode(code)
                 .build();
         userRepository.save(userModel);
-
         sendActivationCodeInMail(userModel);
+        log.info("The user : '" + username + "' was successful registered in application!");
     }
 
     private void sendActivationCodeInMail(UserModel userModel) throws EmailValidationException {

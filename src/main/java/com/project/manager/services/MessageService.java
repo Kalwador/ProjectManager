@@ -1,6 +1,6 @@
 package com.project.manager.services;
 
-import com.project.manager.controllers.MessageViewWindowController;
+import com.project.manager.controllers.message.MessageViewWindowController;
 import com.project.manager.entities.Message;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.message.MessageNotExistException;
@@ -11,6 +11,7 @@ import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.AlertManager;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
+import lombok.extern.log4j.Log4j;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.util.Optional;
 /**
  * This is the class which contain all message logic method
  */
+@Log4j
 @Service
 public class MessageService {
 
@@ -77,24 +79,23 @@ public class MessageService {
         });
     }
 
-    public void sentMessage(Message message) {
+
+    public void sentMessage(Message message) throws UserDoesNotExistException {
         UserModel sender = sessionService.getUserModel();
         Optional<UserModel> receiver = userRepository.findByUsername(message.getReceiver());
         if (!receiver.isPresent()) {
-            throw new UserDoesNotExistException("The user with that isEmailValid does not exist");
+            throw new UserDoesNotExistException();
         }
 
-        message.setSender(sender.getUsername());
         message = messageRepository.save(message);
+        message.setSender(sender.getUsername());
         message.getUsers().add(sender);
         message.getUsers().add(receiver.get());
         sender.getMessages().add(message);
         receiver.get().getMessages().add(message);
         messageRepository.save(message);
-        userRepository.save(sender);
-        userRepository.save(receiver.get());
+        log.info("The message was sent to '" + message.getSender() + "' from '" + message.getReceiver());
     }
-
 
     /**
      * This method perform delete message operation on messageRepository by inserted message Id in parameter

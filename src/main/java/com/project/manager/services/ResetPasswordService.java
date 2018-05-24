@@ -12,15 +12,16 @@ import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import com.project.manager.utils.ActivationCodeGenerator;
 import com.project.manager.utils.BCryptEncoder;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 /**
  * This is the class which is responsible for operations step by step to perform password resetting.
  * This class perform methods pessetPassword, checkGeneratedCode, chcangePassword and generatedCode
  */
+@Log4j
 @Service
 public class ResetPasswordService {
 
@@ -41,16 +42,17 @@ public class ResetPasswordService {
      *
      * @param usernameOrEmail - name or email of user that want to reset password.
      */
-    public void resetPassword(String usernameOrEmail) throws EmailValidationException {
+    public void resetPassword(String usernameOrEmail)
+            throws EmailValidationException, UserDoesNotExistException, EmptyUsernameException {
 
         if (usernameOrEmail.isEmpty()) {
-            throw new EmptyUsernameException("Username or Email field can't be empty.");
+            throw new EmptyUsernameException();
         }
 
         Optional<UserModel> userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
         if (!userModel.isPresent()) {
-            throw new UserDoesNotExistException("There is no user with that username or isEmailValid in our service.");
+            throw new UserDoesNotExistException();
         } else {
             String generatePasswordCode = ActivationCodeGenerator.generateCode();
 
@@ -58,8 +60,10 @@ public class ResetPasswordService {
             userModel.get().setActivationCode(generatePasswordCode);
             userRepository.save(userModel.get());
 
-            AlertManager.showInformationAlert("Resetting PASSWORD", "You started procedure to reset your" +
-                    " password. We sent on your EMAIL message with special code to continue reset your password.");
+            log.info("The user with username or email : '" + usernameOrEmail + " was blocked and activation code" +
+                    "was send to his email");
+            AlertManager.showInformationAlert("Resetting password", "You started procedure to reset your" +
+                    " password. We sent on your email message with special code to continue reset your password.");
 
             sendActivationCodeInMessage(userModel.get());
         }
@@ -82,15 +86,16 @@ public class ResetPasswordService {
      * @param usernameOrEmail - name or EMAIL of user that want to reset password.
      * @param generatedCode   - code to unlock blocked account.
      */
-    public void checkGeneratedCode(String usernameOrEmail, String generatedCode) {
+    public void checkGeneratedCode(String usernameOrEmail, String generatedCode)
+            throws DifferentGeneratedCodeException, EmptyGeneratedCodeException {
 
         Optional<UserModel> userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
         if (generatedCode.isEmpty()) {
-            throw new EmptyGeneratedCodeException("Insert your code please.");
+            throw new EmptyGeneratedCodeException();
         }
         if (!userModel.get().getActivationCode().equals(generatedCode)) {
-            throw new DifferentGeneratedCodeException("Inserted code is incorrect.");
+            throw new DifferentGeneratedCodeException();
         } else {
             userModel.get().setActivationCode(null);
             userRepository.save(userModel.get());
@@ -104,11 +109,12 @@ public class ResetPasswordService {
      * @param password        - new password.
      * @param repeatPassword  - confirmed new password.
      */
-    public void changePassword(String usernameOrEmail, String password, String repeatPassword) {
+    public void changePassword(String usernameOrEmail, String password, String repeatPassword)
+            throws DifferentPasswordException {
 
         Optional<UserModel> userModel = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
-        if (!password.equals(repeatPassword)) throw new DifferentPasswordException("The passwords aren't the same!");
+        if (!password.equals(repeatPassword)) throw new DifferentPasswordException();
 
         userModel.get().setPassword(BCryptEncoder.encode(password));
         userModel.get().setBlocked(false);

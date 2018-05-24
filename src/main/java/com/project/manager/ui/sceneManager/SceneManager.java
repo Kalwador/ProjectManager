@@ -27,8 +27,8 @@ public class SceneManager {
     private ManagerProjectView managerProjectView;
     private EmployeeProjectView employeeProjectView;
     private AddUserScene addUserScene;
-    private MessageSentScene messageSentScene;
     private GenerateReportScene generateReportScene;
+    private MessagesWindowScene messagesWindowScene;
     private PersonalDataScene personalDataScene;
 
     private HashMap<Integer, CustomScene> scenes;
@@ -81,8 +81,8 @@ public class SceneManager {
         this.managerProjectView = new ManagerProjectView(primaryStage);
         this.employeeProjectView = new EmployeeProjectView(primaryStage);
         this.addUserScene = new AddUserScene(primaryStage);
-        this.messageSentScene = new MessageSentScene(primaryStage);
         this.generateReportScene = new GenerateReportScene(primaryStage);
+        this.messagesWindowScene = new MessagesWindowScene(primaryStage);
         this.personalDataScene = new PersonalDataScene(primaryStage);
 
         scenes = new HashMap<Integer, CustomScene>() {
@@ -98,8 +98,8 @@ public class SceneManager {
                 put(SceneType.MESSAGE_VIEW_WINDOW.ordinal(), messageViewWindowScene);
                 put(SceneType.RESET_PASSWORD.ordinal(), resetPasswordScene);
                 put(SceneType.ADD_USER.ordinal(), addUserScene);
-                put(SceneType.MESSAGE_SENT_WINDOW.ordinal(), messageSentScene);
                 put(SceneType.GENERATE_REPORT.ordinal(), generateReportScene);
+                put(SceneType.MESSAGES_WINDOW.ordinal(), messagesWindowScene);
                 put(SceneType.PERSONAL_DATA.ordinal(), personalDataScene);
             }
         };

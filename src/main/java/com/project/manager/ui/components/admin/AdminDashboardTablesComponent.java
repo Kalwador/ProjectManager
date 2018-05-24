@@ -8,12 +8,14 @@ import com.project.manager.entities.Message;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.message.MessageNotExistException;
+import com.project.manager.exceptions.project.ProjectNotExistException;
 import com.project.manager.models.MessageTableView;
 import com.project.manager.models.ProjectTableView;
 import com.project.manager.models.UserTableView;
 import com.project.manager.services.MessageService;
 import com.project.manager.services.ProjectService;
 import com.project.manager.services.user.UserService;
+import com.project.manager.ui.AlertManager;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,38 +47,27 @@ public class AdminDashboardTablesComponent {
      * List of all users in database
      */
     public static ObservableList<UserTableView> userTableViews;
-    /**
-     * List off all received and sent messages by actual logged account
-     */
-    public static ObservableList<MessageTableView> receivedMessages;
-    public static ObservableList<MessageTableView> sentMessages;
 
     private ProjectService projectService;
     private UserService userService;
-    private MessageService messageService;
     private AdminDashboardController adminDashboardController;
     private List<Long> selectedProjectIds;
     private List<Long> selectedUserIds;
-    private List<Long> selectedInboxMessagesIds;
-    private List<Long> selectedSendboxMessagesIds;
 
     /**
      * This is the constructor with injected services and one controller
      *
      * @param projectService           injected project service which provides all project login methods
      * @param userService              injected user service which provides all project login methods
-     * @param messageService           injected message service which provides all project login methods
      * @param adminDashboardController injected admin dashboard controller to get reference to JavaFX components
      *                                 in admin view like tables and buttons
      */
     @Autowired
     public AdminDashboardTablesComponent(ProjectService projectService,
                                          UserService userService,
-                                         MessageService messageService,
                                          @Lazy AdminDashboardController adminDashboardController) {
         this.projectService = projectService;
         this.userService = userService;
-        this.messageService = messageService;
         this.adminDashboardController = adminDashboardController;
     }
 
@@ -91,128 +82,6 @@ public class AdminDashboardTablesComponent {
         if (adminDashboardController.getUsersTab().isSelected() &&
                 adminDashboardController.getUserTable().getCurrentItemsCount() < 1) {
             generateUserTableView();
-        }
-        if (adminDashboardController.getMessageTab().isSelected() &&
-                (adminDashboardController.getInboxTable().getCurrentItemsCount() < 1 ||
-                        adminDashboardController.getSentboxTable().getCurrentItemsCount() < 1)) {
-            generateInboxAndSentTableView();
-        }
-    }
-
-    /**
-     * This method generate two table views
-     * First is table of received admin messaged from other users in application
-     * Second generate table view of sent messages by admin to other account in application
-     */
-    public void generateInboxAndSentTableView() {
-        adminDashboardController.getSentboxTable().getColumns().clear();
-        adminDashboardController.getInboxTable().getColumns().clear();
-
-        List<Message> received = messageService.getAllReceivedMessages();
-        if (!received.isEmpty()) {
-            receivedMessages = FXCollections.observableList(received.stream()
-                    .map(MessageTableView::convert)
-                    .map(messageTableView -> messageTableView.generateDelButton(messageTableView))
-                    .peek(u -> u.getDelete().getValue()
-                        .setOnAction(e -> {
-                            deleteMessage(u);
-                            generateInboxAndSentTableView();
-                            generateUserTableView();
-                            generateProjectTableView();
-                        }))
-                    .peek(messageTableView -> {
-                        messageTableView.getCheck().get().setOnAction(e -> {
-                            disableInboxDeleteButton();
-                        });
-                    })
-                    .collect(Collectors.toList()));
-
-            adminDashboardController.getInboxTable().setOnMouseClicked(e -> {
-                int focusedIndex = adminDashboardController.getInboxTable().getSelectionModel().getFocusedIndex();
-                if (focusedIndex >= 0) {
-                    receivedMessages.get(focusedIndex).getCheck().get().fire();
-                    adminDashboardController.getInboxTable().getSelectionModel().clearSelection();
-                }
-            });
-
-            TreeTableColumn<MessageTableView, CheckBox> checkColumn = new TreeTableColumn<>("");
-            TreeTableColumn<MessageTableView, String> receiverColumn = new TreeTableColumn<>("From");
-            TreeTableColumn<MessageTableView, String> receivedTitleColumn = new TreeTableColumn<>("Title");
-            TreeTableColumn<MessageTableView, String> receivedDateColumn = new TreeTableColumn<>("Date");
-            TreeTableColumn<MessageTableView, JFXButton> deleteButtonColumn = new TreeTableColumn<>("");
-
-            checkColumn.setSortable(false);
-            receiverColumn.setSortable(false);
-            receivedDateColumn.setSortable(false);
-            receivedDateColumn.setSortable(false);
-            deleteButtonColumn.setSortable(false);
-
-            adminDashboardController.getInboxTable().getColumns().addAll(checkColumn, receiverColumn, receivedTitleColumn, receivedDateColumn, deleteButtonColumn);
-
-            checkColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getCheck().get()));
-            receiverColumn.setCellValueFactory(m -> m.getValue().getValue().getSender());
-            receivedTitleColumn.setCellValueFactory(m -> m.getValue().getValue().getTitle());
-            receivedDateColumn.setCellValueFactory(m -> m.getValue().getValue().getSentDate());
-            deleteButtonColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getDelete().get()));
-
-            TreeItem<MessageTableView> inboxItem = new RecursiveTreeItem<MessageTableView>(receivedMessages, RecursiveTreeObject::getChildren);
-
-            adminDashboardController.getInboxTable().setRoot(inboxItem);
-            adminDashboardController.getInboxTable().setShowRoot(false);
-        }
-
-        List<Message> sent = messageService.getAllSentMessages();
-        if (!sent.isEmpty()) {
-            sentMessages = FXCollections.observableList(sent.stream()
-                    .map(MessageTableView::convert)
-                    .map(messageTableView -> messageTableView.generateDelButton(messageTableView))
-                    .peek(u -> u.getDelete().getValue()
-                        .setOnAction(e -> {
-                            deleteMessage(u);
-                            generateInboxAndSentTableView();
-                            generateUserTableView();
-                            generateProjectTableView();
-                        }))
-                    .peek(messageTableView -> {
-                        messageTableView.getCheck().get().setOnAction(e -> {
-                            disableSentboxDeleteButton();
-                        });
-                    })
-                    .collect(Collectors.toList()));
-
-            adminDashboardController.getSentboxTable().setOnMouseClicked(e -> {
-                int focusedIndex = adminDashboardController.getSentboxTable().getSelectionModel().getFocusedIndex();
-                if (focusedIndex >= 0) {
-                    sentMessages.get(focusedIndex).getCheck().get().fire();
-                    adminDashboardController.getSentboxTable().getSelectionModel().clearSelection();
-                }
-            });
-
-            TreeTableColumn<MessageTableView, CheckBox> checkColumn = new TreeTableColumn<>("");
-            TreeTableColumn<MessageTableView, String> senderColumn = new TreeTableColumn<>("To");
-            TreeTableColumn<MessageTableView, String> sendTitleColumn = new TreeTableColumn<>("Title");
-            TreeTableColumn<MessageTableView, String> sendDateColumn = new TreeTableColumn<>("Date");
-            TreeTableColumn<MessageTableView, JFXButton> deleteButtonColumn = new TreeTableColumn<>("");
-
-            checkColumn.setSortable(false);
-            senderColumn.setSortable(false);
-            sendTitleColumn.setSortable(false);
-            sendDateColumn.setSortable(false);
-            deleteButtonColumn.setSortable(false);
-
-            adminDashboardController.getSentboxTable().getColumns().addAll(checkColumn, senderColumn, sendTitleColumn, sendDateColumn, deleteButtonColumn);
-
-            checkColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getCheck().get()));
-            senderColumn.setCellValueFactory(m -> m.getValue().getValue().getReceiver());
-            sendTitleColumn.setCellValueFactory(m -> m.getValue().getValue().getTitle());
-            sendDateColumn.setCellValueFactory(m -> m.getValue().getValue().getSentDate());
-            deleteButtonColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getDelete().get()));
-
-
-            TreeItem<MessageTableView> sentBoxItem = new RecursiveTreeItem<MessageTableView>(sentMessages, RecursiveTreeObject::getChildren);
-
-            adminDashboardController.getSentboxTable().setRoot(sentBoxItem);
-            adminDashboardController.getSentboxTable().setShowRoot(false);
         }
     }
 
@@ -231,18 +100,17 @@ public class AdminDashboardTablesComponent {
                     .map(UserTableView::convert)
                     .map(u -> u.generateDelButton(u))
                     .peek(u -> u.getDelete().getValue()
-                            .setOnAction(e -> {
-                                userService.delete(u.getId().get());
-                                generateUserTableView();
-                                generateProjectTableView();
-                                generateInboxAndSentTableView();
-                            }))
+                        .setOnAction(e -> {
+                            userService.delete(u.getId().get());
+                            generateUserTableView();
+                            generateProjectTableView();
+                        }))
                     .map(u -> u.generateLockOrUnlockButton(u))
                     .peek(u -> u.getLockOrUnlock().getValue()
-                            .setOnAction(e -> {
-                                userService.changeLockStatus(u.getIsLocked().get(), u.getId().get());
-                                generateUserTableView();
-                            }))
+                        .setOnAction(e -> {
+                            userService.changeLockStatus(u.getIsLocked().get(), u.getId().get());
+                            generateUserTableView();
+                        }))
                     .map(u -> u.generateResetButton(u))
                     .peek(u -> u.getResetPass().getValue()
                             .setOnAction(e -> userService.changePassword(u.getId().get())))
@@ -332,13 +200,17 @@ public class AdminDashboardTablesComponent {
                             .map(ProjectTableView::convert)
                             .map(projectTableView -> projectTableView.generateDelButton(projectTableView))
                             .peek(projectTableView -> projectTableView.getDelete().getValue()
-                                    .setOnAction(e -> {
+                                .setOnAction(e -> {
+                                    try {
                                         projectService.delete(projectTableView.getId().get());
                                         generateProjectTableView();
                                         adminDashboardController.getDeleteProject().setDisable(true);
                                         adminDashboardController.getShowProject().setDisable(true);
                                         adminDashboardController.getUpdateProject().setDisable(true);
-                                    }))
+                                    } catch (ProjectNotExistException ex) {
+                                        AlertManager.showErrorAlert("Project not exist", "");
+                                    }
+                                }))
                             .peek(projectTableView -> {
                                 projectTableView.getCheck().get().setOnAction(e -> {
                                     disableProjectsDeleteButton();
@@ -420,36 +292,6 @@ public class AdminDashboardTablesComponent {
     }
 
     /**
-     * This method perform disable delete button when anyone received message is not selected
-     * and enable button when anyone received message is selected
-     */
-    private void disableInboxDeleteButton() {
-        Optional result = receivedMessages.stream()
-                .filter(p -> p.getCheck().get().isSelected())
-                .map(p -> p.getCheck().get().isSelected()).findAny();
-        if (result.isPresent()) {
-            adminDashboardController.getDeleteMessages().setDisable(false);
-        } else {
-            adminDashboardController.getDeleteMessages().setDisable(true);
-        }
-    }
-
-    /**
-     * This method perform disable delete button when anyone sent message is not selected
-     * and enable button when anyone sent message is selected
-     */
-    private void disableSentboxDeleteButton() {
-        Optional result = sentMessages.stream()
-                .filter(p -> p.getCheck().get().isSelected())
-                .map(p -> p.getCheck().get().isSelected()).findAny();
-        if (result.isPresent()) {
-            adminDashboardController.getDeleteMessages().setDisable(false);
-        } else {
-            adminDashboardController.getDeleteMessages().setDisable(true);
-        }
-    }
-
-    /**
      * This method perform disable delete update when anyone project is not selected
      * and enable button when only one project is selected
      */
@@ -468,24 +310,6 @@ public class AdminDashboardTablesComponent {
     }
 
     /**
-     * This method are responsible for showing message window with more details about message
-     *
-     * @param id this is the id parameter to select in {@link MessageService} that we will ask about message
-     *           with passed id after show
-     */
-    public void showMessageWindow(long id) {
-        messageService.showMessageWindow(id);
-    }
-
-    public void deleteMessage(MessageTableView u) {
-        try {
-            messageService.delete(u.getId().get());
-        } catch (MessageNotExistException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    /**
      * This method perform deleting of selected users in users table in admin dashboard view
      */
     public void deleteSelectedUsers() {
@@ -497,7 +321,6 @@ public class AdminDashboardTablesComponent {
             adminDashboardController.getDeleteUsers().setDisable(true);
             generateUserTableView();
             generateProjectTableView();
-            generateInboxAndSentTableView();
         });
     }
 
@@ -513,36 +336,6 @@ public class AdminDashboardTablesComponent {
             adminDashboardController.getDeleteProject().setDisable(true);
             generateProjectTableView();
             generateUserTableView();
-            generateInboxAndSentTableView();
-        });
-    }
-
-    /**
-     * This method perform deleting of selected messages in inbox messages table
-     * or sentbox messages table in admin dashboard view
-     */
-    public void deleteSelectedMessages() {
-        adminDashboardController.getDeleteMessages().setOnAction(e -> {
-            if (adminDashboardController.getSelectedInbox().isSelected()) {
-                if (!receivedMessages.isEmpty()) {
-                    selectedInboxMessagesIds = receivedMessages.stream()
-                        .filter(u -> u.getCheck().get().isSelected())
-                        .map(u -> u.getId().get()).collect(Collectors.toList());
-                    messageService.delete(selectedInboxMessagesIds);
-                }
-            }
-            if (adminDashboardController.getSelectedSendbox().isSelected()) {
-                if (!sentMessages.isEmpty()) {
-                    selectedSendboxMessagesIds = sentMessages.stream()
-                        .filter(u -> u.getCheck().get().isSelected())
-                        .map(u -> u.getId().get()).collect(Collectors.toList());
-                    messageService.delete(selectedSendboxMessagesIds);
-                }
-            }
-            adminDashboardController.getDeleteMessages().setDisable(true);
-            generateInboxAndSentTableView();
-            generateUserTableView();
-            generateProjectTableView();
         });
     }
 }

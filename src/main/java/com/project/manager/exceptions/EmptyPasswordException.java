@@ -1,7 +1,14 @@
 package com.project.manager.exceptions;
 
-public class EmptyPasswordException extends RuntimeException {
-    public EmptyPasswordException(String s) {
-        super(s);
+/**
+ * This exception is thrown when user provides empty password
+ */
+public class EmptyPasswordException extends Exception {
+
+    /**
+     * This method is constructor of exception with already defined message
+     */
+    public EmptyPasswordException() {
+        super("Inserted password is empty!");
     }
 }

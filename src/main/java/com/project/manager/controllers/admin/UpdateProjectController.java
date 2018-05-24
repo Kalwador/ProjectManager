@@ -4,6 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.project.manager.data.InjectAvatar;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.UserModel;
+import com.project.manager.exceptions.EmptyUsernameException;
+import com.project.manager.exceptions.NotEnoughPermissionsException;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.services.ProjectService;
 import com.project.manager.services.SessionService;
 import com.project.manager.services.user.UserSelectorService;
@@ -122,8 +125,8 @@ public class UpdateProjectController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.resetManagerLabelError();
-        this.resetMemberLabelError();
+        resetErrorLabel(managerErrorLabel);
+        resetErrorLabel(memberErrorLabel);
 
         Project currentProject = sessionService.getProject();
 
@@ -204,15 +207,18 @@ public class UpdateProjectController implements Initializable {
      * in update project view.
      */
     public void changeUserAsManager() {
-        resetManagerLabelError();
+        resetErrorLabel(managerErrorLabel);
         try {
             String manager = newManagerTextField.getText();
             newManager = userSelectorService.findUser(manager);
             String fullName = newManager.getFirstName() + " " + newManager.getLastName();
             managerName.setText(fullName);
-        } catch (RuntimeException ex) {
-            managerErrorLabel.setVisible(true);
-            managerErrorLabel.setText(ex.getMessage());
+        } catch (UserDoesNotExistException e) {
+            setErrorLabel(managerErrorLabel, "User " + newManagerTextField.getText() + " does not exist!");
+        } catch (NotEnoughPermissionsException e) {
+            setErrorLabel(managerErrorLabel, "You don't have enough permission to change manager");
+        } catch (EmptyUsernameException e) {
+            setErrorLabel(managerErrorLabel, "Please insert a name of user to change manager");
         }
     }
 
@@ -221,22 +227,24 @@ public class UpdateProjectController implements Initializable {
      * in update project view.
      */
     public void addUserAsMember() {
-        resetMemberLabelError();
+        resetErrorLabel(memberErrorLabel);
         try {
             String username = newMemberTextField.getText();
             UserModel possibleMember = userSelectorService.findUser(username);
             List<UserModel> members = memberPaneGenerator.getMembers();
             if (members.stream().anyMatch(member -> member.getId().equals(possibleMember.getId()))) {
-                memberErrorLabel.setVisible(true);
-                memberErrorLabel.setText("This user exist as member");
+                setErrorLabel(memberErrorLabel, "This user exist as member");
             } else {
                 memberPaneGenerator.getMembers().add(possibleMember);
                 projectMembersArea.getChildren().clear();
                 memberPaneGenerator.createTempPanes(projectMembersArea);
             }
-        } catch (RuntimeException ex) {
-            memberErrorLabel.setVisible(true);
-            memberErrorLabel.setText(ex.getMessage());
+        } catch (UserDoesNotExistException e) {
+            setErrorLabel(memberErrorLabel, "User " + newMemberTextField.getText() + " does not exist!");
+        } catch (NotEnoughPermissionsException e) {
+            setErrorLabel(memberErrorLabel, "You don't have enough permission to change manager");
+        } catch (EmptyUsernameException e) {
+            setErrorLabel(memberErrorLabel, "Please insert a name of user to change manager");
         }
     }
 
@@ -252,18 +260,24 @@ public class UpdateProjectController implements Initializable {
     }
 
     /**
-     * This method is responsible for resetting error labels for project manager in update project view.
+     * This method is responsible for resetting error labels for specified roles in update project view.
+     *
+     * @param label to hide
      */
-    public void resetManagerLabelError() {
-        managerErrorLabel.setText("");
-        managerErrorLabel.setVisible(false);
+    private void resetErrorLabel(Label label) {
+        label.setText("");
+        label.setVisible(false);
     }
 
     /**
-     * This method is responsible for resetting error labels for project members in update project view.
+     * This method is responsible for setting error labels for specified roles in update project view.
+     *
+     * @param label   label to show and specify message
+     * @param message message to write in label
      */
-    public void resetMemberLabelError() {
-        memberErrorLabel.setText("");
-        memberErrorLabel.setVisible(false);
+    private void setErrorLabel(Label label, String message) {
+        label.setVisible(true);
+        label.setText(message);
+
     }
 }

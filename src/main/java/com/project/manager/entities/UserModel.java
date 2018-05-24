@@ -28,6 +28,7 @@ public class UserModel {
 
     @NotNull
     @NotEmpty
+    @Min(value = 4)@Max(value = 25)
     private String username;
 
     @Email
@@ -35,9 +36,9 @@ public class UserModel {
     @NotEmpty
     private String email;
 
-    @Min(value = 8)
     @NotNull
     @NotEmpty
+    @Min(value = 8)@Max(value = 25)
     private String password;
 
     @Enumerated(EnumType.STRING)

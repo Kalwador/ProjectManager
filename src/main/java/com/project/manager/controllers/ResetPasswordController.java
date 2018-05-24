@@ -3,7 +3,8 @@ package com.project.manager.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import com.project.manager.exceptions.EmailValidationException;
+import com.project.manager.exceptions.*;
+import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.services.ResetPasswordService;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
@@ -13,12 +14,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Log4j
 @Component
 public class ResetPasswordController implements Initializable {
     @FXML
@@ -113,8 +116,14 @@ public class ResetPasswordController implements Initializable {
                 resetPasswordStepOne.setVisible(false);
                 resetPasswordStepTwo.setVisible(true);
             } catch (EmailValidationException ex) {
-                usernameOrEmailErrorLabel.setVisible(true);
-                usernameOrEmailErrorLabel.setText(ex.getMessage());
+                setErrorLabelMessage("Inserted email is invalid!");
+                log.warn("The inserted email by user while resetting password is invalid : "
+                        + usernameOrEmailField.getText());
+            } catch (UserDoesNotExistException ex) {
+                setErrorLabelMessage("The user was not found!");
+                log.warn("The user with username or email : '" + usernameOrEmail + "' was not found!");
+            } catch (EmptyUsernameException ex) {
+                setErrorLabelMessage("Please insert username or email!");
             }
         });
 
@@ -131,9 +140,12 @@ public class ResetPasswordController implements Initializable {
                 resetPasswordService.checkGeneratedCode(usernameOrEmail, generatedCode);
                 resetPasswordStepTwo.setVisible(false);
                 resetPasswordStepThree.setVisible(true);
-            } catch (RuntimeException ex) {
+            } catch (DifferentGeneratedCodeException ex) {
                 codeErrorLabel.setVisible(true);
-                codeErrorLabel.setText(ex.getMessage());
+                codeErrorLabel.setText("Inserted code is different than generated code!");
+            } catch (EmptyGeneratedCodeException e1) {
+                codeErrorLabel.setVisible(true);
+                codeErrorLabel.setText("Inserted code is empty, please insert valid code!");
             }
         });
 
@@ -153,17 +165,22 @@ public class ResetPasswordController implements Initializable {
                 String password = passwordField.getText();
                 String repeatPassword = repeatPasswordField.getText();
                 resetPasswordService.changePassword(usernameOrEmail, password, repeatPassword);
-            } catch (RuntimeException ex) {
+            } catch (DifferentPasswordException ex) {
                 passwordErrorLabel.setVisible(true);
-                passwordErrorLabel.setText(ex.getMessage());
+                passwordErrorLabel.setText("Inserted passwords are different!");
             }
         });
+    }
+
+    private void setErrorLabelMessage(String message) {
+        usernameOrEmailErrorLabel.setVisible(true);
+        usernameOrEmailErrorLabel.setText(message);
     }
 
     /**
      * This method perform set empty string on label and set this label hidden
      */
-    public void resetUsernameOrEmailError() {
+    private void resetUsernameOrEmailError() {
         usernameOrEmailErrorLabel.setText("");
         usernameOrEmailErrorLabel.setVisible(false);
     }
@@ -171,7 +188,7 @@ public class ResetPasswordController implements Initializable {
     /**
      * This method perform set empty string on label and set this label hidden
      */
-    public void resetCodeErrorLabel() {
+    private void resetCodeErrorLabel() {
         codeErrorLabel.setText("");
         codeErrorLabel.setVisible(false);
     }
@@ -179,7 +196,7 @@ public class ResetPasswordController implements Initializable {
     /**
      * This method perform set empty string on label and set this label hidden
      */
-    public void resetPasswordLabel() {
+    private void resetPasswordLabel() {
         passwordErrorLabel.setText("");
         passwordErrorLabel.setVisible(false);
     }
