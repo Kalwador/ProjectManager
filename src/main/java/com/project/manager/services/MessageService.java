@@ -11,9 +11,9 @@ import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.AlertManager;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import lombok.extern.log4j.Log4j;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

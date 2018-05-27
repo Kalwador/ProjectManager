@@ -7,7 +7,6 @@ import com.project.manager.controllers.admin.AdminDashboardController;
 import com.project.manager.entities.Message;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.UserModel;
-import com.project.manager.models.MessageTableView;
 import com.project.manager.models.ProjectTableView;
 import com.project.manager.models.UserRole;
 import com.project.manager.models.UserTableView;
@@ -24,7 +23,6 @@ import org.mockito.internal.util.collections.Sets;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;

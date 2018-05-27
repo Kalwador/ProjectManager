@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="320.0" styleClass="infoBackground" stylesheets="@alertInfo.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXButton buttonType="RAISED" focusTraversable="false" layoutX="134.0" layoutY="201.0" prefHeight="27.0" prefWidth="55.0" ripplerFill="#375fff" styleClass="buttonsDown" text="Ok" textFill="#375fff" />

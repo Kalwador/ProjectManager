@@ -1,22 +1,10 @@
 package com.project.manager.services;
 
-import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.DifferentPasswordException;
-import com.project.manager.exceptions.EmailValidationException;
-import com.project.manager.exceptions.EmptyGeneratedCodeException;
-import com.project.manager.exceptions.EmptyUsernameException;
-import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
-import com.project.manager.utils.ActivationCodeGenerator;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.Optional;
-
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ResetPasswordServiceTest {

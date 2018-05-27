@@ -1,7 +1,7 @@
 package com.project.manager.ui.components;
 
 import com.project.manager.TestData;
-import com.project.manager.controllers.manager.ManagerTaskBrickComponentController;
+import com.project.manager.controllers.TaskBrickComponentController;
 import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +29,7 @@ public class TaskGeneratorTest {
     public void testInject() throws IOException {
         when(sessionService.getProject()).thenReturn(TestData.getProject());
         FXMLLoader customFxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/managerTaskBrickComponent.fxml"));
-        ManagerTaskBrickComponentController managerTaskBrickComponentController = new ManagerTaskBrickComponentController();
+        TaskBrickComponentController managerTaskBrickComponentController = new TaskBrickComponentController();
         customFxmlLoader.setController(managerTaskBrickComponentController);
         when(fxmlLoader.load()).thenReturn(customFxmlLoader.load());
         VBox vBox = new VBox();

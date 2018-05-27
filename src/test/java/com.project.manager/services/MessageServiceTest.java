@@ -2,7 +2,6 @@ package com.project.manager.services;
 
 import com.project.manager.entities.Message;
 import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.MessageRepository;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.sceneManager.SceneManager;
@@ -14,15 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 

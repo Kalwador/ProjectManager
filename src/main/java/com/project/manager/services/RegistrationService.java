@@ -8,11 +8,11 @@ import com.project.manager.models.UserRole;
 import com.project.manager.models.mail.AccountActivationMail;
 import com.project.manager.models.mail.MailSubject;
 import com.project.manager.repositories.UserRepository;
-import lombok.extern.log4j.Log4j;
 import com.project.manager.services.mail.MailFactory;
 import com.project.manager.utils.ActivationCodeGenerator;
 import com.project.manager.utils.BCryptEncoder;
 import com.project.manager.utils.EmailValidator;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

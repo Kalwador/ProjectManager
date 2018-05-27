@@ -37,7 +37,7 @@ public class SceneManager {
      * private constructor, access only through method getInstance
      */
     private SceneManager() {
-        this.log.info("new instance of SceneManager created");
+        log.info("new instance of SceneManager created");
     }
 
     /**
@@ -229,7 +229,14 @@ public class SceneManager {
      */
     public void closeNewWindow(int sceneID) {
         scenes.get(sceneID).closeNewScene();
-        log.trace("Close scene in new window: "+ scenes.get(sceneID).toString());
+        log.trace("Close scene in new window: " + scenes.get(sceneID).toString());
+    }
+
+    /**
+     * Close all secnes in new windows, used in logout user.
+     */
+    public void hideAllNewScenes(){
+        scenes.values().forEach(CustomScene::hideNewScene);
     }
 }
 

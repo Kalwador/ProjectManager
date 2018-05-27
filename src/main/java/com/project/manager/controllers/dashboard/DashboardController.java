@@ -1,6 +1,7 @@
 package com.project.manager.controllers.dashboard;
 
 import com.jfoenix.controls.JFXButton;
+import com.project.manager.services.SessionService;
 import com.project.manager.ui.components.ProjectPaneGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
@@ -22,15 +23,15 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     @FXML
-    private Button backToLoginButton;
-    @FXML
     private Button sentMessage;
-    @FXML
-    private JFXButton userData;
     @FXML
     private VBox projectsArea;
     @FXML
     private Button messages;
+    @FXML
+    private JFXButton userData;
+    @FXML
+    private JFXButton logout;
 
     private SceneManager sceneManager;
     private ProjectPaneGenerator projectPaneGenerator;
@@ -52,10 +53,11 @@ public class DashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
         projectPaneGenerator.createPanes(projectsArea);
-        backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
 
+        messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
         userData.setOnAction(e -> {
             sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
         });
+        logout.setOnAction(e -> SessionService.getInstance().logoutUser());
     }
 }

@@ -75,6 +75,18 @@ public class ProjectService {
         sessionService.setProject(project.get());
     }
 
+    public void getProjectToShow() {
+        Long id = AdminDashboardTablesComponent.projectTableViews
+                .stream()
+                .filter(projectViewInTable -> projectViewInTable.getCheck().get().isSelected())
+                .map(ProjectTableView::getId)
+                .map(LongExpression::getValue)
+                .findFirst()
+                .get();
+        Optional<Project> project = projectRepository.findById(id);
+        sessionService.setProject(project.get());
+    }
+
     /**
      * This method perform delete project operation on projectRepository by inserted project Id in parameter
      *

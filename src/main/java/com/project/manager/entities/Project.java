@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -42,8 +43,27 @@ public class Project {
     @ManyToMany(mappedBy = "projectsAsUser", fetch = FetchType.EAGER)
     private Set<UserModel> members;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
     private Set<Task> tasks;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return Objects.equals(id, project.id) &&
+                Objects.equals(projectName, project.projectName) &&
+                Objects.equals(projectInformation, project.projectInformation) &&
+                Objects.equals(manager, project.manager) &&
+                Objects.equals(lastRapportDate, project.lastRapportDate) &&
+                Objects.equals(members.size(), project.members.size()) &&
+                Objects.equals(tasks.size(), project.tasks.size());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, projectName, projectInformation, manager, lastRapportDate);
+    }
 
     @PreRemove
     private void preRemove() {

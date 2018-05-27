@@ -1,14 +1,11 @@
 package com.project.manager.services;
 
 import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.*;
-import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.services.login.LoginService;
 import com.project.manager.services.user.UserService;
 import com.project.manager.utils.BCryptEncoder;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -16,9 +13,6 @@ import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Optional;
-
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginServiceTest {

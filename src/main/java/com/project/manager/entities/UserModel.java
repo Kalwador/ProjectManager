@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -28,7 +30,8 @@ public class UserModel {
 
     @NotNull
     @NotEmpty
-    @Min(value = 4)@Max(value = 25)
+    @Min(value = 4)
+    @Max(value = 25)
     private String username;
 
     @Email
@@ -38,7 +41,8 @@ public class UserModel {
 
     @NotNull
     @NotEmpty
-    @Min(value = 8)@Max(value = 25)
+    @Min(value = 8)
+    @Max(value = 25)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -89,13 +93,48 @@ public class UserModel {
     )
     private Set<Message> messages;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "USER_TASK",
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "task_id", nullable = false)}
+    )
     private Set<Task> tasks;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserModel userModel = (UserModel) o;
+        return isLocked == userModel.isLocked &&
+                isBlocked == userModel.isBlocked &&
+                incorrectLoginCount == userModel.incorrectLoginCount &&
+                Objects.equals(id, userModel.id) &&
+                Objects.equals(username, userModel.username) &&
+                Objects.equals(email, userModel.email) &&
+                Objects.equals(password, userModel.password) &&
+                role == userModel.role &&
+                Objects.equals(activationCode, userModel.activationCode) &&
+                Objects.equals(firstName, userModel.firstName) &&
+                Objects.equals(lastName, userModel.lastName) &&
+                Arrays.equals(avatar, userModel.avatar) &&
+                Objects.equals(projectsAsManager.size(), userModel.projectsAsManager.size()) &&
+                Objects.equals(projectsAsUser.size(), userModel.projectsAsUser.size()) &&
+                Objects.equals(messages.size(), userModel.messages.size()) &&
+                Objects.equals(tasks.size(), userModel.tasks.size());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, username, email, password, role, isLocked, isBlocked, activationCode, incorrectLoginCount, firstName, lastName);
+        result = 31 * result + Arrays.hashCode(avatar);
+        return result;
+    }
 
     @PreRemove
     private void preRemove() {
         projectsAsManager.forEach(project -> project.setManager(null));
-        this.getTasks().forEach(task -> task.setUser(null));
+        tasks.forEach(task -> task.getUsers().remove(this));
     }
 }
 

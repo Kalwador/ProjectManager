@@ -3,11 +3,13 @@ package com.project.manager.controllers.employee;
 import com.jfoenix.controls.JFXButton;
 import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
+import com.project.manager.services.TaskGeneratorService;
 import com.project.manager.ui.components.TaskGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +41,22 @@ public class EmployeeProjectViewController implements Initializable {
     private VBox codeReviewVBox;
     @FXML
     private VBox doneVBox;
+    @FXML
+    private Button messages;
+    @FXML
+    private JFXButton userData;
+    @FXML
+    private JFXButton logout;
 
     private SessionService sessionService;
     private SceneManager sceneManager;
-    private TaskGenerator taskGenerator;
+    private TaskGeneratorService taskGeneratorService;
 
 
     @Autowired
-    public EmployeeProjectViewController(TaskGenerator taskGenerator) {
+    public EmployeeProjectViewController(TaskGeneratorService taskGeneratorService) {
         this.sessionService = SessionService.getInstance();
-        this.taskGenerator = taskGenerator;
+        this.taskGeneratorService = taskGeneratorService;
         this.sceneManager = SceneManager.getInstance();
     }
 
@@ -64,18 +72,13 @@ public class EmployeeProjectViewController implements Initializable {
         backButton.setOnAction(e -> {
             sceneManager.showScene(SceneType.DASHBOARD);
         });
-        injectTasksToVBoxes(sessionService.getUserModel().getId());
-    }
+        taskGeneratorService.injectTasksToVBoxesForUser(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
+                testingVBox, codeReviewVBox, doneVBox,sessionService.getUserModel().getId());
 
-    /**
-     * Inject tasks of chosen project to specified VBoxes
-     */
-    private void injectTasksToVBoxes(Long userId) {
-        taskGenerator.injectOnlyForOneUser(productBacklogVBox, TaskStatus.PRODUCT_BACKLOG, userId);
-        taskGenerator.injectOnlyForOneUser(sprintBacklogVBox, TaskStatus.SPRINT_BACKLOG, userId);
-        taskGenerator.injectOnlyForOneUser(inProgressVBox, TaskStatus.IN_PROGRESS, userId);
-        taskGenerator.injectOnlyForOneUser(testingVBox, TaskStatus.TESTING, userId);
-        taskGenerator.injectOnlyForOneUser(codeReviewVBox, TaskStatus.CODE_REVIEW, userId);
-        taskGenerator.injectOnlyForOneUser(doneVBox, TaskStatus.DONE, userId);
+        logout.setOnAction(e -> SessionService.getInstance().logoutUser());
+        messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
+        userData.setOnAction(e -> {
+            sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
+        });
     }
 }

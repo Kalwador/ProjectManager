@@ -49,6 +49,7 @@ public class SessionService {
         ApplicationContextProvider.getInstance().getContext()
                 .getBean(RememberUserService.class)
                 .deleteRememberedUser();
+        sceneManager.hideAllNewScenes();
         sceneManager.showScene(SceneType.LOGIN);
     }
 }

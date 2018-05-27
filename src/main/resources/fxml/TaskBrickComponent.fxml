@@ -4,12 +4,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
-<AnchorPane fx:id="brickPane" prefHeight="81.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="brickPane" prefHeight="81.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="nameLabel" layoutX="10.0" layoutY="38.0" prefHeight="40.0" prefWidth="180.0" text="NAZWA ZADANIA" textAlignment="CENTER" wrapText="true" />
+      <Label fx:id="nameLabel" layoutX="38.0" layoutY="56.0" prefHeight="21.0" prefWidth="125.0" text="NAZWA ZADANIA" textAlignment="CENTER" wrapText="true" />
       <Label fx:id="tagLabel" layoutX="67.0" layoutY="17.0" prefHeight="4.0" prefWidth="72.0" text="TAG" wrapText="true" />
       <Pane fx:id="priorityColor" layoutY="7.0" prefHeight="10.0" prefWidth="200.0" />
       <Line endX="196.0" layoutX="2.0" layoutY="78.0" />
       <Line endX="196.0" layoutX="2.0" layoutY="4.0" />
+      <Label fx:id="deadlineLabel" alignment="CENTER" layoutX="38.0" layoutY="38.0" prefHeight="21.0" prefWidth="125.0" text="DEADLINE" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

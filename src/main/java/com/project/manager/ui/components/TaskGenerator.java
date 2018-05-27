@@ -1,6 +1,6 @@
 package com.project.manager.ui.components;
 
-import com.project.manager.controllers.manager.ManagerTaskBrickComponentController;
+import com.project.manager.controllers.TaskBrickComponentController;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
 import com.project.manager.models.task.TaskStatus;
@@ -48,18 +48,21 @@ public class TaskGenerator {
         Project project = sessionService.getProject();
         project.getTasks().forEach(task -> {
             if (task.getTaskStatus() == taskStatus.ordinal()) {
-                if (task.getUser().getId().equals(userId))
-                    box.getChildren().add(getPaneFromTask(task));
+                task.getUsers().forEach(userModel -> {
+                    if (userModel.getId().equals(userId)) {
+                        box.getChildren().add(getPaneFromTask(task));
+                    }
+                });
             }
         });
     }
 
     private AnchorPane getPaneFromTask(Task task) {
         try {
-            ManagerTaskBrickComponentController managerTaskBrickComponentController = new ManagerTaskBrickComponentController();
-            managerTaskBrickComponentController.setTask(task);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/manager/managerTaskBrickComponent.fxml"));
-            fxmlLoader.setController(managerTaskBrickComponentController);
+            TaskBrickComponentController taskBrickComponentController = new TaskBrickComponentController();
+            taskBrickComponentController.setTask(task);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TaskBrickComponent.fxml"));
+            fxmlLoader.setController(taskBrickComponentController);
             log.info("Pane from task created succesfully " + task.toString());
             return fxmlLoader.load();
         } catch (IOException e) {

@@ -2,7 +2,6 @@ package com.project.manager.controllers.admin;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
-import com.project.manager.models.MessageTableView;
 import com.project.manager.models.ProjectTableView;
 import com.project.manager.models.UserTableView;
 import com.project.manager.services.ProjectService;
@@ -13,16 +12,13 @@ import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TreeItem;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -33,6 +29,30 @@ import java.util.ResourceBundle;
 @Getter
 @Setter
 public class AdminDashboardController implements Initializable {
+    @FXML
+    private JFXButton userData;
+    @FXML
+    private Tab projectsTab;
+    @FXML
+    private Tab usersTab;
+    @FXML
+    private JFXTreeTableView<ProjectTableView> projectTable;
+    @FXML
+    private JFXTreeTableView<UserTableView> userTable;
+    @FXML
+    private JFXButton logout;
+    @FXML
+    private JFXButton messages;
+    @FXML
+    private JFXButton updateProject;
+    @FXML
+    private JFXButton deleteProject;
+    @FXML
+    private JFXButton showProject;
+    @FXML
+    private JFXButton deleteUsers;
+    @FXML
+    private JFXButton newTaskButton;
 
     private AdminDashboardTablesComponent adminDashboardTablesComponent;
     private ProjectService projectService;
@@ -57,35 +77,6 @@ public class AdminDashboardController implements Initializable {
         this.sceneManager = SceneManager.getInstance();
     }
 
-    @FXML
-    private Tab projectsTab;
-
-    @FXML
-    private Tab usersTab;
-
-    @FXML
-    private JFXTreeTableView<ProjectTableView> projectTable;
-
-    @FXML
-    private JFXTreeTableView<UserTableView> userTable;
-
-    @FXML
-    private JFXButton logout;
-
-    @FXML
-    private JFXButton messages;
-
-    @FXML
-    private JFXButton updateProject;
-
-    @FXML
-    private JFXButton deleteProject;
-
-    @FXML
-    private JFXButton showProject;
-    @FXML
-    private JFXButton deleteUsers;
-
     /**
      * This method is responsible for listening the controller in window, and making action
      * implemented in lambdas expression
@@ -100,14 +91,26 @@ public class AdminDashboardController implements Initializable {
         projectsTab.setOnSelectionChanged(e -> adminDashboardTablesComponent.generateTables());
         usersTab.setOnSelectionChanged(e -> adminDashboardTablesComponent.generateTables());
 
-        showProject.setOnAction(e -> sceneManager.showInNewWindow(SceneType.ADMIN_PROJECT_VIEW));
+        showProject.setOnAction(e -> {
+            projectService.getProjectToShow();
+            sceneManager.showInNewWindow(SceneType.ADMIN_PROJECT_VIEW);
+        });
 
         updateProject.setOnAction(e -> {
             projectService.getProjectToUpdate();
             sceneManager.showInNewWindow(SceneType.ADMIN_UPDATE_PROJECT);
         });
 
+        newTaskButton.setOnAction(e -> {
+//            sceneManager.showInNewWindow(SceneType.NEW_TASK);
+            throw new IllegalArgumentException("okno nowego taksa nie zdefiniowane");
+        });
+
         logout.setOnAction(e -> SessionService.getInstance().logoutUser());
         messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
+
+        userData.setOnAction(e -> {
+            sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
+        });
     }
 }

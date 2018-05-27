@@ -2,7 +2,6 @@ package com.project.manager.controllers.message;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
-import com.project.manager.controllers.UserSelectorController;
 import com.project.manager.entities.Message;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.MessageTableView;
@@ -11,7 +10,6 @@ import com.project.manager.services.user.UserSelectorService;
 import com.project.manager.ui.AlertManager;
 import com.project.manager.ui.components.MessageWindowComponent;
 import com.project.manager.ui.sceneManager.SceneManager;
-import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,7 +26,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static com.project.manager.ui.AlertManager.showConfirmationAlert;
 import static com.project.manager.ui.AlertManager.showInformationAlert;
 
 /**

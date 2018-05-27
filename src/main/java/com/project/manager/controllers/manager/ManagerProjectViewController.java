@@ -3,6 +3,7 @@ package com.project.manager.controllers.manager;
 import com.jfoenix.controls.JFXButton;
 import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
+import com.project.manager.services.TaskGeneratorService;
 import com.project.manager.ui.components.TaskGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
@@ -42,16 +43,22 @@ public class ManagerProjectViewController implements Initializable {
     private VBox codeReviewVBox;
     @FXML
     private VBox doneVBox;
+    @FXML
+    private Button messages;
+    @FXML
+    private JFXButton userData;
+    @FXML
+    private JFXButton logout;
 
     private SessionService sessionService;
     private SceneManager sceneManager;
-    private TaskGenerator taskGenerator;
+    private TaskGeneratorService taskGeneratorService;
 
 
     @Autowired
-    public ManagerProjectViewController(TaskGenerator taskGenerator) {
+    public ManagerProjectViewController(TaskGeneratorService taskGeneratorService) {
         this.sessionService = SessionService.getInstance();
-        this.taskGenerator = taskGenerator;
+        this.taskGeneratorService = taskGeneratorService;
         this.sceneManager = SceneManager.getInstance();
     }
 
@@ -65,19 +72,14 @@ public class ManagerProjectViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         projectNameLabel.setText(sessionService.getProject().getProjectName());
         backButton.setOnAction(e -> sceneManager.showScene(SceneType.DASHBOARD));
-        injectTasksToVBoxes();
+        taskGeneratorService.injectTasksToVBoxes(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
+                testingVBox, codeReviewVBox, doneVBox);
         report.setOnAction(e -> sceneManager.showInNewWindow(SceneType.GENERATE_REPORT));
-    }
 
-    /**
-     * Inject tasks of chosen project to specified VBoxes
-     */
-    private void injectTasksToVBoxes() {
-        taskGenerator.inject(productBacklogVBox, TaskStatus.PRODUCT_BACKLOG);
-        taskGenerator.inject(sprintBacklogVBox, TaskStatus.SPRINT_BACKLOG);
-        taskGenerator.inject(inProgressVBox, TaskStatus.IN_PROGRESS);
-        taskGenerator.inject(testingVBox, TaskStatus.TESTING);
-        taskGenerator.inject(codeReviewVBox, TaskStatus.CODE_REVIEW);
-        taskGenerator.inject(doneVBox, TaskStatus.DONE);
+        logout.setOnAction(e -> SessionService.getInstance().logoutUser());
+        messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
+        userData.setOnAction(e -> {
+            sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
+        });
     }
 }

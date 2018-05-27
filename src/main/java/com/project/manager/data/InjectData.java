@@ -1,5 +1,6 @@
 package com.project.manager.data;
 
+import com.google.common.collect.Sets;
 import com.project.manager.entities.Message;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 
@@ -84,7 +86,7 @@ public class InjectData {
         this.user = UserModel.builder()
                 .username("user")
                 .password(BCryptEncoder.encode("password"))
-                .email("user@grr.la")
+                .email("users@grr.la")
                 .firstName("Benek")
                 .lastName("Bebenek")
                 .role(UserRole.USER)
@@ -133,9 +135,9 @@ public class InjectData {
 
         for (int i = 0; i < 10; i++) {
             UserModel tempUser = UserModel.builder()
-                    .username("user" + i)
+                    .username("users" + i)
                     .password(BCryptEncoder.encode("password"))
-                    .email("user" + i + "@grr.la")
+                    .email("users" + i + "@grr.la")
                     .firstName("Adam" + i)
                     .lastName("Spadam" + i)
                     .role(UserRole.USER)
@@ -214,7 +216,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.DONE.ordinal())
                 .tag("START")
                 .priority(TaskPriority.HIGH.ordinal())
-                .user(user)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 12))
                 .build();
         this.task2 = Task.builder()
                 .name("Baza danych")
@@ -222,7 +225,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.DONE.ordinal())
                 .tag("BD")
                 .priority(TaskPriority.HIGH.ordinal())
-                .user(manager)
+                .users(Sets.newHashSet(manager))
+                .deadline(LocalDate.of(2018,6, 17))
                 .build();
         this.task3 = Task.builder()
                 .name("Entity")
@@ -230,7 +234,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.CODE_REVIEW.ordinal())
                 .tag("BD")
                 .priority(TaskPriority.MEDIUM.ordinal())
-                .user(user)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 3))
                 .build();
         this.task4 = Task.builder()
                 .name("Połaczenie z bazą")
@@ -238,7 +243,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.TESTING.ordinal())
                 .tag("JP")
                 .priority(TaskPriority.MEDIUM.ordinal())
-                .user(manager)
+                .users(Sets.newHashSet(manager))
+                .deadline(LocalDate.of(2018,6, 29))
                 .build();
         this.task5 = Task.builder()
                 .name("Logika aplikacji")
@@ -246,7 +252,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.TESTING.ordinal())
                 .tag("SERVICE")
                 .priority(TaskPriority.HIGH.ordinal())
-                .user(user)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 19))
                 .build();
         this.task6 = Task.builder()
                 .name("kontrolery")
@@ -254,7 +261,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.IN_PROGRESS.ordinal())
                 .tag("REST")
                 .priority(TaskPriority.MEDIUM.ordinal())
-                .user(manager)
+                .users(Sets.newHashSet(manager))
+                .deadline(LocalDate.of(2018,6, 11))
                 .build();
         this.task7 = Task.builder()
                 .name("testownie")
@@ -262,7 +270,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.SPRINT_BACKLOG.ordinal())
                 .tag("[TEST]")
                 .priority(TaskPriority.LOW.ordinal())
-                .user(user)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 10))
                 .build();
         this.task8 = Task.builder()
                 .name("FrontEnd")
@@ -270,7 +279,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.SPRINT_BACKLOG.ordinal())
                 .tag("[FE]")
                 .priority(TaskPriority.HIGH.ordinal())
-                .user(manager)
+                .users(Sets.newHashSet(manager))
+                .deadline(LocalDate.of(2018,6, 13))
                 .build();
         this.task9 = Task.builder()
                 .name("Security")
@@ -278,7 +288,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.PRODUCT_BACKLOG.ordinal())
                 .tag("[SEC]")
                 .priority(TaskPriority.LOW.ordinal())
-                .user(user)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 7))
                 .build();
         this.task10 = Task.builder()
                 .name("Wdrązenie")
@@ -286,7 +297,8 @@ public class InjectData {
                 .taskStatus(TaskStatus.PRODUCT_BACKLOG.ordinal())
                 .tag("[END]")
                 .priority(TaskPriority.LOW.ordinal())
-                .user(manager)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 20))
                 .build();
 
         this.task1.setProject(projectOne);
