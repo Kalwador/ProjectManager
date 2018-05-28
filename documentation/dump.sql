@@ -263,7 +263,7 @@ COPY public.project (project_id, projectinformation, projectname, manager_id) FR
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.task (id, description, name, priority, tag, taskstatus, project_id) FROM stdin;
+COPY public.task (id, description, name, taskPriority, tag, taskstatus, project_id) FROM stdin;
 1	Podstawowy szkielet funkcionalnej aplikacji	Stworzenie szkieletu	0	START	5	1
 2	Dodanie do projektu połaczenia z baza danych	Baza danych	0	BD	5	1
 3	Stworznie wszystkich wymaganych entity na potrzeby projektu	Entity	1	BD	4	1

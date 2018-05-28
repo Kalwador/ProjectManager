@@ -51,8 +51,6 @@ public class AdminDashboardController implements Initializable {
     private JFXButton showProject;
     @FXML
     private JFXButton deleteUsers;
-    @FXML
-    private JFXButton newTaskButton;
 
     private AdminDashboardTablesComponent adminDashboardTablesComponent;
     private ProjectService projectService;
@@ -99,11 +97,6 @@ public class AdminDashboardController implements Initializable {
         updateProject.setOnAction(e -> {
             projectService.getProjectToUpdate();
             sceneManager.showInNewWindow(SceneType.ADMIN_UPDATE_PROJECT);
-        });
-
-        newTaskButton.setOnAction(e -> {
-//            sceneManager.showInNewWindow(SceneType.NEW_TASK);
-            throw new IllegalArgumentException("okno nowego taksa nie zdefiniowane");
         });
 
         logout.setOnAction(e -> SessionService.getInstance().logoutUser());

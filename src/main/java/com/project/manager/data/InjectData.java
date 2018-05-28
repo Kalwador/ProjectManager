@@ -215,7 +215,7 @@ public class InjectData {
                 .description("Podstawowy szkielet funkcionalnej aplikacji")
                 .taskStatus(TaskStatus.DONE.ordinal())
                 .tag("START")
-                .priority(TaskPriority.HIGH.ordinal())
+                .taskPriority(TaskPriority.HIGH)
                 .users(Sets.newHashSet(user))
                 .deadline(LocalDate.of(2018,6, 12))
                 .build();
@@ -224,7 +224,7 @@ public class InjectData {
                 .description("Dodanie do projektu połaczenia z baza danych")
                 .taskStatus(TaskStatus.DONE.ordinal())
                 .tag("BD")
-                .priority(TaskPriority.HIGH.ordinal())
+                .taskPriority(TaskPriority.HIGH)
                 .users(Sets.newHashSet(manager))
                 .deadline(LocalDate.of(2018,6, 17))
                 .build();
@@ -233,7 +233,7 @@ public class InjectData {
                 .description("Stworznie wszystkich wymaganych entity na potrzeby projektu")
                 .taskStatus(TaskStatus.CODE_REVIEW.ordinal())
                 .tag("BD")
-                .priority(TaskPriority.MEDIUM.ordinal())
+                .taskPriority(TaskPriority.MEDIUM)
                 .users(Sets.newHashSet(user))
                 .deadline(LocalDate.of(2018,6, 3))
                 .build();
@@ -242,7 +242,7 @@ public class InjectData {
                 .description("Stworznie repozytowrów JPA dla entity oraz wykonanie testów zapisu do bazy dancyh")
                 .taskStatus(TaskStatus.TESTING.ordinal())
                 .tag("JP")
-                .priority(TaskPriority.MEDIUM.ordinal())
+                .taskPriority(TaskPriority.MEDIUM)
                 .users(Sets.newHashSet(manager))
                 .deadline(LocalDate.of(2018,6, 29))
                 .build();
@@ -251,7 +251,7 @@ public class InjectData {
                 .description("stworznie potrzebnej logiki aplikacji do zarazdzania i kontrolą lotów na lotnisku")
                 .taskStatus(TaskStatus.TESTING.ordinal())
                 .tag("SERVICE")
-                .priority(TaskPriority.HIGH.ordinal())
+                .taskPriority(TaskPriority.HIGH)
                 .users(Sets.newHashSet(user))
                 .deadline(LocalDate.of(2018,6, 19))
                 .build();
@@ -260,7 +260,7 @@ public class InjectData {
                 .description("Dodanie potrzebnych kontrolerów")
                 .taskStatus(TaskStatus.IN_PROGRESS.ordinal())
                 .tag("REST")
-                .priority(TaskPriority.MEDIUM.ordinal())
+                .taskPriority(TaskPriority.MEDIUM)
                 .users(Sets.newHashSet(manager))
                 .deadline(LocalDate.of(2018,6, 11))
                 .build();
@@ -269,7 +269,7 @@ public class InjectData {
                 .description("Testownie integracyjne bazy andych z logiką oraz kontrolerami")
                 .taskStatus(TaskStatus.SPRINT_BACKLOG.ordinal())
                 .tag("[TEST]")
-                .priority(TaskPriority.LOW.ordinal())
+                .taskPriority(TaskPriority.LOW)
                 .users(Sets.newHashSet(user))
                 .deadline(LocalDate.of(2018,6, 10))
                 .build();
@@ -278,7 +278,7 @@ public class InjectData {
                 .description("stwornzie szkieletu fronu aplikacji")
                 .taskStatus(TaskStatus.SPRINT_BACKLOG.ordinal())
                 .tag("[FE]")
-                .priority(TaskPriority.HIGH.ordinal())
+                .taskPriority(TaskPriority.HIGH)
                 .users(Sets.newHashSet(manager))
                 .deadline(LocalDate.of(2018,6, 13))
                 .build();
@@ -287,7 +287,7 @@ public class InjectData {
                 .description("Zabezpieczenie aplikacji przed działaniami szkodzącymi")
                 .taskStatus(TaskStatus.PRODUCT_BACKLOG.ordinal())
                 .tag("[SEC]")
-                .priority(TaskPriority.LOW.ordinal())
+                .taskPriority(TaskPriority.LOW)
                 .users(Sets.newHashSet(user))
                 .deadline(LocalDate.of(2018,6, 7))
                 .build();
@@ -296,7 +296,7 @@ public class InjectData {
                 .description("Wdrązenie aplikacji na serwer")
                 .taskStatus(TaskStatus.PRODUCT_BACKLOG.ordinal())
                 .tag("[END]")
-                .priority(TaskPriority.LOW.ordinal())
+                .taskPriority(TaskPriority.LOW)
                 .users(Sets.newHashSet(user))
                 .deadline(LocalDate.of(2018,6, 20))
                 .build();

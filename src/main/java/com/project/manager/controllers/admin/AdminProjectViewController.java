@@ -48,6 +48,8 @@ public class AdminProjectViewController implements Initializable {
     private JFXButton userData;
     @FXML
     private JFXButton logout;
+    @FXML
+    private JFXButton newTaskButton;
 
     private SessionService sessionService;
     private SceneManager sceneManager;
@@ -74,6 +76,11 @@ public class AdminProjectViewController implements Initializable {
         taskGeneratorService.injectTasksToVBoxes(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
                 testingVBox, codeReviewVBox, doneVBox);
         report.setOnAction(e -> sceneManager.showInNewWindow(SceneType.GENERATE_REPORT));
+
+        newTaskButton.setOnAction(e -> {
+//            sceneManager.showInNewWindow(SceneType.NEW_TASK);
+            throw new IllegalArgumentException("okno nowego taksa nie zdefiniowane");
+        });
 
         logout.setOnAction(e -> SessionService.getInstance().logoutUser());
         messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));

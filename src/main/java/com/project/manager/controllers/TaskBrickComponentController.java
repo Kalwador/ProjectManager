@@ -1,6 +1,7 @@
 package com.project.manager.controllers;
 
 import com.project.manager.entities.Task;
+import com.project.manager.models.task.TaskPriority;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -48,13 +49,13 @@ public class TaskBrickComponentController implements Initializable {
         tagLabel.setText(task.getTag());
         deadlineLabel.setText(task.getDeadline().toString());
         brickPane.setStyle("-fx-background-color: "+getHexFromColor(getColorByDeadline(task.getDeadline()))+";");
-        priorityColor.setStyle("-fx-background-color: "+getHexFromColor(getColorByTaskPriority(task.getPriority()))+";");
+        priorityColor.setStyle("-fx-background-color: "+getHexFromColor(getColorByTaskPriority(task.getTaskPriority()))+";");
     }
 
-    private Color getColorByTaskPriority(int priority){
-        if(priority == 0) return new Color(0, 255, 0,100);
-        if(priority == 1) return new Color(255, 255, 0, 100);
-        if(priority == 2) return new Color(255, 0, 0, 100);
+    private Color getColorByTaskPriority(TaskPriority priority){
+        if(priority == TaskPriority.LOW) return new Color(0, 255, 0,100);
+        if(priority == TaskPriority.MEDIUM) return new Color(255, 255, 0, 100);
+        if(priority == TaskPriority.HIGH) return new Color(255, 0, 0, 100);
         return new Color(255, 255, 255, 100);
     }
 

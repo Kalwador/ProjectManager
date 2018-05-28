@@ -16,7 +16,7 @@ public class TaskReportModel {
     private String tag;
 
     public static TaskReportModel convert(Task task) {
-        return new TaskReportModel(task.getName(), TaskPriority.values()[task.getPriority()],
+        return new TaskReportModel(task.getName(), task.getTaskPriority(),
                                    TaskStatus.values()[task.getTaskStatus()], task.getTag());
     }
 }

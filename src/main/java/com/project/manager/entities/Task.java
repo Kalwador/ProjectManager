@@ -1,5 +1,6 @@
 package com.project.manager.entities;
 
+import com.project.manager.models.task.TaskPriority;
 import lombok.*;
 import org.hibernate.annotations.Proxy;
 
@@ -34,8 +35,8 @@ public class Task {
 
     private String tag;
 
-    @NotNull
-    private Integer priority;
+    @Enumerated
+    private TaskPriority taskPriority;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
@@ -57,7 +58,7 @@ public class Task {
                 Objects.equals(name, task.name) &&
                 Objects.equals(description, task.description) &&
                 Objects.equals(tag, task.tag) &&
-                Objects.equals(priority, task.priority) &&
+                Objects.equals(taskPriority, task.taskPriority) &&
                 Objects.equals(project, task.project) &&
                 Objects.equals(users.size(), task.users.size()) &&
                 Objects.equals(deadline, task.deadline);
@@ -65,7 +66,7 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, taskStatus, tag, priority, project, deadline);
+        return Objects.hash(id, name, description, taskStatus, tag, taskPriority, project, deadline);
     }
 
     @PreRemove
