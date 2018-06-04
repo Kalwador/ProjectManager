@@ -1,8 +1,10 @@
 package com.project.manager.ui.components;
 
 import com.project.manager.controllers.admin.MemberPaneController;
+import com.project.manager.controllers.task.TaskExecutorPaneController;
 import com.project.manager.data.InjectAvatar;
 import com.project.manager.entities.UserModel;
+import com.project.manager.models.UserRole;
 import com.project.manager.services.SessionService;
 import com.project.manager.utils.ImageConverter;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -67,11 +70,11 @@ public class MemberPaneGenerator {
      * projectTableView in Admin Dashboard
      *
      * @param projectMembersArea - VBox that contains panes of members
-     * @param userModel      - model of user
+     * @param userModel          - model of user
      */
     private void createProjectBrick(VBox projectMembersArea, UserModel userModel) {
         try {
-            if (Optional.ofNullable(userModel.getAvatar()).isPresent()){
+            if (Optional.ofNullable(userModel.getAvatar()).isPresent()) {
                 convertedMemberAvatar = ImageConverter.convertToImage(userModel.getAvatar(), 100, 100);
             }
             String fullName = userModel.getFirstName() + " " + userModel.getLastName();
@@ -86,6 +89,32 @@ public class MemberPaneGenerator {
                 controller.getMemberAvatar().setImage(convertedMemberAvatar);
 
             projectMembersArea.getChildren().add(newAnchorPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createTaskExecutorsPanes(VBox dataBox, Set<UserModel> executors, boolean showEditButtons) {
+        try {
+            for (UserModel u : executors) {
+                if (Optional.ofNullable(u.getAvatar()).isPresent())
+                    convertedMemberAvatar = ImageConverter.convertToImage(u.getAvatar(), 100, 100);
+                String fullName = u.getFirstName() + " " + u.getLastName();
+                AnchorPane pane;
+                TaskExecutorPaneController controller = new TaskExecutorPaneController();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/task/taskExecutorPane.fxml"));
+                loader.setController(controller);
+                pane = loader.load();
+                controller.setExecutorId(u.getId());
+                controller.getExecutorName().setText(fullName);
+                if (sessionService.getUserModel().getRole() == UserRole.ADMIN && showEditButtons) {
+                    controller.getDeleteExecutor().setVisible(true);
+                }
+                if (Optional.ofNullable(convertedMemberAvatar).isPresent()) {
+                    controller.getExecutorAvatar().setImage(convertedMemberAvatar);
+                }
+                dataBox.getChildren().add(pane);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

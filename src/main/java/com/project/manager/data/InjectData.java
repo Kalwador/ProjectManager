@@ -34,6 +34,7 @@ public class InjectData {
     private MessageRepository messageRepository;
 
     private UserModel user;
+    private UserModel user2;
     private UserModel manager;
     private UserModel admin;
 
@@ -99,6 +100,22 @@ public class InjectData {
                 .tasks(new HashSet<>())
                 .build();
 
+        this.user2 = UserModel.builder()
+                .username("userTwo")
+                .password(BCryptEncoder.encode("password"))
+                .email("aga@grr.la")
+                .firstName("Aga")
+                .lastName("Lamaga")
+                .role(UserRole.USER)
+                .isLocked(false)
+                .isBlocked(false)
+                .projectsAsManager(new HashSet<>())
+                .projectsAsUser(new HashSet<>())
+                .messages(new HashSet<>())
+                .avatar(injectAvatar.getAvatar())
+                .tasks(new HashSet<>())
+                .build();
+
         this.manager = UserModel.builder()
                 .username("manager")
                 .password(BCryptEncoder.encode("password"))
@@ -130,6 +147,7 @@ public class InjectData {
                 .build();
 
         this.user = userRepository.save(this.user);
+        this.user2 = userRepository.save(this.user2);
         this.manager = userRepository.save(this.manager);
         this.admin = userRepository.save(this.admin);
 
@@ -176,6 +194,7 @@ public class InjectData {
                 .build();
 
         this.user.getProjectsAsUser().add(this.projectOne);
+        this.user2.getProjectsAsUser().add(this.projectOne);
         this.user.getProjectsAsUser().add(this.projectTwo);
         this.user.getProjectsAsUser().add(this.projectThree);
 
@@ -192,6 +211,7 @@ public class InjectData {
         this.projectThree = projectRepository.save(projectThree);
 
         this.user = userRepository.save(this.user);
+        this.user2 = userRepository.save(this.user2);
         this.manager = userRepository.save(this.manager);
         this.admin = userRepository.save(this.admin);
 
@@ -213,7 +233,7 @@ public class InjectData {
         this.task1 = Task.builder()
                 .name("Stworzenie szkieletu")
                 .description("Podstawowy szkielet funkcionalnej aplikacji")
-                .taskStatus(TaskStatus.DONE.ordinal())
+                .taskStatus(TaskStatus.DONE)
                 .tag("START")
                 .taskPriority(TaskPriority.HIGH)
                 .users(Sets.newHashSet(user))
@@ -222,7 +242,7 @@ public class InjectData {
         this.task2 = Task.builder()
                 .name("Baza danych")
                 .description("Dodanie do projektu połaczenia z baza danych")
-                .taskStatus(TaskStatus.DONE.ordinal())
+                .taskStatus(TaskStatus.DONE)
                 .tag("BD")
                 .taskPriority(TaskPriority.HIGH)
                 .users(Sets.newHashSet(manager))
@@ -231,7 +251,7 @@ public class InjectData {
         this.task3 = Task.builder()
                 .name("Entity")
                 .description("Stworznie wszystkich wymaganych entity na potrzeby projektu")
-                .taskStatus(TaskStatus.CODE_REVIEW.ordinal())
+                .taskStatus(TaskStatus.CODE_REVIEW)
                 .tag("BD")
                 .taskPriority(TaskPriority.MEDIUM)
                 .users(Sets.newHashSet(user))
@@ -240,7 +260,7 @@ public class InjectData {
         this.task4 = Task.builder()
                 .name("Połaczenie z bazą")
                 .description("Stworznie repozytowrów JPA dla entity oraz wykonanie testów zapisu do bazy dancyh")
-                .taskStatus(TaskStatus.TESTING.ordinal())
+                .taskStatus(TaskStatus.TESTING)
                 .tag("JP")
                 .taskPriority(TaskPriority.MEDIUM)
                 .users(Sets.newHashSet(manager))
@@ -249,7 +269,7 @@ public class InjectData {
         this.task5 = Task.builder()
                 .name("Logika aplikacji")
                 .description("stworznie potrzebnej logiki aplikacji do zarazdzania i kontrolą lotów na lotnisku")
-                .taskStatus(TaskStatus.TESTING.ordinal())
+                .taskStatus(TaskStatus.TESTING)
                 .tag("SERVICE")
                 .taskPriority(TaskPriority.HIGH)
                 .users(Sets.newHashSet(user))
@@ -258,7 +278,7 @@ public class InjectData {
         this.task6 = Task.builder()
                 .name("kontrolery")
                 .description("Dodanie potrzebnych kontrolerów")
-                .taskStatus(TaskStatus.IN_PROGRESS.ordinal())
+                .taskStatus(TaskStatus.IN_PROGRESS)
                 .tag("REST")
                 .taskPriority(TaskPriority.MEDIUM)
                 .users(Sets.newHashSet(manager))
@@ -267,7 +287,7 @@ public class InjectData {
         this.task7 = Task.builder()
                 .name("testownie")
                 .description("Testownie integracyjne bazy andych z logiką oraz kontrolerami")
-                .taskStatus(TaskStatus.SPRINT_BACKLOG.ordinal())
+                .taskStatus(TaskStatus.SPRINT_BACKLOG)
                 .tag("[TEST]")
                 .taskPriority(TaskPriority.LOW)
                 .users(Sets.newHashSet(user))
@@ -276,7 +296,7 @@ public class InjectData {
         this.task8 = Task.builder()
                 .name("FrontEnd")
                 .description("stwornzie szkieletu fronu aplikacji")
-                .taskStatus(TaskStatus.SPRINT_BACKLOG.ordinal())
+                .taskStatus(TaskStatus.SPRINT_BACKLOG)
                 .tag("[FE]")
                 .taskPriority(TaskPriority.HIGH)
                 .users(Sets.newHashSet(manager))
@@ -285,7 +305,7 @@ public class InjectData {
         this.task9 = Task.builder()
                 .name("Security")
                 .description("Zabezpieczenie aplikacji przed działaniami szkodzącymi")
-                .taskStatus(TaskStatus.PRODUCT_BACKLOG.ordinal())
+                .taskStatus(TaskStatus.PRODUCT_BACKLOG)
                 .tag("[SEC]")
                 .taskPriority(TaskPriority.LOW)
                 .users(Sets.newHashSet(user))
@@ -294,7 +314,7 @@ public class InjectData {
         this.task10 = Task.builder()
                 .name("Wdrązenie")
                 .description("Wdrązenie aplikacji na serwer")
-                .taskStatus(TaskStatus.PRODUCT_BACKLOG.ordinal())
+                .taskStatus(TaskStatus.PRODUCT_BACKLOG)
                 .tag("[END]")
                 .taskPriority(TaskPriority.LOW)
                 .users(Sets.newHashSet(user))
@@ -324,14 +344,19 @@ public class InjectData {
         this.projectOne.getTasks().add(task10);
 
         this.user.getTasks().add(task1);
+        this.user2.getTasks().add(task1);
         this.manager.getTasks().add(task2);
         this.user.getTasks().add(task3);
+        this.user2.getTasks().add(task3);
         this.manager.getTasks().add(task4);
+        this.user2.getTasks().add(task5);
         this.user.getTasks().add(task5);
         this.manager.getTasks().add(task6);
         this.user.getTasks().add(task7);
+        this.user2.getTasks().add(task7);
         this.manager.getTasks().add(task8);
         this.user.getTasks().add(task9);
+        this.user2.getTasks().add(task9);
         this.manager.getTasks().add(task10);
 
         this.task1 = taskRepository.save(task1);
@@ -348,6 +373,7 @@ public class InjectData {
         this.projectOne = projectRepository.save(projectOne);
 
         this.user = userRepository.save(user);
+        this.user2 = userRepository.save(user2);
         this.manager = userRepository.save(manager);
 
     }

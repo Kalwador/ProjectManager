@@ -24,12 +24,13 @@ public class SceneManager {
     private AdminProjectView adminProjectView;
     private UpdateProjectScene updateProjectScene;
     private MessageViewWindowScene messageViewWindowScene;
-    private ManagerProjectView managerProjectView;
+    private ManagerProjectViewScene managerProjectView;
     private EmployeeProjectView employeeProjectView;
     private AddUserScene addUserScene;
     private GenerateReportScene generateReportScene;
     private MessagesWindowScene messagesWindowScene;
     private PersonalDataScene personalDataScene;
+    private TaskWindowScene taskWindowScene;
 
     private HashMap<Integer, CustomScene> scenes;
 
@@ -78,12 +79,13 @@ public class SceneManager {
         this.adminProjectView = new AdminProjectView(primaryStage);
         this.updateProjectScene = new UpdateProjectScene(primaryStage);
         this.messageViewWindowScene = new MessageViewWindowScene(primaryStage);
-        this.managerProjectView = new ManagerProjectView(primaryStage);
+        this.managerProjectView = new ManagerProjectViewScene(primaryStage);
         this.employeeProjectView = new EmployeeProjectView(primaryStage);
         this.addUserScene = new AddUserScene(primaryStage);
         this.generateReportScene = new GenerateReportScene(primaryStage);
         this.messagesWindowScene = new MessagesWindowScene(primaryStage);
         this.personalDataScene = new PersonalDataScene(primaryStage);
+        this.taskWindowScene = new TaskWindowScene(primaryStage);
 
         scenes = new HashMap<Integer, CustomScene>() {
             {
@@ -101,6 +103,7 @@ public class SceneManager {
                 put(SceneType.GENERATE_REPORT.ordinal(), generateReportScene);
                 put(SceneType.MESSAGES_WINDOW.ordinal(), messagesWindowScene);
                 put(SceneType.PERSONAL_DATA.ordinal(), personalDataScene);
+                put(SceneType.TASK_WINDOW.ordinal(), taskWindowScene);
             }
         };
         log.info("Scenes initializec succesfully in initializeScenes method");

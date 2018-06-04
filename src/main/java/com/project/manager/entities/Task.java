@@ -1,6 +1,7 @@
 package com.project.manager.entities;
 
 import com.project.manager.models.task.TaskPriority;
+import com.project.manager.models.task.TaskStatus;
 import lombok.*;
 import org.hibernate.annotations.Proxy;
 
@@ -31,7 +32,8 @@ public class Task {
     @NotNull
     private String description;
 
-    private int taskStatus;
+    @Enumerated
+    private TaskStatus taskStatus;
 
     private String tag;
 

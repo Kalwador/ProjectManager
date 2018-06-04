@@ -5,6 +5,7 @@ import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
 import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
+import com.project.manager.services.TaskService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -23,10 +24,12 @@ import java.io.IOException;
 @Getter
 public class TaskGenerator {
     private SessionService sessionService;
+    private TaskService taskService;
 
     @Autowired
-    public TaskGenerator() {
+    public TaskGenerator(TaskService taskService) {
         this.sessionService = SessionService.getInstance();
+        this.taskService = taskService;
     }
 
     /**
@@ -38,8 +41,10 @@ public class TaskGenerator {
     public void inject(VBox box, TaskStatus taskStatus) {
         Project project = sessionService.getProject();
         project.getTasks().forEach(task -> {
-            if (task.getTaskStatus() == taskStatus.ordinal()) {
-                box.getChildren().add(getPaneFromTask(task));
+            if (task.getTaskStatus() == taskStatus) {
+                AnchorPane taskPane = getPaneFromTask(task);
+                taskPane.setOnMouseClicked(e -> showTaskWindow(task.getId()));
+                box.getChildren().add(taskPane);
             }
         });
     }
@@ -47,11 +52,12 @@ public class TaskGenerator {
     public void injectOnlyForOneUser(VBox box, TaskStatus taskStatus, Long userId) {
         Project project = sessionService.getProject();
         project.getTasks().forEach(task -> {
-            if (task.getTaskStatus() == taskStatus.ordinal()) {
+            if (task.getTaskStatus() == taskStatus) {
                 task.getUsers().forEach(userModel -> {
                     if (userModel.getId().equals(userId)) {
-                        box.getChildren().add(getPaneFromTask(task));
-                    }
+                        AnchorPane taskPane = getPaneFromTask(task);
+                        taskPane.setOnMouseClicked(e -> showTaskWindow(task.getId()));
+                        box.getChildren().add(taskPane); }
                 });
             }
         });
@@ -63,12 +69,17 @@ public class TaskGenerator {
             taskBrickComponentController.setTask(task);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TaskBrickComponent.fxml"));
             fxmlLoader.setController(taskBrickComponentController);
-            log.info("Pane from task created succesfully " + task.toString());
+            log.info("Pane from task created successfully " + task.toString());
             return fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
             log.error("IOException in getPaneFromTask method during creating Pane from Task");
             throw new RuntimeException("IOException in getPaneFromTask method during creating Pane from Task");
         }
+    }
+
+    private void showTaskWindow(Long id) {
+        taskService.setUpTask(id);
+        taskService.openTaskWindow();
     }
 }
