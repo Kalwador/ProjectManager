@@ -8,6 +8,11 @@ import javafx.stage.Stage;
  */
 public class DashboardScene extends CustomSceneImpl {
 
+    /**
+     * Constructor to specify path to the fxml file which is window view
+     *
+     * @param stage this is the stage of that scene
+     */
     public DashboardScene(Stage stage) {
         super(stage);
         super.setWindowTitle("Dashboard");

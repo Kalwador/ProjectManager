@@ -1,0 +1,16 @@
+.generateButton{
+	-fx-background-color:black;
+	-fx-background-radius:5px;
+	-fx-border-color:#d66000;
+	-fx-border-radius:5px;
+	-fx-effect: innershadow( three-pass-box , rgba(214,96,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+.scrollPaneInside{
+	-fx-border-color:#d66000;
+	-fx-background-radius:3px;
+	-fx-border-radius:3px;
+}
+.topPaneWindow{
+	-fx-background-color:#d66000;
+	-fx-background-radius:7px;
+}

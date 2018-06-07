@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" stylesheets="@personalData.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.PersonalDataController">
+   <center>
+      <BorderPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXTextField fx:id="firstNameTextField" labelFloat="true" layoutX="212.0" layoutY="70.0" promptText="First Name" />
+                  <JFXTextField fx:id="secondNameTextField" labelFloat="true" layoutX="213.0" layoutY="120.0" promptText="Second Name" />
+                  <JFXPasswordField fx:id="passwordField1" layoutX="212.0" layoutY="170.0" promptText="Password" visible="false" />
+                  <JFXPasswordField fx:id="passwordField2" labelFloat="true" layoutX="205.0" layoutY="214.0" promptText="Confirm Password" visible="false" />
+                  <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0" layoutX="49.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" styleClass="avatarImage" />
+                  <Label fx:id="username" layoutX="214.0" layoutY="31.0" text="username" />
+                  <Label fx:id="errorLabel" layoutX="205.0" layoutY="256.0" prefHeight="21.0" prefWidth="185.0" text="Passwords do not match!" visible="false" />
+                  <JFXButton fx:id="saveButton" layoutX="107.0" layoutY="298.0" text="Save" />
+                  <JFXButton fx:id="cancelButton" layoutX="247.0" layoutY="298.0" text="Cancel" />
+                  <JFXButton fx:id="changeAvatarButton" layoutX="67.0" layoutY="198.0" text="change" />
+                  <Label fx:id="changePasswordLabel" layoutX="212.0" layoutY="177.0" text="change password" />
+                  <TextField fx:id="isAvatarChangedNotVisibleButSuperImportant" disable="true" editable="false" layoutX="0.0" layoutY="0.0" prefHeight="0.0" prefWidth="0.0" visible="false" />
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>

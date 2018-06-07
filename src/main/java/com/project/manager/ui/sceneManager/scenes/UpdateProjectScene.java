@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 public class UpdateProjectScene extends CustomSceneImpl {
 
     /**
-     * Constructor to specify path to the fxml file which is window view
+     * Constructor to specify path to the fxml file which is update project view
      *
-     * @param primaryStage this is the mail stage of application
+     * @param stage this is the stage of that scene
      */
-    public UpdateProjectScene(Stage primaryStage) {
-        super(primaryStage);
-        super.setWindowTitle("Update Window");
+    public UpdateProjectScene(Stage stage) {
+        super(stage);
+        super.setWindowTitle("Update Project");
         super.setPathToFXML("/fxml/admin/adminUpdateProject.fxml");
     }
 }

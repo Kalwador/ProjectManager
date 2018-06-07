@@ -1,9 +1,9 @@
 package com.project.manager.ui.sceneManager;
 
 import com.project.manager.ui.sceneManager.scenes.*;
-import com.project.manager.ui.sceneManager.scenes.MessageViewWindowScene;
 import com.project.manager.ui.sceneManager.scenes.system.CustomScene;
 import javafx.stage.Stage;
+import lombok.extern.log4j.Log4j;
 
 import java.util.HashMap;
 
@@ -12,25 +12,33 @@ import java.util.HashMap;
  * Contains all methods to changing scenes in primaryStage and opening new ones.
  * SceneManager is singleton, instance cen be accessible thought getInstance() method.
  */
+@Log4j
 public class SceneManager {
     private static SceneManager instance;
     private Stage primaryStage;
     private LoginScene loginScene;
     private RegistrationScene registrationScene;
     private DashboardScene dashboardScene;
-    private ResetPasswdScene resetPasswdScene;
+    private ResetPasswordScene resetPasswordScene;
     private AdminDashboardScene adminDashboardScene;
+    private AdminProjectView adminProjectView;
     private UpdateProjectScene updateProjectScene;
     private MessageViewWindowScene messageViewWindowScene;
-    private ManagerProjectView managerProjectView;
+    private ManagerProjectViewScene managerProjectView;
     private EmployeeProjectView employeeProjectView;
     private AddUserScene addUserScene;
+    private GenerateReportScene generateReportScene;
+    private MessagesWindowScene messagesWindowScene;
+    private PersonalDataScene personalDataScene;
+    private TaskWindowScene taskWindowScene;
+
     private HashMap<Integer, CustomScene> scenes;
 
     /**
      * private constructor, access only through method getInstance
      */
     private SceneManager() {
+        log.info("new instance of SceneManager created");
     }
 
     /**
@@ -54,6 +62,7 @@ public class SceneManager {
      */
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        log.info("PrimaryStage set complete");
         initializeScenes();
     }
 
@@ -65,13 +74,18 @@ public class SceneManager {
         this.loginScene = new LoginScene(primaryStage);
         this.registrationScene = new RegistrationScene(primaryStage);
         this.dashboardScene = new DashboardScene(primaryStage);
-        this.resetPasswdScene = new ResetPasswdScene(primaryStage);
+        this.resetPasswordScene = new ResetPasswordScene(primaryStage);
         this.adminDashboardScene = new AdminDashboardScene(primaryStage);
+        this.adminProjectView = new AdminProjectView(primaryStage);
         this.updateProjectScene = new UpdateProjectScene(primaryStage);
         this.messageViewWindowScene = new MessageViewWindowScene(primaryStage);
-        this.managerProjectView = new ManagerProjectView(primaryStage);
+        this.managerProjectView = new ManagerProjectViewScene(primaryStage);
         this.employeeProjectView = new EmployeeProjectView(primaryStage);
         this.addUserScene = new AddUserScene(primaryStage);
+        this.generateReportScene = new GenerateReportScene(primaryStage);
+        this.messagesWindowScene = new MessagesWindowScene(primaryStage);
+        this.personalDataScene = new PersonalDataScene(primaryStage);
+        this.taskWindowScene = new TaskWindowScene(primaryStage);
 
         scenes = new HashMap<Integer, CustomScene>() {
             {
@@ -81,12 +95,18 @@ public class SceneManager {
                 put(SceneType.EMPLOYEE_PROJECT_VIEW.ordinal(), employeeProjectView);
                 put(SceneType.MANAGER_PROJECT_VIEW.ordinal(), managerProjectView);
                 put(SceneType.ADMIN_DASHBOARD.ordinal(), adminDashboardScene);
+                put(SceneType.ADMIN_PROJECT_VIEW.ordinal(), adminProjectView);
                 put(SceneType.ADMIN_UPDATE_PROJECT.ordinal(), updateProjectScene);
                 put(SceneType.MESSAGE_VIEW_WINDOW.ordinal(), messageViewWindowScene);
-                put(SceneType.RESETPASSWD.ordinal(), resetPasswdScene);
+                put(SceneType.RESET_PASSWORD.ordinal(), resetPasswordScene);
                 put(SceneType.ADD_USER.ordinal(), addUserScene);
+                put(SceneType.GENERATE_REPORT.ordinal(), generateReportScene);
+                put(SceneType.MESSAGES_WINDOW.ordinal(), messagesWindowScene);
+                put(SceneType.PERSONAL_DATA.ordinal(), personalDataScene);
+                put(SceneType.TASK_WINDOW.ordinal(), taskWindowScene);
             }
         };
+        log.info("Scenes initializec succesfully in initializeScenes method");
     }
 
     /**
@@ -96,6 +116,7 @@ public class SceneManager {
      */
     public void showScene(SceneType type) {
         scenes.get(type.ordinal()).show();
+        log.trace("Show scene: " + type.toString());
     }
 
     /**
@@ -105,6 +126,7 @@ public class SceneManager {
      */
     public void showScene(int sceneID) {
         scenes.get(sceneID).show();
+        log.trace("Show scene: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -114,6 +136,7 @@ public class SceneManager {
      */
     public void hideScene(SceneType type) {
         scenes.get(type.ordinal()).hide();
+        log.trace("Hide scene: " + type.toString());
     }
 
     /**
@@ -123,6 +146,7 @@ public class SceneManager {
      */
     public void hideScene(int sceneID) {
         scenes.get(sceneID).hide();
+        log.trace("Hide scene: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -132,6 +156,7 @@ public class SceneManager {
      */
     public void closeScene(SceneType type) {
         scenes.get(type.ordinal()).close();
+        log.trace("Close scene: " + type.toString());
     }
 
     /**
@@ -141,6 +166,7 @@ public class SceneManager {
      */
     public void closeScene(int sceneID) {
         scenes.get(sceneID).close();
+        log.trace("Close scene: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -151,6 +177,7 @@ public class SceneManager {
      */
     public void showInNewWindow(SceneType type) {
         scenes.get(type.ordinal()).showInNewScene();
+        log.trace("Show scene in new window: " + type.toString());
     }
 
     /**
@@ -161,6 +188,7 @@ public class SceneManager {
      */
     public void showInNewWindow(int sceneID) {
         scenes.get(sceneID).showInNewScene();
+        log.trace("Show scene in new window: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -171,6 +199,7 @@ public class SceneManager {
      */
     public void hideNewWindow(SceneType type) {
         scenes.get(type.ordinal()).hideNewScene();
+        log.trace("Hide scene in new window: " + type.toString());
     }
 
     /**
@@ -181,6 +210,7 @@ public class SceneManager {
      */
     public void hideNewWindow(int sceneID) {
         scenes.get(sceneID).hideNewScene();
+        log.trace("Hide scene in new window: " + scenes.get(sceneID).toString());
     }
 
     /**
@@ -191,17 +221,25 @@ public class SceneManager {
      */
     public void closeNewWindow(SceneType type) {
         scenes.get(type.ordinal()).closeNewScene();
+        log.trace("Close scene in new window: " + type.toString());
     }
 
     /**
      * Close scene passed in parameter by ID in NewStage.
      * There can be only one NewStage.
-     * "when u go so far, that u can't take step back"
      *
      * @param sceneID SceneTypeID to show
      */
     public void closeNewWindow(int sceneID) {
         scenes.get(sceneID).closeNewScene();
+        log.trace("Close scene in new window: " + scenes.get(sceneID).toString());
+    }
+
+    /**
+     * Close all secnes in new windows, used in logout user.
+     */
+    public void hideAllNewScenes(){
+        scenes.values().forEach(CustomScene::hideNewScene);
     }
 }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="365.0" style="-fx-background-color: #c9c5c5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton fx:id="deleteMember" layoutX="293.0" layoutY="25.0" style="-fx-background-color: #ff2121;" text="Delete" />
+      <Label fx:id="memberName" layoutX="109.0" layoutY="29.0" prefHeight="17.0" prefWidth="81.0" text="Member Name" />
+      <ImageView fx:id="memberAvatar" fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

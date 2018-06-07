@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.message.MessageWindowController">
+    <center>
+        <JFXTabPane BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab fx:id="inbox" text="Inbox">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <JFXTreeTableView fx:id="inboxTable" prefHeight="465.0" prefWidth="500.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="sentbox" text="Sent">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <JFXTreeTableView fx:id="sentboxTable" prefHeight="465.0" prefWidth="500.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="sentMessageTab" text="Sent Message">
+                    <content>
+                                <BorderPane prefHeight="400.0" prefWidth="400.0">
+                                    <center>
+                                        <Pane maxWidth="400.0" minWidth="400.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                            <children>
+                                                <VBox prefHeight="400.0" prefWidth="400.0">
+                                                    <children>
+                                                        <TextField fx:id="receiver" promptText="Receiver">
+                                                            <VBox.margin>
+                                                                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+                                                            </VBox.margin>
+                                                        </TextField>
+                                                        <TextField fx:id="title" promptText="Title">
+                                                            <VBox.margin>
+                                                                <Insets bottom="10.0" left="20.0" right="20.0" />
+                                                            </VBox.margin>
+                                                        </TextField>
+                                                        <TextArea fx:id="content" prefHeight="250.0" prefWidth="360.0">
+                                                            <VBox.margin>
+                                                                <Insets left="20.0" right="20.0" />
+                                                            </VBox.margin>
+                                                        </TextArea>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </Pane>
+                                    </center>
+                                    <bottom>
+                                        <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                                            <children>
+                                                <Button fx:id="sent" mnemonicParsing="false" text="Sent">
+                                                    <HBox.margin>
+                                                        <Insets top="10.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                                <Button fx:id="clear" layoutX="190.0" layoutY="20.0" mnemonicParsing="false" text="Clear">
+                                                    <HBox.margin>
+                                                        <Insets left="20.0" top="10.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                    </bottom>
+                                </BorderPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </JFXTabPane>
+    </center>
+    <right>
+        <VBox prefHeight="500.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+            <children>
+                <JFXButton fx:id="deleteMessages" buttonType="RAISED" text="Delete message">
+                    <VBox.margin>
+                        <Insets left="20.0" />
+                    </VBox.margin>
+                </JFXButton>
+                <Button fx:id="refresh" mnemonicParsing="false" text="Refresh">
+                    <VBox.margin>
+                        <Insets left="20.0" top="20.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </right>
+</BorderPane>

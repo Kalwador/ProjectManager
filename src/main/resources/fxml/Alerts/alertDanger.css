@@ -1,0 +1,10 @@
+.buttonsDown{
+-fx-background-color:black;
+-fx-background-radius:5px;
+-fx-border-color:#c90000;
+-fx-border-radius:5px;
+-fx-effect: innershadow( three-pass-box , rgba(214,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+.dangerBackground{
+	-fx-background-color:black;
+}

@@ -1,7 +1,9 @@
 package com.project.manager.controllers.dashboard;
 
-import com.project.manager.ui.sceneManager.SceneManager;
+import com.jfoenix.controls.JFXButton;
+import com.project.manager.services.SessionService;
 import com.project.manager.ui.components.ProjectPaneGenerator;
+import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,12 +23,19 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     @FXML
-    private Button backToLoginButton;
+    private Button sentMessage;
     @FXML
     private VBox projectsArea;
+    @FXML
+    private Button messages;
+    @FXML
+    private JFXButton userData;
+    @FXML
+    private JFXButton logout;
 
     private SceneManager sceneManager;
     private ProjectPaneGenerator projectPaneGenerator;
+
 
     @Autowired
     public DashboardController(ProjectPaneGenerator projectPaneGenerator) {
@@ -37,12 +46,18 @@ public class DashboardController implements Initializable {
     /**
      * Initialization of Dashboard view with project panes
      *
-     * @param location
-     * @param resources
+     * @param location URL location
+     * @param resources Bundle resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
         projectPaneGenerator.createPanes(projectsArea);
-        backToLoginButton.setOnAction(e -> sceneManager.showScene(SceneType.LOGIN));
+
+        messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
+        userData.setOnAction(e -> {
+            sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
+        });
+        logout.setOnAction(e -> SessionService.getInstance().logoutUser());
     }
 }

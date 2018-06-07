@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.task.TaskWindowController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="462.0" text="Description" textAlignment="JUSTIFY">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="100.0" prefWidth="460.0">
+               <children>
+                  <JFXTextArea fx:id="editDescription" prefHeight="80.0" prefWidth="460.0" visible="false" />
+                  <Label fx:id="description" alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="460.0" textAlignment="JUSTIFY" wrapText="true" />
+               </children>
+            </Pane>
+            <ScrollPane layoutX="220.0" layoutY="57.0" opacity="0.85" prefHeight="176.0" prefWidth="460.0" style="-fx-background-radius: 3px;">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="405.0">
+                     <children>
+                        <VBox fx:id="executors" prefWidth="410.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <HBox fx:id="editExecutors" prefHeight="100.0" prefWidth="200.0" visible="false">
+               <children>
+                  <Label text="Add executor" />
+                  <JFXTextField fx:id="executorName" />
+                  <JFXButton fx:id="addExecutor" text="add" />
+                  <Label fx:id="errorAddExecutors" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <Pane prefHeight="90.0" prefWidth="460.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="editStatus" visible="false" />
+            <HBox fx:id="editPane" layoutY="30.0" prefHeight="60.0" prefWidth="460.0" visible="false">
+               <children>
+                  <JFXTextField fx:id="editTag" prefHeight="23.0" prefWidth="75.0">
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="editName">
+                     <HBox.margin>
+                        <Insets left="5.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXComboBox fx:id="editPriority">
+                     <HBox.margin>
+                        <Insets left="5.0" top="8.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+                  <JFXDatePicker fx:id="editDeadLine">
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" top="4.0" />
+                     </HBox.margin>
+                  </JFXDatePicker>
+               </children>
+            </HBox>
+            <HBox fx:id="infoPane" layoutY="30.0" prefHeight="60.0" prefWidth="460.0">
+               <children>
+                  <Label fx:id="tag">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="name">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="priority" alignment="TOP_RIGHT" contentDisplay="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="deadLine">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="48.0" prefWidth="460.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <JFXButton fx:id="accept" buttonType="RAISED" layoutX="366.0" layoutY="21.0" text="Accept" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="362.0" layoutY="21.0" text="Cancel" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="editButton" buttonType="RAISED" text="Edit" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

@@ -13,15 +13,19 @@ public class ApplicationContextProvider {
 
     /**
      * Singleton getInstance method
+     *
      * @return instance of class
      */
-    public static ApplicationContextProvider getInstance(){
-        if(instance == null){
+    public static ApplicationContextProvider getInstance() {
+        if (instance == null) {
             instance = new ApplicationContextProvider();
         }
         return instance;
     }
 
+    /**
+     * Method initialize context field with ApplicationContext
+     */
     private ApplicationContextProvider() {
         this.context = new AnnotationConfigApplicationContext(DataSourceConfiguration.class);
     }

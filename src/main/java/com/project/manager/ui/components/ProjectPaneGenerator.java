@@ -6,6 +6,7 @@ import com.project.manager.services.SessionService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import java.io.IOException;
  * This is the class which is responsible for projectsAsUser panes in Dashboard view.
  * This class perform generating of projectsAsUser panes into Dashboard view.
  */
+@Log4j
 @Component
 public class ProjectPaneGenerator {
 
@@ -28,9 +30,10 @@ public class ProjectPaneGenerator {
     /**
      * This method perform generating of projectsAsUser panes witch will be displayed into Dashboard
      *
-     * @param projectsArea //TODO
+     * @param projectsArea - VBox that contains buttons of projects
      */
     public void createPanes(VBox projectsArea) {
+
         sessionService.getUserModel().getProjectsAsManager().forEach(project -> {
             createProjectBrick(projectsArea, project);
         });
@@ -40,10 +43,10 @@ public class ProjectPaneGenerator {
     }
 
     /**
-     * //TODO MACIEK
+     * This method perform logic of generating of projectsAsUser panes witch will be displayed into Dashboard
      *
-     * @param projectsArea //TODO MACIEK
-     * @param project      //TODO MACIEK
+     * @param projectsArea - VBox that contains buttons of projects
+     * @param project      - model of project
      */
     private void createProjectBrick(VBox projectsArea, Project project) {
         try {
@@ -57,6 +60,7 @@ public class ProjectPaneGenerator {
             projectsArea.getChildren().add(newAnchorPane);
         } catch (IOException e) {
             e.printStackTrace();
+            log.error("Project pane fml not found or problem with loading it");
         }
     }
 }

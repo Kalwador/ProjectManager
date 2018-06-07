@@ -1,13 +1,15 @@
 package com.project.manager.controllers.manager;
 
 import com.jfoenix.controls.JFXButton;
-import com.project.manager.models.TaskStatus;
+import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
+import com.project.manager.services.TaskGeneratorService;
 import com.project.manager.ui.components.TaskGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,36 +27,38 @@ public class ManagerProjectViewController implements Initializable {
 
     @FXML
     private JFXButton backButton;
-
+    @FXML
+    private Button report;
     @FXML
     private Label projectNameLabel;
-
     @FXML
     private VBox productBacklogVBox;
-
     @FXML
     private VBox sprintBacklogVBox;
-
     @FXML
     private VBox inProgressVBox;
-
     @FXML
     private VBox testingVBox;
-
     @FXML
     private VBox codeReviewVBox;
-
     @FXML
     private VBox doneVBox;
+    @FXML
+    private Button messages;
+    @FXML
+    private JFXButton userData;
+    @FXML
+    private JFXButton logout;
 
     private SessionService sessionService;
     private SceneManager sceneManager;
-    private TaskGenerator taskGenerator;
+    private TaskGeneratorService taskGeneratorService;
+
 
     @Autowired
-    public ManagerProjectViewController(TaskGenerator taskGenerator) {
+    public ManagerProjectViewController(TaskGeneratorService taskGeneratorService) {
         this.sessionService = SessionService.getInstance();
-        this.taskGenerator = taskGenerator;
+        this.taskGeneratorService = taskGeneratorService;
         this.sceneManager = SceneManager.getInstance();
     }
 
@@ -67,25 +71,15 @@ public class ManagerProjectViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         projectNameLabel.setText(sessionService.getProject().getProjectName());
-        backButton.setOnAction(e -> {
-            sceneManager.showScene(SceneType.DASHBOARD);
-        });
-        testingVBox.setOnDragDetected(e -> {
-            System.out.println("dragging");
-            System.out.println(e.getPickResult().toString());
-        });
-        injectTasksToVBoxes();
-    }
+        backButton.setOnAction(e -> sceneManager.showScene(SceneType.DASHBOARD));
+        taskGeneratorService.injectTasksToVBoxes(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
+                testingVBox, codeReviewVBox, doneVBox);
+        report.setOnAction(e -> sceneManager.showInNewWindow(SceneType.GENERATE_REPORT));
 
-    /**
-     * Inject tasks of chosen project to specified VBoxes
-     */
-    private void injectTasksToVBoxes() {
-        taskGenerator.inject(productBacklogVBox, TaskStatus.PRODUCT_BACKLOG);
-        taskGenerator.inject(sprintBacklogVBox, TaskStatus.SPRINT_BACKLOG);
-        taskGenerator.inject(inProgressVBox, TaskStatus.IN_PROGRESS);
-        taskGenerator.inject(testingVBox, TaskStatus.TESTING);
-        taskGenerator.inject(codeReviewVBox, TaskStatus.CODE_REVIEW);
-        taskGenerator.inject(doneVBox, TaskStatus.DONE);
+        logout.setOnAction(e -> SessionService.getInstance().logoutUser());
+        messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
+        userData.setOnAction(e -> {
+            sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
+        });
     }
 }

@@ -1,21 +1,23 @@
 package com.project.manager.data;
 
+import com.google.common.collect.Sets;
+import com.project.manager.entities.Message;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
-import com.project.manager.models.TaskPriority;
-import com.project.manager.models.TaskStatus;
-import com.project.manager.repositories.TaskRepository;
-import com.project.manager.utils.BCryptEncoder;
-import com.project.manager.entities.Message;
 import com.project.manager.entities.UserModel;
 import com.project.manager.models.UserRole;
+import com.project.manager.models.task.TaskPriority;
+import com.project.manager.models.task.TaskStatus;
 import com.project.manager.repositories.MessageRepository;
 import com.project.manager.repositories.ProjectRepository;
+import com.project.manager.repositories.TaskRepository;
 import com.project.manager.repositories.UserRepository;
+import com.project.manager.utils.BCryptEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 
@@ -32,6 +34,7 @@ public class InjectData {
     private MessageRepository messageRepository;
 
     private UserModel user;
+    private UserModel user2;
     private UserModel manager;
     private UserModel admin;
 
@@ -52,16 +55,21 @@ public class InjectData {
 
     private Message sentMessage;
     private Message receivedMessage;
+    private Message sentMessage2;
+    private Message receivedMessage2;
+    private InjectAvatar injectAvatar;
 
     @Autowired
     public InjectData(ProjectRepository projectRepository,
                       TaskRepository taskRepository,
                       UserRepository userRepository,
-                      MessageRepository messageRepository) {
+                      MessageRepository messageRepository,
+                      InjectAvatar injectAvatar) {
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.messageRepository = messageRepository;
+        this.injectAvatar = injectAvatar;
     }
 
     /**
@@ -79,57 +87,85 @@ public class InjectData {
         this.user = UserModel.builder()
                 .username("user")
                 .password(BCryptEncoder.encode("password"))
-                .email("user@mail.com")
+                .email("users@grr.la")
                 .firstName("Benek")
                 .lastName("Bebenek")
                 .role(UserRole.USER)
                 .isLocked(false)
+                .isBlocked(false)
                 .projectsAsManager(new HashSet<>())
                 .projectsAsUser(new HashSet<>())
                 .messages(new HashSet<>())
+                .avatar(injectAvatar.getAvatar())
+                .tasks(new HashSet<>())
+                .build();
+
+        this.user2 = UserModel.builder()
+                .username("userTwo")
+                .password(BCryptEncoder.encode("password"))
+                .email("aga@grr.la")
+                .firstName("Aga")
+                .lastName("Lamaga")
+                .role(UserRole.USER)
+                .isLocked(false)
+                .isBlocked(false)
+                .projectsAsManager(new HashSet<>())
+                .projectsAsUser(new HashSet<>())
+                .messages(new HashSet<>())
+                .avatar(injectAvatar.getAvatar())
+                .tasks(new HashSet<>())
                 .build();
 
         this.manager = UserModel.builder()
                 .username("manager")
                 .password(BCryptEncoder.encode("password"))
-                .email("manager@mail.com")
+                .email("manager@grr.la")
                 .firstName("Edward")
                 .lastName("Oncki")
                 .role(UserRole.USER)
                 .isLocked(false)
+                .isBlocked(false)
                 .projectsAsManager(new HashSet<>())
                 .projectsAsUser(new HashSet<>())
                 .messages(new HashSet<>())
+                .avatar(injectAvatar.getAvatar())
+                .tasks(new HashSet<>())
                 .build();
 
         this.admin = UserModel
                 .builder()
                 .username("admin")
                 .password(BCryptEncoder.encode("password"))
-                .email("admin@mail.com")
+                .email("admin@grr.la")
                 .firstName("Adam")
                 .lastName("Admiński")
                 .role(UserRole.ADMIN)
                 .isLocked(false)
+                .isBlocked(false)
                 .messages(new HashSet<>())
+                .avatar(injectAvatar.getAvatar())
                 .build();
 
         this.user = userRepository.save(this.user);
+        this.user2 = userRepository.save(this.user2);
         this.manager = userRepository.save(this.manager);
         this.admin = userRepository.save(this.admin);
 
         for (int i = 0; i < 10; i++) {
             UserModel tempUser = UserModel.builder()
-                    .username("user" + i)
+                    .username("users" + i)
                     .password(BCryptEncoder.encode("password"))
-                    .email("user" + i + "@mail.com")
+                    .email("users" + i + "@grr.la")
                     .firstName("Adam" + i)
                     .lastName("Spadam" + i)
                     .role(UserRole.USER)
                     .isLocked(false)
+                    .isBlocked(false)
                     .projectsAsUser(new HashSet<>())
                     .projectsAsManager(new HashSet<>())
                     .messages(new HashSet<>())
+                    .tasks(new HashSet<>())
+                    .avatar(injectAvatar.getAvatar())
                     .build();
             tempUser = userRepository.save(tempUser);
         }
@@ -158,6 +194,7 @@ public class InjectData {
                 .build();
 
         this.user.getProjectsAsUser().add(this.projectOne);
+        this.user2.getProjectsAsUser().add(this.projectOne);
         this.user.getProjectsAsUser().add(this.projectTwo);
         this.user.getProjectsAsUser().add(this.projectThree);
 
@@ -174,6 +211,7 @@ public class InjectData {
         this.projectThree = projectRepository.save(projectThree);
 
         this.user = userRepository.save(this.user);
+        this.user2 = userRepository.save(this.user2);
         this.manager = userRepository.save(this.manager);
         this.admin = userRepository.save(this.admin);
 
@@ -195,72 +233,92 @@ public class InjectData {
         this.task1 = Task.builder()
                 .name("Stworzenie szkieletu")
                 .description("Podstawowy szkielet funkcionalnej aplikacji")
-                .taskStatus(TaskStatus.DONE.ordinal())
+                .taskStatus(TaskStatus.DONE)
                 .tag("START")
-                .priority(TaskPriority.HIGH.ordinal())
+                .taskPriority(TaskPriority.HIGH)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 12))
                 .build();
         this.task2 = Task.builder()
                 .name("Baza danych")
                 .description("Dodanie do projektu połaczenia z baza danych")
-                .taskStatus(TaskStatus.DONE.ordinal())
+                .taskStatus(TaskStatus.DONE)
                 .tag("BD")
-                .priority(TaskPriority.HIGH.ordinal())
+                .taskPriority(TaskPriority.HIGH)
+                .users(Sets.newHashSet(manager))
+                .deadline(LocalDate.of(2018,6, 17))
                 .build();
         this.task3 = Task.builder()
                 .name("Entity")
                 .description("Stworznie wszystkich wymaganych entity na potrzeby projektu")
-                .taskStatus(TaskStatus.CODE_REVIEW.ordinal())
+                .taskStatus(TaskStatus.CODE_REVIEW)
                 .tag("BD")
-                .priority(TaskPriority.MEDIUM.ordinal())
+                .taskPriority(TaskPriority.MEDIUM)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 3))
                 .build();
         this.task4 = Task.builder()
                 .name("Połaczenie z bazą")
                 .description("Stworznie repozytowrów JPA dla entity oraz wykonanie testów zapisu do bazy dancyh")
-                .taskStatus(TaskStatus.TESTING.ordinal())
+                .taskStatus(TaskStatus.TESTING)
                 .tag("JP")
-                .priority(TaskPriority.MEDIUM.ordinal())
+                .taskPriority(TaskPriority.MEDIUM)
+                .users(Sets.newHashSet(manager))
+                .deadline(LocalDate.of(2018,6, 29))
                 .build();
         this.task5 = Task.builder()
                 .name("Logika aplikacji")
                 .description("stworznie potrzebnej logiki aplikacji do zarazdzania i kontrolą lotów na lotnisku")
-                .taskStatus(TaskStatus.TESTING.ordinal())
+                .taskStatus(TaskStatus.TESTING)
                 .tag("SERVICE")
-                .priority(TaskPriority.HIGH.ordinal())
+                .taskPriority(TaskPriority.HIGH)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 19))
                 .build();
         this.task6 = Task.builder()
                 .name("kontrolery")
                 .description("Dodanie potrzebnych kontrolerów")
-                .taskStatus(TaskStatus.IN_PROGRESS.ordinal())
+                .taskStatus(TaskStatus.IN_PROGRESS)
                 .tag("REST")
-                .priority(TaskPriority.MEDIUM.ordinal())
+                .taskPriority(TaskPriority.MEDIUM)
+                .users(Sets.newHashSet(manager))
+                .deadline(LocalDate.of(2018,6, 11))
                 .build();
         this.task7 = Task.builder()
                 .name("testownie")
                 .description("Testownie integracyjne bazy andych z logiką oraz kontrolerami")
-                .taskStatus(TaskStatus.SPRINT_BACKLOG.ordinal())
+                .taskStatus(TaskStatus.SPRINT_BACKLOG)
                 .tag("[TEST]")
-                .priority(TaskPriority.LOW.ordinal())
+                .taskPriority(TaskPriority.LOW)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 10))
                 .build();
         this.task8 = Task.builder()
                 .name("FrontEnd")
                 .description("stwornzie szkieletu fronu aplikacji")
-                .taskStatus(TaskStatus.SPRINT_BACKLOG.ordinal())
+                .taskStatus(TaskStatus.SPRINT_BACKLOG)
                 .tag("[FE]")
-                .priority(TaskPriority.HIGH.ordinal())
+                .taskPriority(TaskPriority.HIGH)
+                .users(Sets.newHashSet(manager))
+                .deadline(LocalDate.of(2018,6, 13))
                 .build();
         this.task9 = Task.builder()
                 .name("Security")
                 .description("Zabezpieczenie aplikacji przed działaniami szkodzącymi")
-                .taskStatus(TaskStatus.PRODUCT_BACKLOG.ordinal())
+                .taskStatus(TaskStatus.PRODUCT_BACKLOG)
                 .tag("[SEC]")
-                .priority(TaskPriority.LOW.ordinal())
+                .taskPriority(TaskPriority.LOW)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 7))
                 .build();
         this.task10 = Task.builder()
                 .name("Wdrązenie")
                 .description("Wdrązenie aplikacji na serwer")
-                .taskStatus(TaskStatus.PRODUCT_BACKLOG.ordinal())
+                .taskStatus(TaskStatus.PRODUCT_BACKLOG)
                 .tag("[END]")
-                .priority(TaskPriority.LOW.ordinal())
+                .taskPriority(TaskPriority.LOW)
+                .users(Sets.newHashSet(user))
+                .deadline(LocalDate.of(2018,6, 20))
                 .build();
 
         this.task1.setProject(projectOne);
@@ -285,6 +343,22 @@ public class InjectData {
         this.projectOne.getTasks().add(task9);
         this.projectOne.getTasks().add(task10);
 
+        this.user.getTasks().add(task1);
+        this.user2.getTasks().add(task1);
+        this.manager.getTasks().add(task2);
+        this.user.getTasks().add(task3);
+        this.user2.getTasks().add(task3);
+        this.manager.getTasks().add(task4);
+        this.user2.getTasks().add(task5);
+        this.user.getTasks().add(task5);
+        this.manager.getTasks().add(task6);
+        this.user.getTasks().add(task7);
+        this.user2.getTasks().add(task7);
+        this.manager.getTasks().add(task8);
+        this.user.getTasks().add(task9);
+        this.user2.getTasks().add(task9);
+        this.manager.getTasks().add(task10);
+
         this.task1 = taskRepository.save(task1);
         this.task2 = taskRepository.save(task2);
         this.task3 = taskRepository.save(task3);
@@ -297,13 +371,28 @@ public class InjectData {
         this.task10 = taskRepository.save(task10);
 
         this.projectOne = projectRepository.save(projectOne);
+
+        this.user = userRepository.save(user);
+        this.user2 = userRepository.save(user2);
+        this.manager = userRepository.save(manager);
+
     }
 
     private void addMessages() {
         this.sentMessage = Message
                 .builder()
-                .sender(admin.getEmail())
-                .receiver(user.getEmail())
+                .sender(admin.getUsername())
+                .receiver(user.getUsername())
+                .title("Msg sent by admin to user")
+                .contents("Message which will sent by admin to user")
+                .sentDate(LocalDateTime.now())
+                .users(new HashSet<>())
+                .build();
+
+        this.sentMessage2 = Message
+                .builder()
+                .sender(admin.getUsername())
+                .receiver(user.getUsername())
                 .title("Msg sent by admin to user")
                 .contents("Message which will sent by admin to user")
                 .sentDate(LocalDateTime.now())
@@ -312,8 +401,18 @@ public class InjectData {
 
         this.receivedMessage = Message
                 .builder()
-                .sender(user.getEmail())
-                .receiver(admin.getEmail())
+                .sender(user.getUsername())
+                .receiver(admin.getUsername())
+                .title("Msg sent by user to admin")
+                .contents("Message which will sent by user to admin")
+                .sentDate(LocalDateTime.now())
+                .users(new HashSet<>())
+                .build();
+
+        this.receivedMessage2 = Message
+                .builder()
+                .sender(user.getUsername())
+                .receiver(admin.getUsername())
                 .title("Msg sent by user to admin")
                 .contents("Message which will sent by user to admin")
                 .sentDate(LocalDateTime.now())
@@ -322,8 +421,15 @@ public class InjectData {
 
         this.admin.getMessages().add(sentMessage);
         this.sentMessage.getUsers().add(admin);
+
         this.admin.getMessages().add(receivedMessage);
         this.receivedMessage.getUsers().add(admin);
+
+        this.admin.getMessages().add(sentMessage2);
+        this.sentMessage2.getUsers().add(admin);
+
+        this.admin.getMessages().add(receivedMessage2);
+        this.receivedMessage2.getUsers().add(admin);
 
         this.user.getMessages().add(sentMessage);
         this.sentMessage.getUsers().add(user);
@@ -332,6 +438,9 @@ public class InjectData {
 
         this.sentMessage = messageRepository.save(sentMessage);
         this.receivedMessage = messageRepository.save(receivedMessage);
+
+        this.sentMessage2 = messageRepository.save(sentMessage2);
+        this.receivedMessage2 = messageRepository.save(receivedMessage2);
 
         this.user = userRepository.save(user);
         this.admin = userRepository.save(admin);
