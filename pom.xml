@@ -135,6 +135,11 @@
             <artifactId>mockito-all</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>pdf.generator</groupId>
+            <artifactId>pdfgenerator</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
