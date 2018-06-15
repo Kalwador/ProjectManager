@@ -37,6 +37,7 @@ public class MemberPaneGenerator {
     public MemberPaneGenerator(InjectAvatar injectAvatar) {
         this.sessionService = SessionService.getInstance();
         this.injectAvatar = injectAvatar;
+        this.members = new ArrayList<>();
     }
 
     /**
@@ -46,7 +47,6 @@ public class MemberPaneGenerator {
      * @param projectMembersArea - VBox that contains panes with members
      */
     public void createPanes(VBox projectMembersArea) {
-        members = new ArrayList<>();
         members.addAll(sessionService.getProject().getMembers());
         members.forEach(project -> {
             createProjectBrick(projectMembersArea, project);
@@ -87,7 +87,6 @@ public class MemberPaneGenerator {
             controller.getMemberName().setText(fullName);
             if (Optional.ofNullable(convertedMemberAvatar).isPresent())
                 controller.getMemberAvatar().setImage(convertedMemberAvatar);
-
             projectMembersArea.getChildren().add(newAnchorPane);
         } catch (IOException e) {
             e.printStackTrace();

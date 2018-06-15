@@ -20,7 +20,10 @@ public class Report {
     private LocalDate lastReportDate;
     private LocalDate actualDate;
     private List<String> team;
-    private List<TaskReportModel> newTasks;
-    private List<TaskReportModel> currentTasks;
+    private List<TaskReportModel> productBacklogTasks;
+    private List<TaskReportModel> sprintBacklogTasks;
+    private List<TaskReportModel> inProgressTasks;
+    private List<TaskReportModel> testingTasks;
+    private List<TaskReportModel> codeReviewTasks;
     private List<TaskReportModel> doneTasks;
 }

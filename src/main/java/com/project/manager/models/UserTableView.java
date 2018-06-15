@@ -27,7 +27,11 @@ public class UserTableView extends RecursiveTreeObject<UserTableView> {
 
     private BooleanProperty isLocked;
 
+    private BooleanProperty isBlocked;
+
     private SimpleObjectProperty<JFXButton> lockOrUnlock;
+
+    private SimpleObjectProperty<JFXButton> Unblock;
 
     private SimpleObjectProperty<JFXButton> resetPass;
 
@@ -51,6 +55,7 @@ public class UserTableView extends RecursiveTreeObject<UserTableView> {
                 .countOfProjects(new SimpleIntegerProperty(userModel.getProjectsAsManager().size() +
                         userModel.getProjectsAsUser().size()))
                 .isLocked(new SimpleBooleanProperty(userModel.isLocked()))
+                .isBlocked(new SimpleBooleanProperty(userModel.isBlocked()))
                 .check(new SimpleObjectProperty<>(new JFXCheckBox()))
                 .build();
     }
@@ -96,6 +101,14 @@ public class UserTableView extends RecursiveTreeObject<UserTableView> {
             lock = gbg.getJfxButtonWithGraphic("/images/unlock.png");
         }
         userTableView.setLockOrUnlock(new SimpleObjectProperty<>(lock));
+        return userTableView;
+    }
+
+    public UserTableView generateUnblockButton(UserTableView userTableView) {
+        JFXButton unblock = new JFXButton("Unblock");
+        unblock.setButtonType(JFXButton.ButtonType.RAISED);
+        unblock.setStyle("-fx-background-color: #bea600");
+        userTableView.setUnblock(new SimpleObjectProperty(unblock));
         return userTableView;
     }
 }

@@ -2,10 +2,11 @@ package com.project.manager.controllers.admin;
 
 import com.jfoenix.controls.JFXButton;
 import com.project.manager.config.ApplicationContextProvider;
+import com.project.manager.entities.Project;
 import com.project.manager.entities.UserModel;
 import com.project.manager.services.SessionService;
-import com.project.manager.services.TaskService;
 import com.project.manager.services.user.UserService;
+import com.project.manager.ui.sceneManager.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -37,13 +38,16 @@ public class MemberPaneController implements Initializable {
 
     private Long memberId;
     private SessionService session;
+    private SceneManager sceneManager;
     private UserService userService;
     private UpdateProjectController updateProjectController;
-
+    private NewProjectController newProjectController;
 
     public MemberPaneController() {
         userService = ApplicationContextProvider.getInstance().getContext().getBean(UserService.class);
         updateProjectController = ApplicationContextProvider.getInstance().getContext().getBean(UpdateProjectController.class);
+        newProjectController = ApplicationContextProvider.getInstance().getContext().getBean(NewProjectController.class);
+        sceneManager = SceneManager.getInstance();
     }
 
     /**
@@ -57,7 +61,11 @@ public class MemberPaneController implements Initializable {
         session = SessionService.getInstance();
         deleteMember.setOnAction(e -> {
             Optional<UserModel> member = userService.getUserById(memberId);
-            member.ifPresent(userModel -> updateProjectController.deleteFromMembers(userModel));
+            Optional<Project> project = Optional.ofNullable(session.getProject());
+            if (project.isPresent())
+                member.ifPresent(userModel -> updateProjectController.deleteFromMembers(userModel));
+            else
+                member.ifPresent(userModel -> newProjectController.deleteFromMembersOfNewProject(userModel));
         });
     }
 }

@@ -19,10 +19,12 @@ public class SceneManager {
     private LoginScene loginScene;
     private RegistrationScene registrationScene;
     private DashboardScene dashboardScene;
+    private FirstLoginScene firstLoginScene;
     private ResetPasswordScene resetPasswordScene;
     private AdminDashboardScene adminDashboardScene;
     private AdminProjectView adminProjectView;
     private UpdateProjectScene updateProjectScene;
+    private NewProjectScene newProjectScene;
     private MessageViewWindowScene messageViewWindowScene;
     private ManagerProjectViewScene managerProjectView;
     private EmployeeProjectView employeeProjectView;
@@ -31,6 +33,7 @@ public class SceneManager {
     private MessagesWindowScene messagesWindowScene;
     private PersonalDataScene personalDataScene;
     private TaskWindowScene taskWindowScene;
+    private AddTaskScene addTaskScene;
 
     private HashMap<Integer, CustomScene> scenes;
 
@@ -74,10 +77,12 @@ public class SceneManager {
         this.loginScene = new LoginScene(primaryStage);
         this.registrationScene = new RegistrationScene(primaryStage);
         this.dashboardScene = new DashboardScene(primaryStage);
+        this.firstLoginScene = new FirstLoginScene(primaryStage);
         this.resetPasswordScene = new ResetPasswordScene(primaryStage);
         this.adminDashboardScene = new AdminDashboardScene(primaryStage);
         this.adminProjectView = new AdminProjectView(primaryStage);
         this.updateProjectScene = new UpdateProjectScene(primaryStage);
+        this.newProjectScene = new NewProjectScene(primaryStage);
         this.messageViewWindowScene = new MessageViewWindowScene(primaryStage);
         this.managerProjectView = new ManagerProjectViewScene(primaryStage);
         this.employeeProjectView = new EmployeeProjectView(primaryStage);
@@ -86,6 +91,7 @@ public class SceneManager {
         this.messagesWindowScene = new MessagesWindowScene(primaryStage);
         this.personalDataScene = new PersonalDataScene(primaryStage);
         this.taskWindowScene = new TaskWindowScene(primaryStage);
+        this.addTaskScene=new AddTaskScene(primaryStage);
 
         scenes = new HashMap<Integer, CustomScene>() {
             {
@@ -97,13 +103,16 @@ public class SceneManager {
                 put(SceneType.ADMIN_DASHBOARD.ordinal(), adminDashboardScene);
                 put(SceneType.ADMIN_PROJECT_VIEW.ordinal(), adminProjectView);
                 put(SceneType.ADMIN_UPDATE_PROJECT.ordinal(), updateProjectScene);
+                put(SceneType.ADMIN_CREATE_NEW_PROJECT.ordinal(), newProjectScene);
                 put(SceneType.MESSAGE_VIEW_WINDOW.ordinal(), messageViewWindowScene);
+                put(SceneType.FIRST_LOGIN.ordinal(), firstLoginScene);
                 put(SceneType.RESET_PASSWORD.ordinal(), resetPasswordScene);
                 put(SceneType.ADD_USER.ordinal(), addUserScene);
                 put(SceneType.GENERATE_REPORT.ordinal(), generateReportScene);
                 put(SceneType.MESSAGES_WINDOW.ordinal(), messagesWindowScene);
                 put(SceneType.PERSONAL_DATA.ordinal(), personalDataScene);
                 put(SceneType.TASK_WINDOW.ordinal(), taskWindowScene);
+                put(SceneType.NEW_TASK.ordinal(), addTaskScene);
             }
         };
         log.info("Scenes initializec succesfully in initializeScenes method");

@@ -196,4 +196,30 @@ public class ProjectService {
             }
         }
     }
+
+
+    /**
+     * This method perform add new project operation on projectRepository by inserted model of project and
+     * new manager of this by user model and optional members
+     *
+     * @param project            model of project that we need to add
+     * @param projectName        name of new project
+     * @param projectDescription description of new project
+     * @param manager            model of manager of this project
+     */
+    public void addNewProject(Project project, String projectName, String projectDescription, UserModel manager) {
+        Set<UserModel> addMembers = new HashSet<>(memberPaneGenerator.getMembers());
+        project.setProjectName(projectName);
+        project.setProjectInformation(projectDescription);
+        project.setManager(manager);
+        projectRepository.save(project);
+        for (UserModel newUser : addMembers) {
+            newUser.getProjectsAsUser().add(project);
+            userRepository.save(newUser);
+        }
+    }
+
+    public boolean checkThatProjectExists(String projectName) {
+        return projectRepository.findByProjectName(projectName).isPresent();
+    }
 }

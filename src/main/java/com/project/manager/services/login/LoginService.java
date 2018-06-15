@@ -3,7 +3,6 @@ package com.project.manager.services.login;
 import com.project.manager.entities.UserModel;
 import com.project.manager.exceptions.*;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
-import com.project.manager.models.UserRole;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.services.RememberUserService;
 import com.project.manager.services.SessionService;
@@ -28,15 +27,17 @@ public class LoginService {
     private RememberUserService rememberUserService;
     private SceneManager sceneManager;
     private UserService userService;
-
+    private LoadSceneService loadSceneService;
 
     @Autowired
-    public LoginService(UserRepository userRepository, RememberUserService rememberUserService, UserService userService) {
+    public LoginService(UserRepository userRepository, RememberUserService rememberUserService,
+                        UserService userService, LoadSceneService loadSceneService) {
         this.sceneManager = SceneManager.getInstance();
+        this.sessionService = SessionService.getInstance();
         this.userRepository = userRepository;
         this.rememberUserService = rememberUserService;
-        this.sessionService = SessionService.getInstance();
         this.userService = userService;
+        this.loadSceneService = loadSceneService;
     }
 
     /**
@@ -49,7 +50,7 @@ public class LoginService {
      */
     public void loginUser(String username, String password, boolean remember)
             throws UserDoesNotExistException, AccountBlockedException, AccountLockedException,
-            EmptyPasswordException, DifferentPasswordException, EmptyUsernameException {
+            EmptyPasswordException, WrongPasswordException, EmptyUsernameException {
         if (username.isEmpty()) {
             throw new EmptyUsernameException();
         }
@@ -63,7 +64,7 @@ public class LoginService {
         boolean result = BCryptEncoder.check(password, usermodel.get().getPassword());
         if (!result) {
             userService.increaseIncorrectLoginCounter(usermodel.get());
-            throw new DifferentPasswordException();
+            throw new WrongPasswordException();
         }
         if (remember) {
             rememberUserService.rememberUser(username);
@@ -82,21 +83,14 @@ public class LoginService {
         }
         if (usermodel.isLocked()) {
             throw new AccountLockedException();
+        }
+        if (usermodel.isFirstLogin()) {
+            sessionService.setUserModel(usermodel);
+            sceneManager.showScene(SceneType.FIRST_LOGIN);
         } else {
             sessionService.setUserModel(usermodel);
             log.info(usermodel.getUsername() + " has just logged in!");
-            loadScene();
-        }
-    }
-
-    private void loadScene() {
-        UserRole role = sessionService.getUserModel().getRole();
-        switch (role) {
-            case USER:
-                sceneManager.showScene(SceneType.DASHBOARD);
-                break;
-            case ADMIN:
-                sceneManager.showScene(SceneType.ADMIN_DASHBOARD);
+            loadSceneService.loadScene();
         }
     }
 

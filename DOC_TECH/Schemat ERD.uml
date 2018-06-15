@@ -1,67 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>DATABASE</ID>
-  <OriginalElement>564e53c8-9061-4b58-b541-2ebc36c037fb.DATABASE:ProjektZespolowyProjectManager</OriginalElement>
-  <nodes>
-    <node x="281.0005787037037" y="118.41975308641977">564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.user_model</node>
-    <node x="599.2150848765433" y="536.5617283950618">564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.user_project</node>
-    <node x="263.7382330246912" y="530.7037037037036">564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.project</node>
-    <node x="-122.48861882716051" y="499.6666666666668">564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.task</node>
-    <node x="-119.76543209876547" y="0.06172839506174199">564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.message</node>
-    <node x="-71.76543209876547" y="300.45061728395063">564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.message_user</node>
-  </nodes>
+  <OriginalElement />
+  <nodes />
   <notes />
-  <edges>
-    <edge source="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.task" target="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.project">
-      <point x="46.25" y="-103.5" />
-      <point x="16.261381172839492" y="482.7407407407407" />
-      <point x="319.6425540123456" y="481.39506172839526" />
-      <point x="-57.25" y="70.5" />
-    </edge>
-    <edge source="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.project" target="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.user_model">
-      <point x="0.0" y="-70.5" />
-      <point x="378.23823302469134" y="285.01234567901236" />
-      <point x="335.11323302469134" y="285.01234567901236" />
-      <point x="25.625" y="147.5" />
-    </edge>
-    <edge source="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.user_project" target="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.user_model">
-      <point x="36.0" y="-37.0" />
-      <point x="707.2150848765433" y="458.5185185185185" />
-      <point x="707.7814429012345" y="420.8395061728395" />
-      <point x="707.7814429012344" y="283.6666666666667" />
-      <point x="386.36323302469134" y="285.01234567901236" />
-      <point x="76.875" y="147.5" />
-    </edge>
-    <edge source="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.message_user" target="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.message">
-      <point x="-38.0" y="-37.0" />
-      <point x="0.0" y="81.5" />
-    </edge>
-    <edge source="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.task" target="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.user_model">
-      <point x="-46.25" y="-103.5" />
-      <point x="-76.23861882716051" y="439.6790123456791" />
-      <point x="248.33391203703707" y="438.3333333333333" />
-      <point x="246.98823302469134" y="285.01234567901236" />
-      <point x="283.86323302469134" y="285.01234567901236" />
-      <point x="-25.625" y="147.5" />
-    </edge>
-    <edge source="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.user_project" target="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.project">
-      <point x="-36.0" y="-37.0" />
-      <point x="635.2150848765433" y="508.30864197530866" />
-      <point x="428.75983796296305" y="506.96296296296293" />
-      <point x="57.25" y="70.5" />
-    </edge>
-    <edge source="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.message_user" target="564e53c8-9061-4b58-b541-2ebc36c037fb.TABLE:ProjektZespolowyProjectManager.public.user_model">
-      <point x="38.0" y="-37.0" />
-      <point x="182.18518518518533" y="299.81481481481484" />
-      <point x="182.8231095679012" y="412.85185185185196" />
-      <point x="-76.875" y="147.5" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Group" zoom="0.7431192660550459" x="273.5" y="371.5" />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.2000000000000002" x="1427.2878232878247" y="28.032800532800707" />
   <SelectedNodes />
   <Categories>
-    <Category>Key columns</Category>
     <Category>Columns</Category>
+    <Category>Key columns</Category>
   </Categories>
 </Diagram>
 

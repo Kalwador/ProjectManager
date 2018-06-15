@@ -13,15 +13,17 @@ import com.project.manager.services.mail.MailFactory;
 import com.project.manager.ui.AlertManager;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
-import com.project.manager.utils.PDFReportGenerator;
 import lombok.extern.log4j.Log4j;
+import main.java.com.PdfGenerator;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.List;
 
 /**
  * Service where is implemented all login necessary to generate report in pdf and sent them to isEmailValid or just save in
@@ -53,14 +55,16 @@ public class ReportService {
      * @param email    this value is isEmailValid of user which will get isEmailValid message with report is value isn't empty
      * @param path     this is path where application will save report pdf
      */
-    public void generateReport(boolean sendToMe, String email, String path) throws EmailValidationException {
+    public void generateReport(boolean sendToMe, String email, String path) throws EmailValidationException,
+            NoSuchFieldException, IllegalAccessException {
         String fileToDelete = "";
         try {
             FileOutputStream fos = null;
             if (shouldGenerateReport(sendToMe, email, path)) {
+                Thread openFile = null;
                 Report report = prepareReport();
-                PDFReportGenerator generator = new PDFReportGenerator();
-                byte[] pdf = generator.createReportPDF(report);
+                PdfGenerator pdfGenerator = new PdfGenerator(report);
+                byte[] pdf = pdfGenerator.createReportPDF();
 
                 if (sendToMe || !email.isEmpty()) {
                     ProjectReportMail mail = new ProjectReportMail();
@@ -76,13 +80,19 @@ public class ReportService {
                     }
                 }
                 if (!path.isEmpty()) {
+                    if (!path.contains(".pdf")) path = path.concat(".pdf");
                     fos = saveReportDocument(path, pdf);
+                    openFile = openFile(path);
                 }
                 refreshProjectObject(report.getActualDate());
                 AlertManager.showInformationAlert("Success!", "Email was send.");
+                if (Optional.ofNullable(openFile).isPresent())
+                    openFile.start();
+
             }
             sceneManager.closeNewWindow(SceneType.GENERATE_REPORT);
-            fos.close();
+            if (Optional.ofNullable(fos).isPresent())
+                fos.close();
         } catch (DocumentException | IOException e) {
             AlertManager.showErrorAlert("Warning!", e.getMessage());
             log.error(e.getMessage());
@@ -91,7 +101,6 @@ public class ReportService {
             file.delete();
         }
     }
-
     /**
      * This method is refreshing project last generated report date
      *
@@ -113,11 +122,24 @@ public class ReportService {
      */
     private FileOutputStream saveReportDocument(String path, byte[] pdf) throws IOException {
         FileOutputStream fos;
-        if (!path.contains(".pdf")) path = path.concat(".pdf");
         fos = new FileOutputStream(path);
         fos.write(pdf);
         fos.close();
+
         return fos;
+    }
+
+    private Thread openFile(String path) {
+        return new Thread(() -> {
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop desktop = Desktop.getDesktop();
+                    File myFile = new File(path);
+
+                    desktop.open(myFile.getAbsoluteFile());
+                } catch (IOException ex) {}
+            }
+        });
     }
 
     /**
@@ -167,9 +189,12 @@ public class ReportService {
                 .lastReportDate(project.getLastRapportDate())
                 .actualDate(LocalDate.now())
                 .team(getTeam(project))
-                .newTasks(tasks.get(0))
-                .currentTasks(tasks.get(1))
-                .doneTasks(tasks.get(2)).build();
+                .productBacklogTasks(tasks.get(0))
+                .sprintBacklogTasks(tasks.get(1))
+                .inProgressTasks(tasks.get(2))
+                .testingTasks(tasks.get(3))
+                .codeReviewTasks(tasks.get(4))
+                .doneTasks(tasks.get(5)).build();
     }
 
     /**
@@ -181,6 +206,9 @@ public class ReportService {
     private List<List<TaskReportModel>> getTasks(Set<Task> tasks) {
         List<List<TaskReportModel>> resultTasks = Arrays.asList(new ArrayList<TaskReportModel>(),
                 new ArrayList<TaskReportModel>(),
+                new ArrayList<TaskReportModel>(),
+                new ArrayList<TaskReportModel>(),
+                new ArrayList<TaskReportModel>(),
                 new ArrayList<TaskReportModel>());
         for (Task t : tasks) {
             TaskReportModel taskReportModel = TaskReportModel.convert(t);
@@ -188,11 +216,20 @@ public class ReportService {
                 case PRODUCT_BACKLOG:
                     resultTasks.get(0).add(taskReportModel);
                     break;
-                case DONE:
+                case SPRINT_BACKLOG:
+                    resultTasks.get(1).add(taskReportModel);
+                    break;
+                case IN_PROGRESS:
                     resultTasks.get(2).add(taskReportModel);
                     break;
-                default:
-                    resultTasks.get(1).add(taskReportModel);
+                case TESTING:
+                    resultTasks.get(3).add(taskReportModel);
+                    break;
+                case CODE_REVIEW:
+                    resultTasks.get(4).add(taskReportModel);
+                    break;
+                case DONE:
+                    resultTasks.get(5).add(taskReportModel);
                     break;
             }
         }

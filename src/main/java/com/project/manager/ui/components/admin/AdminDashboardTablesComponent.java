@@ -109,12 +109,21 @@ public class AdminDashboardTablesComponent {
                         }))
                     .map(u -> u.generateResetButton(u))
                     .peek(u -> u.getResetPass().getValue()
-                            .setOnAction(e -> userService.changePassword(u.getId().get())))
+                        .setOnAction(e -> {
+                            userService.changePassword(u.getId().get());
+                            generateUserTableView();
+                        }))
                     .peek(projectTableView -> {
                         projectTableView.getCheck().get().setOnAction(e -> {
                             disableUsersDeleteButton();
                         });
                     })
+                    .map(u -> u.generateUnblockButton(u))
+                    .peek(u -> u.getUnblock().getValue()
+                            .setOnAction(e -> {
+                                userService.unblockAccount(u.getId().get());
+                                generateUserTableView();
+                            }))
                     .collect(Collectors.toList()));
 
             adminDashboardController.getUserTable().setOnMouseClicked(e -> {
@@ -134,6 +143,8 @@ public class AdminDashboardTablesComponent {
             TreeTableColumn<UserTableView, Boolean> lockColumn = new TreeTableColumn<>("Lock");
             TreeTableColumn<UserTableView, JFXButton> lockButtonColumn = new TreeTableColumn<>("");
             TreeTableColumn<UserTableView, JFXButton> resetPassColumn = new TreeTableColumn<>("");
+            TreeTableColumn<UserTableView, Boolean> unblockColumn = new TreeTableColumn<>("Blocked");
+            TreeTableColumn<UserTableView, JFXButton> unblockButtonColumn = new TreeTableColumn<>("");
             TreeTableColumn<UserTableView, JFXButton> deleteColumn = new TreeTableColumn<>("");
 
             checkColumn.setSortable(false);
@@ -146,10 +157,12 @@ public class AdminDashboardTablesComponent {
             lockButtonColumn.setSortable(false);
             resetPassColumn.setSortable(false);
             deleteColumn.setSortable(false);
-
+            unblockColumn.setSortable(false);
+            unblockButtonColumn.setSortable(false);
 
             adminDashboardController.getUserTable().getColumns().addAll
-                    (checkColumn, idColumn, usernameColumn, emailColumn, roleColumn, countOfProjectsColumn, lockColumn, lockButtonColumn, resetPassColumn, deleteColumn);
+                    (checkColumn, idColumn, usernameColumn, emailColumn, roleColumn, countOfProjectsColumn, lockColumn,
+                            lockButtonColumn, resetPassColumn, unblockColumn, unblockButtonColumn, deleteColumn);
 
             checkColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getCheck().get()));
             idColumn.setCellValueFactory(u -> u.getValue().getValue().getId().asObject());
@@ -157,9 +170,12 @@ public class AdminDashboardTablesComponent {
             emailColumn.setCellValueFactory(u -> u.getValue().getValue().getEmail());
             roleColumn.setCellValueFactory(u -> u.getValue().getValue().getRole());
             countOfProjectsColumn.setCellValueFactory(u -> u.getValue().getValue().getCountOfProjects().asObject());
+
             lockColumn.setCellValueFactory(u -> u.getValue().getValue().getIsLocked());
             lockButtonColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getLockOrUnlock().get()));
             resetPassColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getResetPass().get()));
+            unblockColumn.setCellValueFactory(u -> u.getValue().getValue().getIsBlocked());
+            unblockButtonColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getUnblock().get()));
             deleteColumn.setCellValueFactory(u -> new SimpleObjectProperty(u.getValue().getValue().getDelete().get()));
 
             TreeItem<UserTableView> item = new RecursiveTreeItem<UserTableView>(userTableViews, RecursiveTreeObject::getChildren);
@@ -175,6 +191,12 @@ public class AdminDashboardTablesComponent {
                     } else {
                         if (!item.getIsLocked().get()) {
                             setStyle("-fx-background-color: #99ff99;-fx-text-fill:#000000");
+                        }
+                        if (item.getIsBlocked().get()) {
+                            setStyle("-fx-background-color: #bea600;-fx-text-fill:#000000");
+                        }
+                        if (item.getIsLocked().get()) {
+                            setStyle("-fx-background-color: #ff1a1a;-fx-text-fill:#000000");
                         }
                     }
                 }

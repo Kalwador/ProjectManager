@@ -13,137 +13,180 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.task.TaskWindowController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" stylesheets="@taskWindow.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.task.TaskWindowController">
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="462.0" text="Description" textAlignment="JUSTIFY">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Pane prefHeight="100.0" prefWidth="460.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="460.0">
+         <center>
+            <VBox minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="200.0" prefWidth="100.0" styleClass="backgroundColor" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextArea fx:id="editDescription" prefHeight="80.0" prefWidth="460.0" visible="false" />
-                  <Label fx:id="description" alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="460.0" textAlignment="JUSTIFY" wrapText="true" />
-               </children>
-            </Pane>
-            <ScrollPane layoutX="220.0" layoutY="57.0" opacity="0.85" prefHeight="176.0" prefWidth="460.0" style="-fx-background-radius: 3px;">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="405.0">
+                  <Line endX="360.0" startX="-100.0" stroke="WHITE" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="462.0" text="Description" textAlignment="JUSTIFY" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="100.0" prefWidth="460.0">
                      <children>
-                        <VBox fx:id="executors" prefWidth="410.0" />
+                        <JFXTextArea fx:id="editDescription" prefHeight="80.0" prefWidth="460.0" style="-fx-text-fill: white;" visible="false" />
+                        <Label fx:id="description" alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="460.0" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true" />
                      </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
-            <HBox fx:id="editExecutors" prefHeight="100.0" prefWidth="200.0" visible="false">
-               <children>
-                  <Label text="Add executor" />
-                  <JFXTextField fx:id="executorName" />
-                  <JFXButton fx:id="addExecutor" text="add" />
-                  <Label fx:id="errorAddExecutors" />
+                  </Pane>
+                  <ScrollPane layoutX="220.0" layoutY="57.0" opacity="0.85" prefHeight="172.0" prefWidth="460.0" styleClass="backgroundColor">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="405.0">
+                           <children>
+                              <VBox fx:id="executors" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+                  <HBox fx:id="editExecutors" prefHeight="52.0" prefWidth="460.0" visible="false">
+                     <children>
+                        <Label text="Add executor" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets right="2.0" top="5.0" />
+                           </HBox.margin></Label>
+                        <JFXTextField fx:id="executorName" focusColor="#ed9203" style="-fx-text-fill: white;" unFocusColor="WHITE">
+                           <HBox.margin>
+                              <Insets right="2.0" />
+                           </HBox.margin></JFXTextField>
+                        <JFXButton fx:id="addExecutor" buttonType="RAISED" focusTraversable="false" prefWidth="50.0" ripplerFill="#ed9202" styleClass="generateButton" text="Add" textFill="#1fcd00">
+                           <HBox.margin>
+                              <Insets right="2.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <Label fx:id="errorAddExecutors" prefHeight="32.0" prefWidth="183.0" textFill="RED" wrapText="true">
+                           <HBox.margin>
+                              <Insets right="2.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
-   <top>
-      <Pane prefHeight="90.0" prefWidth="460.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <JFXComboBox fx:id="editStatus" visible="false" />
-            <HBox fx:id="editPane" layoutY="30.0" prefHeight="60.0" prefWidth="460.0" visible="false">
+            </VBox>
+         </center>
+         <top>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="90.0" prefWidth="460.0" styleClass="backgroundColor" BorderPane.alignment="CENTER">
                <children>
-                  <JFXTextField fx:id="editTag" prefHeight="23.0" prefWidth="75.0">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
-                  </JFXTextField>
-                  <JFXTextField fx:id="editName">
-                     <HBox.margin>
-                        <Insets left="5.0" top="10.0" />
-                     </HBox.margin>
-                  </JFXTextField>
-                  <JFXComboBox fx:id="editPriority">
-                     <HBox.margin>
-                        <Insets left="5.0" top="8.0" />
-                     </HBox.margin>
-                  </JFXComboBox>
-                  <JFXDatePicker fx:id="editDeadLine">
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" top="4.0" />
-                     </HBox.margin>
-                  </JFXDatePicker>
-               </children>
-            </HBox>
-            <HBox fx:id="infoPane" layoutY="30.0" prefHeight="60.0" prefWidth="460.0">
-               <children>
-                  <Label fx:id="tag">
+                  <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="18.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="name">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="priority" alignment="TOP_RIGHT" contentDisplay="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
                      <padding>
-                        <Insets left="20.0" />
+                        <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="deadLine">
+                  <JFXComboBox fx:id="editStatus" focusColor="#ed9203" style="-fx-text-fill: white;" unFocusColor="WHITE" visible="false" />
+                  <HBox fx:id="editPane" layoutY="21.0" opacity="0.8" prefHeight="69.0" prefWidth="460.0" visible="false">
+                     <children>
+                        <JFXTextField fx:id="editTag" focusColor="#ed9203" labelFloat="true" style="-fx-text-fill: white;" unFocusColor="WHITE">
+                           <HBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="editName" focusColor="#ed9203" labelFloat="true" style="-fx-text-fill: white;" unFocusColor="WHITE">
+                           <HBox.margin>
+                              <Insets left="5.0" top="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                        <JFXComboBox fx:id="editPriority" focusColor="#ed9203" style="-fx-text-fill: white;" unFocusColor="WHITE">
+                           <HBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </HBox.margin>
+                        </JFXComboBox>
+                        <JFXDatePicker fx:id="editDeadLine" defaultColor="#ed9203" style="-fx-text-fill: white;">
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" top="7.0" />
+                           </HBox.margin>
+                        </JFXDatePicker>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="infoPane" layoutY="37.0" opacity="0.8" prefHeight="50.0" prefWidth="460.0">
+                     <children>
+                        <Label fx:id="tag" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="name" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="priority" alignment="TOP_RIGHT" contentDisplay="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="deadLine" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Pane layoutX="-7.0" layoutY="-27.0" prefHeight="28.0" prefWidth="474.0" styleClass="topPaneWindow">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="TaskWindow" textFill="WHITE" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </top>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="48.0" prefWidth="460.0" spacing="2.0" styleClass="backgroundColor" BorderPane.alignment="CENTER_RIGHT">
+               <children>
+                  <JFXButton fx:id="accept" buttonType="RAISED" focusTraversable="false" layoutX="366.0" layoutY="21.0" ripplerFill="#ed9203" styleClass="generateButton" text="Accept" textFill="#1fcd00" visible="false">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="14.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
+                        <Insets right="5.0" />
                      </HBox.margin>
-                  </Label>
+                  </JFXButton>
+                  <JFXButton fx:id="cancel" buttonType="RAISED" focusTraversable="false" layoutX="362.0" layoutY="21.0" ripplerFill="#ed9302" styleClass="generateButton" text="Cancel" textFill="#d70000" visible="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="editButton" buttonType="RAISED" focusTraversable="false" prefHeight="32.0" prefWidth="53.0" ripplerFill="#ed9302" styleClass="generateButton" text="Edit" textFill="#ed9203" visible="false">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </JFXButton>
                </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
             </HBox>
-         </children>
-      </Pane>
-   </top>
-   <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="48.0" prefWidth="460.0" BorderPane.alignment="CENTER_RIGHT">
-         <children>
-            <JFXButton fx:id="accept" buttonType="RAISED" layoutX="366.0" layoutY="21.0" text="Accept" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="362.0" layoutY="21.0" text="Cancel" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="editButton" buttonType="RAISED" text="Edit" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-         </children>
-      </HBox>
-   </bottom>
+         </bottom>
+      </BorderPane>
+   </center>
 </BorderPane>

@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
 import lombok.Setter;
@@ -67,8 +68,8 @@ public class UpdateProjectController implements Initializable {
 
     @FXML
     private JFXButton addMember;
-    @FXML
 
+    @FXML
     private VBox projectMembersArea;
 
     @FXML
@@ -85,6 +86,9 @@ public class UpdateProjectController implements Initializable {
 
     @FXML
     private ImageView managerAvatar;
+
+    @FXML
+    private AnchorPane getScene;
 
     private ProjectService projectService;
     private SessionService sessionService;
@@ -150,6 +154,7 @@ public class UpdateProjectController implements Initializable {
         managerName.setText(fullName);
 
         memberPaneGenerator.createPanes(projectMembersArea);
+
         changeManager.setOnAction(event -> {
             changeUserAsManager();
         });
@@ -173,6 +178,7 @@ public class UpdateProjectController implements Initializable {
                 projectService.updateManager(project, newManager);
                 projectService.updateMembers(project);
                 adminDashboardTablesComponent.generateProjectTableView();
+                adminDashboardTablesComponent.generateUserTableView();
                 memberPaneGenerator.getMembers().clear();
                 sessionService.setProject(null);
                 sceneManager.closeNewWindow(SceneType.ADMIN_UPDATE_PROJECT);
@@ -242,9 +248,9 @@ public class UpdateProjectController implements Initializable {
         } catch (UserDoesNotExistException e) {
             setErrorLabel(memberErrorLabel, "User " + newMemberTextField.getText() + " does not exist!");
         } catch (NotEnoughPermissionsException e) {
-            setErrorLabel(memberErrorLabel, "You don't have enough permission to change manager");
+            setErrorLabel(memberErrorLabel, "You don't have enough permission to change member");
         } catch (EmptyUsernameException e) {
-            setErrorLabel(memberErrorLabel, "Please insert a name of user to change manager");
+            setErrorLabel(memberErrorLabel, "Please insert a name of user to change member");
         }
     }
 
@@ -278,6 +284,5 @@ public class UpdateProjectController implements Initializable {
     private void setErrorLabel(Label label, String message) {
         label.setVisible(true);
         label.setText(message);
-
     }
 }

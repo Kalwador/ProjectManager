@@ -167,4 +167,14 @@ public class UserService {
             this.sessionService.logoutUser();
         }
     }
+
+    public void unblockAccount(Long id) {
+        Optional<UserModel> userModel = userRepository.findById(id);
+        if (userModel.isPresent()){
+            if (userModel.get().isBlocked()){
+                userModel.get().setBlocked(false);
+                userRepository.save(userModel.get());
+            }
+        }
+    }
 }

@@ -1,10 +1,8 @@
 package com.project.manager.controllers.manager;
 
 import com.jfoenix.controls.JFXButton;
-import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
 import com.project.manager.services.TaskGeneratorService;
-import com.project.manager.ui.components.TaskGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
@@ -14,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,7 +20,7 @@ import java.util.ResourceBundle;
  * This class perform display project information about selected project from dashboard
  */
 @Component
-public class ManagerProjectViewController implements Initializable {
+public class ManagerProjectViewController implements Initializable  {
 
     @FXML
     private JFXButton backButton;
@@ -54,7 +51,6 @@ public class ManagerProjectViewController implements Initializable {
     private SceneManager sceneManager;
     private TaskGeneratorService taskGeneratorService;
 
-
     @Autowired
     public ManagerProjectViewController(TaskGeneratorService taskGeneratorService) {
         this.sessionService = SessionService.getInstance();
@@ -72,10 +68,10 @@ public class ManagerProjectViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         projectNameLabel.setText(sessionService.getProject().getProjectName());
         backButton.setOnAction(e -> sceneManager.showScene(SceneType.DASHBOARD));
-        taskGeneratorService.injectTasksToVBoxes(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
+        taskGeneratorService.setUpReferences(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
                 testingVBox, codeReviewVBox, doneVBox);
+        taskGeneratorService.injectTasksToVBoxes();
         report.setOnAction(e -> sceneManager.showInNewWindow(SceneType.GENERATE_REPORT));
-
         logout.setOnAction(e -> SessionService.getInstance().logoutUser());
         messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
         userData.setOnAction(e -> {

@@ -89,10 +89,25 @@ public class PersonalDataController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
         this.username.setText(sessionService.getUserModel().getUsername());
-        this.firstNameTextField.setText(sessionService.getUserModel().getFirstName());
-        this.secondNameTextField.setText(sessionService.getUserModel().getLastName());
-        this.avatar.setImage(ImageConverter.convertToImage(sessionService.getUserModel().getAvatar(), 100, 100));
+
+        Optional<String> optionalFirstName = Optional.ofNullable(sessionService.getUserModel().getUsername());
+        if (optionalFirstName.isPresent()) {
+            this.firstNameTextField.setText(sessionService.getUserModel().getFirstName());
+        } else {
+            this.firstNameTextField.setText("Ustaw Imie");
+        }
+        Optional<String> optionalSecondName = Optional.ofNullable(sessionService.getUserModel().getUsername());
+        if (optionalSecondName.isPresent()) {
+            this.secondNameTextField.setText(sessionService.getUserModel().getLastName());
+        } else {
+            this.secondNameTextField.setText("Ustaw Nazwisko");
+        }
+        Optional<byte[]> optionalAvatar = Optional.ofNullable(sessionService.getUserModel().getAvatar());
+        if (optionalAvatar.isPresent()) {
+            this.avatar.setImage(ImageConverter.convertToImage(sessionService.getUserModel().getAvatar(), 100, 100));
+        }
 
         changePasswordLabel.setOnMouseClicked(e -> {
             changePasswordLabel.setVisible(false);

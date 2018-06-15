@@ -109,7 +109,7 @@ public class AdminDashboardTablesComponentTest {
                 users.get(0).getUsername());
 
 
-        assertEquals(table.getColumns().size(), 10);
+        assertEquals(table.getColumns().size(), 12);
 
         assertNotNull(table.getColumns().get(0).getCellObservableValue(0).getValue());
         assertEquals(table.getColumns().get(1).getCellObservableValue(0).getValue(),

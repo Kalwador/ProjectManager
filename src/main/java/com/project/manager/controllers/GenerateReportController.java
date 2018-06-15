@@ -81,6 +81,8 @@ public class GenerateReportController implements Initializable{
             } catch (EmailValidationException e1) {
                 emailError.setVisible(true);
                 emailError.setText("Email is invalid!");
+            } catch (IllegalAccessException | NoSuchFieldException e1) {
+                e1.printStackTrace();
             }
         });
     }

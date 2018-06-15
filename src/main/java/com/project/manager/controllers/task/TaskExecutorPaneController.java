@@ -2,11 +2,7 @@ package com.project.manager.controllers.task;
 
 import com.jfoenix.controls.JFXButton;
 import com.project.manager.config.ApplicationContextProvider;
-import com.project.manager.controllers.admin.UpdateProjectController;
-import com.project.manager.entities.UserModel;
-import com.project.manager.services.SessionService;
 import com.project.manager.services.TaskService;
-import com.project.manager.services.user.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -15,7 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**

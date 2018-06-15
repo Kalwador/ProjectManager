@@ -10,13 +10,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         AdminDashboardTablesComponentTest.class,
 
-        LoginServiceTest.class,
         MessageServiceTest.class,
         ProjectServiceTest.class,
-        RegistrationServiceTest.class,
         RememberUserServiceTest.class,
-        ResetPasswordServiceTest.class,
-        UserSelectorServiceTest.class,
         UserServiceTest.class,
 
         TestAddUserScene.class,

@@ -1,11 +1,11 @@
 package com.project.manager.controllers.task;
 
 import com.jfoenix.controls.*;
-import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.user.UserAlreadyExistException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.UserRole;
 import com.project.manager.services.SessionService;
+import com.project.manager.services.TaskGeneratorService;
 import com.project.manager.services.TaskService;
 import com.project.manager.ui.AlertManager;
 import javafx.fxml.FXML;
@@ -34,6 +34,7 @@ public class TaskWindowController implements Initializable {
 
     private TaskService taskService;
     private SessionService sessionService;
+    private TaskGeneratorService taskGeneratorService;
 
     @FXML
     private Label status;
@@ -83,8 +84,9 @@ public class TaskWindowController implements Initializable {
     private List<String> possibleMembers;
 
     @Autowired
-    public TaskWindowController(TaskService taskService) {
+    public TaskWindowController(TaskService taskService, TaskGeneratorService taskGeneratorService) {
         this.taskService = taskService;
+        this.taskGeneratorService = taskGeneratorService;
         this.sessionService = SessionService.getInstance();
     }
 
@@ -125,6 +127,8 @@ public class TaskWindowController implements Initializable {
                 accept.setVisible(false);
                 cancel.setVisible(false);
                 editButton.setVisible(true);
+                taskService.refreshProject();
+                taskGeneratorService.injectTasksToVBoxes();
             });
         }
     }

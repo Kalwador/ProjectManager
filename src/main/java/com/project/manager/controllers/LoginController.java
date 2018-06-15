@@ -58,10 +58,10 @@ public class LoginController implements Initializable {
         this.resetUsernameError();
         this.resetPasswordError();
 
-        /** -----------------------------todo
+        /**
          * Register action listener
          * Closes login window and opens menu to register new account
-         * Registration window - in progress by Seba
+         * Registration window
          */
 
         register.setOnAction(e -> {
@@ -85,9 +85,9 @@ public class LoginController implements Initializable {
             String username = usernameTextField.getText();
             String passedPassword = passwordPassField.getText();
             loginService.loginUser(username, passedPassword, rememberUser.isSelected());
-        } catch (DifferentPasswordException ex) {
+        } catch (WrongPasswordException ex) {
             labelErrorPassword.setVisible(true);
-            labelErrorPassword.setText("Inserted passwords are different");
+            labelErrorPassword.setText("Wrong password!");
         } catch (EmptyUsernameException ex) {
             labelErrorUsername.setVisible(true);
             labelErrorUsername.setText("Username field is empty, please insert your username!");

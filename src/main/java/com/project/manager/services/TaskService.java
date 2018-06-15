@@ -1,14 +1,15 @@
 package com.project.manager.services;
 
 import com.project.manager.controllers.task.TaskWindowController;
+import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
 import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.user.UserAlreadyExistException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.UserRole;
 import com.project.manager.models.task.TaskPriority;
 import com.project.manager.models.task.TaskStatus;
+import com.project.manager.repositories.ProjectRepository;
 import com.project.manager.repositories.TaskRepository;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.ui.components.MemberPaneGenerator;
@@ -42,11 +43,13 @@ public class TaskService {
     private SceneManager sceneManager;
     private SessionService sessionService;
     private MemberPaneGenerator memberPaneGenerator;
+    private ProjectRepository projectRepository;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository, MemberPaneGenerator memberPaneGenerator) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRepository, MemberPaneGenerator memberPaneGenerator, ProjectRepository projectRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
+        this.projectRepository = projectRepository;
         this.memberPaneGenerator = memberPaneGenerator;
         this.sceneManager = SceneManager.getInstance();
         this.sessionService = SessionService.getInstance();
@@ -203,5 +206,21 @@ public class TaskService {
         }
         task.setUsers(executors);
         return task;
+    }
+
+    /**
+     * Method saving given task into database
+     * @param task task given to save into database
+     */
+    public void saveTask(Task task) {
+        taskRepository.save(task);
+    }
+
+    public void refreshProject() {
+        Long id = sessionService.getProject().getId();
+        if (Optional.ofNullable(id).isPresent()) {
+            Optional<Project> project = projectRepository.findById(id);
+            project.ifPresent(project1 -> sessionService.setProject(project1));
+        }
     }
 }

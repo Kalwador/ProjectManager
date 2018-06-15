@@ -6,6 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -53,6 +54,8 @@ public class UserModel {
      */
     private boolean isLocked;
 
+    private boolean isFirstLogin;
+
     private boolean isBlocked;
 
     private String activationCode;
@@ -70,6 +73,7 @@ public class UserModel {
     private String lastName;
 
     @Lob
+    @Length(max = 5120)
     @Column(name = "avatar")
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] avatar;

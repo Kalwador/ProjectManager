@@ -1,10 +1,8 @@
 package com.project.manager.controllers.employee;
 
 import com.jfoenix.controls.JFXButton;
-import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
 import com.project.manager.services.TaskGeneratorService;
-import com.project.manager.ui.components.TaskGenerator;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;
 import javafx.fxml.FXML;
@@ -72,8 +70,9 @@ public class EmployeeProjectViewController implements Initializable {
         backButton.setOnAction(e -> {
             sceneManager.showScene(SceneType.DASHBOARD);
         });
-        taskGeneratorService.injectTasksToVBoxesForUser(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
-                testingVBox, codeReviewVBox, doneVBox,sessionService.getUserModel().getId());
+        taskGeneratorService.setUpReferences(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
+                testingVBox, codeReviewVBox, doneVBox);
+        taskGeneratorService.injectTasksToVBoxesForUser(sessionService.getUserModel().getId());
 
         logout.setOnAction(e -> SessionService.getInstance().logoutUser());
         messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));

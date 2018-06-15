@@ -28,17 +28,22 @@
                         <content>
                           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="388.0" prefWidth="613.0">
                                  <children>
-                                    <JFXButton fx:id="showProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="35.0" minWidth="75.0" opacity="0.98" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 );" text="Show" textFill="#006b0e">
+                                    <JFXButton fx:id="addNewProject" buttonType="RAISED" disable="false" layoutX="750.0" layoutY="35.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(136,141,0,0.7) , 6, 0.0 , 0 , 2 );" text="Add" textFill="#888d00">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="updateProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="80.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(136,141,0,0.7) , 6, 0.0 , 0 , 2 );" text="Update" textFill="#888d00">
+                                    <JFXButton fx:id="showProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="80.0" minWidth="75.0" opacity="0.98" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(0,107,14,0.7) , 6, 0.0 , 0 , 2 );" text="Show" textFill="#006b0e">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="deleteProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="125.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
+                                    <JFXButton fx:id="updateProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="125.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(136,141,0,0.7) , 6, 0.0 , 0 , 2 );" text="Update" textFill="#888d00">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="deleteProject" buttonType="RAISED" disable="true" layoutX="750.0" layoutY="170.0" minWidth="75.0" ripplerFill="#ed9302" style="-fx-background-color: black; -fx-effect: innershadow( three-pass-box , rgba(154,3,0,0.7) , 5, 0.0 , 0 , 2);" text="Delete" textFill="#9a0300">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

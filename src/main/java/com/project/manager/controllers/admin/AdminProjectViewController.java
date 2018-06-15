@@ -1,6 +1,7 @@
 package com.project.manager.controllers.admin;
 
 import com.jfoenix.controls.JFXButton;
+import com.project.manager.controllers.task.TaskAdderController;
 import com.project.manager.services.SessionService;
 import com.project.manager.services.TaskGeneratorService;
 import com.project.manager.ui.sceneManager.SceneManager;
@@ -57,7 +58,7 @@ public class AdminProjectViewController implements Initializable {
 
 
     @Autowired
-    public AdminProjectViewController(TaskGeneratorService taskGeneratorService) {
+    public AdminProjectViewController(TaskGeneratorService taskGeneratorService, TaskAdderController taskAdderController) {
         this.sessionService = SessionService.getInstance();
         this.sceneManager = SceneManager.getInstance();
         this.taskGeneratorService = taskGeneratorService;
@@ -73,19 +74,21 @@ public class AdminProjectViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         projectNameLabel.setText(sessionService.getProject().getProjectName());
         backButton.setOnAction(e -> sceneManager.showScene(SceneType.ADMIN_DASHBOARD));
-        taskGeneratorService.injectTasksToVBoxes(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
+        taskGeneratorService.setUpReferences(productBacklogVBox, sprintBacklogVBox, inProgressVBox,
                 testingVBox, codeReviewVBox, doneVBox);
+        taskGeneratorService.injectTasksToVBoxes();
         report.setOnAction(e -> sceneManager.showInNewWindow(SceneType.GENERATE_REPORT));
-
         newTaskButton.setOnAction(e -> {
-//            sceneManager.showInNewWindow(SceneType.NEW_TASK);
-            throw new IllegalArgumentException("okno nowego taksa nie zdefiniowane");
+            sceneManager.showInNewWindow(SceneType.NEW_TASK);
         });
-
         logout.setOnAction(e -> SessionService.getInstance().logoutUser());
         messages.setOnAction(e -> sceneManager.showInNewWindow(SceneType.MESSAGES_WINDOW));
         userData.setOnAction(e -> {
             sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
         });
+    }
+
+    public void goIntoNewScene() {
+        sceneManager.showInNewWindow(SceneType.ADMIN_PROJECT_VIEW);
     }
 }

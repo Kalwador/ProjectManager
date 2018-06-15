@@ -20,7 +20,7 @@ import java.util.Optional;
 
 /**
  * This is the class which is responsible for operations step by step to perform password resetting.
- * This class perform methods pessetPassword, checkGeneratedCode, chcangePassword and generatedCode
+ * This class perform methods resetPassword, checkGeneratedCode, changePassword and generatedCode
  */
 @Log4j
 @Service

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../manager/mangerProjectView.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.manager.controllers.employee.EmployeeProjectViewController">
    <center>
       <BorderPane opacity="0.95" prefHeight="200.0" prefWidth="200.0" style="-fx-background-image: url('images/horse.jpg'); -fx-background-position: center;" BorderPane.alignment="CENTER">
@@ -77,11 +82,6 @@
                                           <Font name="Calibri" size="14.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton fx:id="report" buttonType="RAISED" focusTraversable="false" layoutX="771.0" layoutY="14.0" ripplerFill="#ed9302" styleClass="generateButton" text="Generate report" textFill="#d66000">
-                                       <font>
-                                          <Font name="Calibri" size="13.0" />
-                                       </font>
-                                    </JFXButton>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="35.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../images/Backlog.png" />
