@@ -1,14 +1,14 @@
-package com.project.manager.exceptions;
+package com.project.manager.exceptions.registration;
 
 /**
  * This exception is thrown when user is providing different password that that assigned to his account
  */
-public class WrongPasswordException extends Exception {
+public class DifferentPasswordException extends Exception {
 
     /**
      * This method is constructor of exception with already defined message
      */
-    public WrongPasswordException() {
-        super("Wrong password!");
+    public DifferentPasswordException() {
+        super("Passwords are different!");
     }
 }

@@ -77,12 +77,10 @@ public class MessageWindowController implements Initializable {
     private JFXButton deleteMessages;
     @FXML
     private Button refresh;
-
     @FXML
     private Button sent;
     @FXML
     private Button clear;
-
     @FXML
     private TextField receiver;
     @FXML

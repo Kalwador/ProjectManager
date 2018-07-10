@@ -52,13 +52,10 @@ public class AdminDashboardController implements Initializable {
     private JFXButton deleteProject;
     @FXML
     private JFXButton showProject;
-
     @FXML
     private JFXButton addNewProject;
-
     @FXML
     private Button sentMessage;
-
     @FXML
     private JFXButton deleteUsers;
 

@@ -1,13 +1,12 @@
 package com.project.manager.controllers.task;
 
 import com.project.manager.entities.Task;
-import com.project.manager.exceptions.*;
+import com.project.manager.exceptions.task.*;
 import com.project.manager.models.task.TaskPriority;
 import com.project.manager.models.task.TaskStatus;
 import com.project.manager.services.SessionService;
 import com.project.manager.services.TaskGeneratorService;
 import com.project.manager.services.TaskService;
-import com.project.manager.ui.components.TaskGenerator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,8 +19,6 @@ import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 

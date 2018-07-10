@@ -1,6 +1,10 @@
 package com.project.manager.controllers;
 
-import com.project.manager.exceptions.*;
+import com.project.manager.exceptions.login.AccountBlockedException;
+import com.project.manager.exceptions.login.AccountLockedException;
+import com.project.manager.exceptions.login.WrongPasswordException;
+import com.project.manager.exceptions.registration.EmptyPasswordException;
+import com.project.manager.exceptions.registration.EmptyUsernameException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.services.login.LoginService;
 import com.project.manager.ui.AlertManager;

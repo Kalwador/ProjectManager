@@ -1,7 +1,11 @@
 package com.project.manager.services.login;
 
 import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.*;
+import com.project.manager.exceptions.login.AccountBlockedException;
+import com.project.manager.exceptions.login.AccountLockedException;
+import com.project.manager.exceptions.login.WrongPasswordException;
+import com.project.manager.exceptions.registration.EmptyPasswordException;
+import com.project.manager.exceptions.registration.EmptyUsernameException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.repositories.UserRepository;
 import com.project.manager.services.RememberUserService;

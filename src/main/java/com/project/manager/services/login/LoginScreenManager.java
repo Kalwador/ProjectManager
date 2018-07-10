@@ -1,8 +1,8 @@
 package com.project.manager.services.login;
 
 import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.AccountBlockedException;
-import com.project.manager.exceptions.AccountLockedException;
+import com.project.manager.exceptions.login.AccountBlockedException;
+import com.project.manager.exceptions.login.AccountLockedException;
 import com.project.manager.services.RememberUserService;
 import com.project.manager.ui.sceneManager.SceneManager;
 import com.project.manager.ui.sceneManager.SceneType;

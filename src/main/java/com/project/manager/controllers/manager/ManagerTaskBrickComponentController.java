@@ -36,8 +36,8 @@ public class ManagerTaskBrickComponentController implements Initializable {
      * Standard method initialized on controller setup.
      * Defines action after click on task in VBox
      *
-     * @param location  standard framework vaariable
-     * @param resources standard framework vaariable
+     * @param location  standard framework variable
+     * @param resources standard framework variable
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

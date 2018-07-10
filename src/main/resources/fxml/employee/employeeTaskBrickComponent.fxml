@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
-
 <AnchorPane fx:id="brickPane" prefHeight="81.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="nameLabel" layoutX="10.0" layoutY="38.0" prefHeight="40.0" prefWidth="180.0" text="NAZWA ZADANIA" wrapText="true" />

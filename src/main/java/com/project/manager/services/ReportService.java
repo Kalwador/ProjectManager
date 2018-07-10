@@ -3,7 +3,7 @@ package com.project.manager.services;
 import com.itextpdf.text.DocumentException;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.Task;
-import com.project.manager.exceptions.EmailValidationException;
+import com.project.manager.exceptions.registration.EmailValidationException;
 import com.project.manager.models.Report;
 import com.project.manager.models.mail.MailSubject;
 import com.project.manager.models.mail.ProjectReportMail;

@@ -23,8 +23,6 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     @FXML
-    private Button sentMessage;
-    @FXML
     private VBox projectsArea;
     @FXML
     private Button messages;

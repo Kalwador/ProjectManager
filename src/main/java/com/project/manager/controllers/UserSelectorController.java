@@ -1,18 +1,15 @@
 package com.project.manager.controllers;
 
-import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.NotEnoughPermissionsException;
+import com.project.manager.exceptions.registration.EmptyUsernameException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.services.user.UserSelectorService;
-import com.project.manager.ui.components.ProjectPaneGenerator;
-import com.project.manager.ui.sceneManager.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import lombok.extern.log4j.Log4j;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,17 +33,12 @@ public class UserSelectorController implements Initializable {
     @FXML
     private TextField usernameTextField;
 
-    private SceneManager sceneManager;
-    private ProjectPaneGenerator projectPaneGenerator;
     private UserSelectorService userSelectorService;
-
-
     private List<String> possibleUsers;
-    private AutoCompletionBinding<String> autoCompletionBinding;
+
 
     @Autowired
     public UserSelectorController(UserSelectorService userSelectorService) {
-        this.sceneManager = SceneManager.getInstance();
         this.userSelectorService = userSelectorService;
     }
 

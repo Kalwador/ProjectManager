@@ -1,7 +1,11 @@
 package com.project.manager.services;
 
 import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.*;
+import com.project.manager.exceptions.DifferentGeneratedCodeException;
+import com.project.manager.exceptions.EmptyGeneratedCodeException;
+import com.project.manager.exceptions.registration.DifferentPasswordException;
+import com.project.manager.exceptions.registration.EmailValidationException;
+import com.project.manager.exceptions.registration.EmptyUsernameException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.models.mail.MailSubject;
 import com.project.manager.models.mail.ResetPasswordMail;

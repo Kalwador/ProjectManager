@@ -87,8 +87,4 @@ public class AdminProjectViewController implements Initializable {
             sceneManager.showInNewWindow(SceneType.PERSONAL_DATA);
         });
     }
-
-    public void goIntoNewScene() {
-        sceneManager.showInNewWindow(SceneType.ADMIN_PROJECT_VIEW);
-    }
 }

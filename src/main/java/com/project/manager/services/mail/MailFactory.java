@@ -1,6 +1,6 @@
 package com.project.manager.services.mail;
 
-import com.project.manager.exceptions.EmailValidationException;
+import com.project.manager.exceptions.registration.EmailValidationException;
 import com.project.manager.models.mail.AccountActivationMail;
 import com.project.manager.models.mail.Mail;
 import com.project.manager.models.mail.ProjectReportMail;

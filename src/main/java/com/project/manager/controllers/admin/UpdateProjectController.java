@@ -4,8 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import com.project.manager.data.InjectAvatar;
 import com.project.manager.entities.Project;
 import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.EmptyUsernameException;
 import com.project.manager.exceptions.NotEnoughPermissionsException;
+import com.project.manager.exceptions.registration.EmptyUsernameException;
 import com.project.manager.exceptions.user.UserDoesNotExistException;
 import com.project.manager.services.ProjectService;
 import com.project.manager.services.SessionService;
@@ -50,43 +50,30 @@ public class UpdateProjectController implements Initializable {
 
     @FXML
     private JFXButton accept;
-
     @FXML
     private JFXButton cancel;
-
     @FXML
     private Label managerName;
-
     @FXML
     private Label managerErrorLabel;
-
     @FXML
     private Label memberErrorLabel;
-
     @FXML
     private JFXButton changeManager;
-
     @FXML
     private JFXButton addMember;
-
     @FXML
     private VBox projectMembersArea;
-
     @FXML
     private TextField insertProjectInfo;
-
     @FXML
     private TextField insertProjectName;
-
     @FXML
     private TextField newManagerTextField;
-
     @FXML
     private TextField newMemberTextField;
-
     @FXML
     private ImageView managerAvatar;
-
     @FXML
     private AnchorPane getScene;
 

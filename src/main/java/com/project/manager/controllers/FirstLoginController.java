@@ -22,13 +22,10 @@ import java.util.ResourceBundle;
 public class FirstLoginController implements Initializable {
     @FXML
     private JFXTextField generatedCodeField;
-
     @FXML
     private JFXButton backToLoginButton;
-
     @FXML
     private JFXButton confirmButton;
-
     @FXML
     private Label codeErrorLabel;
 

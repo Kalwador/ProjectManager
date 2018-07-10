@@ -1,8 +1,8 @@
 package com.project.manager.services;
 
 import com.project.manager.entities.UserModel;
-import com.project.manager.exceptions.DifferentPasswordException;
-import com.project.manager.exceptions.EmailValidationException;
+import com.project.manager.exceptions.registration.DifferentPasswordException;
+import com.project.manager.exceptions.registration.EmailValidationException;
 import com.project.manager.exceptions.user.UserAlreadyExistException;
 import com.project.manager.models.UserRole;
 import com.project.manager.models.mail.AccountActivationMail;

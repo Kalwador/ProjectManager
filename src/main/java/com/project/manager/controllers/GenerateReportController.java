@@ -1,7 +1,7 @@
 package com.project.manager.controllers;
 
 import com.project.manager.entities.Project;
-import com.project.manager.exceptions.EmailValidationException;
+import com.project.manager.exceptions.registration.EmailValidationException;
 import com.project.manager.services.ReportService;
 import com.project.manager.services.SessionService;
 import com.project.manager.ui.sceneManager.SceneManager;
